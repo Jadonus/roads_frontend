@@ -1,0 +1,7 @@
+{
+  "name": "roads_frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}

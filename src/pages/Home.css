@@ -1,0 +1,7 @@
+.hide-word {
+  filter: blur(10px); /* Adjust the blur radius as needed */
+
+}
+.ion-text-center {
+    text-align: center;
+}
