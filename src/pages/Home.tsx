@@ -41,7 +41,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   }, []);
 
   useEffect(() => {
-    const dashboardUrl = "http://localhost:5173/dashboard";
+    const dashboardUrl = "https://localhost:5173/dashboard";
 
     fetch(dashboardUrl)
       .then((response) => {
