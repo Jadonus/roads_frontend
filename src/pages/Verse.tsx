@@ -54,7 +54,7 @@ const Verse: React.FC<ContainerProps> = () => {
     const location = window.location.href;
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("http://localhost:5173/roads/" + groupName)
+    fetch("https://roadsbible.com/roads/" + groupName)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response

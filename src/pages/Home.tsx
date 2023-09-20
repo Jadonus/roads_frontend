@@ -46,7 +46,7 @@ const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   }, []);
 
   useEffect(() => {
-    const dashboardUrl = "https://localhost:5173/dashboard";
+    const dashboardUrl = "https://roadsbible.com/dashboard";
 
     fetch(dashboardUrl)
       .then((response) => {
