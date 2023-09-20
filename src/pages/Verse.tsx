@@ -280,7 +280,8 @@ return (
 
                 <div style={{ margin: "6rem", marginTop: "2rem" }}>
                   <IonProgressBar
-                    value={(currentSentenceIndex / sentences.length).toFixed(2)}
+value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
+
                     style={{ marginBottom: "1rem" }}
                   ></IonProgressBar>
                 </div>

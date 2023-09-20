@@ -8,7 +8,7 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
-import Settings from "./pages/Settings";
+import Settings from "./pages/settings";
 import Verseday from "./pages/verseday";
 import "@ionic/react/css/core.css";
 import { Switch } from "react-router-dom";
@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Set the CSS variable for primary accent color
-    root.style.setProperty("--ion-color-primary", primaryAccentColor);
+    document.documentElement.style.setProperty("--ion-color-primary", primaryAccentColor);
 console.log(primaryAccentColor);
     // Store the preference in local storage
   }) 

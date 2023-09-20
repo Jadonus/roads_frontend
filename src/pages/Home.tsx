@@ -14,13 +14,18 @@ import {
   IonSearchbar,
   IonLabel
 } from "@ionic/react";
+import { IonSearchbarCustomEvent, SearchbarChangeEventDetail } from "@ionic/core";
+
 import "./ExploreContainer.css";
 import { Link } from "react-router-dom";
 interface ContainerProps {}
-
+interface DashboardData {
+  combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
+}
 const ExploreContainer: React.FC<ContainerProps> = () => {
   const [verse, setVerse] = useState<string | null>(null);
-  const [dashboardData, setDashboardData] = useState<any[] | null>(null);
+const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
     const verseUrl = "https://beta.ourmanna.com/api/v1/get";
@@ -59,8 +64,15 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
+  setSearchQuery(e.target.value);
+};
+
+// Create a new function that adapts the event type
+const handleIonSearchChange = (e: IonSearchbarCustomEvent<SearchbarChangeEventDetail>) => {
+  // You can access e.detail.value for the search query
+  setSearchQuery(e.detail.value || "");
+};
+
   console.log(dashboardData);
   const filteredMetadata = Array.isArray(dashboardData?.combined_data)
     ? dashboardData.combined_data.filter((item: any) => {
@@ -93,11 +105,11 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </IonToolbar>
           <IonToolbar className="">
             <IonSearchbar
-              className="mt"
-              placeholder="Search all roads"
-              onIonChange={handleSearchChange}
-              value={searchQuery}
-            />
+  className="mt"
+  placeholder="Search all roads"
+  onIonChange={handleIonSearchChange}
+  value={searchQuery}
+/>
           </IonToolbar>
         </IonHeader>
         <IonContent>
