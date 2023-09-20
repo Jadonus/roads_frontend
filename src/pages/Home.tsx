@@ -12,9 +12,12 @@ import {
   IonItem,
   IonPage,
   IonSearchbar,
-  IonLabel
+  IonLabel,
 } from "@ionic/react";
-import { IonSearchbarCustomEvent, SearchbarChangeEventDetail } from "@ionic/core";
+import {
+  IonSearchbarCustomEvent,
+  SearchbarChangeEventDetail,
+} from "@ionic/core";
 
 import "./ExploreContainer.css";
 import { Link } from "react-router-dom";
@@ -24,7 +27,9 @@ interface DashboardData {
 }
 const ExploreContainer: React.FC<ContainerProps> = () => {
   const [verse, setVerse] = useState<string | null>(null);
-const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(
+    null
+  );
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
@@ -46,7 +51,7 @@ const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   }, []);
 
   useEffect(() => {
-    const dashboardUrl = "https://roadsbible.com/dashboard";
+    const dashboardUrl = "https://www.roadsbible.com/dashboard";
 
     fetch(dashboardUrl)
       .then((response) => {
@@ -64,14 +69,16 @@ const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setSearchQuery(e.target.value);
-};
+    setSearchQuery(e.target.value);
+  };
 
-// Create a new function that adapts the event type
-const handleIonSearchChange = (e: IonSearchbarCustomEvent<SearchbarChangeEventDetail>) => {
-  // You can access e.detail.value for the search query
-  setSearchQuery(e.detail.value || "");
-};
+  // Create a new function that adapts the event type
+  const handleIonSearchChange = (
+    e: IonSearchbarCustomEvent<SearchbarChangeEventDetail>
+  ) => {
+    // You can access e.detail.value for the search query
+    setSearchQuery(e.detail.value || "");
+  };
 
   console.log(dashboardData);
   const filteredMetadata = Array.isArray(dashboardData?.combined_data)
@@ -105,20 +112,20 @@ const handleIonSearchChange = (e: IonSearchbarCustomEvent<SearchbarChangeEventDe
           </IonToolbar>
           <IonToolbar className="">
             <IonSearchbar
-  className="mt"
-  placeholder="Search all roads"
-  onIonChange={handleIonSearchChange}
-  value={searchQuery}
-/>
+              className="mt"
+              placeholder="Search all roads"
+              onIonChange={handleIonSearchChange}
+              value={searchQuery}
+            />
           </IonToolbar>
         </IonHeader>
         <IonContent>
           <IonItem>
             <IonCardTitle>Verse Of the Day</IonCardTitle>
           </IonItem>
- <IonItem lines="none" href="/verseoftheday">
-        <IonLabel className="ion-text-wrap">{verse}</IonLabel>
-      </IonItem>
+          <IonItem lines="none" href="/verseoftheday">
+            <IonLabel className="ion-text-wrap">{verse}</IonLabel>
+          </IonItem>
 
           <div>
             {filteredMetadata.map((item: any, index: number) => (
