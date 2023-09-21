@@ -55,7 +55,7 @@ const Roads = withAuthenticationRequired(Verse);
 <Auth0Provider
   domain="dev-72prekgw4c7whtas.us.auth0.com"
   clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-  redirectUri="http://localhost:5173/"
+  redirectUri="https://dashboard.roadsbible.com"
   {...({} as MyAuth0ProviderOptions)}
 
 >
