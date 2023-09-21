@@ -18,6 +18,7 @@ import {
   IonSearchbarCustomEvent,
   SearchbarChangeEventDetail,
 } from "@ionic/core";
+import { useAuth0 } from '@auth0/auth0-react';
 
 import "./ExploreContainer.css";
 import { Link } from "react-router-dom";
@@ -30,6 +31,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
     null
   );
+const { user } = useAuth0();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
@@ -96,10 +98,12 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
   if (verse === null || dashboardData === null) {
     return (
+      <>
       <IonSpinner
         style={{ margin: "auto", width: "5rem", height: "5rem" }}
         name="dots"
       ></IonSpinner>
+      </>
     );
   }
 
