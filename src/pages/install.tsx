@@ -22,7 +22,7 @@ function Install() {
         <IonToolbar>
           <IonTitle>Settings</IonTitle>
 
-          <IonBackButton slot="start" defaultHref="/"></IonBackButton>
+          <IonBackButton  defaultHref="/"></IonBackButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>

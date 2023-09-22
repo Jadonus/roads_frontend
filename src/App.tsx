@@ -12,7 +12,7 @@ import Settings from "./pages/settings";
 import Verseday from "./pages/verseday";
 import "@ionic/react/css/core.css";
 import { Switch } from "react-router-dom";
-
+import Install from "./pages/install";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
@@ -59,15 +59,18 @@ const Roads = withAuthenticationRequired(Verse);
   {...({} as MyAuth0ProviderOptions)}
 
 >
-    <IonApp>
+    <IonApp >
+
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/" exact component={Dashboard} />
           <Route path="/settings" exact component={Settings} />
           <Route path="/roads/:groupName" component={Roads} exact />
         <Route path="/verseoftheday" component={Verseday} exact />
-
+<Route path = "/dev" component = {ExploreContainer} exact />
         <Route path="/login" component={Login} exact />
+
+        <Route path="/settings/install" component={Install} exact />
         </IonRouterOutlet>
 
       </IonReactRouter>
