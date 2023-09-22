@@ -71,11 +71,35 @@ const {user} = useAuth0()
       })
       .catch((error) => {
         console.error("Error fetching verses:", error);
+
       });
-  }, []);
+    const data = {
+  title: "Progress saving info.",
+  username: user.name,
+  index: currentSentenceIndex,
+  road: groupName,
+};
+
+const requestOptions = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+};
+fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+fetch('https://www.roadsbible.com/api/get_saved_progress', requestOptions)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
   const openActionSheet = () => {
     setIsOpen(true);
   };
+  }, []);
 
   const closeActionSheet = () => {
     setIsOpen(false);
@@ -201,10 +225,8 @@ const requestOptions = {
   },
   body: JSON.stringify(data),
 };
-fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+
+
 //useEffect(() => {
 //  setTimeout(() => {
   //  if (mode === "firstLetter") {

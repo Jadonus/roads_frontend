@@ -46,7 +46,7 @@ const SettingsPage = () => {
           <IonTitle size="large">Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent color="">
+      <IonContent>
         <div>
           <IonList inset={true}>
 
