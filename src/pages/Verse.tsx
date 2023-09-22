@@ -191,6 +191,7 @@ const data = {
   title: "Progress saving info.",
   username: user.name,
   index: currentSentenceIndex,
+  road: groupName,
 };
 
 const requestOptions = {
