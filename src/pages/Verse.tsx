@@ -32,9 +32,13 @@ import {
   settingsOutline,
   arrowForwardOutline,
 } from "ionicons/icons";
+
+import { useAuth0 } from "@auth0/auth0-react";
 let groupName = "";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
+
+const {user} = useAuth0()
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [hiddenWordIndices, setHiddenWordIndices] = useState([]);
@@ -183,8 +187,23 @@ const Verse: React.FC<ContainerProps> = () => {
       }
     });
   };
+const data = {
+  title: "YourTitleHere",
+  body: user.name,
+  userId: 1,
+};
 
-  const mode = localStorage.getItem("mode");
+const requestOptions = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+};
+fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
 //useEffect(() => {
 //  setTimeout(() => {
   //  if (mode === "firstLetter") {

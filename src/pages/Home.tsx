@@ -13,13 +13,15 @@ import {
   IonPage,
   IonSearchbar,
   IonLabel,
+  IonButton,
+  IonButtons,
 } from "@ionic/react";
 import {
   IonSearchbarCustomEvent,
   SearchbarChangeEventDetail,
 } from "@ionic/core";
-import { useAuth0 } from '@auth0/auth0-react';
-
+import { useAuth0 } from "@auth0/auth0-react";
+import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import { Link } from "react-router-dom";
 interface ContainerProps {}
@@ -31,7 +33,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
     null
   );
-const { user } = useAuth0();
+  const { user } = useAuth0();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
@@ -99,10 +101,10 @@ const { user } = useAuth0();
   if (verse === null || dashboardData === null) {
     return (
       <>
-      <IonSpinner
-        style={{ margin: "auto", width: "5rem", height: "5rem" }}
-        name="dots"
-      ></IonSpinner>
+        <IonSpinner
+          style={{ margin: "auto", width: "5rem", height: "5rem" }}
+          name="dots"
+        ></IonSpinner>
       </>
     );
   }
@@ -113,6 +115,9 @@ const { user } = useAuth0();
         <IonHeader>
           <IonToolbar>
             <IonTitle size="large">Dashboard</IonTitle>
+            <IonButtons slot="end">
+              <SettingsIcon />
+            </IonButtons>
           </IonToolbar>
           <IonToolbar className="">
             <IonSearchbar
