@@ -188,9 +188,9 @@ const {user} = useAuth0()
     });
   };
 const data = {
-  title: "YourTitleHere",
-  body: user.name,
-  userId: 1,
+  title: "Progress saving info.",
+  username: user.name,
+  index: currentSentenceIndex,
 };
 
 const requestOptions = {
