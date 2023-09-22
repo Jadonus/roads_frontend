@@ -104,7 +104,7 @@ fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
   .then(data => console.log(data))
   .catch(error => console.error(error));
 
-fetch('https://www.roadsbible.com/api/get_saved_progress', requestOptionsa)
+fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptionsa)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error(error));
