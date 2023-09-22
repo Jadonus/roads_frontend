@@ -87,12 +87,24 @@ const requestOptions = {
   },
   body: JSON.stringify(data),
 };
+   const dataa = {
+  title: "Progress saving info.",
+  username: user.name,
+};
+
+const requestOptionsa = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(dataa),
+};
 fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error(error));
 
-fetch('https://www.roadsbible.com/api/get_saved_progress', requestOptions)
+fetch('https://www.roadsbible.com/api/get_saved_progress', requestOptionsa)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error(error));
