@@ -111,15 +111,13 @@ const requestOptions = {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
-
-  // This part will run whenever currentSentenceIndex changes
  
-
+console.log(currentSentenceIndex) 
   fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
-}, [currentSentenceIndex, groupName, requestOptionsa, user.name]);
+}, [currentSentenceIndex, groupName, requestOptions, user.name]);
 
   const closeActionSheet = () => {
     setIsOpen(false);
