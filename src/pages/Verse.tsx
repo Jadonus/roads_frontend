@@ -122,7 +122,17 @@ const requestOptions = {
   };
   fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
     .then(response => response.json())
-    .then(data => console.log(data))
+      .then(response => response.json())
+  .then(data => {
+    // Extract the saved index from the response
+    const savedIndex = data.index;
+
+    // Set the initial value of currentSentenceIndex to the saved index
+    setCurrentSentenceIndex(savedIndex);
+
+    // ... (the rest of your code)
+  })
+
     .catch(error => console.error(error));
  
 const saveProgress = () => {
