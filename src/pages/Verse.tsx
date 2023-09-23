@@ -127,7 +127,7 @@ const requestOptions = {
  
 console.log(currentSentenceIndex) 
   fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
-    .then(response => response.json())
+  .then(response => console.log(response))
     .then(data => console.log(data))
     .catch(error => console.error(error));
 }, [currentSentenceIndex);
