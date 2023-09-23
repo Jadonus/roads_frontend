@@ -121,46 +121,16 @@ const requestOptions = {
     body: JSON.stringify(dataa),
   };
   fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
- .then(response => {
-    console.log(response); // Log the response
-    return response.json(); // Continue with parsing JSON
-  })
-  .then(data => {
-    // Extract the saved index from the response
-    const savedIndex = data.index;
-
-    // Set the initial value of currentSentenceIndex to the saved index
-    setCurrentSentenceIndex(savedIndex);
-
-    // ... (the rest of your code)
-  })
-
+    .then(response => response.json())
+    .then(data => console.log(data))
     .catch(error => console.error(error));
  
-const saveProgress = () => {
-    const data = {
-      title: "Progress saving info.",
-      username: user.name,
-      index: currentSentenceIndex,
-      road: groupName,
-    };
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-
-    fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
-  };
-
-  saveProgress(); 
-}, [currentSentenceIndex]); 
+console.log(currentSentenceIndex) 
+  fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}, [currentSentenceIndex);
 
   const closeActionSheet = () => {
     setIsOpen(false);
