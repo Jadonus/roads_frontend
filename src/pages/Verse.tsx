@@ -121,8 +121,10 @@ const requestOptions = {
     body: JSON.stringify(dataa),
   };
   fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
-    .then(response => response.json())
-      .then(response => response.json())
+ .then(response => {
+    console.log(response); // Log the response
+    return response.json(); // Continue with parsing JSON
+  })
   .then(data => {
     // Extract the saved index from the response
     const savedIndex = data.index;
