@@ -130,7 +130,7 @@ console.log(currentSentenceIndex)
   .then(response => console.log(response))
     .then(data => console.log(data))
     .catch(error => console.error(error));
-}, [currentSentenceIndex);
+}, [currentSentenceIndex]);
 
   const closeActionSheet = () => {
     setIsOpen(false);
