@@ -107,17 +107,48 @@ const requestOptions = {
     },
     body: JSON.stringify(data),
   };
+ const dataa = {
+    title: "Progress return",
+    index: currentSentenceIndex,
+    road: groupName,
+  };
+
+  const requestOptionsa = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataa),
+  };
   fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
  
-console.log(currentSentenceIndex) 
-  fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-}, [currentSentenceIndex, groupName, requestOptions, user.name]);
+const saveProgress = () => {
+    const data = {
+      title: "Progress saving info.",
+      username: user.name,
+      index: currentSentenceIndex,
+      road: groupName,
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+
+    fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  };
+
+  saveProgress(); 
+}, [currentSentenceIndex]); 
 
   const closeActionSheet = () => {
     setIsOpen(false);
