@@ -47,6 +47,26 @@ const {user} = useAuth0()
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
+   const data = {
+  title: "Progress saving info.",
+  username: user.name,
+  index: currentSentenceIndex,
+  road: groupName,
+};
+
+const requestOptions = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+};
+  
+ console.log(currentSentenceIndex) 
+  fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -73,45 +93,33 @@ const {user} = useAuth0()
         console.error("Error fetching verses:", error);
 
       });
-    const data = {
-  title: "Progress saving info.",
-  username: user.name,
-  index: currentSentenceIndex,
-  road: groupName,
-};
-
-const requestOptions = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(data),
-};
-   const dataa = {
-  title: "Progress saving info.",
-  username: user.name,
-};
-
-const requestOptionsa = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(dataa),
-};
-fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-
-fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptionsa)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-  const openActionSheet = () => {
-    setIsOpen(true);
+ const data = {
+    title: "Progress saving info.",
+    username: user.name,
+    index: currentSentenceIndex,
+    road: groupName,
   };
-  }, []);
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+  // This part will run whenever currentSentenceIndex changes
+ 
+
+  fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}, [currentSentenceIndex, groupName, requestOptionsa, user.name]);
 
   const closeActionSheet = () => {
     setIsOpen(false);
@@ -223,20 +231,6 @@ fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptionsa)
       }
     });
   };
-const data = {
-  title: "Progress saving info.",
-  username: user.name,
-  index: currentSentenceIndex,
-  road: groupName,
-};
-
-const requestOptions = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(data),
-};
 
 
 //useEffect(() => {
