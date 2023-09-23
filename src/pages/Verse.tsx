@@ -120,10 +120,12 @@ const requestOptions = {
     },
     body: JSON.stringify(dataa),
   };
-  fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
+  .then(response => response.json())
+  .then(data => {
+    setCurrentSentenceIndex(data.index);
+  })
+  .catch(error => console.error(error));
  
 console.log(currentSentenceIndex) 
   fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
