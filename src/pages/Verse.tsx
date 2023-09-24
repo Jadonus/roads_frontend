@@ -93,7 +93,7 @@ if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
     body: JSON.stringify(dataa),
   };
 fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
-  .then(response => console.log(response))
+  .then(response => response.json()) 
     .then(pro => console.log('Progress Save DATA',pro))
     .catch(error => console.error(error));
 
