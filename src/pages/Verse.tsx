@@ -102,6 +102,7 @@ const saveProgressAndFetch = async () => {
       title: "Progress return",
       index: currentSentenceIndex,
       road: groupName,
+      username: user.name,
     };
 
     const requestOptionsa = {
