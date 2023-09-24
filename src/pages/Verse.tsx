@@ -47,25 +47,7 @@ const {user} = useAuth0()
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
-   const data = {
-  title: "Progress saving info.",
-  username: user.name,
-  index: currentSentenceIndex,
-  road: groupName,
-};
-
-const requestOptions = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(data),
-};
- console.log('index', currentSentenceIndex) 
-  fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+  
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
