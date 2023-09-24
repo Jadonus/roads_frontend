@@ -114,7 +114,7 @@ fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
 fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
   .then(response => response.json())
   .then(data => {
-    console.log(data.index)
+    console.log(data)
     setCurrentSentenceIndex(data.index);
     
   })
