@@ -74,72 +74,49 @@ const {user} = useAuth0()
       .catch((error) => {
         console.error("Error fetching verses:", error);
 
-      });
-if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
- 
-
-
-const saveProgressAndFetch = async () => {
-  try {
-    const data = {
-      title: "Progress saving info.",
-      username: user.name,
-      road: groupName,
-
-      index: currentSentenceIndex,
-    };
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-
-    await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions);
-    console.log('Progress saved successfully.');
-
-    const dataa = {
-      title: "Progress return",
-      index: currentSentenceIndex,
-      road: groupName,
-      username: user.name,
-    };
-
-    const requestOptionsa = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dataa),
-    };
-
-    const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptionsa);
-    const daata = await response.json();
-    console.log('Progress fetched successfully:', daata);
-    console.log('Fetched index:', daata.progress.index);
-    setCurrentSentenceIndex(daata.progress.index);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-// Call the function when you want to save and fetch progress
-saveProgressAndFetch();
-
-
-
-
-
-
+      })
+    }, []);
+useEffect(() => {
 
  
-console.log('index', currentSentenceIndex) 
-  } else {
-  console.error("currentSentenceIndex is null or undefined.");
-}
-}, [currentSentenceIndex]);
+
+
+  const loadProgress = async () => {
+    try {
+      const data = {
+        username: user.name,
+        road: groupName,
+      };
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+
+      const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions);
+      const progressData = await response.json();
+
+      if (response.status === 200) {
+        const savedIndex = progressData.progress.index;
+        setCurrentSentenceIndex(savedIndex);
+      } else if (response.status === 404) {
+        // Handle the case when no progress is found (starting from the beginning).
+        setCurrentSentenceIndex(0);
+      } else {
+        // Handle other error cases as needed.
+        console.error('Error:', progressData.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // Load progress when the component mounts or when the currentSentenceIndex changes
+  loadProgress();
+}, [user.name, groupName, currentSentenceIndex]);
 
   const closeActionSheet = () => {
     setIsOpen(false);
