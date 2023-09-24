@@ -94,14 +94,13 @@ if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
   };
 fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
   .then(response => console.log(response))
-    .then(data => console.log(data))
+    .then(pro => console.log('Progress Save DATA',pro))
     .catch(error => console.error(error));
 
 
  const data = {
     title: "Progress saving info.",
     username: user.name,
-    index: currentSentenceIndex,
     road: groupName,
   };
   const requestOptions = {
