@@ -61,8 +61,7 @@ const requestOptions = {
   },
   body: JSON.stringify(data),
 };
-  
- console.log(currentSentenceIndex) 
+ console.log('index', currentSentenceIndex) 
   fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
   .then(response => response.json())
   .then(data => console.log(data))
@@ -93,7 +92,8 @@ const requestOptions = {
         console.error("Error fetching verses:", error);
 
       });
- const data = {
+if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
+  const data = {
     title: "Progress saving info.",
     username: user.name,
     index: currentSentenceIndex,
@@ -132,7 +132,11 @@ console.log(currentSentenceIndex)
   .then(response => console.log(response))
     .then(data => console.log(data))
     .catch(error => console.error(error));
-}, [currentSentenceIndex]);
+
+} else {
+  console.error("currentSentenceIndex is null or undefined.");
+};
+[currentSentenceIndex]};
 
   const closeActionSheet = () => {
     setIsOpen(false);
