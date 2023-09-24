@@ -76,20 +76,9 @@ const {user} = useAuth0()
 
       });
 if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
-  const data = {
-    title: "Progress saving info.",
-    username: user.name,
-    index: currentSentenceIndex,
-    road: groupName,
-  };
+ 
 
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
+
  const dataa = {
     title: "Progress return",
     index: currentSentenceIndex,
@@ -103,6 +92,25 @@ if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
     },
     body: JSON.stringify(dataa),
   };
+fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
+  .then(response => console.log(response))
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+
+ const data = {
+    title: "Progress saving info.",
+    username: user.name,
+    index: currentSentenceIndex,
+    road: groupName,
+  };
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
 fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
   .then(response => response.json())
   .then(data => {
@@ -110,13 +118,8 @@ fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
   })
   .catch(error => console.error(error));
  
-console.log(currentSentenceIndex) 
-  fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
-  .then(response => console.log(response))
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-
-} else {
+console.log('index', currentSentenceIndex) 
+  } else {
   console.error("currentSentenceIndex is null or undefined.");
 }
 }, [currentSentenceIndex]);
