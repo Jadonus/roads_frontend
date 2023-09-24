@@ -114,8 +114,8 @@ fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
   .then(response => response.json())
   .then(daata => {
     console.log('daata',daata);
-    console.log('daata index', daata.index);
-    setCurrentSentenceIndex(daata.index);
+    console.log('daata index', daata.progress.index);
+    setCurrentSentenceIndex(daata.progress.index);
     
   })
   .catch(error => console.error(error));
