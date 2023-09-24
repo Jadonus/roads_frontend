@@ -112,9 +112,9 @@ fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
   };
 fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
   .then(response => response.json())
-  .then(data => {
-    console.log(data)
-    setCurrentSentenceIndex(data.index);
+  .then(daata => {
+    console.log('daata',daata);
+    setCurrentSentenceIndex(daata.index);
     
   })
   .catch(error => console.error(error));
