@@ -112,7 +112,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
-        <IonHeader>
+        <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Dashboard</IonTitle>
             <IonButtons slot="end">
