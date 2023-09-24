@@ -79,45 +79,52 @@ if (currentSentenceIndex !== null && currentSentenceIndex !== undefined) {
  
 
 
- const dataa = {
-    title: "Progress return",
-    index: currentSentenceIndex,
-    road: groupName,
-  };
+const saveProgressAndFetch = async () => {
+  try {
+    const data = {
+      title: "Progress saving info.",
+      username: user.name,
+      road: groupName,
+    };
 
-  const requestOptionsa = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(dataa),
-  };
-fetch('https://www.roadsbible.com/api/save_progress/', requestOptionsa)
-  .then(response => response.json()) 
-    .then(pro => console.log('Progress Save DATA',pro))
-    .catch(error => console.error(error));
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
 
+    await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions);
+    console.log('Progress saved successfully.');
 
- const data = {
-    title: "Progress saving info.",
-    username: user.name,
-    road: groupName,
-  };
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions)
-  .then(response => response.json())
-  .then(daata => {
-    console.log('daata',daata);
-    console.log('daata index', daata.progress.index);
+    const dataa = {
+      title: "Progress return",
+      index: currentSentenceIndex,
+      road: groupName,
+    };
+
+    const requestOptionsa = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataa),
+    };
+
+    const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptionsa);
+    const daata = await response.json();
+    console.log('Progress fetched successfully:', daata);
+    console.log('Fetched index:', daata.progress.index);
     setCurrentSentenceIndex(daata.progress.index);
-  })
-  .catch(error => console.error(error));
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+// Call the function when you want to save and fetch progress
+saveProgressAndFetch();
+
 
 
 
