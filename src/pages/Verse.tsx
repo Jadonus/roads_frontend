@@ -38,6 +38,7 @@ let groupName = "";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
 
+
 const {user} = useAuth0()
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -117,8 +118,8 @@ console.log(currentSentenceIndex)
 
 } else {
   console.error("currentSentenceIndex is null or undefined.");
-};
-[currentSentenceIndex]};
+}
+}, [currentSentenceIndex]);
 
   const closeActionSheet = () => {
     setIsOpen(false);
@@ -229,17 +230,9 @@ console.log(currentSentenceIndex)
         return newSentences;
       }
     });
-  };
 
 
-//useEffect(() => {
-//  setTimeout(() => {
-  //  if (mode === "firstLetter") {
-   //   toggleFirstLetterMode();
-    //}
-  //}, 0);
-//}, []);
-
+  }
 return (
     <>
       <IonPage>
@@ -428,5 +421,4 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
     </>
   );
 };
-
 export default Verse;
