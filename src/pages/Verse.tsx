@@ -86,6 +86,7 @@ useEffect(() => {
       const data = {
         username: user.name,
         road: groupName,
+        index: currentSentenceIndex,
       };
 
       const requestOptions = {
