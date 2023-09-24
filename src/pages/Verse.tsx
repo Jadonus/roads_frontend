@@ -119,6 +119,7 @@ useEffect(() => {
   loadProgress();
 }, [user.name, groupName, currentSentenceIndex]);
 
+
   const closeActionSheet = () => {
     setIsOpen(false);
   };
