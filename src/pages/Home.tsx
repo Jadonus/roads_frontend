@@ -125,7 +125,7 @@ console.log(verseUrl);
                 Dashboard
               </IonTitle>
 
-              <IonButtons style={{ paddingTop: "1.2rem" }} slot="end">
+              <IonButtons style={{ paddingTop: "0.5rem" }} slot="end">
                 <div>
                   <h1>
                     <IonRouterLink
@@ -148,7 +148,7 @@ marginTop: "0.5rem"
                           1
                         </IonBadge>
                       ) : (
-                        <div style={{marginTop: '1.2rem'}}></div>
+                        <div style={{marginTop: '0.5rem'}}></div>
                       )}
                     </IonRouterLink>
                   </h1>

@@ -152,11 +152,11 @@ localStorage.setItem("dark", (!dark).toString());
             </IonItem>
 
             <h3>Links</h3>
-            <IonItem href="https://github.com/jadonus/roads_bible_vercel">
+            <IonItem routerLink="https://github.com/jadonus/roads_bible_vercel">
               <IonIcon icon={logoGithub}/>{' '} 
               Backend Source Code
             </IonItem>
-<IonItem href="https://github.com/jadonus/roads_frontend">
+<IonItem routerLink="https://github.com/jadonus/roads_frontend">
               <IonIcon icon={logoGithub}/> Frontend Source Code
             </IonItem>
           </IonList>
