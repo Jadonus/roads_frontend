@@ -119,8 +119,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     <>
       <IonPage>
      
-        <IonContent fullscreen={true}>
-          <IonHeader collapse="condense">
+        <IonContent >
+          <IonHeader >
             <IonToolbar>
               <IonTitle size="large" >Dashboard</IonTitle>
 
@@ -131,7 +131,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     routerLink="/settings"
                     target="_blank"
                     routerDirection="forward"
-                    style={{ paddingRight: "1rem" }}
+                    style={{ paddingRight: "1rem", padddingTop: "1rem" }}
                   >
                     <IonIcon icon={settingsOutline}></IonIcon>
                     {!PWA ? (
