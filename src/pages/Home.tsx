@@ -9,20 +9,22 @@ import {
   IonSpinner,
   IonCardContent,
   IonContent,
+  IonCardHeader,
   IonItem,
   IonPage,
+  IonAvatar,
   IonSearchbar,
   IonLabel,
   IonButton,
   IonButtons,
   IonIcon,
-IonRefresher,
+  IonChip,
+  IonRefresher,
   IonRefresherContent,
   RefresherEventDetail,
-
   IonBadge,
 } from "@ionic/react";
-import '../theme/variables.css'
+import "../theme/variables.css";
 import { settings, settingsOutline } from "ionicons/icons";
 import {
   IonSearchbarCustomEvent,
@@ -47,7 +49,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
     const verseUrl = "https://beta.ourmanna.com/api/v1/get";
-console.log(verseUrl);
+    console.log(verseUrl);
     fetch(verseUrl)
       .then((response) => {
         if (!response.ok) {
@@ -62,7 +64,6 @@ console.log(verseUrl);
         console.error("Error fetching verse:", error);
       });
   }, []);
-
   useEffect(() => {
     const dashboardUrl = "https://www.roadsbible.com/dashboard";
 
@@ -119,7 +120,7 @@ console.log(verseUrl);
       </>
     );
   }
-function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
+  function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
     setTimeout(() => {
       // Any calls to load data go here
       event.detail.complete();
@@ -129,12 +130,12 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
     <>
       <IonPage>
         <IonContent>
- <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
-          <IonHeader >
-            <IonToolbar >
-              <IonTitle size="large" >
+          <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+            <IonRefresherContent></IonRefresherContent>
+          </IonRefresher>
+          <IonHeader>
+            <IonToolbar>
+              <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
                 Dashboard
               </IonTitle>
 
@@ -147,7 +148,17 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
                       routerDirection="forward"
                       style={{ paddingRight: "1rem" }}
                     >
-                      <IonIcon className="color"icon={settingsOutline}></IonIcon>
+                      <IonAvatar>
+                        {user ? (
+                          <img alt="Profile" src={user.picture} />
+                        ) : (
+                          <IonIcon
+                            className="color"
+                            icon={settingsOutline}
+                          ></IonIcon>
+                        )}
+                      </IonAvatar>
+
                       {!PWA ? (
                         <IonBadge
                           color="danger"
@@ -155,13 +166,13 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
                             position: "absolute",
                             left: "1rem",
                             top: "1rem",
-marginTop: "0.5rem" 
+                            marginTop: "0.5rem",
                           }}
                         >
                           1
                         </IonBadge>
                       ) : (
-                        <div style={{marginTop: '0.5rem'}}></div>
+                        <div style={{ marginTop: "0.5rem" }}></div>
                       )}
                     </IonRouterLink>
                   </h1>
@@ -187,23 +198,27 @@ marginTop: "0.5rem"
           <div>
             {filteredMetadata.map((item: any, index: number) => (
               <IonCard className="margin" key={index}>
-                <IonCardContent>
+                <IonCardHeader>
                   <IonCardTitle>
                     {item.parsed_data[0]?.title || "No title available"}
                   </IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
                   <p>
                     {" "}
                     {item.parsed_data[0]?.description ||
                       "No description available"}
                   </p>
-                  <IonRouterLink
-                    routerLink={item.parsed_data[0]?.url || ""}
-                    target="_blank"
-                    routerDirection="forward"
-                  >
-                    Memorize!
-                  </IonRouterLink>
+
+                  <IonChip>{item.num_groups} Verses</IonChip>
                 </IonCardContent>
+                <IonButton fill='clear'><IonRouterLink
+                  routerLink={item.parsed_data[0]?.url || ""}
+                  target="_blank"
+                  routerDirection="forward"
+                >
+                  Memorize!
+                </IonRouterLink></IonButton>
               </IonCard>
             ))}
           </div>
