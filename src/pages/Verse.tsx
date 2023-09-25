@@ -208,7 +208,7 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
 const data = {
         username: user.name,
         road: groupName,
-        index: currentSentenceIndex + 1 ,
+        index: currentSentenceIndex,
       };
 
       const requestOptions = {
