@@ -131,7 +131,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     routerLink="/settings"
                     target="_blank"
                     routerDirection="forward"
-                    style={{ paddingRight: "1rem", padddingTop: "1rem" }}
+                    style={{ paddingRight: "1rem",marginTop: "1.5rem" }}
                   >
                     <IonIcon icon={settingsOutline}></IonIcon>
                     {!PWA ? (
