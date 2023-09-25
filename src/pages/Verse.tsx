@@ -117,7 +117,7 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
 
   // Load progress when the component mounts or when the currentSentenceIndex changes
   loadProgress();
-}, [user.name, groupName, currentSentenceIndex]);
+}, []);
 
 
   const closeActionSheet = () => {
