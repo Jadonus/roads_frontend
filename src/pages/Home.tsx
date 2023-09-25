@@ -15,7 +15,14 @@ import {
   IonLabel,
   IonButton,
   IonButtons,
+  IonIcon,
+  IonBadge,
 } from "@ionic/react";
+import {
+  settings,
+   settingsOutline
+
+} from 'ionicons/icons'
 import {
   IonSearchbarCustomEvent,
   SearchbarChangeEventDetail,
@@ -35,6 +42,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   );
   const { user } = useAuth0();
 
+  let PWA = window.matchMedia("(display-mode: standalone)").matches;
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
     const verseUrl = "https://beta.ourmanna.com/api/v1/get";
@@ -119,7 +127,18 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           <IonToolbar>
             <IonTitle size="large">Dashboard</IonTitle>
             <IonButtons slot="end">
-              <SettingsIcon />
+<div>
+    <h1>
+        <IonRouterLink href="/settings" direction="forward">
+            <IonIcon icon={settingsOutline}></IonIcon>
+ {PWA ? (
+            <IonBadge color="danger" >1</IonBadge>
+ ) : (
+
+ )}
+</IonRouterLink></h1>
+
+</div>
             </IonButtons>
           </IonToolbar>
           <IonToolbar className="">
