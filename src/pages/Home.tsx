@@ -42,7 +42,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
     const verseUrl = "https://beta.ourmanna.com/api/v1/get";
-
+console.log(verseUrl);
     fetch(verseUrl)
       .then((response) => {
         if (!response.ok) {
