@@ -118,49 +118,51 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
-     
-        <IonContent >
-          <IonHeader >
+        <IonContent>
+          <IonHeader>
             <IonToolbar>
-              <IonTitle size="large" >Dashboard</IonTitle>
+              <IonTitle size="large" >
+                Dashboard
+              </IonTitle>
 
-              <IonButtons slot="end">
-              <div>
-                <h1>
-                  <IonRouterLink
-                    routerLink="/settings"
-                    target="_blank"
-                    routerDirection="forward"
-                    style={{ paddingRight: "1rem",marginTop: "3rem" }}
-                  >
-                    <IonIcon icon={settingsOutline}></IonIcon>
-                    {!PWA ? (
-                      <IonBadge
-                        color="danger"
-                        style={{
-                          position: "absolute",
-                          left: "1rem",
-                          top: "1rem",
-                        }}
-                      >
-                        1
-                      </IonBadge>
-                    ) : (
-                      <div></div>
-                    )}
-                  </IonRouterLink>
-                </h1>
-              </div>
-            </IonButtons>
+              <IonButtons style={{ paddingTop: "1.2rem" }} slot="end">
+                <div>
+                  <h1>
+                    <IonRouterLink
+                      routerLink="/settings"
+                      target="_blank"
+                      routerDirection="forward"
+                      style={{ paddingRight: "1rem" }}
+                    >
+                      <IonIcon icon={settingsOutline}></IonIcon>
+                      {!PWA ? (
+                        <IonBadge
+                          color="danger"
+                          style={{
+                            position: "absolute",
+                            left: "1rem",
+                            top: "1rem",
+marginTop: "1.2rem" 
+                          }}
+                        >
+                          1
+                        </IonBadge>
+                      ) : (
+                        <div></div>
+                      )}
+                    </IonRouterLink>
+                  </h1>
+                </div>
+              </IonButtons>
             </IonToolbar>
- <IonToolbar className="">
-            <IonSearchbar
-              className="mt"
-              placeholder="Search all roads"
-              onIonChange={handleIonSearchChange}
-              value={searchQuery}
-            />
-          </IonToolbar>
+            <IonToolbar className="">
+              <IonSearchbar
+                className="mt"
+                placeholder="Search all roads"
+                onIonChange={handleIonSearchChange}
+                value={searchQuery}
+              />
+            </IonToolbar>
           </IonHeader>
           <IonItem>
             <IonCardTitle>Verse Of the Day</IonCardTitle>
