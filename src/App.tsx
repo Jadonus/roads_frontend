@@ -75,7 +75,7 @@ const Roads = withAuthenticationRequired(Verse);
   {...({} as MyAuth0ProviderOptions)}
 
 >
-    <IonApp className={dark ? 'dark' : ''}>
+    <IonApp >
 
       <IonReactRouter>
         <IonRouterOutlet>

@@ -16,6 +16,10 @@ import {
   IonButton,
   IonButtons,
   IonIcon,
+IonRefresher,
+  IonRefresherContent,
+  RefresherEventDetail,
+
   IonBadge,
 } from "@ionic/react";
 import { settings, settingsOutline } from "ionicons/icons";
@@ -114,11 +118,19 @@ console.log(verseUrl);
       </>
     );
   }
-
+function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.detail.complete();
+    }, 2000);
+  }
   return (
     <>
       <IonPage>
         <IonContent>
+ <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
           <IonHeader>
             <IonToolbar>
               <IonTitle size="large" >
