@@ -96,7 +96,6 @@ useEffect(() => {
         },
         body: JSON.stringify(data),
       };
-await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
      
 
 const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions);
@@ -174,6 +173,21 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
 
     setCurrentSentenceIndex((prevIndex) => prevIndex + 1);
     setHiddenWordIndices([]);
+   const data = {
+        username: user.name,
+        road: groupName,
+        index: currentSentenceIndex,
+      };
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+     
+    fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
   };
 
   const finishButtonClicked = () => {
@@ -191,6 +205,21 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
     if (currentSentenceIndex > 0) {
       setCurrentSentenceIndex((prevIndex) => prevIndex - 1);
       setHiddenWordIndices([]);
+const data = {
+        username: user.name,
+        road: groupName,
+        index: currentSentenceIndex,
+      };
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+     
+    fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
     } else {
       console.log("You are already at the beginning.");
     }
