@@ -8,6 +8,7 @@ import {
   IonButtons,
   IonIcon,
   IonContent,
+  IonCardSubtitle,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import { shareOutline, ellipsisVertical } from "ionicons/icons";
@@ -30,7 +31,6 @@ function Install() {
           </IonToolbar>
           </IonHeader>
       <IonContent>
-
         {PWA ? (
           <IonItem>
             <h1>Horray! You Are installed!</h1>

@@ -150,7 +150,15 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     >
                       <IonAvatar>
                         {user ? (
-                          <img alt="Profile" src={user.picture} />
+                          <img
+                            alt="Profile"
+                            style={{
+                              width: "2rem",
+                              height: "2rem",
+                              marginRight: ".7rem",
+                            }}
+                            src={user.picture}
+                          />
                         ) : (
                           <IonIcon
                             className="color"
@@ -212,13 +220,15 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
                   <IonChip>{item.num_groups} Verses</IonChip>
                 </IonCardContent>
-                <IonButton fill='clear'><IonRouterLink
-                  routerLink={item.parsed_data[0]?.url || ""}
-                  target="_blank"
-                  routerDirection="forward"
-                >
-                  Memorize!
-                </IonRouterLink></IonButton>
+                <IonButton fill="clear">
+                  <IonRouterLink
+                    routerLink={item.parsed_data[0]?.url || ""}
+                    target="_blank"
+                    routerDirection="forward"
+                  >
+                    Memorize!
+                  </IonRouterLink>
+                </IonButton>
               </IonCard>
             ))}
           </div>
