@@ -48,7 +48,8 @@ const {user} = useAuth0()
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
-  
+    const [isLoadingProgress, setIsLoadingProgress] = useState(true); // New state for loading progress
+
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -321,6 +322,13 @@ return (
               height: "100vh",
             }}
           >
+ {isLoadingProgress ? ( // Check if loading progress
+              <IonSpinner
+                style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                name="dots"
+              ></IonSpinner>
+            ) : (
+              <div style={{ padding: "20px" }}>
             {sentences.length === 0 ? (
               <IonSpinner
                 style={{ margin: "auto", width: "5rem", height: "5rem" }}
