@@ -101,10 +101,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   if (verse === null || dashboardData === null) {
     return (
       <>
+      <div style={{height: '100vh', display:'grid', placeItems: 'center'}}>
         <IonSpinner
           style={{ margin: "auto", width: "5rem", height: "5rem" }}
           name="dots"
         ></IonSpinner>
+        </div>
+
       </>
     );
   }

@@ -312,7 +312,7 @@ return (
           ></IonActionSheet>
         </IonHeader>
 
-        <IonContent>
+          <IonContent>
           <div
             style={{
               display: "flex",
@@ -322,49 +322,42 @@ return (
               height: "100vh",
             }}
           >
- {isLoadingProgress ? ( // Check if loading progress
+            {isLoadingProgress ? ( // Check if loading progress
               <IonSpinner
                 style={{ margin: "auto", width: "5rem", height: "5rem" }}
                 name="dots"
               ></IonSpinner>
             ) : (
               <div style={{ padding: "20px" }}>
-            {sentences.length === 0 ? (
-              <IonSpinner
-                style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                name="dots"
-              ></IonSpinner>
-            ) : (
-              <div style={{ padding: "20px" }}>
-            <h1 className="ion-text-center">
-  {sentences.length === 0 ? (
-    <IonSpinner
-      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-      name="dots"
-    ></IonSpinner>
-  ) : (
-    <span>
-      {currentSentenceIndex < sentences.length && (
-
-        sentences[currentSentenceIndex].split(" ").map((word, index) => (
-          <span
-            key={index}
-            className={
-              hiddenWordIndices.includes(index) ? "hide-word" : ""
-            }
-          >
-            {word}{" "}
-          </span>
-        ))
-      )}
-    </span>
-  )}
-</h1>
+                <h1 className="ion-text-center">
+                  {sentences.length === 0 ? (
+                    <IonSpinner
+                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                      name="dots"
+                    ></IonSpinner>
+                  ) : (
+                    <span>
+                      {currentSentenceIndex < sentences.length && (
+                        sentences[currentSentenceIndex]
+                          .split(" ")
+                          .map((word, index) => (
+                            <span
+                              key={index}
+                              className={
+                                hiddenWordIndices.includes(index) ? "hide-word" : ""
+                              }
+                            >
+                              {word}{" "}
+                            </span>
+                          ))
+                      )}
+                    </span>
+                  )}
+                </h1>
 
                 <div style={{ margin: "6rem", marginTop: "2rem" }}>
                   <IonProgressBar
-value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
-
+                    value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
                     style={{ marginBottom: "1rem" }}
                   ></IonProgressBar>
                 </div>
