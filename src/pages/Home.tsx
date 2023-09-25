@@ -134,7 +134,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     routerDirection="forward" >
             <IonIcon icon={settingsOutline}></IonIcon>
  {!PWA ? (
-            <IonBadge color="danger" >1</IonBadge>
+            <IonBadge color="danger"style={{position: 'absolute',}} slot="end" >1</IonBadge>
  ) : (
 <div></div>
  )}

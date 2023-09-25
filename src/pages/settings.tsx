@@ -20,6 +20,7 @@ import {
   IonRadio,
   IonButton,
   IonButtons,
+  IonBadge,
 } from "@ionic/react";
 
 const SettingsPage = () => {
@@ -41,28 +42,27 @@ const SettingsPage = () => {
 
   // Function to update settings
 
+  const PWA = window.matchMedia("(display-mode: standalone)").matches;
   return (
-
-        <div>
-    <IonPage>
-       <IonHeader>
+    <div>
+      <IonPage>
+        <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" />
             </IonButtons>
             <IonTitle>name</IonTitle>
-            <IonButtons slot="end">
-            </IonButtons>
-          </IonToolbar>
-          </IonHeader>
-      <IonContent>
-  <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Settings</IonTitle>
+            <IonButtons slot="end"></IonButtons>
           </IonToolbar>
         </IonHeader>
+        <IonContent>
+          <IonHeader collapse="condense">
+            <IonToolbar>
+              <IonTitle size="large">Settings</IonTitle>
+            </IonToolbar>
+          </IonHeader>
           <IonList inset={true}>
-              <h3>General</h3>
+            <h3>General</h3>
             <IonItem>
               <IonSelect
                 label="Default Memory Mode"
@@ -86,7 +86,7 @@ const SettingsPage = () => {
               <IonToggle>Save Progress</IonToggle>
             </IonItem>
 
-              <h3>Colors</h3>
+            <h3>Colors</h3>
             <IonItem>
               <IonRadioGroup
                 value={colorPreference}
@@ -117,13 +117,13 @@ const SettingsPage = () => {
               </IonRadioGroup>
             </IonItem>
             <h3>App</h3>
-            <IonItem routerLink="/settings/install">Install Roads
+            <IonItem routerLink="/settings/install">
+              Install Roads   {!PWA ? <IonBadge slot="end"color="danger">1</IonBadge> : <div></div>}
             </IonItem>
           </IonList>
-              </IonContent>
-    </IonPage>
-
-        </div>
+        </IonContent>
+      </IonPage>
+    </div>
   );
 };
 
