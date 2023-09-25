@@ -1,5 +1,5 @@
 import { IonIcon } from "@ionic/react";
-import { colorPalette } from "ionicons/icons";
+import { colorPalette, logoGithub } from "ionicons/icons";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -149,6 +149,15 @@ localStorage.setItem("dark", (!dark).toString());
               ) : (
                 <div></div>
               )}
+            </IonItem>
+
+            <h3>Links</h3>
+            <IonItem href="https://github.com/jadonus/roads_bible_vercel">
+              <IonIcon icon={logoGithub}/>{' '} 
+              Backend Source Code
+            </IonItem>
+<IonItem href="https://github.com/jadonus/roads_frontend">
+              <IonIcon icon={logoGithub}/> Frontend Source Code
             </IonItem>
           </IonList>
         </IonContent>

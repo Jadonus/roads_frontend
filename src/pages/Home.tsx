@@ -148,7 +148,7 @@ marginTop: "1.2rem"
                           1
                         </IonBadge>
                       ) : (
-                        <div></div>
+                        <div style={{marginTop: '1.2rem'}}></div>
                       )}
                     </IonRouterLink>
                   </h1>
