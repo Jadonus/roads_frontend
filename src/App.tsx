@@ -26,7 +26,6 @@ import "@ionic/react/css/display.css";
 import { Auth0Provider } from '@auth0/auth0-react';
 
 import { withAuthenticationRequired } from '@auth0/auth0-react';
-
 import Login from "./pages/login"
 /* Theme variables */
 import "./theme/variables.css";
@@ -49,22 +48,17 @@ const App: React.FC = () => {
     
   });
   console.log(dark)
-useEffect(() => {
-  // Set the CSS variable for primary accent color
-  document.documentElement.style.setProperty("--ion-color-primary", primaryAccentColor);
-  document.body.style.setProperty("--ion-color-primary", primaryAccentColor);
-
-  // Toggle dark mode based on the 'dark' state
-  if (dark) {
-    document.body.classList.add('dark');
-    console.log('dark mode enabled');
-  } else {
-    document.body.classList.remove('dark');
-    console.log('dark mode disabled');
-  }
-
-  // Store the preference in local storage
-}, [dark, primaryAccentColor]);
+  useEffect(() => {
+    // Set the CSS variable for primary accent color
+    document.documentElement.style.setProperty("--ion-color-primary", primaryAccentColor);
+    document.body.style.setProperty("--ion-color-primary", primaryAccentColor);
+console.log(primaryAccentColor);
+if (dark) {
+document.body.classList.add('dark')
+console.log('dark')
+}
+    // Store the preference in local storage
+  }) 
 const Dashboard = withAuthenticationRequired(ExploreContainer);
 const Roads = withAuthenticationRequired(Verse);
   return (

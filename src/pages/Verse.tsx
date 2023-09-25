@@ -376,7 +376,7 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
             >
               <IonButton
                 onClick={() => hideRandomWords(3)}
-                style={{ margin: "0 0.5rem" }}
+                style={{ margin: "0 0.5rem" }} className="color"
               >
                 <div
                   style={{
@@ -390,7 +390,7 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
                 </div>
               </IonButton>
 
-              <IonButton onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
+              <IonButton  className="color" onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
                 <div
                   style={{
                     display: "flex",
@@ -421,7 +421,7 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
 
               <IonButton
                 onClick={moveToNextSentence}
-                style={{ margin: "0 0.5rem" }}
+                style={{ margin: "0 0.5rem" }} className="color"
               >
                 <div
                   style={{
@@ -437,7 +437,7 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
 
               <IonButton
                 onClick={backButtonClicked}
-                style={{ margin: "0 0.5rem" }}
+                style={{ margin: "0 0.5rem" }} className="color"
               >
                 <div
                   style={{

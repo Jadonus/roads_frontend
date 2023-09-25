@@ -5,3 +5,7 @@
 .ion-text-center {
     text-align: center;
 }
+IonButton {
+   --ion-color: #ffffff;
+
+  }

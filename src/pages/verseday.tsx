@@ -330,7 +330,7 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
 
               <IonButton
                 onClick={revealAllWords}
-                style={{ margin: "0 0.5rem" }}
+                style={{margin: "0 0.5rem" }}
               >
                 <div
                   style={{

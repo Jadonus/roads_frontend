@@ -22,6 +22,7 @@ IonRefresher,
 
   IonBadge,
 } from "@ionic/react";
+import '../theme/variables.css'
 import { settings, settingsOutline } from "ionicons/icons";
 import {
   IonSearchbarCustomEvent,
@@ -131,8 +132,8 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
  <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-          <IonHeader>
-            <IonToolbar>
+          <IonHeader >
+            <IonToolbar >
               <IonTitle size="large" >
                 Dashboard
               </IonTitle>
@@ -146,7 +147,7 @@ function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
                       routerDirection="forward"
                       style={{ paddingRight: "1rem" }}
                     >
-                      <IonIcon icon={settingsOutline}></IonIcon>
+                      <IonIcon className="color"icon={settingsOutline}></IonIcon>
                       {!PWA ? (
                         <IonBadge
                           color="danger"
