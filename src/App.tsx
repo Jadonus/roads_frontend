@@ -42,13 +42,29 @@ const App: React.FC = () => {
     const storedPrimaryAccentColor = localStorage.getItem("colorPreference");
     return storedPrimaryAccentColor || "#3875D2"; // Default to blue (or your desired default color)
   });
+  const [dark] = useState(() => {
+    const darkpref = localStorage.getItem("dark");
+   console.log(darkpref);
+    return darkpref || false; // Default to blue (or your desired default color)
+    
+  });
+  console.log(dark)
+useEffect(() => {
+  // Set the CSS variable for primary accent color
+  document.documentElement.style.setProperty("--ion-color-primary", primaryAccentColor);
+  document.body.style.setProperty("--ion-color-primary", primaryAccentColor);
 
-  useEffect(() => {
-    // Set the CSS variable for primary accent color
-    document.documentElement.style.setProperty("--ion-color-primary", primaryAccentColor);
-console.log(primaryAccentColor);
-    // Store the preference in local storage
-  }) 
+  // Toggle dark mode based on the 'dark' state
+  if (dark) {
+    document.body.classList.add('dark');
+    console.log('dark mode enabled');
+  } else {
+    document.body.classList.remove('dark');
+    console.log('dark mode disabled');
+  }
+
+  // Store the preference in local storage
+}, [dark, primaryAccentColor]);
 const Dashboard = withAuthenticationRequired(ExploreContainer);
 const Roads = withAuthenticationRequired(Verse);
   return (
@@ -59,7 +75,7 @@ const Roads = withAuthenticationRequired(Verse);
   {...({} as MyAuth0ProviderOptions)}
 
 >
-    <IonApp >
+    <IonApp className={dark ? 'dark' : ''}>
 
       <IonReactRouter>
         <IonRouterOutlet>

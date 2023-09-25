@@ -1,5 +1,5 @@
 import { IonIcon } from "@ionic/react";
-import { square } from "ionicons/icons";
+import { colorPalette } from "ionicons/icons";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -25,10 +25,15 @@ import {
 
 const SettingsPage = () => {
   // Initialize settings using localStorage or default values
+  const [dark, setDark] = useState(() => {
+    // Use localStorage value if available, otherwise default to false
+    const darkPreference = localStorage.getItem("dark");
+    return darkPreference === "true"; // Convert string to boolean
+  });
   const [colorPreference, setColorPreference] = useState(() => {
     const storedColorPreference = localStorage.getItem("colorPreference");
 
-    return storedColorPreference; // Default to blue if no preference is stored
+    return storedColorPreference; 
   });
 
   const [pageRefreshed, setPageRefreshed] = useState(false);
@@ -36,10 +41,15 @@ const SettingsPage = () => {
   // useEffect to save settings to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("colorPreference", colorPreference);
-  }, [colorPreference, pageRefreshed]);
+    localStorage.setItem("dark", dark);
+  }, [colorPreference, pageRefreshed, dark]);
   let mode = "he";
   const [mode1, mode2] = useState(() => {});
-
+  const toggleDarkMode = () => {
+    // Update the state and save it to localStorage
+    setDark((prevDark) => !prevDark);
+    localStorage.setItem("dark", !dark); // Toggle and save as a boolean
+  };
   // Function to update settings
 
   const PWA = window.matchMedia("(display-mode: standalone)").matches;
@@ -83,7 +93,11 @@ const SettingsPage = () => {
               </IonSelect>
             </IonItem>
             <IonItem>
-              <IonToggle>Save Progress</IonToggle>
+ <IonToggle
+        checked={dark}
+        onIonChange={toggleDarkMode}
+        value={dark}
+      >Dark Mode </IonToggle>
             </IonItem>
 
             <h3>Colors</h3>
@@ -102,17 +116,17 @@ const SettingsPage = () => {
                 {/* Radio options */}
 
                 <IonRadio value="#eb3434">
-                  Red <IonIcon icon={square} style={{ color: "#eb3434" }} />
+                  Red <IonIcon icon={colorPalette} style={{ color: "#eb3434" }} />
                 </IonRadio>
                 <IonRadio value="#3875D2">
                   Blue (default){" "}
-                  <IonIcon icon={square} style={{ color: "#3875D2" }} />
+                  <IonIcon icon={colorPalette} style={{ color: "#3875D2" }} />
                 </IonRadio>
                 <IonRadio value="#33FF9B">
-                  Green <IonIcon icon={square} style={{ color: "#33FF9B" }} />
+                  Green <IonIcon icon={colorPalette} style={{ color: "#33FF9B" }} />
                 </IonRadio>
                 <IonRadio value="#9133FF">
-                  Purple <IonIcon icon={square} style={{ color: "#9133FF" }} />{" "}
+                  Purple <IonIcon icon={colorPalette} style={{ color: "#9133FF" }} />{" "}
                 </IonRadio>
               </IonRadioGroup>
             </IonItem>

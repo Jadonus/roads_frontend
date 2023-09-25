@@ -18,11 +18,7 @@ import {
   IonIcon,
   IonBadge,
 } from "@ionic/react";
-import {
-  settings,
-   settingsOutline
-
-} from 'ionicons/icons'
+import { settings, settingsOutline } from "ionicons/icons";
 import {
   IonSearchbarCustomEvent,
   SearchbarChangeEventDetail,
@@ -109,13 +105,12 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   if (verse === null || dashboardData === null) {
     return (
       <>
-      <div style={{height: '100vh', display:'grid', placeItems: 'center'}}>
-        <IonSpinner
-          style={{ margin: "auto", width: "9rem", height: "9rem" }}
-          name="dots"
-        ></IonSpinner>
+        <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+          <IonSpinner
+            style={{ margin: "auto", width: "7rem", height: "7rem" }}
+            name="dots"
+          ></IonSpinner>
         </div>
-
       </>
     );
   }
@@ -123,27 +118,42 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle size="large">Dashboard</IonTitle>
-            <IonButtons slot="end">
-<div>
-    <h1>
-        <IonRouterLink   routerLink="/settings"
-                    target="_blank"
-                    routerDirection="forward" >
-            <IonIcon icon={settingsOutline}></IonIcon>
- {!PWA ? (
-            <IonBadge color="danger"style={{position: 'absolute',}} slot="end" >1</IonBadge>
- ) : (
-<div></div>
- )}
-</IonRouterLink></h1>
+     
+        <IonContent fullscreen={true}>
+          <IonHeader collapse="condense">
+            <IonToolbar>
+              <IonTitle size="large" >Dashboard</IonTitle>
 
-</div>
+              <IonButtons slot="end">
+              <div>
+                <h1>
+                  <IonRouterLink
+                    routerLink="/settings"
+                    target="_blank"
+                    routerDirection="forward"
+                    style={{ paddingRight: "1rem" }}
+                  >
+                    <IonIcon icon={settingsOutline}></IonIcon>
+                    {!PWA ? (
+                      <IonBadge
+                        color="danger"
+                        style={{
+                          position: "absolute",
+                          left: "1rem",
+                          top: "1rem",
+                        }}
+                      >
+                        1
+                      </IonBadge>
+                    ) : (
+                      <div></div>
+                    )}
+                  </IonRouterLink>
+                </h1>
+              </div>
             </IonButtons>
-          </IonToolbar>
-          <IonToolbar className="">
+            </IonToolbar>
+ <IonToolbar className="">
             <IonSearchbar
               className="mt"
               placeholder="Search all roads"
@@ -151,8 +161,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               value={searchQuery}
             />
           </IonToolbar>
-        </IonHeader>
-        <IonContent>
+          </IonHeader>
           <IonItem>
             <IonCardTitle>Verse Of the Day</IonCardTitle>
           </IonItem>
