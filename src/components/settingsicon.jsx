@@ -2,6 +2,8 @@ import {
     IonRouterLink,
     IonIcon,
     IonBadge,
+    IonApp,
+    IonContent,
 } from '@ionic/react'
 import {
     settingsOutline
@@ -9,6 +11,8 @@ import {
 function SettingsIcon() {
     
 return (
+<IonApp>
+    <IonContent>
 <div>
     <h1>
         <IonRouterLink href="/settings" direction="forward">
@@ -17,7 +21,9 @@ return (
 </IonRouterLink></h1>
 
 </div>
+</IonContent>
 
+</IonApp>
 )
 
 }
