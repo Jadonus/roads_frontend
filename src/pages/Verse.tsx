@@ -96,16 +96,17 @@ useEffect(() => {
         },
         body: JSON.stringify(data),
       };
+await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+     
 
-      const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions);
+const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions);
       const progressData = await response.json();
-
       if (response.status === 200) {
         const savedIndex = progressData.progress.index;
         setCurrentSentenceIndex(savedIndex);
       } else if (response.status === 404) {
+       console.log("No progress found");
         // Handle the case when no progress is found (starting from the beginning).
-        setCurrentSentenceIndex(0);
       } else {
         // Handle other error cases as needed.
         console.error('Error:', progressData.error);
