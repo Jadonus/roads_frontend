@@ -18,6 +18,8 @@ import {
   IonRadioGroup,
   IonListHeader,
   IonRadio,
+  IonButton,
+  IonButtons,
 } from "@ionic/react";
 
 const SettingsPage = () => {
@@ -40,15 +42,20 @@ const SettingsPage = () => {
   // Function to update settings
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonBackButton></IonBackButton>
-          <IonTitle>Settings</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
+
         <div>
+    <IonPage>
+       <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" />
+            </IonButtons>
+            <IonTitle>name</IonTitle>
+            <IonButtons slot="end">
+            </IonButtons>
+          </IonToolbar>
+          </IonHeader>
+      <IonContent>
   <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Settings</IonTitle>
@@ -110,12 +117,13 @@ const SettingsPage = () => {
               </IonRadioGroup>
             </IonItem>
             <h3>App</h3>
-            <IonItem href="/settings/install">Install Roads
+            <IonItem routerLink="/settings/install">Install Roads
             </IonItem>
           </IonList>
-        </div>
-      </IonContent>
+              </IonContent>
     </IonPage>
+
+        </div>
   );
 };
 

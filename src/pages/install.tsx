@@ -19,15 +19,18 @@ function Install() {
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-          <IonTitle>Settings</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+<IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/settings" />
+            </IonButtons>
+            <IonTitle>Install Roads</IonTitle>
+            <IonButtons slot="end">
+            </IonButtons>
+          </IonToolbar>
+          </IonHeader>
       <IonContent>
+
         {PWA ? (
           <IonItem>
             <h1>Horray! You Are installed!</h1>
@@ -36,7 +39,7 @@ function Install() {
           <>
             <IonItem>
               <img
-                src="https://roadsbible.com/static/roads.png"
+                src="https://dashboard.roadsbible.com/roads.png"
                 style={{ width: "5em", margin: "3em" }}
               />
               <div>
