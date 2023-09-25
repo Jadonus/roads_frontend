@@ -33,7 +33,7 @@ const SettingsPage = () => {
   const [colorPreference, setColorPreference] = useState(() => {
     const storedColorPreference = localStorage.getItem("colorPreference");
 
-    return storedColorPreference; 
+    return storedColorPreference;
   });
 
   const [pageRefreshed, setPageRefreshed] = useState(false);
@@ -41,14 +41,17 @@ const SettingsPage = () => {
   // useEffect to save settings to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("colorPreference", colorPreference);
-    localStorage.setItem("dark", dark);
+localStorage.setItem("dark", dark.toString());
+
   }, [colorPreference, pageRefreshed, dark]);
   let mode = "he";
   const [mode1, mode2] = useState(() => {});
   const toggleDarkMode = () => {
     // Update the state and save it to localStorage
     setDark((prevDark) => !prevDark);
-    localStorage.setItem("dark", !dark); // Toggle and save as a boolean
+localStorage.setItem("dark", (!dark).toString());
+
+
   };
   // Function to update settings
 
@@ -61,7 +64,7 @@ const SettingsPage = () => {
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" />
             </IonButtons>
-            <IonTitle>name</IonTitle>
+            <IonTitle>Settings</IonTitle>
             <IonButtons slot="end"></IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -93,11 +96,14 @@ const SettingsPage = () => {
               </IonSelect>
             </IonItem>
             <IonItem>
- <IonToggle
-        checked={dark}
-        onIonChange={toggleDarkMode}
-        value={dark}
-      >Dark Mode </IonToggle>
+              <IonToggle
+                checked={dark}
+                onIonChange={toggleDarkMode}
+  value={dark.toString()} // Convert boolean to string
+
+              >
+                Dark Mode{" "}
+              </IonToggle>
             </IonItem>
 
             <h3>Colors</h3>
@@ -116,23 +122,33 @@ const SettingsPage = () => {
                 {/* Radio options */}
 
                 <IonRadio value="#eb3434">
-                  Red <IonIcon icon={colorPalette} style={{ color: "#eb3434" }} />
+                  Red{" "}
+                  <IonIcon icon={colorPalette} style={{ color: "#eb3434" }} />
                 </IonRadio>
                 <IonRadio value="#3875D2">
                   Blue (default){" "}
                   <IonIcon icon={colorPalette} style={{ color: "#3875D2" }} />
                 </IonRadio>
                 <IonRadio value="#33FF9B">
-                  Green <IonIcon icon={colorPalette} style={{ color: "#33FF9B" }} />
+                  Green{" "}
+                  <IonIcon icon={colorPalette} style={{ color: "#33FF9B" }} />
                 </IonRadio>
                 <IonRadio value="#9133FF">
-                  Purple <IonIcon icon={colorPalette} style={{ color: "#9133FF" }} />{" "}
+                  Purple{" "}
+                  <IonIcon icon={colorPalette} style={{ color: "#9133FF" }} />{" "}
                 </IonRadio>
               </IonRadioGroup>
             </IonItem>
             <h3>App</h3>
             <IonItem routerLink="/settings/install">
-              Install Roads   {!PWA ? <IonBadge slot="end"color="danger">1</IonBadge> : <div></div>}
+              Install Roads{" "}
+              {!PWA ? (
+                <IonBadge slot="end" color="danger">
+                  1
+                </IonBadge>
+              ) : (
+                <div></div>
+              )}
             </IonItem>
           </IonList>
         </IonContent>
