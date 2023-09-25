@@ -77,7 +77,6 @@ const {user} = useAuth0()
 
       })
     }, []);
-useEffect(() => {
 
  
 
@@ -121,6 +120,9 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
   };
 
   // Load progress when the component mounts or when the currentSentenceIndex changes
+
+useEffect(() => {
+
   loadProgress();
 }, []);
 
