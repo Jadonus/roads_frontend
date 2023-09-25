@@ -5,6 +5,7 @@ import {
   IonBackButton,
   IonTitle,
   IonItem,
+  IonButtons,
   IonIcon,
   IonContent,
 } from "@ionic/react";
@@ -20,9 +21,10 @@ function Install() {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton></IonBackButton>
+          </IonButtons>
           <IonTitle>Settings</IonTitle>
-
-          <IonBackButton  defaultHref="/"></IonBackButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -55,16 +57,17 @@ function Install() {
                 <h3>
                   To Install Roads, press the{" "}
                   <IonIcon icon={ellipsisVertical}></IonIcon> button, Then press
-                  "Add To Home Screen" You may also choose to press install if you see a prompt.
+                  "Add To Home Screen" You may also choose to press install if
+                  you see a prompt.
                 </h3>
               </IonItem>
             ) : (
-<IonItem>
+              <IonItem>
                 <h3>
-                 Depending on the browser, you can press the download button on the url bar, and then press install. 
+                  Depending on the browser, you can press the download button on
+                  the url bar, and then press install.
                 </h3>
               </IonItem>
-
             )}
           </>
         )}

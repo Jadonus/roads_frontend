@@ -16,6 +16,7 @@ import {
   IonSelectOption,
   IonBackButton,
   IonRadioGroup,
+  IonListHeader,
   IonRadio,
 } from "@ionic/react";
 
@@ -43,13 +44,17 @@ const SettingsPage = () => {
       <IonHeader>
         <IonToolbar>
           <IonBackButton></IonBackButton>
-          <IonTitle size="large">Settings</IonTitle>
+          <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <div>
+  <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">Settings</IonTitle>
+          </IonToolbar>
+        </IonHeader>
           <IonList inset={true}>
-
               <h3>General</h3>
             <IonItem>
               <IonSelect
@@ -103,6 +108,9 @@ const SettingsPage = () => {
                   Purple <IonIcon icon={square} style={{ color: "#9133FF" }} />{" "}
                 </IonRadio>
               </IonRadioGroup>
+            </IonItem>
+            <h3>App</h3>
+            <IonItem href="/settings/install">Install Roads
             </IonItem>
           </IonList>
         </div>
