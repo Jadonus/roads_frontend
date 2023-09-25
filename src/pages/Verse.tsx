@@ -32,6 +32,7 @@ import {
   settingsOutline,
   arrowForwardOutline,
 } from "ionicons/icons";
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 import { useAuth0 } from "@auth0/auth0-react";
 let groupName = "";
@@ -48,7 +49,10 @@ const {user} = useAuth0()
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
-  
+  const hapticsImpactMedium = async () => {
+  await Haptics.impact({ style: ImpactStyle.Medium });
+};
+
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -168,11 +172,13 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
   const moveToNextSentence = () => {
     if (currentSentenceIndex >= sentences.length - 1) {
       console.log("You have finished all the sentences.");
+hapticsImpactMedium()
       return;
     }
 
     setCurrentSentenceIndex((prevIndex) => prevIndex + 1);
     setHiddenWordIndices([]);
+
    const data = {
         username: user.name,
         road: groupName,
@@ -228,6 +234,7 @@ const data = {
     savepro()
     } else {
       console.log("You are already at the beginning.");
+hapticsImpactMedium()
     }
   };
   const toggleFirstLetterMode = () => {
