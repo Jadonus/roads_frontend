@@ -110,9 +110,13 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
       } else {
         // Handle other error cases as needed.
         console.error('Error:', progressData.error);
+      setIsLoadingProgress(false); // Update loading state when progress is loaded
+
       }
     } catch (error) {
       console.error('Error:', error);
+      setIsLoadingProgress(false); // Update loading state even on error
+
     }
   };
 

@@ -103,7 +103,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       <>
       <div style={{height: '100vh', display:'grid', placeItems: 'center'}}>
         <IonSpinner
-          style={{ margin: "auto", width: "5rem", height: "5rem" }}
+          style={{ margin: "auto", width: "9rem", height: "9rem" }}
           name="dots"
         ></IonSpinner>
         </div>
