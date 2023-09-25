@@ -186,9 +186,12 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
         },
         body: JSON.stringify(data),
       };
-     
-    fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+    async function savepro() { 
+    await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+    }
+    savepro()
   };
+
 
   const finishButtonClicked = () => {
     if (finishButtonClicks === 0) {
@@ -219,7 +222,10 @@ const data = {
         body: JSON.stringify(data),
       };
      
-    fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+  async function savepro() { 
+    await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+    }
+    savepro()
     } else {
       console.log("You are already at the beginning.");
     }
