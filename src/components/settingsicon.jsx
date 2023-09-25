@@ -1,5 +1,5 @@
 import {
-    IonRouterLink,
+    IonItem,
     IonIcon,
     IonBadge,
     IonApp,
@@ -11,19 +11,14 @@ import {
 function SettingsIcon() {
     
 return (
-<IonApp>
-    <IonContent>
 <div>
     <h1>
-        <IonRouterLink href="/settings" direction="forward">
+        <IonItem href="/settings" direction="forward">
             <IonIcon icon={settingsOutline}></IonIcon>
             <IonBadge color="danger" >1</IonBadge>
-</IonRouterLink></h1>
+</IonItem></h1>
 
 </div>
-</IonContent>
-
-</IonApp>
 )
 
 }

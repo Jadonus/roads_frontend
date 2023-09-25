@@ -48,8 +48,7 @@ const {user} = useAuth0()
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
-    const [isLoadingProgress, setIsLoadingProgress] = useState(true); // New state for loading progress
-
+  
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -77,6 +76,7 @@ const {user} = useAuth0()
 
       })
     }, []);
+useEffect(() => {
 
  
 
@@ -109,20 +109,13 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
       } else {
         // Handle other error cases as needed.
         console.error('Error:', progressData.error);
-      setIsLoadingProgress(false); // Update loading state when progress is loaded
-
       }
     } catch (error) {
       console.error('Error:', error);
-      setIsLoadingProgress(false); // Update loading state even on error
-
     }
   };
 
   // Load progress when the component mounts or when the currentSentenceIndex changes
-
-useEffect(() => {
-
   loadProgress();
 }, []);
 
@@ -318,7 +311,7 @@ return (
           ></IonActionSheet>
         </IonHeader>
 
-          <IonContent>
+        <IonContent>
           <div
             style={{
               display: "flex",
@@ -328,42 +321,43 @@ return (
               height: "100vh",
             }}
           >
-            {isLoadingProgress ? ( // Check if loading progress
+
+            {sentences.length === 0 ? (
               <IonSpinner
                 style={{ margin: "auto", width: "5rem", height: "5rem" }}
                 name="dots"
               ></IonSpinner>
             ) : (
               <div style={{ padding: "20px" }}>
-                <h1 className="ion-text-center">
-                  {sentences.length === 0 ? (
-                    <IonSpinner
-                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                      name="dots"
-                    ></IonSpinner>
-                  ) : (
-                    <span>
-                      {currentSentenceIndex < sentences.length && (
-                        sentences[currentSentenceIndex]
-                          .split(" ")
-                          .map((word, index) => (
-                            <span
-                              key={index}
-                              className={
-                                hiddenWordIndices.includes(index) ? "hide-word" : ""
-                              }
-                            >
-                              {word}{" "}
-                            </span>
-                          ))
-                      )}
-                    </span>
-                  )}
-                </h1>
+            <h1 className="ion-text-center">
+  {sentences.length === 0 ? (
+    <IonSpinner
+      style={{ margin: "auto", width: "5rem", height: "5rem" }}
+      name="dots"
+    ></IonSpinner>
+  ) : (
+    <span>
+      {currentSentenceIndex < sentences.length && (
+
+        sentences[currentSentenceIndex].split(" ").map((word, index) => (
+          <span
+            key={index}
+            className={
+              hiddenWordIndices.includes(index) ? "hide-word" : ""
+            }
+          >
+            {word}{" "}
+          </span>
+        ))
+      )}
+    </span>
+  )}
+</h1>
 
                 <div style={{ margin: "6rem", marginTop: "2rem" }}>
                   <IonProgressBar
-                    value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
+value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
+
                     style={{ marginBottom: "1rem" }}
                   ></IonProgressBar>
                 </div>
