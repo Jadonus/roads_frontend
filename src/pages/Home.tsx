@@ -129,12 +129,12 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             <IonButtons slot="end">
 <div>
     <h1>
-        <IonRouterLink href="/settings" direction="forward">
+        <IonRouterLink href="/settings" >
             <IonIcon icon={settingsOutline}></IonIcon>
  {PWA ? (
             <IonBadge color="danger" >1</IonBadge>
  ) : (
-
+<div></div>
  )}
 </IonRouterLink></h1>
 
