@@ -142,7 +142,7 @@ console.log(verseUrl);
                             position: "absolute",
                             left: "1rem",
                             top: "1rem",
-marginTop: "1.2rem" 
+marginTop: "0.5rem" 
                           }}
                         >
                           1
