@@ -380,7 +380,7 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
             )}
           </div>
         </IonContent>
-        <IonFooter translucent={true}>
+        <IonFooter style={{backgroundColor: 'var(--ionic-color-secondary)'}}>
           <IonToolbar>
             <IonButtons
               style={{

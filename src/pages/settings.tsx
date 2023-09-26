@@ -129,9 +129,9 @@ localStorage.setItem("dark", (!dark).toString());
                   Blue (default){" "}
                   <IonIcon icon={colorPalette} style={{ color: "#3875D2" }} />
                 </IonRadio>
-                <IonRadio value="#33FF9B">
+                <IonRadio value="#3A936B">
                   Green{" "}
-                  <IonIcon icon={colorPalette} style={{ color: "#33FF9B" }} />
+                  <IonIcon icon={colorPalette} style={{ color: "#3A936B" }} />
                 </IonRadio>
                 <IonRadio value="#9133FF">
                   Purple{" "}
