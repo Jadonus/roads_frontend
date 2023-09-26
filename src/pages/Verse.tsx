@@ -15,6 +15,7 @@ import {
   IonContent,
   IonCardTitle,
   IonHeader,
+  IonAlert,
   IonCardHeader,
   IonCard,
   IonLabel,
@@ -48,6 +49,7 @@ const {user} = useAuth0()
   const [isHidden, setIsHidden] = useState(false);
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
+  const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
   await Haptics.impact({ style: ImpactStyle.Medium });
@@ -173,7 +175,8 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
     if (currentSentenceIndex >= sentences.length - 1) {
       console.log("You have finished all the sentences.");
 hapticsImpactMedium()
-      return;
+setShowAlert(true)      
+return;
     }
 
     setCurrentSentenceIndex((prevIndex) => prevIndex + 1);
@@ -319,6 +322,9 @@ return (
         </IonHeader>
 
         <IonContent>
+          <IonAlert header="Your Done!" message="Horray! 🎉 You finished this road.">
+
+          </IonAlert>
           <div
             style={{
               display: "flex",
