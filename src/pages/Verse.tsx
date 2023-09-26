@@ -175,6 +175,8 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
     if (currentSentenceIndex >= sentences.length - 1) {
       console.log("You have finished all the sentences.");
 hapticsImpactMedium()
+  setCurrentSentenceIndex((prevIndex) => prevIndex + 1); // Increment index first
+
 setShowAlert(true)      
 return;
     }
@@ -331,7 +333,7 @@ return (
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "100vh",
+              height: "80vh",
             }}
           >
 
