@@ -34,7 +34,7 @@ import {
   arrowForwardOutline,
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
-
+import '../theme/variables.css'
 import { useAuth0 } from "@auth0/auth0-react";
 let groupName = "";
 interface ContainerProps {}
