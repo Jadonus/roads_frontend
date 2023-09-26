@@ -322,7 +322,7 @@ return (
         </IonHeader>
 
         <IonContent>
-          <IonAlert header="Your Done!" message="Horray! 🎉 You finished this road.">
+          <IonAlert onDidDismiss={() => location.href='/'} buttons={['Great!']}isOpen={isOpen}header="Your Done!" message="Horray! 🎉 You finished this road.">
 
           </IonAlert>
           <div
