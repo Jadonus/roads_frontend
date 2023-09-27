@@ -5,6 +5,8 @@ import {
   IonRouterOutlet,
   setupIonicReact,
 } from "@ionic/react";
+import OneSignal from 'react-onesignal';
+
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
@@ -24,7 +26,6 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import { Auth0Provider } from '@auth0/auth0-react';
-import runOneSignal from './pages/onesignal';
 
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Login from "./pages/login"
@@ -61,13 +62,13 @@ console.log('dark')
     // Store the preference in local storage
   }) 
 
-// do other stuff
 
-//Example2
-const [initialized, setInitialized] = useState(false);
  useEffect(() => {
-    runOneSignal();
-  })
+
+    console.log('OneSignal')
+  OneSignal.init({ appId: '812fcdb7-72b5-46ef-afd7-8680bb358698', allowLocalhostAsSecureOrigin: true});
+  OneSignal.Slidedown.promptPush();
+  },[])
 const Dashboard = withAuthenticationRequired(ExploreContainer);
 const Roads = withAuthenticationRequired(Verse);
   return (
