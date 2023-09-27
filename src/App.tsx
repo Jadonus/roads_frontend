@@ -16,7 +16,7 @@ import Install from "./pages/install";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
-
+import Welcome from "./pages/welcome";
 import "@ionic/react/css/padding.css";
 import "@ionic/react/css/float-elements.css";
 import "@ionic/react/css/text-alignment.css";
@@ -24,6 +24,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import { Auth0Provider } from '@auth0/auth0-react';
+import runOneSignal from './pages/onesignal';
 
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Login from "./pages/login"
@@ -59,6 +60,14 @@ console.log('dark')
 }
     // Store the preference in local storage
   }) 
+
+// do other stuff
+
+//Example2
+const [initialized, setInitialized] = useState(false);
+ useEffect(() => {
+    runOneSignal();
+  })
 const Dashboard = withAuthenticationRequired(ExploreContainer);
 const Roads = withAuthenticationRequired(Verse);
   return (
@@ -79,7 +88,7 @@ const Roads = withAuthenticationRequired(Verse);
         <Route path="/verseoftheday" component={Verseday} exact />
 <Route path = "/dev" component = {ExploreContainer} exact />
         <Route path="/login" component={Login} exact />
-
+<Route path="/welcome" component={Welcome} exact />
         <Route path="/settings/install" component={Install} exact />
         </IonRouterOutlet>
 
