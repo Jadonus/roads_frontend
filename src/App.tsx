@@ -66,12 +66,14 @@ console.log('dark')
  useEffect(() => {
 
     console.log('OneSignal')
+  if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
+      navigator.serviceWorker.register('/onesignal/OneSignalSDKWorker.js');
+    }
 OneSignal.init({
  appId: '812fcdb7-72b5-46ef-afd7-8680bb358698',
  allowLocalhostAsSecureOrigin: true,
- serviceWorkerParam: { scope: '/onesignal/' },
- serviceWorkerPath: '/onesignal/OneSignalSDKWorker.js',
 });
+
   OneSignal.Slidedown.promptPush();
   },[])
 const Dashboard = withAuthenticationRequired(ExploreContainer);
