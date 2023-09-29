@@ -50,4 +50,19 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+      appId: "812fcdb7-72b5-46ef-afd7-8680bb358698",
+      safari_web_id: "web.onesignal.auto.48d9c6a2-4943-4221-b17b-a4e235bf1c7d",
+      notifyButton: {
+        enable: true,
+      },
+            serviceWorkerParam: { scope: "/onesignal/" },
+            serviceWorkerPath: "onesignal/OneSignalSDKWorker.js",
+    });
+  });
+</script>
 </html>

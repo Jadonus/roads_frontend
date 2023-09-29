@@ -5,7 +5,6 @@ import {
   IonRouterOutlet,
   setupIonicReact,
 } from "@ionic/react";
-import OneSignal from 'react-onesignal';
 
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
@@ -63,7 +62,7 @@ console.log('dark')
   }) 
 
 
- useEffect(() => {
+ /*useEffect(() => {
 
     console.log('OneSignal')
   if ('serviceWorker' in navigator && !navigator.serviceWorker.controller) {
@@ -75,7 +74,7 @@ OneSignal.init({
 });
 
   OneSignal.Slidedown.promptPush();
-  },[])
+  },[])*/
 const Dashboard = withAuthenticationRequired(ExploreContainer);
 const Roads = withAuthenticationRequired(Verse);
   return (
