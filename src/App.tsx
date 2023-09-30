@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
-import { useLocation } from "react-router-dom";
 
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
@@ -68,11 +67,11 @@ const App: React.FC = () => {
       document.body.classList.add("dark");
     }
   });
- const location = useLocation();
+  const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
   const isTabActive = (tabPath: string) => {
-    return location.pathname === tabPath;
+    return currentPath === tabPath;
   };
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
