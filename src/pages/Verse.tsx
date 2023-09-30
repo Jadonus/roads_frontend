@@ -344,78 +344,55 @@ const Verse: React.FC<ContainerProps> = () => {
             header="Your Done!"
             message="Horray! 🎉 You finished this road."
           ></IonAlert>
-   <Swiper
+<Swiper
   navigation={{
-    nextEl: ".swiper-button-next", // Use the appropriate class for your Next button
-    prevEl: ".swiper-button-prev", // Use the appropriate class for your Previous button
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   }}
   onSlideChange={(swiper) => {
-    const isNext = swiper.realIndex > swiper.previousIndex;
-    if (isNext) {
-      // Call your "Next Sentence" function here
+    const currentIndex = swiper.realIndex;
+    // Check if the user swiped forward
+    if (currentIndex > currentSentenceIndex) {
+      // User swiped forward
       moveToNextSentence();
-    } else {
-      // Call your "Back" function here
+    } else if (currentIndex < currentSentenceIndex) {
+      // User swiped backward
       backButtonClicked();
     }
   }}
 >
-  <SwiperSlide>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "80vh",
-            }}
-          >
-            {sentences.length === 0 ? (
-              <IonSpinner
-                style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                name="dots"
-              ></IonSpinner>
-            ) : (
-              <div style={{ padding: "20px" }}>
-                <h1 className="ion-text-center">
-                  {sentences.length === 0 ? (
-                    <IonSpinner
-                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                      name="dots"
-                    ></IonSpinner>
-                  ) : (
-                    <span>
-                      {currentSentenceIndex < sentences.length &&
-                        sentences[currentSentenceIndex]
-                          .split(" ")
-                          .map((word, index) => (
-                            <span
-                              key={index}
-                              className={
-                                hiddenWordIndices.includes(index)
-                                  ? "hide-word"
-                                  : ""
-                              }
-                            >
-                              {word}{" "}
-                            </span>
-                          ))}
-                    </span>
-                  )}
-                </h1>
-
-                <div style={{ margin: "6rem", marginTop: "2rem" }}>
-                  <IonProgressBar
-                    value={parseFloat(
-                      (currentSentenceIndex / sentences.length).toFixed(2)
-                    )}
-                    style={{ marginBottom: "1rem" }}
-                  ></IonProgressBar>
-                </div>
-              </div>
-            )}
-          </div>
-</SwiperSlide>
+  {sentences.map((verse, index) => (
+    <SwiperSlide key={index}>
+      <div>
+        {/* Display your verse content here */}
+        <h1 className="ion-text-center">
+          {sentences.length === 0 ? (
+            <IonSpinner
+              style={{ margin: "auto", width: "5rem", height: "5rem" }}
+              name="dots"
+            ></IonSpinner>
+          ) : (
+            verse.split(" ").map((word, wordIndex) => (
+              <span
+                key={wordIndex}
+                className={
+                  hiddenWordIndices.includes(wordIndex) ? "hide-word" : ""
+                }
+              >
+                {word}{" "}
+              </span>
+            ))
+          )}
+        </h1>
+        <div style={{ margin: "6rem", marginTop: "2rem" }}>
+          <IonProgressBar
+            value={parseFloat(((index + 1) / sentences.length).toFixed(2))}
+            style={{ marginBottom: "1rem" }}
+          ></IonProgressBar>
+        </div>
+      </div>
+    </SwiperSlide>
+  ))}
 </Swiper>
 <IonToolbar style={style}>
             <IonButtons

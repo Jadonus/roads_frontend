@@ -112,13 +112,13 @@ const Roads = withAuthenticationRequired(Verse);
             <IonLabel>Dashboard</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="radio" href="/radio">
+          <IonTabButton tab="radio" href="/welcome">
             <IonIcon icon={personCircle} />
             <IonLabel>My Progress</IonLabel>
           </IonTabButton>
 
 
-          <IonTabButton tab="search" href="/search">
+          <IonTabButton tab="search" href="/settings">
             <IonIcon icon={settingsOutline} />
             <IonLabel>Search</IonLabel>
           </IonTabButton>
