@@ -83,7 +83,9 @@ const App: React.FC = () => {
       redirectUri="https://dashboard.roadsbible.com/"
       {...({} as MyAuth0ProviderOptions)}
     >
+      
         <IonApp>
+          <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
@@ -116,6 +118,7 @@ const App: React.FC = () => {
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
+</IonReactRouter>
       </IonApp>
     </Auth0Provider>
   );
