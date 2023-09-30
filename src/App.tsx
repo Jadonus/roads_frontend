@@ -80,7 +80,7 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      redirectUri="https://dashboard.roadsbible.com/"
+      redirectUri="https://dashboard.roadsbible.com/dashboard"
       {...({} as MyAuth0ProviderOptions)}
     >
       
@@ -89,10 +89,10 @@ const App: React.FC = () => {
         <IonTabs>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
-            <Route path="/" component={Dashboard} exact />
-            <Route path="/my-progress" component={Welcome} exact />
-            <Route path="/settings" component={Settings} exact />
-            <Route path="/roads/:groupName" component={Verse} exact />
+            <Route path="/dashboard" component={Dashboard} exact />
+            <Route path="/dashboard/my-progress" component={Welcome} exact />
+            <Route path="/dashboard/settings" component={Settings} exact />
+            <Route path="/dashboard/roads/:groupName" component={Verse} exact />
 
             {/* Additional Routes */}
             <Route path="/verseoftheday" component={Verseday} exact />
@@ -100,19 +100,19 @@ const App: React.FC = () => {
             <Route path="/settings/install" component={Install} exact />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="Dashboard" href="/" selected={isTabActive("/")} >
+            <IonTabButton tab="Dashboard" href="/dashboard"  >
               <IonIcon icon={library} />
               <IonLabel>Dashboard</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="My Progress" href="/my-progress" selected={isTabActive("/my-progress")}>
+            <IonTabButton tab="My Progress" href="/dashboard/my-progress" >
               <IonIcon icon={personCircle} />
               <IonLabel>My Progress</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="Settings" href="/settings"selected={isTabActive("/settings")}>
+            <IonTabButton tab="Settings" href="/dashboard/settings">
               <IonIcon icon={settingsOutline} />
               <IonLabel>Settings</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="Roads" href="/roads" selected={isTabActive("/roads")}>
+            <IonTabButton tab="Roads" href="/dashboard/roads" >
               <IonIcon icon={book} />
               <IonLabel>Roads</IonLabel>
             </IonTabButton>
