@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
-import { personCircle, radio, library, settingsOutline } from "ionicons/icons";
+import { personCircle, book, library, settingsOutline } from "ionicons/icons";
 
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
@@ -83,6 +83,7 @@ const App: React.FC = () => {
           <IonTabs>
             <IonRouterOutlet>
               {/* Dashboard Routes */}
+              <Redirect path="/" to="/dashboard"/>
               <Route path="/dashboard" exact component={Dashboard} />
               <Route path="/my-progress" component={Welcome} exact />
               <Route path="/settings" component={Settings} exact />
@@ -107,7 +108,7 @@ const App: React.FC = () => {
                 <IonLabel>Settings</IonLabel>
               </IonTabButton>
               <IonTabButton tab="Roads" href="/roads">
-                <IonIcon icon={library} />
+                <IonIcon icon={book} />
                 <IonLabel>Roads</IonLabel>
               </IonTabButton>
             </IonTabBar>
