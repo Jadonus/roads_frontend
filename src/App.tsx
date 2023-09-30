@@ -75,7 +75,7 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      redirectUri="https://dashboard.roadsbible.com/dashboard"
+      redirectUri="https://dashboard.roadsbible.com/"
       {...({} as MyAuth0ProviderOptions)}
     >
       <IonApp>
@@ -83,8 +83,7 @@ const App: React.FC = () => {
           <IonTabs>
             <IonRouterOutlet>
               {/* Dashboard Routes */}
-              <Redirect from="/" to="/dashboard"/>
-              <Route path="/dashboard" exact component={Dashboard} />
+              <Route path="/" exact component={Dashboard} />
               <Route path="/my-progress" component={Welcome} exact />
               <Route path="/settings" component={Settings} exact />
               <Route path="/roads/:groupName" component={Roads} exact />
@@ -95,7 +94,7 @@ const App: React.FC = () => {
               <Route path="/settings/install" component={Install} exact />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
-              <IonTabButton tab="Dashboard" href="/dashboard">
+              <IonTabButton tab="Dashboard" href="/">
                 <IonIcon icon={library} />
                 <IonLabel>Dashboard</IonLabel>
               </IonTabButton>
