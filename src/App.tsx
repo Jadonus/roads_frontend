@@ -84,9 +84,9 @@ const App: React.FC = () => {
             <IonRouterOutlet>
               {/* Dashboard Routes */}
               <Route path="/dashboard" exact component={Dashboard} />
-              <Route path="/dashboard/my-progress" component={Welcome} exact />
-              <Route path="/dashboard/settings" component={Settings} exact />
-              <Route path="/dashboard/roads/:groupName" component={Roads} exact />
+              <Route path="/my-progress" component={Welcome} exact />
+              <Route path="/settings" component={Settings} exact />
+              <Route path="/roads/:groupName" component={Roads} exact />
 
               {/* Additional Routes */}
               <Route path="/verseoftheday" component={Verseday} exact />
@@ -98,11 +98,11 @@ const App: React.FC = () => {
                 <IonIcon icon={library} />
                 <IonLabel>Dashboard</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="My Progress" href="/dashboard/my-progress">
+              <IonTabButton tab="My Progress" href="/my-progress">
                 <IonIcon icon={personCircle} />
                 <IonLabel>My Progress</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="Settings" href="/dashboard/settings">
+              <IonTabButton tab="Settings" href="/settings">
                 <IonIcon icon={settingsOutline} />
                 <IonLabel>Settings</IonLabel>
               </IonTabButton>
