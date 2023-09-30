@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
+import { useLocation } from "react-router-dom";
 
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
@@ -67,7 +68,12 @@ const App: React.FC = () => {
       document.body.classList.add("dark");
     }
   });
+ const location = useLocation();
 
+  // Define a function to determine if a tab should be active
+  const isTabActive = (tabPath: string) => {
+    return location.pathname === tabPath;
+  };
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
 
@@ -78,41 +84,39 @@ const App: React.FC = () => {
       redirectUri="https://dashboard.roadsbible.com/"
       {...({} as MyAuth0ProviderOptions)}
     >
-      <IonApp>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              {/* Dashboard Routes */}
-              <Route path="/" exact component={Dashboard} />
-              <Route path="/my-progress" component={Welcome} exact />
-              <Route path="/settings" component={Settings} exact />
-              <Route path="/roads/:groupName" component={Roads} exact />
+        <IonApp>
+        <IonTabs>
+          <IonRouterOutlet>
+            {/* Dashboard Routes */}
+            <Route path="/" component={Dashboard} exact />
+            <Route path="/my-progress" component={Welcome} exact />
+            <Route path="/settings" component={Settings} exact />
+            <Route path="/roads/:groupName" component={Verse} exact />
 
-              {/* Additional Routes */}
-              <Route path="/verseoftheday" component={Verseday} exact />
-              <Route path="/login" component={Login} exact />
-              <Route path="/settings/install" component={Install} exact />
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="Dashboard" href="/">
-                <IonIcon icon={library} />
-                <IonLabel>Dashboard</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="My Progress" href="/my-progress">
-                <IonIcon icon={personCircle} />
-                <IonLabel>My Progress</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="Settings" href="/settings">
-                <IonIcon icon={settingsOutline} />
-                <IonLabel>Settings</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="Roads" href="/roads">
-                <IonIcon icon={book} />
-                <IonLabel>Roads</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
+            {/* Additional Routes */}
+            <Route path="/verseoftheday" component={Verseday} exact />
+            <Route path="/login" component={Login} exact />
+            <Route path="/settings/install" component={Install} exact />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="Dashboard" href="/" selected={isTabActive("/")} >
+              <IonIcon icon={library} />
+              <IonLabel>Dashboard</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="My Progress" href="/my-progress" selected={isTabActive("/my-progress")}>
+              <IonIcon icon={personCircle} />
+              <IonLabel>My Progress</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="Settings" href="/settings"selected={isTabActive("/settings")}>
+              <IonIcon icon={settingsOutline} />
+              <IonLabel>Settings</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="Roads" href="/roads" selected={isTabActive("/roads")}>
+              <IonIcon icon={book} />
+              <IonLabel>Roads</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
       </IonApp>
     </Auth0Provider>
   );
