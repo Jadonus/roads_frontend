@@ -83,7 +83,7 @@ const App: React.FC = () => {
           <IonTabs>
             <IonRouterOutlet>
               {/* Dashboard Routes */}
-              <Redirect path="/" to="/dashboard"/>
+              <Redirect from="/" to="/dashboard"/>
               <Route path="/dashboard" exact component={Dashboard} />
               <Route path="/my-progress" component={Welcome} exact />
               <Route path="/settings" component={Settings} exact />
