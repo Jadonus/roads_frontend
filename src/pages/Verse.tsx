@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
+import { Navigation } from "swiper/modules";
+import SwiperCore  from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+SwiperCore.use([Navigation]);
+
 import {
   IonActionSheet,
   IonFooter,
@@ -20,7 +26,12 @@ import {
   IonCard,
   IonLabel,
   IonSkeletonText,
+  IonSegment,
+  IonSegmentButton,
   IonIcon,
+  IonFab,
+  IonFabButton,
+  IonFabList,
   IonSpinner,
   IonProgressBar,
 } from "@ionic/react";
@@ -33,15 +44,13 @@ import {
   settingsOutline,
   arrowForwardOutline,
 } from "ionicons/icons";
-import { Haptics, ImpactStyle } from '@capacitor/haptics';
-import '../theme/variables.css'
+import { Haptics, ImpactStyle } from "@capacitor/haptics";
+import "../theme/variables.css";
 import { useAuth0 } from "@auth0/auth0-react";
 let groupName = "";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
-
-
-const {user} = useAuth0()
+  const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [hiddenWordIndices, setHiddenWordIndices] = useState([]);
@@ -50,10 +59,12 @@ const {user} = useAuth0()
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
+  const [isFabOpen, setIsFabOpen] = useState(false);
+
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
-  await Haptics.impact({ style: ImpactStyle.Medium });
-};
+    await Haptics.impact({ style: ImpactStyle.Medium });
+  };
 
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
@@ -79,52 +90,48 @@ const {user} = useAuth0()
       })
       .catch((error) => {
         console.error("Error fetching verses:", error);
+      });
+  }, []);
+  useEffect(() => {
+    const loadProgress = async () => {
+      try {
+        const data = {
+          username: user.name,
+          road: groupName,
+          index: currentSentenceIndex,
+        };
 
-      })
-    }, []);
-useEffect(() => {
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
 
- 
-
-
-  const loadProgress = async () => {
-    try {
-      const data = {
-        username: user.name,
-        road: groupName,
-        index: currentSentenceIndex,
-      };
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      };
-     
-
-const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/', requestOptions);
-      const progressData = await response.json();
-      if (response.status === 200) {
-        const savedIndex = progressData.progress.index;
-        setCurrentSentenceIndex(savedIndex);
-      } else if (response.status === 404) {
-       console.log("No progress found");
-        // Handle the case when no progress is found (starting from the beginning).
-      } else {
-        // Handle other error cases as needed.
-        console.error('Error:', progressData.error);
+        const response = await fetch(
+          "https://www.roadsbible.com/api/get_saved_progress/",
+          requestOptions
+        );
+        const progressData = await response.json();
+        if (response.status === 200) {
+          const savedIndex = progressData.progress.index;
+          setCurrentSentenceIndex(savedIndex);
+        } else if (response.status === 404) {
+          console.log("No progress found");
+          // Handle the case when no progress is found (starting from the beginning).
+        } else {
+          // Handle other error cases as needed.
+          console.error("Error:", progressData.error);
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+    };
 
-  // Load progress when the component mounts or when the currentSentenceIndex changes
-  loadProgress();
-}, []);
-
+    // Load progress when the component mounts or when the currentSentenceIndex changes
+    loadProgress();
+  }, []);
 
   const closeActionSheet = () => {
     setIsOpen(false);
@@ -174,35 +181,37 @@ const response = await fetch('https://www.roadsbible.com/api/get_saved_progress/
   const moveToNextSentence = () => {
     if (currentSentenceIndex >= sentences.length - 1) {
       console.log("You have finished all the sentences.");
-hapticsImpactMedium()
-  setCurrentSentenceIndex((prevIndex) => prevIndex + 1); // Increment index first
+      hapticsImpactMedium();
+      setCurrentSentenceIndex((prevIndex) => prevIndex + 1); // Increment index first
 
-setShowAlert(true)      
-return;
+      setShowAlert(true);
+      return;
     }
 
     setCurrentSentenceIndex((prevIndex) => prevIndex + 1);
     setHiddenWordIndices([]);
 
-   const data = {
-        username: user.name,
-        road: groupName,
-        index: currentSentenceIndex + 1,
-      };
+    const data = {
+      username: user.name,
+      road: groupName,
+      index: currentSentenceIndex + 1,
+    };
 
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      };
-    async function savepro() { 
-    await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    async function savepro() {
+      await fetch(
+        "https://www.roadsbible.com/api/save_progress/",
+        requestOptions
+      );
     }
-    savepro()
+    savepro();
   };
-
 
   const finishButtonClicked = () => {
     if (finishButtonClicks === 0) {
@@ -219,27 +228,30 @@ return;
     if (currentSentenceIndex > 0) {
       setCurrentSentenceIndex((prevIndex) => prevIndex - 1);
       setHiddenWordIndices([]);
-const data = {
+      const data = {
         username: user.name,
         road: groupName,
         index: currentSentenceIndex - 1,
       };
 
       const requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       };
-     
-  async function savepro() { 
-    await fetch('https://www.roadsbible.com/api/save_progress/', requestOptions)
-    }
-    savepro()
+
+      async function savepro() {
+        await fetch(
+          "https://www.roadsbible.com/api/save_progress/",
+          requestOptions
+        );
+      }
+      savepro();
     } else {
       console.log("You are already at the beginning.");
-hapticsImpactMedium()
+      hapticsImpactMedium();
     }
   };
   const toggleFirstLetterMode = () => {
@@ -277,10 +289,11 @@ hapticsImpactMedium()
         return newSentences;
       }
     });
+  };
+    const style = { "--background": 'var(--ion-background)' } as React.CSSProperties;
 
 
-  }
-return (
+  return (
     <>
       <IonPage>
         <IonHeader>
@@ -324,9 +337,30 @@ return (
         </IonHeader>
 
         <IonContent>
-          <IonAlert onDidDismiss={() => location.href='/'} buttons={['Great!']}isOpen={showAlert}header="Your Done!" message="Horray! 🎉 You finished this road.">
-
-          </IonAlert>
+          <IonAlert
+            onDidDismiss={() => (location.href = "/")}
+            buttons={["Great!"]}
+            isOpen={showAlert}
+            header="Your Done!"
+            message="Horray! 🎉 You finished this road."
+          ></IonAlert>
+   <Swiper
+  navigation={{
+    nextEl: ".swiper-button-next", // Use the appropriate class for your Next button
+    prevEl: ".swiper-button-prev", // Use the appropriate class for your Previous button
+  }}
+  onSlideChange={(swiper) => {
+    const isNext = swiper.realIndex > swiper.previousIndex;
+    if (isNext) {
+      // Call your "Next Sentence" function here
+      moveToNextSentence();
+    } else {
+      // Call your "Back" function here
+      backButtonClicked();
+    }
+  }}
+>
+  <SwiperSlide>
           <div
             style={{
               display: "flex",
@@ -336,7 +370,6 @@ return (
               height: "80vh",
             }}
           >
-
             {sentences.length === 0 ? (
               <IonSpinner
                 style={{ margin: "auto", width: "5rem", height: "5rem" }}
@@ -344,44 +377,47 @@ return (
               ></IonSpinner>
             ) : (
               <div style={{ padding: "20px" }}>
-            <h1 className="ion-text-center">
-  {sentences.length === 0 ? (
-    <IonSpinner
-      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-      name="dots"
-    ></IonSpinner>
-  ) : (
-    <span>
-      {currentSentenceIndex < sentences.length && (
-
-        sentences[currentSentenceIndex].split(" ").map((word, index) => (
-          <span
-            key={index}
-            className={
-              hiddenWordIndices.includes(index) ? "hide-word" : ""
-            }
-          >
-            {word}{" "}
-          </span>
-        ))
-      )}
-    </span>
-  )}
-</h1>
+                <h1 className="ion-text-center">
+                  {sentences.length === 0 ? (
+                    <IonSpinner
+                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                      name="dots"
+                    ></IonSpinner>
+                  ) : (
+                    <span>
+                      {currentSentenceIndex < sentences.length &&
+                        sentences[currentSentenceIndex]
+                          .split(" ")
+                          .map((word, index) => (
+                            <span
+                              key={index}
+                              className={
+                                hiddenWordIndices.includes(index)
+                                  ? "hide-word"
+                                  : ""
+                              }
+                            >
+                              {word}{" "}
+                            </span>
+                          ))}
+                    </span>
+                  )}
+                </h1>
 
                 <div style={{ margin: "6rem", marginTop: "2rem" }}>
                   <IonProgressBar
-value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
-
+                    value={parseFloat(
+                      (currentSentenceIndex / sentences.length).toFixed(2)
+                    )}
                     style={{ marginBottom: "1rem" }}
                   ></IonProgressBar>
                 </div>
               </div>
             )}
           </div>
-        </IonContent>
-        <IonFooter style={{backgroundColor: 'var(--ionic-color-secondary)'}}>
-          <IonToolbar>
+</SwiperSlide>
+</Swiper>
+<IonToolbar style={style}>
             <IonButtons
               style={{
                 display: "flex",
@@ -400,7 +436,6 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
                     alignItems: "center",
                   }}
                 >
-                  <IonIcon icon={backspaceOutline} size="large" />
                   <IonLabel>Hide</IonLabel>
                 </div>
               </IonButton>
@@ -413,7 +448,6 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
                     alignItems: "center",
                   }}
                 >
-                  <IonIcon icon={eyeOffOutline} size="large" />
                   <IonLabel>Hide All</IonLabel>
                 </div>
               </IonButton>
@@ -429,45 +463,16 @@ value={parseFloat((currentSentenceIndex / sentences.length).toFixed(2))}
                     alignItems: "center",
                   }}
                 >
-                  <IonIcon icon={refreshOutline} size="large" />
                   <IonLabel>Undo</IonLabel>
                 </div>
               </IonButton>
 
-              <IonButton
-                onClick={moveToNextSentence}
-                style={{ margin: "0 0.5rem" }} className="color"
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <IonIcon icon={arrowForwardOutline} size="large" />
-                  <IonLabel>Next</IonLabel>
-                </div>
-              </IonButton>
-
-              <IonButton
-                onClick={backButtonClicked}
-                style={{ margin: "0 0.5rem" }} className="color"
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <IonIcon icon={arrowBackOutline} size="large" />
-                  <IonLabel>Back</IonLabel>
-                </div>
-              </IonButton>
             </IonButtons>
-          </IonToolbar>
-        </IonFooter>
+                </IonToolbar>
+        </IonContent>
+       
+         
+          
       </IonPage>
     </>
   );

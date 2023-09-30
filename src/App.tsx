@@ -5,6 +5,7 @@ import {
   IonRouterOutlet,
   setupIonicReact,
 } from "@ionic/react";
+import { personCircle, radio, library, settingsOutline } from 'ionicons/icons';
 
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
@@ -25,6 +26,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import { Auth0Provider } from '@auth0/auth0-react';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel,  } from '@ionic/react';
 
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Login from "./pages/login"
@@ -88,18 +90,41 @@ const Roads = withAuthenticationRequired(Verse);
     <IonApp >
 
       <IonReactRouter>
+      <IonTabs>
+
         <IonRouterOutlet>
           <Route path="/" exact component={Dashboard} />
           <Route path="/settings" exact component={Settings} />
           <Route path="/roads/:groupName" component={Roads} exact />
         <Route path="/verseoftheday" component={Verseday} exact />
 <Route path = "/dev" component = {ExploreContainer} exact />
+
+<Route path = "/dev/roads/:groupName" component = {Verse} exact />
         <Route path="/login" component={Login} exact />
 <Route path="/welcome" component={Welcome} exact />
         <Route path="/settings/install" component={Install} exact />
         </IonRouterOutlet>
+  <IonTabBar slot="bottom">
+          <IonTabButton tab="home" href="/">
 
-      </IonReactRouter>
+            <IonIcon icon={library} />
+
+            <IonLabel>Dashboard</IonLabel>
+          </IonTabButton>
+
+          <IonTabButton tab="radio" href="/radio">
+            <IonIcon icon={personCircle} />
+            <IonLabel>My Progress</IonLabel>
+          </IonTabButton>
+
+
+          <IonTabButton tab="search" href="/search">
+            <IonIcon icon={settingsOutline} />
+            <IonLabel>Search</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    </IonReactRouter>
     </IonApp>
 </Auth0Provider>
   );
