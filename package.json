@@ -30,6 +30,7 @@
     "react-onesignal": "^3.0.1",
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
+    "react-swipeable": "^7.0.1",
     "swiper": "^10.3.0"
   },
   "devDependencies": {

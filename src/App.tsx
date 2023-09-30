@@ -105,22 +105,22 @@ const Roads = withAuthenticationRequired(Verse);
         <Route path="/settings/install" component={Install} exact />
         </IonRouterOutlet>
   <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/">
+          <IonTabButton tab="dashboard" href="/">
 
             <IonIcon icon={library} />
 
             <IonLabel>Dashboard</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="radio" href="/welcome">
+          <IonTabButton tab="welcome" href="/welcome">
             <IonIcon icon={personCircle} />
             <IonLabel>My Progress</IonLabel>
           </IonTabButton>
 
 
-          <IonTabButton tab="search" href="/settings">
+          <IonTabButton tab="settings" href="/settings">
             <IonIcon icon={settingsOutline} />
-            <IonLabel>Search</IonLabel>
+            <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
-import { Navigation } from "swiper/modules";
-import SwiperCore  from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 
-SwiperCore.use([Navigation]);
+import { useSwipeable } from "react-swipeable";
 
 import {
   IonActionSheet,
@@ -291,6 +288,10 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
     const style = { "--background": 'var(--ion-background)' } as React.CSSProperties;
+ const handlers = useSwipeable({
+    onSwipedLeft: moveToNextSentence,
+    onSwipedRight: backButtonClicked,
+  });
 
 
   return (
@@ -336,7 +337,8 @@ const Verse: React.FC<ContainerProps> = () => {
           ></IonActionSheet>
         </IonHeader>
 
-        <IonContent>
+              <IonContent {...handlers}>
+
           <IonAlert
             onDidDismiss={() => (location.href = "/")}
             buttons={["Great!"]}
@@ -344,56 +346,65 @@ const Verse: React.FC<ContainerProps> = () => {
             header="Your Done!"
             message="Horray! 🎉 You finished this road."
           ></IonAlert>
-<Swiper
-  navigation={{
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  }}
-  onSlideChange={(swiper) => {
-    const currentIndex = swiper.realIndex;
-    // Check if the user swiped forward
-    if (currentIndex > currentSentenceIndex) {
-      // User swiped forward
-      moveToNextSentence();
-    } else if (currentIndex < currentSentenceIndex) {
-      // User swiped backward
-      backButtonClicked();
-    }
-  }}
->
-  {sentences.map((verse, index) => (
-    <SwiperSlide key={index}>
-      <div>
-        {/* Display your verse content here */}
-        <h1 className="ion-text-center">
-          {sentences.length === 0 ? (
-            <IonSpinner
-              style={{ margin: "auto", width: "5rem", height: "5rem" }}
-              name="dots"
-            ></IonSpinner>
-          ) : (
-            verse.split(" ").map((word, wordIndex) => (
-              <span
-                key={wordIndex}
-                className={
-                  hiddenWordIndices.includes(wordIndex) ? "hide-word" : ""
-                }
-              >
-                {word}{" "}
-              </span>
-            ))
-          )}
-        </h1>
-        <div style={{ margin: "6rem", marginTop: "2rem" }}>
-          <IonProgressBar
-            value={parseFloat(((index + 1) / sentences.length).toFixed(2))}
-            style={{ marginBottom: "1rem" }}
-          ></IonProgressBar>
-        </div>
-      </div>
-    </SwiperSlide>
-  ))}
-</Swiper>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "80vh",
+            }}
+          >
+            {sentences.length === 0 ? (
+              <IonSpinner
+                style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                name="dots"
+              ></IonSpinner>
+            ) : (
+              <div style={{ padding: "20px" }}>
+                <h1 className="ion-text-center">
+                  {sentences.length === 0 ? (
+                    <IonSpinner
+                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                      name="dots"
+                    ></IonSpinner>
+                  ) : (
+
+                    <span>
+                      {currentSentenceIndex < sentences.length &&
+                        sentences[currentSentenceIndex]
+                          .split(" ")
+                          .map((word, index) => (
+                            <span
+                              key={index}
+                              className={
+                                hiddenWordIndices.includes(index)
+                                  ? "hide-word"
+                                  : ""
+                              }
+                            >
+                              {word}{" "}
+
+                            </span>
+
+                          ))}
+
+                    </span>
+
+                  )}
+                </h1>
+                <div style={{ margin: "6rem", marginTop: "2rem" }}>
+                  <IonProgressBar
+                    value={parseFloat(
+                      (currentSentenceIndex / sentences.length).toFixed(2)
+                    )}
+                    style={{ marginBottom: "1rem" }}
+                  ></IonProgressBar>
+                </div>
+              </div>
+            )}
+          </div>
 <IonToolbar style={style}>
             <IonButtons
               style={{
