@@ -352,7 +352,7 @@ const Verse: React.FC<ContainerProps> = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "80vh",
+              height: "45vh",
             }}
           >
             {sentences.length === 0 ? (
