@@ -12,7 +12,7 @@ function Myprogress() {
     </IonToolbar>
 </IonHeader>
 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-<img src="../public/road-svgrepo-com.svg" />
+<img src="/road-svgrepo-com.svg" />
 </div>
 </IonContent>
 </IonPage>
