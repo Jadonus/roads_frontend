@@ -16,7 +16,6 @@ const TabBar: React.FC = () => {
         <Route path="/tabs/welcome" component={Welcome} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
         <Route path="/tabs/roads/:groupName" component={Verse} />
-        <Route path="/tabs" render={() => <Redirect to="/tabs/dashboard" />} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="dashboard" href="/tabs/dashboard">
