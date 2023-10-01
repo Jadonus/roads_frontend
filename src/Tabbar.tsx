@@ -35,12 +35,6 @@ const TabBar: React.FC = () => {
  {!PWA ? (
                         <IonBadge
                           color="danger"
-                          style={{
-                            position: "absolute",
-                            left: "1rem",
-                            top: "1rem",
-                            marginTop: "0.5rem",
-                          }}
                         >
                           1
                         </IonBadge>
