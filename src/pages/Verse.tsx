@@ -393,16 +393,17 @@ const Verse: React.FC<ContainerProps> = () => {
 
                   )}
                 </h1>
-                <div style={{ margin: "6rem", marginTop: "2rem" }}>
+                <div style={{ margin: "0.5rem", marginTop: "2rem" }}>
                   <IonProgressBar
                     value={parseFloat(
                       (currentSentenceIndex / sentences.length).toFixed(2)
                     )}
-                    style={{ marginBottom: "1rem" }}
+                    style={{ marginBottom: "0.4rem" }}
                   ></IonProgressBar>
                 </div>
               </div>
             )}
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <IonButton
                 onClick={() => hideRandomWords(3)}
                 style={{ margin: "0 0.5rem" }} className="color"
@@ -444,8 +445,7 @@ const Verse: React.FC<ContainerProps> = () => {
                   <IonLabel>Undo</IonLabel>
                 </div>
               </IonButton>
-
-          </div>
+</div>
         </IonContent>
        
          

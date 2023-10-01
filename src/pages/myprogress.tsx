@@ -11,7 +11,7 @@ function Myprogress() {
 <IonTitle size="large">My Progress</IonTitle>
     </IonToolbar>
 </IonHeader>
-<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+<div style={{margin: '1rem',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 <img src="/road-svgrepo-com.svg" />
 </div>
 </IonContent>
