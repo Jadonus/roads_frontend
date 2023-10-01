@@ -131,9 +131,11 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
+        
           <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
+         <IonContent>
           <IonHeader>
             <IonToolbar>
               <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
@@ -198,7 +200,6 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             </IonToolbar>
           </IonHeader>
 
-        <IonContent>
           <IonItem>
             <IonCardTitle>Verse Of the Day</IonCardTitle>
           </IonItem>
