@@ -91,9 +91,6 @@ const App: React.FC = () => {
                         <Route path="/tabs" render={() => <TabBar />} />
 
             <Route path="/" component={Dashboard} exact />
-            <Route path="/my-progress" component={Welcome} exact />
-            <Route path="/settings" component={Settings} exact />
-            <Route path="/roads/:groupName" component={Verse} exact />
 
             {/* Additional Routes */}
             <Route path="/verseoftheday" component={Verseday} exact />

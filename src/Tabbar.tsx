@@ -12,10 +12,10 @@ const TabBar: React.FC = () => {
     <IonTabs>
       <IonRouterOutlet>
         <Redirect exact path="/tabs" to="/tabs/dashboard" />
-        <Route path="/tabs/dashboard" render={() => <ExploreContainer />} exact={true} />
-        <Route path="/tabs/welcome" render={() => <Welcome />} exact={true} />
-        <Route path="/tabs/settings" render={() => <Settings />} exact={true} />
-        <Route path="/tabs/roads/:groupName" render={() => <Verse />} />
+        <Route path="/tabs/dashboard" component={ExploreContainer} exact={true} />
+        <Route path="/tabs/welcome" component={Welcome} exact={true} />
+        <Route path="/tabs/settings" component={Settings} exact={true} />
+        <Route path="/tabs/roads/:groupName" component={Verse} />
         <Route path="/tabs" render={() => <Redirect to="/tabs/dashboard" />} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
