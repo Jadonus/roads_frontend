@@ -11,7 +11,7 @@ import Verseday from "./pages/verseday";
 import Install from "./pages/install";
 import Welcome from "./pages/welcome";
 import Login from "./pages/login";
-
+import TabBar from "./Tabbar";
 import "@ionic/react/css/core.css";
 import { Switch } from "react-router-dom";
 import "@ionic/react/css/normalize.css";
@@ -80,7 +80,7 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      redirectUri="https://dashboard.roadsbible.com/dashboard"
+      redirectUri="https://dashboard.roadsbible.com/"
       {...({} as MyAuth0ProviderOptions)}
     >
       
@@ -89,35 +89,17 @@ const App: React.FC = () => {
         <IonTabs>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
-            <Route path="/dashboard" component={Dashboard} exact />
-            <Route path="/dashboard/my-progress" component={Welcome} exact />
-            <Route path="/dashboard/settings" component={Settings} exact />
-            <Route path="/dashboard/roads/:groupName" component={Verse} exact />
+            <Route path="/" component={Dashboard} exact />
+            <Route path="/my-progress" component={Welcome} exact />
+            <Route path="/settings" component={Settings} exact />
+            <Route path="/roads/:groupName" component={Verse} exact />
 
             {/* Additional Routes */}
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/settings/install" component={Install} exact />
           </IonRouterOutlet>
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="Dashboard" href="/dashboard"  >
-              <IonIcon icon={library} />
-              <IonLabel>Dashboard</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="My Progress" href="/dashboard/my-progress" >
-              <IonIcon icon={personCircle} />
-              <IonLabel>My Progress</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="Settings" href="/dashboard/settings">
-              <IonIcon icon={settingsOutline} />
-              <IonLabel>Settings</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="Roads" href="/dashboard/roads" >
-              <IonIcon icon={book} />
-              <IonLabel>Roads</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <TabBar /> 
 </IonReactRouter>
       </IonApp>
     </Auth0Provider>
