@@ -404,14 +404,6 @@ const Verse: React.FC<ContainerProps> = () => {
               </div>
             )}
           </div>
-<IonToolbar style={style}>
-            <IonButtons
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                padding: "1rem",
-              }}
-            >
               <IonButton
                 onClick={() => hideRandomWords(3)}
                 style={{ margin: "0 0.5rem" }} className="color"
@@ -454,8 +446,6 @@ const Verse: React.FC<ContainerProps> = () => {
                 </div>
               </IonButton>
 
-            </IonButtons>
-                </IonToolbar>
         </IonContent>
        
          
