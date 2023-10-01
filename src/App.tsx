@@ -75,7 +75,7 @@ const App: React.FC = () => {
   };
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
-const Aipp = withAuthenticationRequired(TabBar);
+  const Aipp = withAuthenticationRequired(TabBar);
   return (
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
@@ -83,12 +83,12 @@ const Aipp = withAuthenticationRequired(TabBar);
       redirectUri="https://dashboard.roadsbible.com/tabs"
       {...({} as MyAuth0ProviderOptions)}
     >
-      
-        <IonApp>
-          <IonReactRouter>
+      <IonApp>
+        <IonReactRouter>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
-                        <Route path="/tabs" render={() => <Aipp />} />
+            <Redirect from="/" to="/tabs"/>
+            <Route path="/tabs" render={() => <Aipp />} />
 
             <Route path="/" component={Dashboard} exact />
 
@@ -97,11 +97,10 @@ const Aipp = withAuthenticationRequired(TabBar);
             <Route path="/login" component={Login} exact />
             <Route path="/settings/install" component={Install} exact />
           </IonRouterOutlet>
-</IonReactRouter>
+        </IonReactRouter>
       </IonApp>
     </Auth0Provider>
   );
 };
 
 export default App;
-

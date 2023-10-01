@@ -300,7 +300,6 @@ const Verse: React.FC<ContainerProps> = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
             </IonButtons>
             <IonTitle>{groupName}</IonTitle>
             <IonButtons slot="end">

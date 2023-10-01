@@ -62,7 +62,6 @@ localStorage.setItem("dark", (!dark).toString());
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
             </IonButtons>
             <IonTitle>Settings</IonTitle>
             <IonButtons slot="end"></IonButtons>

@@ -6,7 +6,7 @@ import ExploreContainer from './pages/Home';
 import Verse from './pages/Verse';
 import Settings from './pages/settings';
 import Welcome from './pages/welcome';
-
+import About from './pages/aboutroads';
 const TabBar: React.FC = () => {
   return (
     <IonTabs>
@@ -16,6 +16,7 @@ const TabBar: React.FC = () => {
         <Route path="/tabs/welcome" component={Welcome} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
         <Route path="/tabs/roads/:groupName" component={Verse} />
+        <Route path="/tabs/roads/" component={About} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="dashboard" href="/tabs/dashboard">
