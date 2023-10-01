@@ -352,7 +352,8 @@ const Verse: React.FC<ContainerProps> = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "60vh",
+              height: "45vh",
+              marginTop: '15vh',
             }}
           >
             {sentences.length === 0 ? (
@@ -393,7 +394,7 @@ const Verse: React.FC<ContainerProps> = () => {
 
                   )}
                 </h1>
-                <div style={{ margin: "-1rem", marginTop: "2rem" }}>
+                <div style={{ margin: "1rem", marginTop: "2rem" }}>
                   <IonProgressBar
                     value={parseFloat(
                       (currentSentenceIndex / sentences.length).toFixed(2)
