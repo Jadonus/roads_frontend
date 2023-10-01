@@ -89,6 +89,8 @@ const App: React.FC = () => {
         <IonTabs>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
+                        <Route path="/tabs" render={() => <TabBar />} />
+
             <Route path="/" component={Dashboard} exact />
             <Route path="/my-progress" component={Welcome} exact />
             <Route path="/settings" component={Settings} exact />
@@ -99,7 +101,6 @@ const App: React.FC = () => {
             <Route path="/login" component={Login} exact />
             <Route path="/settings/install" component={Install} exact />
           </IonRouterOutlet>
-        <TabBar /> 
 </IonReactRouter>
       </IonApp>
     </Auth0Provider>
