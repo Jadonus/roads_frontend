@@ -403,6 +403,8 @@ const Verse: React.FC<ContainerProps> = () => {
                 </div>
               </div>
             )}
+
+</div>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <IonButton
                 onClick={() => hideRandomWords(3)}
