@@ -86,7 +86,6 @@ const App: React.FC = () => {
       
         <IonApp>
           <IonReactRouter>
-        <IonTabs>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
                         <Route path="/tabs" render={() => <TabBar />} />
