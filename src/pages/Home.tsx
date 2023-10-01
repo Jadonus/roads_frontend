@@ -225,7 +225,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 </IonCardContent>
                 <IonButton fill="clear">
                   <IonRouterLink
-                    routerLink={item.parsed_data[0]?.url || ""}
+                    routerLink={"/tabs" + item.parsed_data[0]?.url || ""}
                     target="_blank"
                     routerDirection="forward"
                   >

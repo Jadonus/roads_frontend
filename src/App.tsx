@@ -75,7 +75,7 @@ const App: React.FC = () => {
   };
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
-
+const Aipp = withAuthenticationRequired(TabBar);
   return (
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
@@ -88,7 +88,7 @@ const App: React.FC = () => {
           <IonReactRouter>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
-                        <Route path="/tabs" render={() => <TabBar />} />
+                        <Route path="/tabs" render={() => <Aipp />} />
 
             <Route path="/" component={Dashboard} exact />
 
