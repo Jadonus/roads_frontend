@@ -132,10 +132,11 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     <>
       <IonPage>
         
-          <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          
+         <IonContent>
+<IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-         <IonContent>
           <IonHeader>
             <IonToolbar>
               <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
@@ -170,21 +171,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                         )}
                       </IonAvatar>
 
-                      {!PWA ? (
-                        <IonBadge
-                          color="danger"
-                          style={{
-                            position: "absolute",
-                            left: "1rem",
-                            top: "1rem",
-                            marginTop: "0.5rem",
-                          }}
-                        >
-                          1
-                        </IonBadge>
-                      ) : (
-                        <div style={{ marginTop: "0.5rem" }}></div>
-                      )}
+                     
                     </IonRouterLink>
                   </h1>
                 </div>

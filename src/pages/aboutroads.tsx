@@ -1,11 +1,13 @@
-import { IonPage, IonHeader, IonTitle, IonContent, IonItem } from "@ionic/react";
+import { IonToolbar, IonPage, IonHeader, IonTitle, IonContent, IonItem } from "@ionic/react";
 
 function About() {
 
 return (
 <IonPage>
 <IonHeader>
+    <IonToolbar>
 <IonTitle size="large">About Roads</IonTitle>
+</IonToolbar>
 </IonHeader>
 <IonContent>
 <IonItem>
