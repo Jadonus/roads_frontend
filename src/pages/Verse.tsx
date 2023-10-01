@@ -352,7 +352,7 @@ const Verse: React.FC<ContainerProps> = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "45vh",
+              height: "60vh",
             }}
           >
             {sentences.length === 0 ? (
@@ -407,6 +407,7 @@ const Verse: React.FC<ContainerProps> = () => {
 </div>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <IonButton
+              shape="round"
                 onClick={() => hideRandomWords(3)}
                 style={{ margin: "0 0.5rem" }} className="color"
               >
@@ -421,7 +422,10 @@ const Verse: React.FC<ContainerProps> = () => {
                 </div>
               </IonButton>
 
-              <IonButton  className="color" onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
+              <IonButton 
+              
+              shape="round"
+              className="color" onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
                 <div
                   style={{
                     display: "flex",
@@ -434,6 +438,8 @@ const Verse: React.FC<ContainerProps> = () => {
               </IonButton>
 
               <IonButton
+
+              shape="round"
                 onClick={revealAllWords}
                 style={{ margin: "0 0.5rem" }}
               >
