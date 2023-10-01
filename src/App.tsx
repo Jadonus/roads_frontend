@@ -90,6 +90,7 @@ const App: React.FC = () => {
             <Redirect from="/" to="/tabs"/>
             <Route path="/tabs" render={() => <Aipp />} />
 
+            <Route path="/dev" render={() => <TabBar />} />
             <Route path="/" component={Dashboard} exact />
 
             {/* Additional Routes */}

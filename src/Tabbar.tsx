@@ -7,15 +7,17 @@ import Verse from './pages/Verse';
 import Settings from './pages/settings';
 import Welcome from './pages/welcome';
 import About from './pages/aboutroads';
+import Myprogress from './pages/myprogress';
 const TabBar: React.FC = () => {
 
-  let PWA = window.matchMedia("(display-mode: standalone)").matches;
+
+    let PWA = window.matchMedia("(display-mode: standalone)").matches;
     return (
     <IonTabs>
       <IonRouterOutlet>
         <Redirect exact path="/tabs" to="/tabs/dashboard" />
         <Route path="/tabs/dashboard" component={ExploreContainer} exact={true} />
-        <Route path="/tabs/welcome" component={Welcome} exact={true} />
+        <Route path="/tabs/welcome" component={Myprogress} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
         <Route path="/tabs/roads/:groupName" component={Verse} />
         <Route path="/tabs/roads/" exact={true} component={About} />
