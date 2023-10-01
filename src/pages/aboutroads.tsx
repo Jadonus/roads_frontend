@@ -5,13 +5,13 @@ function About() {
 return (
 <IonPage>
 <IonHeader>
-<IonTitle>About Roads</IonTitle>
+<IonTitle size="large">About Roads</IonTitle>
 </IonHeader>
 <IonContent>
 <IonItem>
-    About Roads.
+
+If you want verses to memorize, go to the dashboard tab.
 </IonItem>
-<p>If you want verses to memorize, go to the dashboard tab.</p>
     </IonContent>
 </IonPage>
 
