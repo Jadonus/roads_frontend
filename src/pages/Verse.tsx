@@ -393,12 +393,11 @@ const Verse: React.FC<ContainerProps> = () => {
 
                   )}
                 </h1>
-                <div style={{ margin: "0.5rem", marginTop: "2rem" }}>
+                <div style={{ margin: "-1rem", marginTop: "2rem" }}>
                   <IonProgressBar
                     value={parseFloat(
                       (currentSentenceIndex / sentences.length).toFixed(2)
                     )}
-                    style={{ marginBottom: "0.4rem" }}
                   ></IonProgressBar>
                 </div>
               </div>
