@@ -287,14 +287,15 @@ const Verse: React.FC<ContainerProps> = () => {
       }
     });
   };
-    const style = { "--background": 'var(--ion-background)' } as React.CSSProperties;
- const handlers = useSwipeable({
+  const style = {
+    "--background": "var(--ion-background)",
+  } as React.CSSProperties;
+  const handlers = useSwipeable({
     onSwipedLeft: moveToNextSentence,
     onSwipedRight: backButtonClicked,
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
-
 
   return (
     <>
@@ -302,6 +303,20 @@ const Verse: React.FC<ContainerProps> = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
+              <IonButton
+                onClick={revealAllWords}
+                style={{ margin: "0 0.5rem" }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <IonIcon icon={arrowBackOutline}></IonIcon>
+                </div>
+              </IonButton>
             </IonButtons>
             <IonTitle>{groupName}</IonTitle>
             <IonButtons slot="end">
@@ -338,8 +353,7 @@ const Verse: React.FC<ContainerProps> = () => {
           ></IonActionSheet>
         </IonHeader>
 
-              <IonContent {...handlers}>
-
+        <IonContent {...handlers}>
           <IonAlert
             onDidDismiss={() => (location.href = "/tabs/")}
             buttons={["Great!"]}
@@ -355,7 +369,7 @@ const Verse: React.FC<ContainerProps> = () => {
               alignItems: "center",
               justifyContent: "center",
               height: "30vh",
-              marginTop: '25vh',
+              marginTop: "25vh",
             }}
           >
             {sentences.length === 0 ? (
@@ -372,7 +386,6 @@ const Verse: React.FC<ContainerProps> = () => {
                       name="dots"
                     ></IonSpinner>
                   ) : (
-
                     <span>
                       {currentSentenceIndex < sentences.length &&
                         sentences[currentSentenceIndex]
@@ -387,13 +400,9 @@ const Verse: React.FC<ContainerProps> = () => {
                               }
                             >
                               {word}{" "}
-
                             </span>
-
                           ))}
-
                     </span>
-
                   )}
                 </h1>
                 <div style={{ margin: "1rem", marginTop: "2rem" }}>
@@ -405,13 +414,19 @@ const Verse: React.FC<ContainerProps> = () => {
                 </div>
               </div>
             )}
-
-</div>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-             <IonButtons>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <IonButtons>
               <IonButton
                 onClick={() => hideRandomWords(3)}
-                style={{ margin: "0 0.5rem" }} className="color"
+                style={{ margin: "0 0.5rem" }}
+                className="color"
               >
                 <div
                   style={{
@@ -424,9 +439,11 @@ const Verse: React.FC<ContainerProps> = () => {
                 </div>
               </IonButton>
 
-              <IonButton 
-              
-              className="color" onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
+              <IonButton
+                className="color"
+                onClick={hideAllWords}
+                style={{ margin: "0 0.5rem" }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -437,30 +454,9 @@ const Verse: React.FC<ContainerProps> = () => {
                   <IonLabel>Hide All</IonLabel>
                 </div>
               </IonButton>
-
-              <IonButton
-
-                onClick={revealAllWords}
-                style={{ margin: "0 0.5rem" }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <IonLabel>Undo</IonLabel>
-                </div>
-
-              </IonButton>
-</IonButtons>
-</div>
-
+            </IonButtons>
+          </div>
         </IonContent>
-       
-         
-          
       </IonPage>
     </>
   );
