@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './VerticalProgressBar.css'; // Adjust your CSS file name
+import './SnakeProgressBar.css'; // Adjust your CSS file name
 import { IonToolbar, IonPage, IonTitle, IonContent, IonHeader } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
 
