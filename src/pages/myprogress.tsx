@@ -11,7 +11,11 @@ function Myprogress() {
 <IonTitle size="large">My Progress</IonTitle>
     </IonToolbar>
 </IonHeader>
-<div style={{margin: '1rem',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+<div style={{marginTop: '1rem',marginLeft: '1rem', marginRight: '1rem',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+<img src="/road-svgrepo-com.svg" />
+</div>
+
+<div style={{marginLeft: '1rem', marginRight: '1rem',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 <img src="/road-svgrepo-com.svg" />
 </div>
 </IonContent>

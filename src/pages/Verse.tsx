@@ -314,7 +314,7 @@ const Verse: React.FC<ContainerProps> = () => {
                     alignItems: "center",
                   }}
                 >
-                  <IonIcon icon={arrowBackOutline}></IonIcon>
+                  <IonIcon icon={refreshOutline}></IonIcon>
                 </div>
               </IonButton>
             </IonButtons>
