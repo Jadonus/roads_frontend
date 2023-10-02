@@ -1,6 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './SnakeProgressBar.css'; // Adjust your CSS file name
-import { IonToolbar, IonPage, IonTitle, IonContent, IonHeader } from "@ionic/react";
+import React, { useState, useEffect, useRef } from "react";
+import "./SnakeProgressBar.css"; // Adjust your CSS file name
+import {
+  IonToolbar,
+  IonPage,
+  IonTitle,
+  IonContent,
+  IonHeader,
+} from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Myprogress() {
@@ -9,20 +15,21 @@ function Myprogress() {
   const textRef = useRef(null);
 
   function setProgressBarPosition(progress) {
-    // Calculate the position of the text box
-    const containerHeight = textRef.current.parentNode.offsetHeight;
-    const textHeight = textRef.current.offsetHeight;
-    const newPosition = ((100 - progress) / 100) * (containerHeight - textHeight);
-    textRef.current.style.transform = `translateY(-${newPosition}px)`;
+    // Ensure that textRef.current exists before accessing its parent
+    if (textRef.current) {
+      // Calculate the position of the text box
+      const containerHeight = textRef.current.parentNode.offsetHeight;
+      const textHeight = textRef.current.offsetHeight;
+      const newPosition =
+        ((100 - progress) / 100) * (containerHeight - textHeight);
 
-    // Calculate the target position for smooth scrolling
-    const targetPosition = textRef.current.parentNode.offsetTop + newPosition;
+      console.log("Progress:", progress);
+      console.log("Container Height:", containerHeight);
+      console.log("Text Height:", textHeight);
+      console.log("New Position:", newPosition);
 
-    // Smooth scroll to the target position
-    window.scrollTo({
-      top: targetPosition,
-      behavior: "smooth", // Enable smooth scrolling
-    });
+      textRef.current.style.transform = `translateY(${newPosition}%)`;
+    }
   }
 
   function fetchData() {
@@ -39,14 +46,14 @@ function Myprogress() {
         body: JSON.stringify(data),
       };
 
-      fetch('https://www.roadsbible.com/api/gameify', requestOptions)
-        .then(response => response.json())
-        .then(response => {
+      fetch("https://www.roadsbible.com/api/gameify", requestOptions)
+        .then((response) => response.json())
+        .then((response) => {
           console.log(response);
           setProgress(response.numverses);
           setProgressBarPosition(response.numverses);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     } else {
@@ -82,7 +89,10 @@ function Myprogress() {
             ></div>
           </div>
           <div className="text-box" ref={textRef}>
-            <p>You have memorized <strong>{progress}</strong> verses! Keep up the great work!</p>
+            <p>
+              You have memorized <strong>{progress}</strong> verses! Keep up the
+              great work!
+            </p>
           </div>
         </div>
       </IonContent>
