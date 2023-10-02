@@ -8,12 +8,13 @@ import {
   IonHeader,
 } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
+import Confetti from 'react-confetti'
 
 function Myprogress() {
   const [progress, setProgress] = useState(0);
   const { user } = useAuth0();
   const textRef = useRef(null);
-
+let confet
   function setProgressBarPosition(progress) {
   // Ensure that textRef.current exists before accessing its parent
   if (textRef.current) {
@@ -48,13 +49,18 @@ function Myprogress() {
         },
         body: JSON.stringify(data),
       };
-
+let confet = false
       fetch("https://www.roadsbible.com/api/gameify", requestOptions)
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
           setProgress(response.numverses);
           setProgressBarPosition(response.numverses);
+
+          if (response.numverses % 10) {
+            confet = true
+            console.log('🎉')
+          }
         })
         .catch((error) => {
           console.error(error);
@@ -96,6 +102,7 @@ function Myprogress() {
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!
             </p>
+ {confet ? <Confetti></Confetti>: ''}
           </div>
         </div>
       </IonContent>
