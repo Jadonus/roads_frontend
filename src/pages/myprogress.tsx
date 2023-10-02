@@ -12,9 +12,10 @@ import Confetti from 'react-confetti'
 
 function Myprogress() {
   const [progress, setProgress] = useState(0);
+
+  const [confet, setConfet] = useState(0);
   const { user } = useAuth0();
   const textRef = useRef(null);
-let confet
   function setProgressBarPosition(progress) {
   // Ensure that textRef.current exists before accessing its parent
   if (textRef.current) {
@@ -49,7 +50,6 @@ let confet
         },
         body: JSON.stringify(data),
       };
-let confet = false
       fetch("https://www.roadsbible.com/api/gameify", requestOptions)
         .then((response) => response.json())
         .then((response) => {
@@ -64,7 +64,7 @@ let confet = false
 
         else {
 
-            confet = true
+            setConfet(true)
 
             console.log('🎉')
         }
