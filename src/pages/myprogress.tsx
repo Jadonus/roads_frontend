@@ -35,7 +35,6 @@ function Myprogress() {
   }
 }
 
-  setProgressBarPosition(100);
   function fetchData() {
     if (user && user.name) {
       const data = {
@@ -66,7 +65,6 @@ function Myprogress() {
   }
 
   useEffect(() => {
-    setProgress(100);
     fetchData();
   }, []);
 

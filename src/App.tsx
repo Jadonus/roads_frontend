@@ -92,6 +92,7 @@ const App: React.FC = () => {
             <Route path="/tabs" render={() => <Aipp />} />
 
             <Route path="/dev" render={() => <TabBar />} />
+            <Route path="/" component={Dashboard} exact />
 
             {/* Additional Routes */}
 
