@@ -7,13 +7,22 @@ function Myprogress() {
   const [progress, setProgress] = useState(0);
   const { user } = useAuth0();
   const textRef = useRef(null);
-  
+
   function setProgressBarPosition(progress) {
     // Calculate the position of the text box
     const containerHeight = textRef.current.parentNode.offsetHeight;
     const textHeight = textRef.current.offsetHeight;
     const newPosition = ((100 - progress) / 100) * (containerHeight - textHeight);
     textRef.current.style.transform = `translateY(-${newPosition}px)`;
+
+    // Calculate the target position for smooth scrolling
+    const targetPosition = textRef.current.parentNode.offsetTop + newPosition;
+
+    // Smooth scroll to the target position
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth", // Enable smooth scrolling
+    });
   }
 
   function fetchData() {
