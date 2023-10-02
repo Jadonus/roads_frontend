@@ -55,13 +55,16 @@ function Myprogress() {
               height: `${progress}%`,
             }}
           ></div>
-          <div
-            className="vertical-progress-bar-unfilled"
-            style={{
-              height: `${100 - progress}%`,
-            }}
-          ></div>
-        </div>
+            <div
+              className="vertical-progress-bar-unfilled"
+              style={{
+                height: `${100 - progress}%`,
+              }}
+            ></div>
+          </div>
+          <div className="text-box">
+            <p>Your Text Here</p>
+          </div>
       </IonContent>
     </IonPage>
   );
