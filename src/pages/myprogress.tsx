@@ -7,7 +7,7 @@ function Myprogress() {
   const [progress, setProgress] = useState(0);
   const { user } = useAuth0();
   const textRef = useRef(null);
-
+ let numver = 0
   function set() {
     // Check if user is defined before accessing its properties
     if (user && user.name) {
@@ -28,7 +28,7 @@ function Myprogress() {
         .then(response => {
           console.log(response);
           setProgress(response.numverses);
-
+          numver = response.numverses
           // Calculate the position of the text box
           const containerHeight = textRef.current.parentNode.offsetHeight;
           const textHeight = textRef.current.offsetHeight;
@@ -69,7 +69,7 @@ function Myprogress() {
             }}
           ></div>
           <div className="text-box" ref={textRef}>
-            <p>Your Text Here</p>
+            <p>You have memorized<strong>{numver}</strong> verses! Keep Up the great work!</p>
           </div>
         </div>
       </IonContent>
