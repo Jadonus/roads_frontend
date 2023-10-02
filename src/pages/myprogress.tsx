@@ -58,11 +58,15 @@ let confet = false
           setProgressBarPosition(response.numverses);
 
           if (response.numverses % 10) {
-            confet = true
-            console.log('🎉')
-          }
-        else {
+          
           console.log('sad...')
+          }
+
+        else {
+
+            confet = true
+
+            console.log('🎉')
         }
         })
         .catch((error) => {
@@ -105,7 +109,7 @@ let confet = false
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!
             </p>
- {confet ? <Confetti></Confetti>: ''}
+ {confet ? <><Confetti run={true}></Confetti> <p>YAY!</p> </>: ''}
           </div>
         </div>
       </IonContent>
