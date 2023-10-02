@@ -22,7 +22,7 @@ function Myprogress() {
         body: JSON.stringify(data),
       };
 
-      fetch('https://roadsbible.com/api/gameify', requestOptions)
+      fetch('https://www.roadsbible.com/api/gameify', requestOptions)
         .then(response => response.json())
         .then(response => {
           console.log(response);
