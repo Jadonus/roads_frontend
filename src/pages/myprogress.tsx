@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import './SnakeProgressBar.css';
+import React, { useState, useEffect, useRef } from 'react';
+import './VerticalProgressBar.css'; // Adjust your CSS file name
 import { IonToolbar, IonPage, IonTitle, IonContent, IonHeader } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Myprogress() {
   const [progress, setProgress] = useState(0);
   const { user } = useAuth0();
+  const textRef = useRef(null);
 
   function set() {
     // Check if user is defined before accessing its properties
@@ -26,7 +27,13 @@ function Myprogress() {
         .then(response => response.json())
         .then(response => {
           console.log(response);
-          setProgress(response.numverses)
+          setProgress(response.numverses);
+
+          // Calculate the position of the text box
+          const containerHeight = textRef.current.parentNode.offsetHeight;
+          const textHeight = textRef.current.offsetHeight;
+          const newPosition = (progress / 100) * (containerHeight - textHeight);
+          textRef.current.style.transform = `translateY(-${100 - progress}%)`;
         })
         .catch(error => {
           console.error(error);
@@ -55,16 +62,16 @@ function Myprogress() {
               height: `${progress}%`,
             }}
           ></div>
-            <div
-              className="vertical-progress-bar-unfilled"
-              style={{
-                height: `${100 - progress}%`,
-              }}
-            ></div>
-          </div>
-          <div className="text-box">
+          <div
+            className="vertical-progress-bar-unfilled"
+            style={{
+              height: `${100 - progress}%`,
+            }}
+          ></div>
+          <div className="text-box" ref={textRef}>
             <p>Your Text Here</p>
           </div>
+        </div>
       </IonContent>
     </IonPage>
   );
