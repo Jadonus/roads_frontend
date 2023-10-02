@@ -26,6 +26,7 @@ function Myprogress() {
         .then(response => response.json())
         .then(response => {
           console.log(response);
+          setProgress(response.numverses)
         })
         .catch(error => {
           console.error(error);
