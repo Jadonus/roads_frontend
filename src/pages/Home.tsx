@@ -131,7 +131,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
-          <IonHeader collapse="condense">
+          <IonHeader >
             <IonToolbar>
               <IonTitle>
                 Dashboard
@@ -142,7 +142,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <IonHeader>
+          <IonHeader collapse="condense">
             <IonToolbar>
               <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
                 Dashboard

@@ -61,6 +61,9 @@ let confet = false
             confet = true
             console.log('🎉')
           }
+        else {
+          console.log('sad...')
+        }
         })
         .catch((error) => {
           console.error(error);
