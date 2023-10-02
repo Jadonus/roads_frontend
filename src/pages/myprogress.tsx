@@ -13,7 +13,7 @@ import Confetti from 'react-confetti'
 function Myprogress() {
   const [progress, setProgress] = useState(0);
 
-  const [confet, setConfet] = useState(0);
+  const [confet, setConfet] = useState(false);
   const { user } = useAuth0();
   const textRef = useRef(null);
   function setProgressBarPosition(progress) {
