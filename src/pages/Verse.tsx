@@ -291,6 +291,8 @@ const Verse: React.FC<ContainerProps> = () => {
  const handlers = useSwipeable({
     onSwipedLeft: moveToNextSentence,
     onSwipedRight: backButtonClicked,
+    preventScrollOnSwipe: true,
+    trackMouse: true,
   });
 
 
@@ -339,7 +341,7 @@ const Verse: React.FC<ContainerProps> = () => {
               <IonContent {...handlers}>
 
           <IonAlert
-            onDidDismiss={() => (location.href = "/")}
+            onDidDismiss={() => (location.href = "/tabs/")}
             buttons={["Great!"]}
             isOpen={showAlert}
             header="Your Done!"
@@ -352,8 +354,8 @@ const Verse: React.FC<ContainerProps> = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "45vh",
-              marginTop: '15vh',
+              height: "30vh",
+              marginTop: '25vh',
             }}
           >
             {sentences.length === 0 ? (
@@ -406,8 +408,8 @@ const Verse: React.FC<ContainerProps> = () => {
 
 </div>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+             <IonButtons>
               <IonButton
-              shape="round"
                 onClick={() => hideRandomWords(3)}
                 style={{ margin: "0 0.5rem" }} className="color"
               >
@@ -424,7 +426,6 @@ const Verse: React.FC<ContainerProps> = () => {
 
               <IonButton 
               
-              shape="round"
               className="color" onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
                 <div
                   style={{
@@ -439,7 +440,6 @@ const Verse: React.FC<ContainerProps> = () => {
 
               <IonButton
 
-              shape="round"
                 onClick={revealAllWords}
                 style={{ margin: "0 0.5rem" }}
               >
@@ -452,8 +452,11 @@ const Verse: React.FC<ContainerProps> = () => {
                 >
                   <IonLabel>Undo</IonLabel>
                 </div>
+
               </IonButton>
+</IonButtons>
 </div>
+
         </IonContent>
        
          
