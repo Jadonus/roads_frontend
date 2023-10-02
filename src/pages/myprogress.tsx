@@ -28,7 +28,6 @@ function Myprogress() {
         .then(response => {
           console.log(response);
           setProgress(response.numverses);
-          numver = response.numverses
           // Calculate the position of the text box
           const containerHeight = textRef.current.parentNode.offsetHeight;
           const textHeight = textRef.current.offsetHeight;
@@ -62,15 +61,16 @@ function Myprogress() {
               height: `${progress}%`,
             }}
           ></div>
+   <div className="text-box" ref={textRef}>
+            <p>You have memorized <strong>{progress}</strong> verses! Keep Up the great work!</p>
+          </div>
           <div
             className="vertical-progress-bar-unfilled"
             style={{
               height: `${100 - progress}%`,
             }}
           ></div>
-          <div className="text-box" ref={textRef}>
-            <p>You have memorized<strong>{numver}</strong> verses! Keep Up the great work!</p>
-          </div>
+       
         </div>
       </IonContent>
     </IonPage>
