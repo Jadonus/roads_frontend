@@ -15,23 +15,28 @@ function Myprogress() {
   const textRef = useRef(null);
 
   function setProgressBarPosition(progress) {
-    // Ensure that textRef.current exists before accessing its parent
-    if (textRef.current) {
-      // Calculate the position of the text box
-      const containerHeight = textRef.current.parentNode.offsetHeight;
-      const textHeight = textRef.current.offsetHeight;
-      const newPosition =
-        ((100 - progress) / 100) * (containerHeight - textHeight);
+  // Ensure that textRef.current exists before accessing its parent
+  if (textRef.current) {
+    // Calculate the position of the text box
+    const progressBarHeight = 250; // Assuming the progress bar covers 250% of the screen
 
-      console.log("Progress:", progress);
-      console.log("Container Height:", containerHeight);
-      console.log("Text Height:", textHeight);
-      console.log("New Position:", newPosition);
+    const newPosition =
+      (progress / progressBarHeight) * progressBarHeight - 2;
 
-      textRef.current.style.transform = `translateY(${newPosition}%)`;
-    }
+    console.log("Progress:", progress);
+    console.log("New Position:", newPosition);
+
+    textRef.current.style.transform = `translateY(${newPosition}%)`;
+
+    // Calculate the scroll position
+    const windowHeight = window.innerHeight;
+    const scrollToY = (progress / 100) * windowHeight;
+    // Scroll the window to the calculated Y-coordinate
+    window.location.href="#mem"
   }
+}
 
+  setProgressBarPosition(100);
   function fetchData() {
     if (user && user.name) {
       const data = {
@@ -62,6 +67,7 @@ function Myprogress() {
   }
 
   useEffect(() => {
+    setProgress(100);
     fetchData();
   }, []);
 
@@ -89,7 +95,7 @@ function Myprogress() {
             ></div>
           </div>
           <div className="text-box" ref={textRef}>
-            <p>
+            <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!
             </p>
