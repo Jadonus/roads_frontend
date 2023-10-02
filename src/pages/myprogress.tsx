@@ -7,9 +7,16 @@ function Myprogress() {
   const [progress, setProgress] = useState(0);
   const { user } = useAuth0();
   const textRef = useRef(null);
- let numver = 0
-  function set() {
-    // Check if user is defined before accessing its properties
+  
+  function setProgressBarPosition(progress) {
+    // Calculate the position of the text box
+    const containerHeight = textRef.current.parentNode.offsetHeight;
+    const textHeight = textRef.current.offsetHeight;
+    const newPosition = ((100 - progress) / 100) * (containerHeight - textHeight);
+    textRef.current.style.transform = `translateY(-${newPosition}px)`;
+  }
+
+  function fetchData() {
     if (user && user.name) {
       const data = {
         username: user.name,
@@ -28,11 +35,7 @@ function Myprogress() {
         .then(response => {
           console.log(response);
           setProgress(response.numverses);
-          // Calculate the position of the text box
-          const containerHeight = textRef.current.parentNode.offsetHeight;
-          const textHeight = textRef.current.offsetHeight;
-          const newPosition = (progress / 100) * (containerHeight - textHeight);
-          textRef.current.style.transform = `translateY(-${100 - progress}%)`;
+          setProgressBarPosition(response.numverses);
         })
         .catch(error => {
           console.error(error);
@@ -43,8 +46,8 @@ function Myprogress() {
   }
 
   useEffect(() => {
-    set();
-  }, []); // Added an empty dependency array to run the effect only once
+    fetchData();
+  }, []);
 
   return (
     <IonPage>
@@ -55,21 +58,22 @@ function Myprogress() {
           </IonToolbar>
         </IonHeader>
         <div className="vertical-progress-bar-container">
-          <div
-            className="vertical-progress-bar"
-            style={{
-              height: `${progress}%`,
-            }}
-          ></div>
- 
-          <div
-            className="vertical-progress-bar-unfilled"
-            style={{
-              height: `${100 - progress}%`,
-            }}
-          ></div>
-         <div className="text-box" ref={textRef}>
-            <p>You have memorized <strong>{progress}</strong> verses! Keep Up the great work!</p>
+          <div className="progress-bars-container">
+            <div
+              className="vertical-progress-bar"
+              style={{
+                height: `${progress}%`,
+              }}
+            ></div>
+            <div
+              className="vertical-progress-bar-unfilled"
+              style={{
+                height: `${100 - progress}%`,
+              }}
+            ></div>
+          </div>
+          <div className="text-box" ref={textRef}>
+            <p>You have memorized <strong>{progress}</strong> verses! Keep up the great work!</p>
           </div>
         </div>
       </IonContent>
