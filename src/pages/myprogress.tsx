@@ -32,7 +32,6 @@ function Myprogress() {
     const windowHeight = window.innerHeight;
     const scrollToY = (progress / 100) * windowHeight;
     // Scroll the window to the calculated Y-coordinate
-    window.location.href="#mem"
   }
 }
 
