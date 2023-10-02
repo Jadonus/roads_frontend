@@ -61,16 +61,16 @@ function Myprogress() {
               height: `${progress}%`,
             }}
           ></div>
-   <div className="text-box" ref={textRef}>
-            <p>You have memorized <strong>{progress}</strong> verses! Keep Up the great work!</p>
-          </div>
+ 
           <div
             className="vertical-progress-bar-unfilled"
             style={{
               height: `${100 - progress}%`,
             }}
           ></div>
-       
+         <div className="text-box" ref={textRef}>
+            <p>You have memorized <strong>{progress}</strong> verses! Keep Up the great work!</p>
+          </div>
         </div>
       </IonContent>
     </IonPage>

@@ -2,21 +2,24 @@
 
 /* Keep the existing styles for the vertical progress bar container */
 .vertical-progress-bar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 250vh;
-    justify-content: flex-end;
-    padding: 20px;
-  }
-  
-  /* Keep the existing styles for the filled part */
-  .vertical-progress-bar {
-    width: 3em;
-    background-color: var(--ion-color-primary);
-    border-radius: 5px;
-    transition: height 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  }
+  display: grid; /* Step 2: Enable grid layout */
+  grid-template-columns: auto 1fr; /* Step 3: Divide into two columns */
+  height: 250vh;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+/* Adjust the width of the progress bar column as needed */
+.vertical-progress-bar {
+  width: 3em; /* Set to your desired width */
+  background-color: var(--ion-color-primary);
+  border-radius: 5px;
+  transition: height 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+
+.side-items {
+}
   
   /* Keep the existing styles for the unfilled part */
   .vertical-progress-bar-unfilled {
@@ -28,9 +31,8 @@
   
   /* Add styles for the text box */
   .text-box {
-    width: 3em; /* Match the width of the progress bars */
-    text-align: center;
-    margin-top: 10px; /* Adjust the margin as needed to position the text box */
+    margin-top: 10px;
+    margin: 5px; /* Adjust the margin as needed to position the text box */
   }
   
   /* Optional: Add some shadows for a 3D effect */
@@ -39,7 +41,3 @@
   }
   
   /* Optional: Add a hover effect for interaction */
-  .vertical-progress-bar:hover {
-    transform: scale(1.1);
-  }
-  
