@@ -36,6 +36,7 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 /* Theme variables */
 import "./theme/variables.css";
+import Myprogress from "./pages/myprogress";
 setupIonicReact();
 
 type MyAuth0ProviderOptions = {
@@ -94,6 +95,8 @@ const App: React.FC = () => {
             <Route path="/" component={Dashboard} exact />
 
             {/* Additional Routes */}
+
+            <Route path="/devpro" exact component={Myprogress}></Route>
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/settings/install" component={Install} exact />
