@@ -305,7 +305,6 @@ const Verse: React.FC<ContainerProps> = () => {
             <IonButtons slot="start">
               <IonButton
                 onClick={revealAllWords}
-                style={{ margin: "0 0.5rem" }}
               >
                 <div
                   style={{
@@ -355,8 +354,25 @@ const Verse: React.FC<ContainerProps> = () => {
 
         <IonContent {...handlers}>
           <IonAlert
-            onDidDismiss={() => (location.href = "/tabs/")}
-            buttons={["Great!"]}
+  buttons={[
+          {
+            text: 'Retry',
+            role: 'cancel',
+            handler: () => {
+              setCurrentSentenceIndex(0)
+            },
+          },
+          {
+            text: 'Great!',
+            role: 'confirm',
+            handler: () => {
+location.href = "/tabs/"
+
+            },
+          },
+        ]}
+        onDidDismiss={({ detail }) => console.log(`Dismissed with role: ${detail.role}`)}
+
             isOpen={showAlert}
             header="Your Done!"
             message="Horray! 🎉 You finished this road."
