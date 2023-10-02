@@ -4,11 +4,11 @@ import { IonToolbar, IonPage, IonTitle, IonContent, IonHeader} from "@ionic/reac
 
 import { useAuth0 } from "@auth0/auth0-react";
 
-  const { user } = useAuth0();
 
 function Myprogress() {
   const [progress, setProgress] = useState(0);
 
+  const { user } = useAuth0();
  function set() {
      const data = {
         username: user.name,
@@ -23,7 +23,7 @@ function Myprogress() {
       };
       fetch('https://roadsbible.com/api/gameify', requestOptions)
       .then(response => response.json())
-     .then(response => console.log(response))
+     .then(response => console.log('response:'+response))
  }
     return (
 <IonPage>
