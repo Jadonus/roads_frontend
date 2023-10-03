@@ -33,6 +33,7 @@ function Myprogress() {
     // Calculate the scroll position
     const windowHeight = window.innerHeight;
     const scrollToY = (progress / 100) * windowHeight;
+    window.location.href="#mem"
     // Scroll the window to the calculated Y-coordinate
   }
 }
@@ -107,6 +108,8 @@ function Myprogress() {
             ></div>
           </div>
           <div className="text-box" ref={textRef}>
+
+ {confet ? <><Confetti></Confetti> </>: ''}
             <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!
