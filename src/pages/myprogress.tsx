@@ -89,6 +89,8 @@ function Myprogress() {
             <IonTitle size="large">My Progress</IonTitle>
           </IonToolbar>
         </IonHeader>
+
+ {confet ? <><Confetti></Confetti> </>: ''}
         <div className="vertical-progress-bar-container">
           <div className="progress-bars-container">
             <div
@@ -109,7 +111,6 @@ function Myprogress() {
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!
             </p>
- {confet ? <><Confetti run={true}></Confetti> <p>YAY!</p> </>: ''}
           </div>
         </div>
       </IonContent>
