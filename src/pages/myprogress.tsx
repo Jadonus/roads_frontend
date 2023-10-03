@@ -33,7 +33,10 @@ function Myprogress() {
     // Calculate the scroll position
     const windowHeight = window.innerHeight;
     const scrollToY = (progress / 100) * windowHeight;
-    document.getElementById('mem').scrollIntoView()
+    document.getElementById('mem').scrollIntoView({
+ behavior: 'smooth', // Optional: Add smooth scrolling for a polished effect
+  block: 'center',  
+    })
     // Scroll the window to the calculated Y-coordinate
   }
 }
