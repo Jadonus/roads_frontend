@@ -84,9 +84,7 @@ function Myprogress() {
   }
 
   useEffect(() => {
-    setProgress(40)
 
-          setProgressBarPosition(40);
     fetchData();
   }, []);
 
@@ -99,7 +97,9 @@ function Myprogress() {
           </IonToolbar>
         </IonHeader>
 
- {confet ? <><Confetti></Confetti> </>: ''}
+
+ {confet ? <><Confetti height={window.innerHeight * 2.5} recycle={false}></Confetti> </>: ''}
+
         <div className="vertical-progress-bar-container">
           <div className="progress-bars-container">
             <div
@@ -117,7 +117,6 @@ function Myprogress() {
           </div>
           <div className="text-box" ref={textRef}>
 
- {confet ? <><Confetti></Confetti> </>: ''}
             <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!
