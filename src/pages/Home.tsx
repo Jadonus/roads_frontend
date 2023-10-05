@@ -131,13 +131,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
-          <IonHeader >
-            <IonToolbar>
-              <IonTitle>
-                Dashboard
-              </IonTitle>
-          </IonToolbar>
-          </IonHeader>
+         
          <IonContent>
 <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
