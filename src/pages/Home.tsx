@@ -136,7 +136,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <IonHeader collapse="condense">
+          <IonHeader >
             <IonToolbar>
               <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
                 Dashboard
