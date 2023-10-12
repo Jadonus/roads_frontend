@@ -88,7 +88,7 @@ interface ResponseData {
 }
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("https://www.roadsbible.com/roads/" + groupName, requestOption)
+    fetch("https://www.roadsbible.com/roads/" + groupName + '/', requestOption)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
