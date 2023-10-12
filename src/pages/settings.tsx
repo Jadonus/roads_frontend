@@ -22,8 +22,8 @@ import {
   IonButtons,
   IonBadge,
 } from "@ionic/react";
-const [colorPreference, setColorPreference] = useState()
   const { user } = useAuth0();
+  let colorPreference
 const SettingsPage = () => {
   // Initialize settings using localStorage or default values
 async function settings(key, value) {
