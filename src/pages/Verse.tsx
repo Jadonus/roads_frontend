@@ -366,78 +366,74 @@ const Verse: React.FC<ContainerProps> = () => {
             message="Horray! 🎉 You finished this road."
           ></IonAlert>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100vh",
-            }}
-          >
-            {sentences.length === 0 ? (
-              <IonSpinner
-                style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                name="dots"
-              ></IonSpinner>
-            ) : (
-              <div style={{ padding: "20px" }}>
-                <h1 className="ion-text-center">
-                  {sentences.length === 0 ? (
-                    <IonSpinner
-                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                      name="dots"
-                    ></IonSpinner>
-                  ) : (
-                    <span>
-                      {currentSentenceIndex < sentences.length &&
-                        sentences[currentSentenceIndex]
-                          .split(" ")
-                          .map((word, index) => (
-                            <span
-                              key={index}
-                              className={
-                                hiddenWordIndices.includes(index)
-                                  ? "hide-word"
-                                  : ""
-                              }
-                            >
-                              {word}{" "}
-                            </span>
-                          ))}
-                    </span>
-                  )}
-                </h1>
-                <div style={{ margin: "1rem", marginTop: "2rem" }}>
-                  <IonProgressBar
-                    value={parseFloat(
-                      (currentSentenceIndex / sentences.length).toFixed(2)
-                    )}
-                  ></IonProgressBar>
-                </div>
-  <IonButtons>
- <IonButton onClick={backButtonClicked}>
-        <IonIcon size="large" icon={arrowBack} />
-    </IonButton>
-    <IonButton onClick={() => hideRandomWords(3)} style={{ margin: "0 0.5rem" }}>
-      <IonIcon size="large" icon={backspace} />
-    </IonButton>
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+  }}
+>
+  {sentences.length === 0 ? (
+    <IonSpinner
+      style={{ margin: "auto", width: "5rem", height: "5rem" }}
+      name="dots"
+    ></IonSpinner>
+  ) : (
+    <div style={{ padding: "20px" }}>
+      <h1 className="ion-text-center">
+        {sentences.length === 0 ? (
+          <IonSpinner
+            style={{ margin: "auto", width: "5rem", height: "5rem" }}
+            name="dots"
+          ></IonSpinner>
+        ) : (
+          <span>
+            {currentSentenceIndex < sentences.length &&
+              sentences[currentSentenceIndex]
+                .split(" ")
+                .map((word, index) => (
+                  <span
+                    key={index}
+                    className={
+                      hiddenWordIndices.includes(index) ? "hide-word" : ""
+                    }
+                  >
+                    {word}{" "}
+                  </span>
+                ))}
+          </span>
+        )}
+      </h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly", // This will evenly space out the buttons
+          margin: "1rem",
+          marginTop: "2rem",
+        }}
+      >
+        <IonButton onClick={backButtonClicked}>
+          <IonIcon size="medium" icon={arrowBack} />
+        </IonButton>
+        <IonButton onClick={() => hideRandomWords(3)} style={{ margin: "0 0.5rem" }}>
+          <IonIcon size="medium" icon={backspace} />
+        </IonButton>
+        <IonButton onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
+          <IonIcon size="medium" icon={eyeOff} />
+        </IonButton>
+        <IonButton onClick={revealAllWords}>
+          <IonIcon size="medium" icon={refresh} />
+        </IonButton>
+        <IonButton onClick={moveToNextSentence}>
+          <IonIcon size="medium" icon={arrowForward} />
+        </IonButton>
+      </div>
+    </div>
+  )}
+</div>
 
-    <IonButton onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
-      <IonIcon size="large" icon={eyeOff} />
-    </IonButton>
-
-    <IonButton onClick={revealAllWords}>
-        <IonIcon size="large" icon={refresh} />
-    </IonButton>
- <IonButton onClick={moveToNextSentence}>
-        <IonIcon size="large" icon={arrowForward} />
-    </IonButton>
-  </IonButtons>
-              </div>
-
-            )}
-          </div>
 
         </IonContent>
       </IonPage>
