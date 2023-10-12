@@ -1,6 +1,6 @@
 import { IonIcon } from "@ionic/react";
 import { colorPalette, logoGithub } from "ionicons/icons";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState, useEffect } from "react";
 import {
   IonContent,
@@ -22,37 +22,23 @@ import {
   IonButtons,
   IonBadge,
 } from "@ionic/react";
-
+const [colorPreference, setColorPreference] = useState()
+  const { user } = useAuth0();
 const SettingsPage = () => {
   // Initialize settings using localStorage or default values
-  const [dark, setDark] = useState(() => {
-    // Use localStorage value if available, otherwise default to false
-    const darkPreference = localStorage.getItem("dark");
-    return darkPreference === "true"; // Convert string to boolean
-  });
-  const [colorPreference, setColorPreference] = useState(() => {
-    const storedColorPreference = localStorage.getItem("colorPreference");
-
-    return storedColorPreference;
-  });
-
-  const [pageRefreshed, setPageRefreshed] = useState(false);
+async function settings(key, value) {
+ 
+  let data = {
+username: user.name,
+key: value,
+  }
+  await (data as any).fetch('https://roadsbible.com/api/settings/', data)
+  .catch(err => {console.error(err)});
+}
 
   // useEffect to save settings to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem("colorPreference", colorPreference);
-localStorage.setItem("dark", dark.toString());
 
-  }, [colorPreference, pageRefreshed, dark]);
-  let mode = "he";
-  const [mode1, mode2] = useState(() => {});
-  const toggleDarkMode = () => {
-    // Update the state and save it to localStorage
-    setDark((prevDark) => !prevDark);
-localStorage.setItem("dark", (!dark).toString());
-
-
-  };
+  
   // Function to update settings
 
   const PWA = window.matchMedia("(display-mode: standalone)").matches;
@@ -83,7 +69,7 @@ localStorage.setItem("dark", (!dark).toString());
                 placeholder="Choose Mode"
                 onIonChange={(e) => {
                   const selectedMode = e.detail.value || "randomWord";
-                  localStorage.setItem("mode", selectedMode);
+                  settings('defaultmode', selectedMode);
                 }}
               >
                 <IonSelectOption value="randomWord">
@@ -94,28 +80,13 @@ localStorage.setItem("dark", (!dark).toString());
                 </IonSelectOption>
               </IonSelect>
             </IonItem>
-            <IonItem>
-              <IonToggle
-                checked={dark}
-                onIonChange={toggleDarkMode}
-  value={dark.toString()} // Convert boolean to string
-
-              >
-                Dark Mode{" "}
-              </IonToggle>
-            </IonItem>
 
             <h3>Colors</h3>
             <IonItem>
               <IonRadioGroup
                 value={colorPreference}
                 onIonChange={(e) => {
-                  setColorPreference(e.detail.value);
-                  // Reload the page only if it hasn't been refreshed before
-                  if (!pageRefreshed) {
-                    window.location.reload();
-                    setPageRefreshed(true);
-                  }
+                  settings('color', e.detail.value)
                 }}
               >
                 {/* Radio options */}

@@ -33,12 +33,12 @@ import {
 } from "@ionic/react";
 
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-
+import {useAuth0} from "@auth0/auth0-react"
 /* Theme variables */
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
 setupIonicReact();
-
+const {user} = useAuth0()
 type MyAuth0ProviderOptions = {
   domain: string;
   clientId: string;
@@ -46,27 +46,39 @@ type MyAuth0ProviderOptions = {
 };
 
 const App: React.FC = () => {
-  const [primaryAccentColor, setPrimaryAccentColor] = useState(() => {
-    const storedPrimaryAccentColor = localStorage.getItem("colorPreference");
-    return storedPrimaryAccentColor || "#3875D2"; // Default to blue (or your desired default color)
-  });
+const data = {
+  username: user.name
+}
 
-  const [dark] = useState(() => {
-    const darkpref = localStorage.getItem("dark");
-    return darkpref || false; // Default to blue (or your desired default color)
+let received
+fetch('https://roadsbible.com/api/settings/', {
+  method: 'POST',
+  body: JSON.stringify(data),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Data received:', data);
+    received = data
+    // Handle the response data as needed
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
   });
-
   useEffect(() => {
     // Set the CSS variable for primary accent color
     document.documentElement.style.setProperty(
       "--ion-color-primary",
-      primaryAccentColor
+     received.feilds.color 
     );
-    document.body.style.setProperty("--ion-color-primary", primaryAccentColor);
-
-    if (dark) {
-      document.body.classList.add("dark");
-    }
+    document.body.style.setProperty("--ion-color-primary", received.feilds.color);
   });
   const currentPath = window.location.pathname;
 
