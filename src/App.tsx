@@ -48,12 +48,9 @@ const App: React.FC = () => {
 
 const { user } = useAuth0()
 
+ 
 
-
-let received
-
-  useEffect(() => {
-if (user !== undefined) {
+/*  useEffect(() => {
 const data = {
   username: user.name
 }
@@ -84,8 +81,8 @@ fetch('https://roadsbible.com/api/settings/', {
      received.feilds.color 
     );
     document.body.style.setProperty("--ion-color-primary", received.feilds.color);
-}
-},[user])
+  });
+},[])*/
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
