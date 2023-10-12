@@ -339,7 +339,7 @@ const Verse: React.FC<ContainerProps> = () => {
             ]}
           ></IonActionSheet>
         </IonHeader>
-  
+
         <IonContent {...handlers}>
           <IonAlert
             buttons={[
@@ -365,15 +365,14 @@ const Verse: React.FC<ContainerProps> = () => {
             header="Your Done!"
             message="Horray! 🎉 You finished this road."
           ></IonAlert>
-  
+
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "35vh",
-              marginTop: "20vh",
+              height: "100vh",
             }}
           >
             {sentences.length === 0 ? (
@@ -423,5 +422,5 @@ const Verse: React.FC<ContainerProps> = () => {
       </IonPage>
     </>
   );
-                    }
- export default Verse 
+};
+export default Verse;
