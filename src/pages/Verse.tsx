@@ -75,11 +75,20 @@ const Verse: React.FC<ContainerProps> = () => {
 let dat = {
   username: user.name
 }
+const requestOption: RequestInit = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(dat),
+};
     const location = window.location.href
-
+interface ResponseData {
+  dat: any;
+}
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("https://www.roadsbible.com/roads/" + groupName, dat)
+    fetch("https://www.roadsbible.com/roads/" + groupName, requestOption)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
