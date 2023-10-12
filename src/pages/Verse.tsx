@@ -72,11 +72,14 @@ const Verse: React.FC<ContainerProps> = () => {
       "This is the second sentence.",
       // Add more sentences as needed
     ];
+let dat = {
+  username: user.name
+}
+    const location = window.location.href
 
-    const location = window.location.href;
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("https://www.roadsbible.com/roads/" + groupName)
+    (dat as any).fetch("https://www.roadsbible.com/roads/" + groupName, dat)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
