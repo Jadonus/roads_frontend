@@ -85,7 +85,7 @@ fetch('https://roadsbible.com/api/settings/', {
     );
     document.body.style.setProperty("--ion-color-primary", received.feilds.color);
 }
-},[])
+},[user])
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
