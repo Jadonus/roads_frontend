@@ -47,14 +47,16 @@ type MyAuth0ProviderOptions = {
 const App: React.FC = () => {
 
 const { user } = useAuth0()
-console.log(user)
+
+
+
+let received
 
   useEffect(() => {
+if (user !== undefined) {
 const data = {
   username: user.name
 }
-
-let received
 fetch('https://roadsbible.com/api/settings/', {
   method: 'POST',
   body: JSON.stringify(data),
@@ -76,14 +78,13 @@ fetch('https://roadsbible.com/api/settings/', {
   .catch(error => {
     console.error('There was a problem with the fetch operation:', error);
   });
-  useEffect(() => {
     // Set the CSS variable for primary accent color
     document.documentElement.style.setProperty(
       "--ion-color-primary",
      received.feilds.color 
     );
     document.body.style.setProperty("--ion-color-primary", received.feilds.color);
-  });
+}
 },[])
   const currentPath = window.location.pathname;
 
