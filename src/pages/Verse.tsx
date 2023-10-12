@@ -34,12 +34,13 @@ import {
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import {
-  backspaceOutline,
-  arrowBackOutline,
-  eyeOffOutline,
-  refreshOutline,
+  backspace,
+  arrowBack,
+  eyeOff,
+  refresh,
+  ellipsisHorizontal,
   settingsOutline,
-  arrowForwardOutline,
+  arrowForward,
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
@@ -302,21 +303,7 @@ const Verse: React.FC<ContainerProps> = () => {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start">
-              <IonButton
-                onClick={revealAllWords}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <IonIcon icon={refreshOutline}></IonIcon>
-                </div>
-              </IonButton>
-            </IonButtons>
+            <IonButtons slot="start"></IonButtons>
             <IonTitle>{groupName}</IonTitle>
             <IonButtons slot="end">
               <IonButton id="open-action-sheet">
@@ -354,25 +341,25 @@ const Verse: React.FC<ContainerProps> = () => {
 
         <IonContent {...handlers}>
           <IonAlert
-  buttons={[
-          {
-            text: 'Retry',
-            role: 'cancel',
-            handler: () => {
-              setCurrentSentenceIndex(0)
-            },
-          },
-          {
-            text: 'Great!',
-            role: 'confirm',
-            handler: () => {
-location.href = "/tabs/"
-
-            },
-          },
-        ]}
-        onDidDismiss={({ detail }) => console.log(`Dismissed with role: ${detail.role}`)}
-
+            buttons={[
+              {
+                text: "Retry",
+                role: "cancel",
+                handler: () => {
+                  setCurrentSentenceIndex(0);
+                },
+              },
+              {
+                text: "Great!",
+                role: "confirm",
+                handler: () => {
+                  location.href = "/tabs/";
+                },
+              },
+            ]}
+            onDidDismiss={({ detail }) =>
+              console.log(`Dismissed with role: ${detail.role}`)
+            }
             isOpen={showAlert}
             header="Your Done!"
             message="Horray! 🎉 You finished this road."
@@ -438,39 +425,52 @@ location.href = "/tabs/"
               justifyContent: "center",
             }}
           >
-            <IonButtons>
-              <IonButton
-                onClick={() => hideRandomWords(3)}
-                style={{ margin: "0 0.5rem" }}
-                className="color"
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
+            <IonToolbar>
+              <IonButtons>
+                <IonButton
+                  onClick={() => hideRandomWords(3)}
+                  style={{ margin: "0 0.5rem" }}
                 >
-                  <IonLabel>Hide</IonLabel>
-                </div>
-              </IonButton>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <IonIcon icon={backspace} />
+                  </div>
+                </IonButton>
 
-              <IonButton
-                className="color"
-                onClick={hideAllWords}
-                style={{ margin: "0 0.5rem" }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
+                <IonButton
+                  onClick={hideAllWords}
+                  style={{ margin: "0 0.5rem" }}
                 >
-                  <IonLabel>Hide All</IonLabel>
-                </div>
-              </IonButton>
-            </IonButtons>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+
+                    <IonIcon icon={eyeOff} />
+
+                  </div>
+                </IonButton>
+                <IonButton onClick={revealAllWords}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <IonIcon icon={refresh}/>
+                  </div>
+                </IonButton>
+              </IonButtons>
+            </IonToolbar>
           </div>
         </IonContent>
       </IonPage>

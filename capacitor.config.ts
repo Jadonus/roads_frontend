@@ -5,7 +5,10 @@ const config: CapacitorConfig = {
   appName: 'roads_frontend',
   webDir: 'dist',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'https',
+    allowNavigation: [
+    "*"
+    ]
   }
 };
 
