@@ -38,7 +38,6 @@ import {useAuth0} from "@auth0/auth0-react"
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
 setupIonicReact();
-const {user} = useAuth0()
 type MyAuth0ProviderOptions = {
   domain: string;
   clientId: string;
@@ -46,6 +45,8 @@ type MyAuth0ProviderOptions = {
 };
 
 const App: React.FC = () => {
+
+const {user} = useAuth0()
 const data = {
   username: user.name
 }
