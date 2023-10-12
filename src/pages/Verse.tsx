@@ -415,9 +415,28 @@ const Verse: React.FC<ContainerProps> = () => {
                     )}
                   ></IonProgressBar>
                 </div>
+<IonItem>
+  <IonButtons>
+    <IonButton onClick={() => hideRandomWords(3)} style={{ margin: "0 0.5rem" }}>
+      <IonIcon icon={backspace} />
+    </IonButton>
+
+    <IonButton onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
+      <IonIcon icon={eyeOff} />
+    </IonButton>
+
+    <IonButton onClick={revealAllWords}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <IonIcon icon={refresh} />
+      </div>
+    </IonButton>
+  </IonButtons>
+</IonItem>
               </div>
+
             )}
           </div>
+
         </IonContent>
       </IonPage>
     </>
