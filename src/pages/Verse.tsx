@@ -339,7 +339,7 @@ const Verse: React.FC<ContainerProps> = () => {
             ]}
           ></IonActionSheet>
         </IonHeader>
-
+  
         <IonContent {...handlers}>
           <IonAlert
             buttons={[
@@ -365,7 +365,7 @@ const Verse: React.FC<ContainerProps> = () => {
             header="Your Done!"
             message="Horray! 🎉 You finished this road."
           ></IonAlert>
-
+  
           <div
             style={{
               display: "flex",
@@ -419,61 +419,9 @@ const Verse: React.FC<ContainerProps> = () => {
               </div>
             )}
           </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <IonItem>
-              <IonButtons>
-                <IonButton
-                  onClick={() => hideRandomWords(3)}
-                  style={{ margin: "0 0.5rem" }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <IonIcon icon={backspace} />
-                  </div>
-                </IonButton>
-
-                <IonButton
-                  onClick={hideAllWords}
-                  style={{ margin: "0 0.5rem" }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <IonIcon icon={eyeOff} />
-                  </div>
-                </IonButton>
-                <IonButton onClick={revealAllWords}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <IonIcon icon={refresh} />
-                  </div>
-                </IonButton>
-              </IonButtons>
-            </IonItem>
-          </div>
         </IonContent>
       </IonPage>
     </>
   );
-};
-export default Verse;
+                    }
+ export default Verse 
