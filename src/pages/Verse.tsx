@@ -79,7 +79,7 @@ let dat = {
 
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    (dat as any).fetch("https://www.roadsbible.com/roads/" + groupName, dat)
+    fetch("https://www.roadsbible.com/roads/" + groupName, dat)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
