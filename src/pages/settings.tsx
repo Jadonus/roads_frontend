@@ -22,23 +22,24 @@ import {
   IonButtons,
   IonBadge,
 } from "@ionic/react";
-  const { user } = useAuth0();
-  let colorPreference
+let colorPreference;
 const SettingsPage = () => {
   // Initialize settings using localStorage or default values
-async function settings(key, value) {
- 
-  let data = {
-username: user.name,
-key: value,
+  async function settings(key, value) {
+    const { user } = useAuth0();
+    let data = {
+      username: user.name,
+      key: value,
+    };
+    await (data as any)
+      .fetch("https://roadsbible.com/api/settings/", data)
+      .catch((err) => {
+        console.error(err);
+      });
   }
-  await (data as any).fetch('https://roadsbible.com/api/settings/', data)
-  .catch(err => {console.error(err)});
-}
 
   // useEffect to save settings to localStorage whenever they change
 
-  
   // Function to update settings
 
   const PWA = window.matchMedia("(display-mode: standalone)").matches;
@@ -47,8 +48,7 @@ key: value,
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start">
-            </IonButtons>
+            <IonButtons slot="start"></IonButtons>
             <IonTitle>Settings</IonTitle>
             <IonButtons slot="end"></IonButtons>
           </IonToolbar>
@@ -69,7 +69,7 @@ key: value,
                 placeholder="Choose Mode"
                 onIonChange={(e) => {
                   const selectedMode = e.detail.value || "randomWord";
-                  settings('defaultmode', selectedMode);
+                  settings("defaultmode", selectedMode);
                 }}
               >
                 <IonSelectOption value="randomWord">
@@ -86,7 +86,7 @@ key: value,
               <IonRadioGroup
                 value={colorPreference}
                 onIonChange={(e) => {
-                  settings('color', e.detail.value)
+                  settings("color", e.detail.value);
                 }}
               >
                 {/* Radio options */}
@@ -123,11 +123,10 @@ key: value,
 
             <h3>Links</h3>
             <IonItem href="https://github.com/jadonus/roads_bible_vercel">
-              <IonIcon icon={logoGithub}/>{' '} 
-              Backend Source Code
+              <IonIcon icon={logoGithub} /> Backend Source Code
             </IonItem>
-<IonItem href="https://github.com/jadonus/roads_frontend">
-              <IonIcon icon={logoGithub}/> Frontend Source Code
+            <IonItem href="https://github.com/jadonus/roads_frontend">
+              <IonIcon icon={logoGithub} /> Frontend Source Code
             </IonItem>
           </IonList>
         </IonContent>
