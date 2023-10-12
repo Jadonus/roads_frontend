@@ -316,7 +316,9 @@ interface ResponseData {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start"></IonButtons>
+            <IonButtons slot="start">
+              <IonBackButton />
+            </IonButtons>
             <IonTitle>{groupName}</IonTitle>
             <IonButtons slot="end">
               <IonButton id="open-action-sheet">
