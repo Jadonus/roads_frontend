@@ -9,6 +9,7 @@ import {
   IonFooter,
   IonTitle,
   IonToolbar,
+  IonItem,
   IonBackButton,
   IonButtons,
   IonButton,
@@ -425,7 +426,7 @@ const Verse: React.FC<ContainerProps> = () => {
               justifyContent: "center",
             }}
           >
-            <IonToolbar>
+            <IonItem>
               <IonButtons>
                 <IonButton
                   onClick={() => hideRandomWords(3)}
@@ -453,9 +454,7 @@ const Verse: React.FC<ContainerProps> = () => {
                       alignItems: "center",
                     }}
                   >
-
                     <IonIcon icon={eyeOff} />
-
                   </div>
                 </IonButton>
                 <IonButton onClick={revealAllWords}>
@@ -466,11 +465,11 @@ const Verse: React.FC<ContainerProps> = () => {
                       alignItems: "center",
                     }}
                   >
-                    <IonIcon icon={refresh}/>
+                    <IonIcon icon={refresh} />
                   </div>
                 </IonButton>
               </IonButtons>
-            </IonToolbar>
+            </IonItem>
           </div>
         </IonContent>
       </IonPage>
