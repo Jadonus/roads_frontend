@@ -51,6 +51,7 @@ let received
  
 
 useEffect(() => {
+  if (user) {
 const data = {
   username: user.name
 }
@@ -81,7 +82,8 @@ fetch('https://roadsbible.com/api/settings/', {
      received.feilds.color 
     );
     document.body.style.setProperty("--ion-color-primary", received.feilds.color);
-},[user])
+    }
+  },[user])
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
