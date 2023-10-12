@@ -46,7 +46,10 @@ type MyAuth0ProviderOptions = {
 
 const App: React.FC = () => {
 
-const {user} = useAuth0()
+const { user } = useAuth0()
+console.log(user)
+
+  useEffect(() => {
 const data = {
   username: user.name
 }
@@ -81,6 +84,7 @@ fetch('https://roadsbible.com/api/settings/', {
     );
     document.body.style.setProperty("--ion-color-primary", received.feilds.color);
   });
+},[])
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
