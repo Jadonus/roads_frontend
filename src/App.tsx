@@ -50,7 +50,6 @@ const App: React.FC = () => {
   }
   useEffect(() => {
     console.log('useffect')
-    if (isAuthenticated) {
 
     console.log('useffected')
       // Check if the user is authenticated
@@ -87,7 +86,6 @@ const App: React.FC = () => {
         "--ion-color-primary",
         received.feilds.color
       );
-    }
   }, [isAuthenticated]);
   const currentPath = window.location.pathname;
 
