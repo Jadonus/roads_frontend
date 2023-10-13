@@ -312,8 +312,8 @@ const Verse: React.FC<ContainerProps> = () => {
   };
   useEffect(() => {
     console.log(settings)
-    if (settings){
-  if (settings[0].fields.defaultmode == "randomword") {
+    if (settings.length > 0) {
+      if (settings[0].fields.defaultmode == "randomword") {
     console.log("Random word");
   } else {
     toggleFirstLetterMode()
