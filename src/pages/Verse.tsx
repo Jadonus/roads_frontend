@@ -62,7 +62,7 @@ const Verse: React.FC<ContainerProps> = () => {
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
-  const isFirstLetterModeRef = useRef(null);
+  const [mode, setMode] = useState('randomWord');
 
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -277,11 +277,8 @@ const Verse: React.FC<ContainerProps> = () => {
     }
   };
   const toggleFirstLetterMode = () => {
-    if (isFirstLetterModeRef.current) {
-      return;
-    }
+   
 
-    isFirstLetterModeRef.current = true;
 
     setSentences((prevSentences) => {
       if (!isFirstLetterMode) {
@@ -305,7 +302,6 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
-        isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
         // Exit First Letter Mode and restore original content
@@ -314,23 +310,27 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
-        isFirstLetterModeRef.current = false;
         return newSentences;
       }
     });
   };
-
+  useEffect(() => {
+if (isFirstLetterMode) {
+setMode('firstLetter')
+}
+else {
+  setMode('randomWord')
+}
+  },[isFirstLetterMode] )
   useEffect(() => {
     if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord") {
+      if (settings[0].fields.defaultmode === "randomWord" && mode === 'randomWord') {
         console.log("Random word");
-      } else {
+      } else if (mode === "firstLetter"){
         toggleFirstLetterMode();
-        console.log(isFirstLetterModeRef)
-        console.log("First Letter Mode")
       }
     }
-  }, [settings, isFirstLetterModeRef]);
+  }, [settings]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
