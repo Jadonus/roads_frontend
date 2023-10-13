@@ -278,9 +278,10 @@ const toggleFirstLetterMode = () => {
   setSentences((prevSentences) => {
     if (!isFirstLetterMode) {
       // Enter First Letter Mode
-      const newSentences = prevSentences.map((sentence) => {
+      const newSentences = [...prevSentences];
+      newSentences.forEach((sentence, index) => {
         // Store the original content
-        originalSentences.push(sentence);
+        originalSentences[index] = sentence;
         // Replace the content with first letters
         const words = sentence.split(" ");
         const firstLetters = words
@@ -294,22 +295,26 @@ const toggleFirstLetterMode = () => {
             }
           })
           .join(" ");
-        return firstLetters;
+        newSentences[index] = firstLetters;
       });
       setIsFirstLetterMode(true);
-      return newSentences;
+      return newSentences; // Return the updated sentences
     } else {
       // Exit First Letter Mode and restore original content
-      const newSentences = originalSentences.slice();
+      const newSentences = [...prevSentences];
+      newSentences.forEach((sentence, index) => {
+        newSentences[index] = originalSentences[index];
+      });
       setIsFirstLetterMode(false);
-      return newSentences;
+      return newSentences; // Return the updated sentences
     }
   });
 };
+
   useEffect(() => {
     console.log(settings)
     if (settings.length > 0) {
-      if (settings[0].fields.defaultmode == "randomword") {
+      if (settings[0].fields.defaultmode == "randomWord") {
     console.log("Random word");
   } else {
     toggleFirstLetterMode()
