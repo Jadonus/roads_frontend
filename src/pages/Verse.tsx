@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
 
@@ -61,6 +61,7 @@ const Verse: React.FC<ContainerProps> = () => {
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
+  const isFirstLetterModeRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -274,53 +275,59 @@ const Verse: React.FC<ContainerProps> = () => {
       hapticsImpactMedium();
     }
   };
-const toggleFirstLetterMode = () => {
-  setSentences((prevSentences) => {
-    if (!isFirstLetterMode) {
-      // Enter First Letter Mode
-      const newSentences = [...prevSentences];
-      newSentences.forEach((sentence, index) => {
-        // Store the original content
-        originalSentences[index] = sentence;
-        // Replace the content with first letters
-        const words = sentence.split(" ");
-        const firstLetters = words
-          .filter((word) => word.length > 0)
-          .map((word) => {
-            if (!isNaN(word[0])) {
-              // If the first character is a number, keep it as-is
-              return word;
-            } else {
-              return word[0].toUpperCase().replace(/["()]/g, ""); // Use regular expressions to remove double quotes and parentheses
-            }
-          })
-          .join(" ");
-        newSentences[index] = firstLetters;
-      });
-      setIsFirstLetterMode(true);
-      return newSentences; // Return the updated sentences
-    } else {
-      // Exit First Letter Mode and restore original content
-      const newSentences = [...prevSentences];
-      newSentences.forEach((sentence, index) => {
-        newSentences[index] = originalSentences[index];
-      });
-      setIsFirstLetterMode(false);
-      return newSentences; // Return the updated sentences
+  const toggleFirstLetterMode = () => {
+    if (isFirstLetterModeRef.current) {
+      return;
     }
-  });
-};
+
+    isFirstLetterModeRef.current = true;
+
+    setSentences((prevSentences) => {
+      if (!isFirstLetterMode) {
+        // Enter First Letter Mode
+        const newSentences = [...prevSentences];
+        newSentences.forEach((sentence, index) => {
+          // Store the original content
+          originalSentences[index] = sentence;
+          // Replace the content with first letters
+          const words = sentence.split(" ");
+          const firstLetters = words
+            .filter((word) => word.length > 0)
+            .map((word) => {
+              if (!isNaN(word[0])) {
+                return word;
+              } else {
+                return word[0].toUpperCase().replace(/["()]/g, "");
+              }
+            })
+            .join(" ");
+          newSentences[index] = firstLetters;
+        });
+        setIsFirstLetterMode(true);
+        isFirstLetterModeRef.current = false;
+        return newSentences;
+      } else {
+        // Exit First Letter Mode and restore original content
+        const newSentences = [...prevSentences];
+        newSentences.forEach((sentence, index) => {
+          newSentences[index] = originalSentences[index];
+        });
+        setIsFirstLetterMode(false);
+        isFirstLetterModeRef.current = false;
+        return newSentences;
+      }
+    });
+  };
 
   useEffect(() => {
-    console.log(settings)
     if (settings.length > 0) {
-      if (settings[0].fields.defaultmode == "randomWord") {
-    console.log("Random word");
-  } else {
-    toggleFirstLetterMode()
-  }
-}
-}, [settings, isFirstLetterMode] )
+      if (settings[0].fields.defaultmode === "randomWord") {
+        console.log("Random word");
+      } else {
+        toggleFirstLetterMode();
+      }
+    }
+  }, [settings, isFirstLetterMode]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
