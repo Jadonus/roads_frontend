@@ -41,6 +41,7 @@ const SettingsPage = () => {
     }
     await 
       fetch("https://www.roadsbible.com/api/settings/", dato)
+      .then(response => {console.log('Api REsponse:',response)})
       .catch((err) => {
         console.error(err);
       });
