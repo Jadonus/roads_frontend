@@ -56,7 +56,7 @@ const App: React.FC = () => {
       const data = {
         username: user?.name, // Access user information
       };
-      fetch("https://roadsbible.com/api/settings/", {
+      fetch("https://www.roadsbible.com/api/settings/", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -80,11 +80,11 @@ const App: React.FC = () => {
       // Set the CSS variable for primary accent color
       document.documentElement.style.setProperty(
         "--ion-color-primary",
-        received.feilds.color
+        received.fields.color
       );
       document.body.style.setProperty(
         "--ion-color-primary",
-        received.feilds.color
+        received.fields.color
       );
   }, [isAuthenticated]);
   const currentPath = window.location.pathname;
