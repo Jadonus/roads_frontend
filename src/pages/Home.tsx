@@ -195,7 +195,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
           <div>
             {filteredMetadata.map((item: any, index: number) => (
-              <IonCard className="margin" key={index}>
+              <IonCard 
+                    href={"/tabs" + item.parsed_data[0]?.url || ""}
+              className="margin" key={index}>
                 <IonCardHeader>
                   <IonCardTitle>
                     {item.parsed_data[0]?.title || "No title available"}
@@ -211,13 +213,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                   <IonChip>{item.num_groups} Verses</IonChip>
                 </IonCardContent>
                 <IonButton fill="clear">
-                  <IonRouterLink
-                    routerLink={"/tabs" + item.parsed_data[0]?.url || ""}
-                    target="_blank"
-                    routerDirection="forward"
-                  >
-                    Memorize!
-                  </IonRouterLink>
+                 
                 </IonButton>
               </IonCard>
             ))}
