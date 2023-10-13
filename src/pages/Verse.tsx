@@ -331,7 +331,8 @@ const Verse: React.FC<ContainerProps> = () => {
         initialRender.current = false;
       }
     } else {
-      toggleFirstLetterMode();
+
+        setIsFirstLetterMode(true);
       initialRender.current = false;
     }
   }
