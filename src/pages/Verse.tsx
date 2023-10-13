@@ -52,8 +52,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
   const [settings, setSettings] = useState([])
-  const initialRender = useRef(true);
-
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -64,7 +62,7 @@ const Verse: React.FC<ContainerProps> = () => {
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
-  const isFirstLetterModeRef = useRef(null);
+  const [mode, setMode] = useState('randomWord');
 
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -278,12 +276,11 @@ const Verse: React.FC<ContainerProps> = () => {
       hapticsImpactMedium();
     }
   };
-  const toggleFirstLetterMode = () => {
-    if (isFirstLetterModeRef.current) {
-      return;
-    }
+const toggleFirstLetterMode = () => {
+    const newMode = isFirstLetterMode ? 'randomWord' : 'firstLetter'; // Toggle the mode
 
-    isFirstLetterModeRef.current = true;
+    // Update the mode immediately without causing an infinite loop
+    setMode(newMode);
 
     setSentences((prevSentences) => {
       if (!isFirstLetterMode) {
@@ -307,7 +304,6 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
-        isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
         // Exit First Letter Mode and restore original content
@@ -316,28 +312,20 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
-        isFirstLetterModeRef.current = false;
         return newSentences;
       }
     });
   };
-
-useEffect(() => {
-  if (settings.length > 0) {
-    if (settings[0].fields.defaultmode === "randomWord") {
-      if (!initialRender.current) {
-        setIsFirstLetterMode(false);
-      }
-    } else {
-      if (!initialRender.current) {
-        toggleFirstLetterMode()
-        
+  useEffect(() => {
+    if (settings.length > 0) {
+      const desiredMode = settings[0].fields.defaultmode;
+  
+      if (desiredMode !== mode) {
+        // Update the mode only if it doesn't match the desired mode
+        setMode(desiredMode);
       }
     }
-    initialRender.current = false;
-  }
-}, [settings, isFirstLetterMode]);
-
+  }, [settings, mode]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
@@ -497,4 +485,4 @@ useEffect(() => {
     </>
   );
 };
-export default Verse;
+export default Verse
