@@ -314,12 +314,12 @@ const Verse: React.FC<ContainerProps> = () => {
 
       // Trigger a re-render by updating forceUpdate
 
+      setShouldRerender(true);
       return newSentences; // Return newSentences
     });
   };
   const [shouldRerender, setShouldRerender] = useState(false);
 
-  setShouldRerender(true);
   useEffect(() => {
     if (settings.length > 0) {
       if (settings[0].fields.defaultmode === "randomWord") {
