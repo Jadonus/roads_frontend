@@ -322,13 +322,15 @@ const Verse: React.FC<ContainerProps> = () => {
 
   useEffect(() => {
     if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord") {
-        console.log("Random word");
-      } else {
+      if (settings[0].fields.defaultmode === "randomWord" && !isFirstLetterModeRef.current) {
         toggleFirstLetterMode();
+        isFirstLetterModeRef.current = true; // Set the ref to true to prevent future calls
+      } else if (settings[0].fields.defaultmode === "firstLetter" && isFirstLetterModeRef.current) {
+        toggleFirstLetterMode();
+        isFirstLetterModeRef.current = false; // Reset the ref if needed
       }
     }
-  }, [settings, isFirstLetterMode]);
+  }, [settings, toggleFirstLetterMode]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
