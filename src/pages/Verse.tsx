@@ -53,6 +53,7 @@ interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
   const [forceUpdate, setForceUpdate] = useState(0);
 
+  const [shouldRerender, setShouldRerender] = useState(false);
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
@@ -318,7 +319,6 @@ const Verse: React.FC<ContainerProps> = () => {
       return newSentences; // Return newSentences
     });
   };
-  const [shouldRerender, setShouldRerender] = useState(false);
 
   console.log(shouldRerender); // Reset the flag
   useEffect(() => {
