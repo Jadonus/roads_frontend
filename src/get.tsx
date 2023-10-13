@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function AuthenticatedAction() {
   const { isAuthenticated, user } = useAuth0();
-
+console.log('YEH WE IN DIS')
   useEffect(() => {
     if (isAuthenticated) {
       // Run your function or code here after authentication
