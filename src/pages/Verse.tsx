@@ -333,7 +333,7 @@ useEffect(() => {
       console.log('w')
     }
   }
-}, [settings]);
+}, [settings, isFirstLetterMode]);
 
   const style = {
     "--background": "var(--ion-background)",
