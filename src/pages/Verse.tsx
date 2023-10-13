@@ -52,6 +52,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
   const [settings, setSettings] = useState([])
+  const initialRender = useRef(true);
+
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -62,7 +64,7 @@ const Verse: React.FC<ContainerProps> = () => {
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
-  const [mode, setMode] = useState('randomWord');
+  const isFirstLetterModeRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -277,8 +279,11 @@ const Verse: React.FC<ContainerProps> = () => {
     }
   };
   const toggleFirstLetterMode = () => {
-   
+    if (isFirstLetterModeRef.current) {
+      return;
+    }
 
+    isFirstLetterModeRef.current = true;
 
     setSentences((prevSentences) => {
       if (!isFirstLetterMode) {
@@ -302,6 +307,7 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
+        isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
         // Exit First Letter Mode and restore original content
@@ -310,29 +316,27 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
+        isFirstLetterModeRef.current = false;
         return newSentences;
       }
     });
   };
-  useEffect(() => {
-if (!isFirstLetterMode) {
-setMode('firstLetter')
-}
-else {
-  setMode('randomWord')
-}
-console.log(mode)
-  },[isFirstLetterMode] )
-  useEffect(() => {
-    if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord" && mode === 'randomWord') {
-        console.log("Random word");
-      } else if (mode === "firstLetter"){
-setIsFirstLetterMode(!isFirstLetterMode);
 
+ useEffect(() => {
+  if (settings.length > 0) {
+    if (settings[0].fields.defaultmode === "randomWord") {
+      console.log("Random word");
+      if (initialRender.current) {
+        setIsFirstLetterMode(false);
+        initialRender.current = false;
       }
+    } else {
+      toggleFirstLetterMode();
+      initialRender.current = false;
     }
-  }, [settings]);
+  }
+}, [settings]);
+
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
