@@ -4,12 +4,53 @@ import { useAuth0 } from "@auth0/auth0-react";
 function AuthenticatedAction() {
   const { isAuthenticated, user } = useAuth0();
 console.log('YEH WE IN DIS')
+let received
   useEffect(() => {
-    if (isAuthenticated) {
-      // Run your function or code here after authentication
-      // For example, you can make an API request, set up user data, etc.
-      console.log("Authenticated, running your custom action");
-    }
+        if (user) {
+          console.log("useffect");
+    
+          console.log("useffected");
+          // Check if the user is authenticated
+          const data = {
+            username: user.name, // Access user information
+          };
+          console.log("data", data);
+          async function get() {
+            await fetch("https://www.roadsbible.com/api/settings", {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                }
+                return response.json();
+              })
+              .then((data) => {
+                console.log("Data received:", data);
+                received = data;
+                // Handle the response data as needed
+              })
+              .catch((error) => {
+                console.error(
+                  "There was a problem with the fetch operation:",
+                  error
+                );
+              });
+            // Set the CSS variable for primary accent color
+            document.documentElement.style.setProperty(
+              "--ion-color-primary",
+              received.fields.color
+            );
+            document.body.style.setProperty(
+              "--ion-color-primary",
+              received[0].fields.color
+            );
+          }
+        }
   }, [isAuthenticated]);
 
   // You can return null or any UI elements you want here
