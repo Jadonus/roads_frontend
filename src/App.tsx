@@ -31,7 +31,6 @@ import {
   IonIcon,
   IonLabel,
 } from "@ionic/react";
-
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { useAuth0 } from "@auth0/auth0-react";
 /* Theme variables */
@@ -89,7 +88,7 @@ const App: React.FC = () => {
         received.feilds.color
       );
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated]);
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
