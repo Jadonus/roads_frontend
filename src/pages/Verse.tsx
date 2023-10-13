@@ -51,6 +51,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
+const [forceUpdate, setForceUpdate] = useState(0);
+
   const [settings, setSettings] = useState([])
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
@@ -277,55 +279,63 @@ const Verse: React.FC<ContainerProps> = () => {
     }
   };
   const toggleFirstLetterMode = () => {
-    setSentences((prevSentences) => {
-      if (!isFirstLetterMode) {
-        // Enter First Letter Mode
-        const newSentences = [...prevSentences];
-        newSentences.forEach((sentence, index) => {
-          // Store the original content
-          originalSentences[index] = sentence;
-          // Replace the content with first letters
-          const words = sentence.split(" ");
-          const firstLetters = words
-            .filter((word) => word.length > 0)
-            .map((word) => {
-              if (!isNaN(word[0])) {
-                return word;
-              } else {
-                return word[0].toUpperCase().replace(/["()]/g, "");
-              }
-            })
-            .join(" ");
-          newSentences[index] = firstLetters;
-        });
-        setIsFirstLetterMode(true);
-        return newSentences;
-      } else {
-        // Exit First Letter Mode and restore original content
-        const newSentences = [...prevSentences];
-        newSentences.forEach((sentence, index) => {
-          newSentences[index] = originalSentences[index];
-        });
-        setIsFirstLetterMode(false);
-        return newSentences;
-      }
-    });
-  };
-  useEffect(() => {
-    if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord" ) {
-        console.log("Random word");
-        // Handle the case where default mode is "randomWord" and isFirstLetterMode is true
-      } else {
+  setSentences((prevSentences) => {
+    let newSentences; // Define newSentences variable
+
+    if (!isFirstLetterMode) {
+      // Enter First Letter Mode
+      newSentences = [...prevSentences];
+      newSentences.forEach((sentence, index) => {
+        // Store the original content
+        originalSentences[index] = sentence;
+        // Replace the content with first letters
+        const words = sentence.split(" ");
+        const firstLetters = words
+          .filter((word) => word.length > 0)
+          .map((word) => {
+            if (!isNaN(word[0])) {
+              return word;
+            } else {
+              return word[0].toUpperCase().replace(/["()]/g, "");
+            }
+          })
+          .join(" ");
+        newSentences[index] = firstLetters;
+      });
+      setIsFirstLetterMode(true);
+    } else {
+      // Exit First Letter Mode and restore original content
+      newSentences = [...prevSentences];
+      newSentences.forEach((sentence, index) => {
+        newSentences[index] = originalSentences[index];
+      });
+      setIsFirstLetterMode(false);
+    }
+
+    // Trigger a re-render by updating forceUpdate
+    setForceUpdate((prev) => prev + 1);
+
+    return newSentences; // Return newSentences
+  });
+};
+
+useEffect(() => {
+  if (settings.length > 0) {
+    if (settings[0].fields.defaultmode === "randomWord") {
+      console.log("Random word");
+      if (isFirstLetterMode) {
         toggleFirstLetterMode();
-        // Handle the case where default mode is not "randomWord" or isFirstLetterMode is false
+      }
+    } else {
+      if (!isFirstLetterMode) {
+        toggleFirstLetterMode();
       }
     }
-  }, [settings]);
+  }
+}, [settings]);
+
  
-  useEffect(() => {
-    // Watch for changes in isFirstLetterMode and trigger re-render
-  }, [isFirstLetterMode]); 
+  
   
   
   
