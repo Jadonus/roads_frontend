@@ -327,6 +327,7 @@ const Verse: React.FC<ContainerProps> = () => {
       if (settings[0].fields.defaultmode === "randomWord") {
         console.log("Random word");
       } else {
+        setShouldRerender(true);
         if (shouldRerender) {
           toggleFirstLetterMode();
 
