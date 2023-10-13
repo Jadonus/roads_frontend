@@ -4,7 +4,7 @@ import "./Home.css";
 
 import { useSwipeable } from "react-swipeable";
 
-    let groupName
+let groupName;
 import {
   IonActionSheet,
   IonFooter,
@@ -51,9 +51,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
-const [forceUpdate, setForceUpdate] = useState(0);
+  const [forceUpdate, setForceUpdate] = useState(0);
 
-  const [settings, setSettings] = useState([])
+  const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -279,75 +279,65 @@ const [forceUpdate, setForceUpdate] = useState(0);
     }
   };
   const toggleFirstLetterMode = () => {
-  setSentences((prevSentences) => {
-    let newSentences; // Define newSentences variable
+    setSentences((prevSentences) => {
+      let newSentences; // Define newSentences variable
 
-    if (!isFirstLetterMode) {
-      // Enter First Letter Mode
-      newSentences = [...prevSentences];
-      newSentences.forEach((sentence, index) => {
-        // Store the original content
-        originalSentences[index] = sentence;
-        // Replace the content with first letters
-        const words = sentence.split(" ");
-        const firstLetters = words
-          .filter((word) => word.length > 0)
-          .map((word) => {
-            if (!isNaN(word[0])) {
-              return word;
-            } else {
-              return word[0].toUpperCase().replace(/["()]/g, "");
-            }
-          })
-          .join(" ");
-        newSentences[index] = firstLetters;
-      });
-      setIsFirstLetterMode(true);
-    } else {
-      // Exit First Letter Mode and restore original content
-      newSentences = [...prevSentences];
-      newSentences.forEach((sentence, index) => {
-        newSentences[index] = originalSentences[index];
-      });
-      setIsFirstLetterMode(false);
-    }
+      if (!isFirstLetterMode) {
+        // Enter First Letter Mode
+        newSentences = [...prevSentences];
+        newSentences.forEach((sentence, index) => {
+          // Store the original content
+          originalSentences[index] = sentence;
+          // Replace the content with first letters
+          const words = sentence.split(" ");
+          const firstLetters = words
+            .filter((word) => word.length > 0)
+            .map((word) => {
+              if (!isNaN(word[0])) {
+                return word;
+              } else {
+                return word[0].toUpperCase().replace(/["()]/g, "");
+              }
+            })
+            .join(" ");
+          newSentences[index] = firstLetters;
+        });
+        setIsFirstLetterMode(true);
+      } else {
+        // Exit First Letter Mode and restore original content
+        newSentences = [...prevSentences];
+        newSentences.forEach((sentence, index) => {
+          newSentences[index] = originalSentences[index];
+        });
+        setIsFirstLetterMode(false);
+      }
 
-    // Trigger a re-render by updating forceUpdate
-    setShouldRerender(true);
+      // Trigger a re-render by updating forceUpdate
+      setShouldRerender(true);
 
+      return newSentences; // Return newSentences
+    });
+  };
+  const [shouldRerender, setShouldRerender] = useState(false);
 
-    return newSentences; // Return newSentences
-  });
-};
-const [shouldRerender, setShouldRerender] = useState(false);
-
-useEffect(() => {
-  if (settings.length > 0) {
-    if (settings[0].fields.defaultmode === "randomWord") {
-      console.log("Random word");
-     
-    } else {
+  useEffect(() => {
+    if (settings.length > 0) {
+      if (settings[0].fields.defaultmode === "randomWord") {
+        console.log("Random word");
+      } else {
         toggleFirstLetterMode();
+      }
     }
-  }
-}, [settings]);
-useEffect(() => {
-  if (shouldRerender) {
-    setForceUpdate((prev) => prev + 1);
-    setShouldRerender(false); // Reset the flag
-  }
-}, [shouldRerender]);
+  }, [settings]);
+  useEffect(() => {
+    console.log("Rendereffect");
+    if (shouldRerender) {
+      console.log("force updating");
+      setForceUpdate((prev) => prev + 1);
+      setShouldRerender(false); // Reset the flag
+    }
+  }, [shouldRerender]);
 
-
-
-
-
-
- 
-  
-  
-  
-  
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
