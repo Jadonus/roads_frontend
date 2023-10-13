@@ -320,17 +320,20 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
 
-  useEffect(() => {
-    if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord" && !isFirstLetterModeRef.current) {
+ useEffect(() => {
+  if (settings.length > 0) {
+    if (settings[0].fields.defaultmode === "randomWord") {
+      if (isFirstLetterMode) {
         toggleFirstLetterMode();
-        isFirstLetterModeRef.current = true; // Set the ref to true to prevent future calls
-      } else if (settings[0].fields.defaultmode === "firstLetter" && isFirstLetterModeRef.current) {
+      }
+    } else {
+      if (!isFirstLetterMode) {
         toggleFirstLetterMode();
-        isFirstLetterModeRef.current = false; // Reset the ref if needed
       }
     }
-  }, [settings, toggleFirstLetterMode]);
+  }
+}, [settings, isFirstLetterMode]);
+
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
