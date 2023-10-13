@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
 
@@ -47,29 +47,28 @@ import {
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
 import { useAuth0 } from "@auth0/auth0-react";
+
 let groupName = "";
-interface ContainerProps {}
-const Verse: React.FC<ContainerProps> = () => {
-  const [settings, setSettings] = useState([])
+
+const Verse: React.FC = () => {
+  const [settings, setSettings] = useState<any[]>([]);
   const { user } = useAuth0();
-  const [sentences, setSentences] = useState([]);
+  const [sentences, setSentences] = useState<string[]>([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-  const [hiddenWordIndices, setHiddenWordIndices] = useState([]);
+  const [hiddenWordIndices, setHiddenWordIndices] = useState<number[]>([]);
   const [finishButtonClicks, setFinishButtonClicks] = useState(0);
   const [isHidden, setIsHidden] = useState(false);
-  const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
-  const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
-  const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
+  const [isFirstLetterMode, setIsFirstLetterMode] = useState(false);
+  const [originalSentences, setOriginalSentences] = useState<string[]>([]);
+  const [showAlert, setShowAlert] = useState(false);
   const [isFabOpen, setIsFabOpen] = useState(false);
-  const isFirstLetterModeRef = useRef(null);
 
-  const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
+  let groupName = "";
   const hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Medium });
   };
 
   useEffect(() => {
-    // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
       "This is the first sentence.",
       "This is the second sentence.",
@@ -93,26 +92,21 @@ const Verse: React.FC<ContainerProps> = () => {
       });
 
     const location = window.location.href;
-    interface ResponseData {
-      dat: any;
-    }
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
     fetch("https://www.roadsbible.com/roads/" + groupName + "/", requestOption)
       .then((response) => response.json())
       .then((data) => {
-        // Extract verses and references from the API response
         const verses = data.verses.map(
-          (verse) => `${verse.verse} ${verse.reference}`
+          (verse: any) => `${verse.verse} ${verse.reference}`
         );
-
-        // Update the state with the fetched verses
         setSentences(verses);
       })
       .catch((error) => {
         console.error("Error fetching verses:", error);
       });
   }, []);
+
   useEffect(() => {
     const loadProgress = async () => {
       try {
@@ -140,9 +134,7 @@ const Verse: React.FC<ContainerProps> = () => {
           setCurrentSentenceIndex(savedIndex);
         } else if (response.status === 404) {
           console.log("No progress found");
-          // Handle the case when no progress is found (starting from the beginning).
         } else {
-          // Handle other error cases as needed.
           console.error("Error:", progressData.error);
         }
       } catch (error) {
@@ -150,14 +142,56 @@ const Verse: React.FC<ContainerProps> = () => {
       }
     };
 
-    // Load progress when the component mounts or when the currentSentenceIndex changes
     loadProgress();
-  }, []);
+  }, [currentSentenceIndex, user.name]);
+
+  const toggleFirstLetterMode = () => {
+    setSentences((prevSentences) => {
+      if (!isFirstLetterMode) {
+        const newSentences = [...prevSentences];
+        newSentences.forEach((sentence, index) => {
+          originalSentences[index] = sentence;
+          const words = sentence.split(" ");
+          const firstLetters = words
+            .filter((word) => word.length > 0)
+            .map((word) => {
+              if (!isNaN(parseInt(word[0]))) {
+                return word;
+              } else {
+                return word[0].toUpperCase().replace(/["()]/g, "");
+              }
+            })
+            .join(" ");
+          newSentences[index] = firstLetters;
+        });
+        setIsFirstLetterMode(true);
+        return newSentences;
+      } else {
+        const newSentences = [...prevSentences];
+        newSentences.forEach((sentence, index) => {
+          newSentences[index] = originalSentences[index];
+        });
+        setIsFirstLetterMode(false);
+        return newSentences;
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (settings.length > 0) {
+      if (settings[0].fields.defaultmode === "randomWord") {
+        console.log("Random word");
+      } else {
+        toggleFirstLetterMode();
+      }
+    }
+  }, [settings, isFirstLetterMode]);
 
   const closeActionSheet = () => {
-    setIsOpen(false);
+    setIsFabOpen(false);
   };
-  const hideRandomWords = (numWords) => {
+
+  const hideRandomWords = (numWords: number) => {
     const currentSentence = sentences[currentSentenceIndex];
     const words = currentSentence.split(" ");
 
@@ -172,9 +206,11 @@ const Verse: React.FC<ContainerProps> = () => {
 
     numWords = Math.min(numWords, visibleWordIndices.length);
 
-    const randomIndices = [];
+    const randomIndices: number[] = [];
     while (randomIndices.length < numWords && visibleWordIndices.length > 0) {
-      const randomIndex = Math.floor(Math.random() * visibleWordIndices.length);
+      const randomIndex = Math.floor(
+        Math.random() * visibleWordIndices.length
+      );
       const randomVisibleIndex = visibleWordIndices[randomIndex];
       randomIndices.push(randomVisibleIndex);
       visibleWordIndices.splice(randomIndex, 1);
@@ -187,12 +223,10 @@ const Verse: React.FC<ContainerProps> = () => {
 
   const hideAllWords = () => {
     const currentSentence = sentences[currentSentenceIndex];
-    console.log(currentSentence);
     const words = currentSentence.split(" ");
 
     const allHiddenIndices = words.map((_, index) => index);
     setHiddenWordIndices(allHiddenIndices);
-    console.log("hideing");
   };
 
   const revealAllWords = () => {
@@ -203,7 +237,7 @@ const Verse: React.FC<ContainerProps> = () => {
     if (currentSentenceIndex >= sentences.length - 1) {
       console.log("You have finished all the sentences.");
       hapticsImpactMedium();
-      setCurrentSentenceIndex((prevIndex) => prevIndex + 1); // Increment index first
+      setCurrentSentenceIndex((prevIndex) => prevIndex + 1);
 
       setShowAlert(true);
       return;
@@ -225,13 +259,12 @@ const Verse: React.FC<ContainerProps> = () => {
       },
       body: JSON.stringify(data),
     };
-    async function savepro() {
-      await fetch(
-        "https://www.roadsbible.com/api/save_progress/",
-        requestOptions
-      );
+
+    async function saveProgress() {
+      await fetch("https://www.roadsbible.com/api/save_progress/", requestOptions);
     }
-    savepro();
+
+    saveProgress();
   };
 
   const finishButtonClicked = () => {
@@ -263,71 +296,17 @@ const Verse: React.FC<ContainerProps> = () => {
         body: JSON.stringify(data),
       };
 
-      async function savepro() {
-        await fetch(
-          "https://www.roadsbible.com/api/save_progress/",
-          requestOptions
-        );
+      async function saveProgress() {
+        await fetch("https://www.roadsbible.com/api/save_progress/", requestOptions);
       }
-      savepro();
+
+      saveProgress();
     } else {
       console.log("You are already at the beginning.");
       hapticsImpactMedium();
     }
   };
-  const toggleFirstLetterMode = () => {
-    if (isFirstLetterModeRef.current) {
-      return;
-    }
 
-    isFirstLetterModeRef.current = true;
-
-    setSentences((prevSentences) => {
-      if (!isFirstLetterMode) {
-        // Enter First Letter Mode
-        const newSentences = [...prevSentences];
-        newSentences.forEach((sentence, index) => {
-          // Store the original content
-          originalSentences[index] = sentence;
-          // Replace the content with first letters
-          const words = sentence.split(" ");
-          const firstLetters = words
-            .filter((word) => word.length > 0)
-            .map((word) => {
-              if (!isNaN(word[0])) {
-                return word;
-              } else {
-                return word[0].toUpperCase().replace(/["()]/g, "");
-              }
-            })
-            .join(" ");
-          newSentences[index] = firstLetters;
-        });
-        setIsFirstLetterMode(true);
-        isFirstLetterModeRef.current = false;
-        return newSentences;
-      } else {
-        // Exit First Letter Mode and restore original content
-        const newSentences = [...prevSentences];
-        newSentences.forEach((sentence, index) => {
-          newSentences[index] = originalSentences[index];
-        });
-        setIsFirstLetterMode(false);
-        isFirstLetterModeRef.current = false;
-        return newSentences;
-      }
-    });
-  };
-
-  useEffect(() => {
-    if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord") {
-        console.log("Random word");
-      } else {
-        toggleFirstLetterMode();
-      }
-    }
-  }, [settings, isFirstLetterMode]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
@@ -353,14 +332,14 @@ const Verse: React.FC<ContainerProps> = () => {
           </IonToolbar>
           <IonActionSheet
             trigger="open-action-sheet"
-            onDidDismiss={closeActionSheet} // Close the ActionSheet when anything is clicked outside
+            onDidDismiss={closeActionSheet}
             header="Actions"
             buttons={[
               {
                 text: isFirstLetterMode
                   ? "Random Word Mode"
                   : "First Letter Mode",
-                handler: toggleFirstLetterMode, // Toggle the mode when the button is clicked
+                handler: toggleFirstLetterMode,
               },
               {
                 text: "Verse Info",
@@ -401,8 +380,8 @@ const Verse: React.FC<ContainerProps> = () => {
               console.log(`Dismissed with role: ${detail.role}`)
             }
             isOpen={showAlert}
-            header="Your Done!"
-            message="Horray! 🎉 You finished this road."
+            header="You're Done!"
+            message="Hooray! 🎉 You've finished this road."
           ></IonAlert>
 
           <div
@@ -422,35 +401,28 @@ const Verse: React.FC<ContainerProps> = () => {
             ) : (
               <div style={{ padding: "20px" }}>
                 <h1 className="ion-text-center">
-                  {sentences.length === 0 ? (
-                    <IonSpinner
-                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                      name="dots"
-                    ></IonSpinner>
-                  ) : (
-                    <span>
-                      {currentSentenceIndex < sentences.length &&
-                        sentences[currentSentenceIndex]
-                          .split(" ")
-                          .map((word, index) => (
-                            <span
-                              key={index}
-                              className={
-                                hiddenWordIndices.includes(index)
-                                  ? "hide-word"
-                                  : ""
-                              }
-                            >
-                              {word}{" "}
-                            </span>
-                          ))}
-                    </span>
-                  )}
+                  <span>
+                    {currentSentenceIndex < sentences.length &&
+                      sentences[currentSentenceIndex]
+                        .split(" ")
+                        .map((word, index) => (
+                          <span
+                            key={index}
+                            className={
+                              hiddenWordIndices.includes(index)
+                                ? "hide-word"
+                                : ""
+                            }
+                          >
+                            {word}{" "}
+                          </span>
+                        ))}
+                  </span>
                 </h1>
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-evenly", // This will evenly space out the buttons
+                    justifyContent: "space-evenly",
                     margin: "1rem",
                     marginTop: "2rem",
                   }}
@@ -487,4 +459,5 @@ const Verse: React.FC<ContainerProps> = () => {
     </>
   );
 };
+
 export default Verse;
