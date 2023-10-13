@@ -50,6 +50,8 @@ let received
               received[0].fields.color
             );
           }
+
+        get()
         }
   }, [isAuthenticated]);
 
