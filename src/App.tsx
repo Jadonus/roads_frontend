@@ -45,9 +45,14 @@ type MyAuth0ProviderOptions = {
 let received;
 const App: React.FC = () => {
   const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-  if (isAuthenticated) {
-    console.log("Authentication");
-  }
+  console.log("isAuthenticated:", isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Run your code here when isAuthenticated becomes true
+      console.log("Authentication");
+    }
+  }, [isAuthenticated]);
   useEffect(() => {
     console.log('useffect')
 
@@ -86,7 +91,7 @@ const App: React.FC = () => {
       );
       document.body.style.setProperty(
         "--ion-color-primary",
-        received.fields.color
+        received[0].fields.color
       );
       }
   }, [isAuthenticated]);
