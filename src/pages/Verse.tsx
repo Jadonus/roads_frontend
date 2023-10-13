@@ -63,7 +63,11 @@ const Verse: React.FC<ContainerProps> = () => {
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
   const [mode, setMode] = useState('randomWord');
+  const [forceUpdateFlag, setForceUpdateFlag] = useState(false); // State to trigger re-render
 
+  const forceRerender = () => {
+    setForceUpdateFlag(!forceUpdateFlag);
+  };
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Medium });
@@ -320,12 +324,13 @@ const toggleFirstLetterMode = () => {
     if (settings.length > 0) {
       const desiredMode = settings[0].fields.defaultmode;
   
-      if (desiredMode !== mode) {
+      if (desiredMode === 'firstLetter') {
+        toggleFirstLetterMode()
+        forceRerender()
         // Update the mode only if it doesn't match the desired mode
-        setMode(desiredMode);
       }
     }
-  }, [settings, mode]);
+  }, [settings]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
