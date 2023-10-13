@@ -324,8 +324,13 @@ useEffect(() => {
   if (settings.length > 0) {
     const newMode = settings[0].fields.defaultmode;
     if (newMode === "randomWord" && !isFirstLetterMode) {
+      console.log('Random Word Mode')
     } else if (newMode === "firstLetter" && !isFirstLetterMode) {
       toggleFirstLetterMode();
+      console.log('First Letter Mode')
+    }
+    else{
+      console.log('w')
     }
   }
 }, [settings]);
