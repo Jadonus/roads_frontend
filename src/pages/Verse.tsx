@@ -63,7 +63,6 @@ const Verse: React.FC<ContainerProps> = () => {
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
   const isFirstLetterModeRef = useRef(null);
-const [shouldToggle, setShouldToggle] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -321,25 +320,15 @@ const [shouldToggle, setShouldToggle] = useState(false);
     });
   };
 
-useEffect(() => {
-  if (shouldToggle) {
-    toggleFirstLetterMode();
-    setShouldToggle(false); // Reset the flag
-  }
-}, [isFirstLetterMode]);
-
-useEffect(() => {
-  if (settings.length > 0) {
-    if (settings[0].fields.defaultmode === "randomWord") {
-      console.log("Random word");
-      setIsFirstLetterMode(false);
-      setShouldToggle(true); // Set the flag to trigger the effect
-    } else {
-      setIsFirstLetterMode(true);
-      setShouldToggle(true); // Set the flag to trigger the effect
+  useEffect(() => {
+    if (settings.length > 0) {
+      if (settings[0].fields.defaultmode === "randomWord") {
+        console.log("Random word");
+      } else {
+        toggleFirstLetterMode();
+      }
     }
-  }
-}, [settings]);
+  }, [settings, isFirstLetterMode]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
