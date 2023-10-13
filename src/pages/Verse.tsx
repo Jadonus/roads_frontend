@@ -42,6 +42,7 @@ import {
   ellipsisHorizontal,
   settingsOutline,
   arrowForward,
+  toggle,
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
@@ -49,6 +50,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 let groupName = "";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
+  let settings;
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -82,6 +84,13 @@ const Verse: React.FC<ContainerProps> = () => {
       },
       body: JSON.stringify(dat),
     };
+    fetch("https://www.roadsbible.com/api/settings/", requestOption)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        data = settings;
+      });
+
     const location = window.location.href;
     interface ResponseData {
       dat: any;
@@ -301,6 +310,11 @@ const Verse: React.FC<ContainerProps> = () => {
       }
     });
   };
+  if (settings[0].fields.defaultmode == "randomword") {
+    console.log("Random word");
+  } else {
+    toggleFirstLetterMode()
+  }
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;

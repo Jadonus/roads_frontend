@@ -97,7 +97,7 @@ const SettingsPage = () => {
                 value={colorPreference}
                 onIonChange={(a) => {
                   settings("color", a.detail.value);
-                  location.reload
+                  location.reload()
                 }}
               >
                 {/* Radio options */}
