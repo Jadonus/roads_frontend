@@ -30,7 +30,7 @@ const SettingsPage = () => {
   async function settings(key, value) {
     let data = {
       username: user.name,
-      key: value,
+      color: value,
     };
     let dato ={
       method: "POST",
