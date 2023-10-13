@@ -43,7 +43,7 @@ let received
             // Set the CSS variable for primary accent color
             document.documentElement.style.setProperty(
               "--ion-color-primary",
-              received.fields.color
+              received[0].fields.color
             );
             document.body.style.setProperty(
               "--ion-color-primary",
