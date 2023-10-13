@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
-
+import Get from "./get"
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
@@ -45,56 +45,59 @@ type MyAuth0ProviderOptions = {
 let received;
 const App: React.FC = () => {
   const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-  console.log("isAuthenticated:", isAuthenticated);
 
   useEffect(() => {
+    console.log("isAuthenticated:", isAuthenticated);
     if (user) {
       // Run your code here when the user is authenticated
       console.log("Authentication");
     }
   }, [user]);
-  console.log(user)
+  console.log(user);
   useEffect(() => {
     if (user) {
-    console.log('useffect')
+      console.log("useffect");
 
-    console.log('useffected')
+      console.log("useffected");
       // Check if the user is authenticated
       const data = {
         username: user.name, // Access user information
       };
-      console.log('data',data);
+      console.log("data", data);
       async function get() {
-      await fetch("https://www.roadsbible.com/api/settings", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
+        await fetch("https://www.roadsbible.com/api/settings", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-        .then((data) => {
-          console.log("Data received:", data);
-          received = data;
-          // Handle the response data as needed
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-        });
-      // Set the CSS variable for primary accent color
-      document.documentElement.style.setProperty(
-        "--ion-color-primary",
-        received.fields.color
-      );
-      document.body.style.setProperty(
-        "--ion-color-primary",
-        received[0].fields.color
-      );
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Data received:", data);
+            received = data;
+            // Handle the response data as needed
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+        // Set the CSS variable for primary accent color
+        document.documentElement.style.setProperty(
+          "--ion-color-primary",
+          received.fields.color
+        );
+        document.body.style.setProperty(
+          "--ion-color-primary",
+          received[0].fields.color
+        );
       }
     }
   }, [user]);
@@ -120,9 +123,9 @@ const App: React.FC = () => {
             {/* Dashboard Routes */}
             <Redirect from="/" to="/tabs" />
             <Route path="/tabs" render={() => <Aipp />} />
-
+<Get />
             <Route path="/dev" render={() => <TabBar />} />
-<Route path="/" exact render={() => <Login/>} />
+            <Route path="/" exact render={() => <Login />} />
             {/* Additional Routes */}
 
             <Route path="/devpro" exact component={Myprogress}></Route>
