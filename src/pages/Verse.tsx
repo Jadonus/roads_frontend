@@ -320,7 +320,7 @@ const toggleFirstLetterMode = () => {
     toggleFirstLetterMode()
   }
 }
-}, [settings] )
+}, [settings, isFirstLetterMode] )
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;

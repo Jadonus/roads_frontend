@@ -130,7 +130,6 @@ const App: React.FC = () => {
             <Route path="/devpro" exact component={Myprogress}></Route>
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
-            <Route path="/settings/install" component={Install} exact />
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>

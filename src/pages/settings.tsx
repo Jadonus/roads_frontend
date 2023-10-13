@@ -24,8 +24,7 @@ import {
 } from "@ionic/react";
 let colorPreference;
 const SettingsPage = () => {
-  
-    const { user } = useAuth0();
+  const { user } = useAuth0();
   // Initialize settings using localStorage or default values
   async function settings(key, value) {
     let data = {
@@ -33,16 +32,17 @@ const SettingsPage = () => {
     };
     data[key] = value;
 
-    let dato ={
+    let dato = {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
-    }
-    await 
-      fetch("https://www.roadsbible.com/api/settings/", dato)
-      .then(response => {console.log('Api REsponse:',response)})
+    };
+    await fetch("https://www.roadsbible.com/api/settings/", dato)
+      .then((response) => {
+        console.log("Api REsponse:", response);
+      })
       .catch((err) => {
         console.error(err);
       });
@@ -97,7 +97,7 @@ const SettingsPage = () => {
                 value={colorPreference}
                 onIonChange={(a) => {
                   settings("color", a.detail.value);
-                  location.reload()
+                  location.reload();
                 }}
               >
                 {/* Radio options */}
@@ -121,7 +121,7 @@ const SettingsPage = () => {
               </IonRadioGroup>
             </IonItem>
             <h3>App</h3>
-            <IonItem routerLink="/settings/install">
+            <IonItem routerLink="/tabs/settings/install">
               Install Roads{" "}
               {!PWA ? (
                 <IonBadge slot="end" color="danger">
