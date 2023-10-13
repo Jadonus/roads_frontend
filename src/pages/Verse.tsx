@@ -317,14 +317,15 @@ const Verse: React.FC<ContainerProps> = () => {
         console.log("Random word");
         // Handle the case where default mode is "randomWord" and isFirstLetterMode is true
       } else {
-        while (1 === 1) {
         toggleFirstLetterMode();
-        }
         // Handle the case where default mode is not "randomWord" or isFirstLetterMode is false
       }
     }
   }, [settings]);
-  
+ 
+  useEffect(() => {
+    // Watch for changes in isFirstLetterMode and trigger re-render
+  }, [isFirstLetterMode]); 
   
   
   
