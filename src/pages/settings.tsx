@@ -32,8 +32,15 @@ const SettingsPage = () => {
       username: user.name,
       key: value,
     };
-    await (data as any)
-      .fetch("https://roadsbible.com/api/settings/", data)
+    let dato ={
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+    await 
+      fetch("https://roadsbible.com/api/settings/", dato)
       .catch((err) => {
         console.error(err);
       });
