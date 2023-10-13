@@ -277,12 +277,6 @@ const Verse: React.FC<ContainerProps> = () => {
     }
   };
   const toggleFirstLetterMode = () => {
-    if (isFirstLetterModeRef.current) {
-      return;
-    }
-
-    isFirstLetterModeRef.current = true;
-
     setSentences((prevSentences) => {
       if (!isFirstLetterMode) {
         // Enter First Letter Mode
@@ -305,7 +299,6 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
-        isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
         // Exit First Letter Mode and restore original content
@@ -314,14 +307,13 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
-        isFirstLetterModeRef.current = false;
         return newSentences;
       }
     });
   };
   useEffect(() => {
     if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord" && isFirstLetterMode) {
+      if (settings[0].fields.defaultmode === "randomWord" ) {
         console.log("Random word");
         // Handle the case where default mode is "randomWord" and isFirstLetterMode is true
       } else {
