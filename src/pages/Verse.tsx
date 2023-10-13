@@ -328,7 +328,8 @@ console.log(mode)
       if (settings[0].fields.defaultmode === "randomWord" && mode === 'randomWord') {
         console.log("Random word");
       } else if (mode === "firstLetter"){
-        toggleFirstLetterMode();
+setIsFirstLetterMode(!isFirstLetterMode);
+
       }
     }
   }, [settings]);
