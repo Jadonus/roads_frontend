@@ -315,12 +315,13 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
   useEffect(() => {
-if (isFirstLetterMode) {
+if (!isFirstLetterMode) {
 setMode('firstLetter')
 }
 else {
   setMode('randomWord')
 }
+console.log(mode)
   },[isFirstLetterMode] )
   useEffect(() => {
     if (settings.length > 0) {
