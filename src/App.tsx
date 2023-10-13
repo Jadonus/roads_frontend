@@ -56,7 +56,9 @@ const App: React.FC = () => {
       const data = {
         username: user?.name, // Access user information
       };
-      fetch("https://www.roadsbible.com/api/settings", {
+      console.log('data',data);
+      async function get() {
+      await fetch("https://www.roadsbible.com/api/settings", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -86,6 +88,7 @@ const App: React.FC = () => {
         "--ion-color-primary",
         received.fields.color
       );
+      }
   }, [isAuthenticated]);
   const currentPath = window.location.pathname;
 
