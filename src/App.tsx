@@ -123,7 +123,6 @@ const App: React.FC = () => {
             {/* Dashboard Routes */}
             <Redirect from="/" to="/tabs" />
             <Route path="/tabs" render={() => <Aipp />} />
-<AuthenticationAction />
             <Route path="/dev" render={() => <TabBar />} />
             <Route path="/" exact render={() => <Login />} />
             {/* Additional Routes */}
@@ -135,6 +134,8 @@ const App: React.FC = () => {
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
+
+<AuthenticationAction />
     </Auth0Provider>
   );
 };
