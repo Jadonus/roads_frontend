@@ -321,7 +321,7 @@ const Verse: React.FC<ContainerProps> = () => {
         // Handle the case where default mode is not "randomWord" or isFirstLetterMode is false
       }
     }
-  }, [settings]);
+  }, [settings, isFirstLetterMode]);
   
   
   
