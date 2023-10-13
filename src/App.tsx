@@ -48,11 +48,11 @@ const App: React.FC = () => {
   console.log("isAuthenticated:", isAuthenticated);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      // Run your code here when isAuthenticated becomes true
+    if (user) {
+      // Run your code here when the user is authenticated
       console.log("Authentication");
     }
-  }, [isAuthenticated]);
+  }, [user]);
   useEffect(() => {
     console.log('useffect')
 
@@ -94,7 +94,7 @@ const App: React.FC = () => {
         received[0].fields.color
       );
       }
-  }, [isAuthenticated]);
+  }, [user]);
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
