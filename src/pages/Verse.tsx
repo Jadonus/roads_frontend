@@ -315,8 +315,6 @@ const Verse: React.FC<ContainerProps> = () => {
 
       // Trigger a re-render by updating forceUpdate
 
-      setShouldRerender(true);
-      console.log("dfg", shouldRerender); // Reset the flag
       return newSentences; // Return newSentences
     });
   };
@@ -328,16 +326,17 @@ const Verse: React.FC<ContainerProps> = () => {
         console.log("Random word");
       } else {
         setShouldRerender(true);
-        if (shouldRerender) {
-          toggleFirstLetterMode();
-
-          setShouldRerender(false);
-
-          console.log("redede", shouldRerender); // Reset the flag
-        }
       }
     }
-  }, [settings, shouldRerender]);
+  }, [settings]);
+
+  useEffect(() => {
+    if (shouldRerender) {
+      toggleFirstLetterMode();
+      console.log("redede", shouldRerender); // Reset the flag
+      setShouldRerender(false);
+    }
+  }, [shouldRerender]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
