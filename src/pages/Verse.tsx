@@ -274,42 +274,38 @@ const Verse: React.FC<ContainerProps> = () => {
       hapticsImpactMedium();
     }
   };
-  const toggleFirstLetterMode = () => {
-    setSentences((prevSentences) => {
-      if (!isFirstLetterMode) {
-        // Enter First Letter Mode
-        const newSentences = [...prevSentences];
-        newSentences.forEach((sentence, index) => {
-          // Store the original content
-          originalSentences[index] = sentence;
-          // Replace the content with first letters
-          const words = sentence.split(" ");
-          const firstLetters = words
-            .filter((word) => word.length > 0)
-            .map((word) => {
-              if (!isNaN(word[0])) {
-                // If the first character is a number, keep it as-is
-                return word;
-              } else {
-                return word[0].toUpperCase().replace(/["()]/g, ""); // Use regular expressions to remove double quotes and parentheses
-              }
-            })
-            .join(" ");
-          newSentences[index] = firstLetters;
-        });
-        setIsFirstLetterMode(true);
-        return newSentences;
-      } else {
-        // Exit First Letter Mode and restore original content
-        const newSentences = [...prevSentences];
-        newSentences.forEach((sentence, index) => {
-          newSentences[index] = originalSentences[index];
-        });
-        setIsFirstLetterMode(false);
-        return newSentences;
-      }
-    });
-  };
+const toggleFirstLetterMode = () => {
+  setSentences((prevSentences) => {
+    if (!isFirstLetterMode) {
+      // Enter First Letter Mode
+      const newSentences = prevSentences.map((sentence) => {
+        // Store the original content
+        originalSentences.push(sentence);
+        // Replace the content with first letters
+        const words = sentence.split(" ");
+        const firstLetters = words
+          .filter((word) => word.length > 0)
+          .map((word) => {
+            if (!isNaN(word[0])) {
+              // If the first character is a number, keep it as-is
+              return word;
+            } else {
+              return word[0].toUpperCase().replace(/["()]/g, ""); // Use regular expressions to remove double quotes and parentheses
+            }
+          })
+          .join(" ");
+        return firstLetters;
+      });
+      setIsFirstLetterMode(true);
+      return newSentences;
+    } else {
+      // Exit First Letter Mode and restore original content
+      const newSentences = originalSentences.slice();
+      setIsFirstLetterMode(false);
+      return newSentences;
+    }
+  });
+};
   useEffect(() => {
     console.log(settings)
     if (settings.length > 0) {
