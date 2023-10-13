@@ -111,7 +111,7 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      redirectUri="https://dashboard.roadsbible.com/tabs"
+      redirectUri="https://dashboard.roadsbible.com/tabs/"
       {...({} as MyAuth0ProviderOptions)}
     >
       <IonApp>
@@ -122,7 +122,7 @@ const App: React.FC = () => {
             <Route path="/tabs" render={() => <Aipp />} />
 
             <Route path="/dev" render={() => <TabBar />} />
-<Route path="/" render={() => <Login/>} />
+<Route path="/" exact render={() => <Login/>} />
             {/* Additional Routes */}
 
             <Route path="/devpro" exact component={Myprogress}></Route>
