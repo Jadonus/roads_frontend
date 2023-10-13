@@ -16,7 +16,7 @@ let received
           };
           console.log("data", data);
           async function get() {
-            await fetch("https://www.roadsbible.com/api/settings", {
+            await fetch("https://www.roadsbible.com/api/settings/", {
               method: "POST",
               body: JSON.stringify(data),
               headers: {
