@@ -43,47 +43,53 @@ type MyAuth0ProviderOptions = {
   clientId: string;
   redirectUri: string;
 };
-let received
-  const App: React.FC = () => {
-    const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-  
-    useEffect(() => {
-      if (isAuthenticated) { // Check if the user is authenticated
-        const data = {
-          username: user?.name, // Access user information
-        };
-        fetch("https://roadsbible.com/api/settings/", {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
+let received;
+const App: React.FC = () => {
+  const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
+  if (isAuthenticated) {
+    console.log("Authentication");
+  }
+  useEffect(() => {
+    console.log('useffect')
+    if (isAuthenticated) {
+
+    console.log('useffected')
+      // Check if the user is authenticated
+      const data = {
+        username: user?.name, // Access user information
+      };
+      fetch("https://roadsbible.com/api/settings/", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
         })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log("Data received:", data);
-            received = data;
-            // Handle the response data as needed
-          })
-          .catch((error) => {
-            console.error("There was a problem with the fetch operation:", error);
-          });
-        // Set the CSS variable for primary accent color
-        document.documentElement.style.setProperty(
-          "--ion-color-primary",
-          received.feilds.color
-        );
-        document.body.style.setProperty(
-          "--ion-color-primary",
-          received.feilds.color
-        );
-      }
-    }, [isAuthenticated, user]);
+        .then((data) => {
+          console.log("Data received:", data);
+          received = data;
+          // Handle the response data as needed
+        })
+        .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+        });
+      // Set the CSS variable for primary accent color
+      document.documentElement.style.setProperty(
+        "--ion-color-primary",
+        received.feilds.color
+      );
+      document.body.style.setProperty(
+        "--ion-color-primary",
+        received.feilds.color
+      );
+    }
+  }, [isAuthenticated, user]);
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
