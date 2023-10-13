@@ -316,11 +316,12 @@ const Verse: React.FC<ContainerProps> = () => {
       // Trigger a re-render by updating forceUpdate
 
       setShouldRerender(true);
+      console.log("dfg", shouldRerender); // Reset the flag
       return newSentences; // Return newSentences
     });
   };
 
-  console.log(shouldRerender); // Reset the flag
+  console.log("redede", shouldRerender); // Reset the flag
   useEffect(() => {
     if (settings.length > 0) {
       if (settings[0].fields.defaultmode === "randomWord") {
@@ -330,7 +331,8 @@ const Verse: React.FC<ContainerProps> = () => {
           toggleFirstLetterMode();
 
           setShouldRerender(false);
-          console.log(shouldRerender); // Reset the flag
+
+          console.log("redede", shouldRerender); // Reset the flag
         }
       }
     }
