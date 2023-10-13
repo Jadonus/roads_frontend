@@ -330,7 +330,8 @@ useEffect(() => {
       }
     } else {
       if (!initialRender.current) {
-        setIsFirstLetterMode(true);
+        toggleFirstLetterMode()
+        
       }
     }
     initialRender.current = false;
