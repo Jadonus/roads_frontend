@@ -95,8 +95,8 @@ const SettingsPage = () => {
             <IonItem>
               <IonRadioGroup
                 value={colorPreference}
-                onIonChange={(e) => {
-                  settings("color", e.detail.value);
+                onIonChange={(a) => {
+                  settings("color", a.detail.value);
                   location.reload
                 }}
               >
