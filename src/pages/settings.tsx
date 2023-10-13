@@ -30,8 +30,9 @@ const SettingsPage = () => {
   async function settings(key, value) {
     let data = {
       username: user.name,
-      color: value,
     };
+    data[key] = value;
+
     let dato ={
       method: "POST",
       body: JSON.stringify(data),
@@ -96,6 +97,7 @@ const SettingsPage = () => {
                 value={colorPreference}
                 onIonChange={(e) => {
                   settings("color", e.detail.value);
+                  location.reload
                 }}
               >
                 {/* Radio options */}
