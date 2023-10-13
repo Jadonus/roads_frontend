@@ -313,31 +313,26 @@ const Verse: React.FC<ContainerProps> = () => {
       }
 
       // Trigger a re-render by updating forceUpdate
-      setShouldRerender(true);
 
       return newSentences; // Return newSentences
     });
   };
   const [shouldRerender, setShouldRerender] = useState(false);
 
+  setShouldRerender(true);
   useEffect(() => {
     if (settings.length > 0) {
       if (settings[0].fields.defaultmode === "randomWord") {
         console.log("Random word");
       } else {
-        toggleFirstLetterMode();
+        if (shouldRerender) {
+          toggleFirstLetterMode();
+
+          setShouldRerender(false); // Reset the flag
+        }
       }
     }
-  }, [settings]);
-  useEffect(() => {
-    console.log("Rendereffect");
-    if (shouldRerender) {
-      console.log("force updating");
-      setForceUpdate((prev) => prev + 1);
-      setShouldRerender(false); // Reset the flag
-    }
-  }, [shouldRerender]);
-
+  }, [settings, shouldRerender]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
