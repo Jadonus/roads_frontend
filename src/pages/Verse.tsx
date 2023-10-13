@@ -322,21 +322,20 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
 
- useEffect(() => {
+useEffect(() => {
   if (settings.length > 0) {
     if (settings[0].fields.defaultmode === "randomWord") {
-      console.log("Random word");
-      if (initialRender.current) {
+      if (!initialRender.current) {
         setIsFirstLetterMode(false);
-        initialRender.current = false;
       }
     } else {
-
+      if (!initialRender.current) {
         setIsFirstLetterMode(true);
-      initialRender.current = false;
+      }
     }
+    initialRender.current = false;
   }
-}, [settings]);
+}, [settings, isFirstLetterMode]);
 
   const style = {
     "--background": "var(--ion-background)",
