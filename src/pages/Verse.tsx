@@ -319,16 +319,21 @@ const Verse: React.FC<ContainerProps> = () => {
       }
     });
   };
-
+let done = false
+if (!done) { 
   useEffect(() => {
+    console.log('Probs looping')
     if (settings.length > 0) {
       if (settings[0].fields.defaultmode === "randomWord") {
         console.log("Random word");
+        done = false
       } else {
         toggleFirstLetterMode();
+        done = true
       }
     }
   }, [settings, isFirstLetterMode]);
+}
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
