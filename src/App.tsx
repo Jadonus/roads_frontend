@@ -33,7 +33,7 @@ import {
 } from "@ionic/react";
 
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import {useAuth0} from "@auth0/auth0-react"
+import { useAuth0 } from "@auth0/auth0-react";
 /* Theme variables */
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
@@ -43,47 +43,47 @@ type MyAuth0ProviderOptions = {
   clientId: string;
   redirectUri: string;
 };
-
-const App: React.FC = () => {
-
-const { user } = useAuth0()
 let received
- 
-
-useEffect(() => {
-  if (user) {
-const data = {
-  username: user.name
-}
-fetch('https://roadsbible.com/api/settings/', {
-  method: 'POST',
-  body: JSON.stringify(data),
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('Data received:', data);
-    received = data
-    // Handle the response data as needed
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
-    // Set the CSS variable for primary accent color
-    document.documentElement.style.setProperty(
-      "--ion-color-primary",
-     received.feilds.color 
-    );
-    document.body.style.setProperty("--ion-color-primary", received.feilds.color);
-    }
-  },[user])
+  const App: React.FC = () => {
+    const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
+  
+    useEffect(() => {
+      if (isAuthenticated) { // Check if the user is authenticated
+        const data = {
+          username: user?.name, // Access user information
+        };
+        fetch("https://roadsbible.com/api/settings/", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Data received:", data);
+            received = data;
+            // Handle the response data as needed
+          })
+          .catch((error) => {
+            console.error("There was a problem with the fetch operation:", error);
+          });
+        // Set the CSS variable for primary accent color
+        document.documentElement.style.setProperty(
+          "--ion-color-primary",
+          received.feilds.color
+        );
+        document.body.style.setProperty(
+          "--ion-color-primary",
+          received.feilds.color
+        );
+      }
+    }, [isAuthenticated, user]);
   const currentPath = window.location.pathname;
 
   // Define a function to determine if a tab should be active
@@ -104,7 +104,7 @@ fetch('https://roadsbible.com/api/settings/', {
         <IonReactRouter>
           <IonRouterOutlet>
             {/* Dashboard Routes */}
-            <Redirect from="/" to="/tabs"/>
+            <Redirect from="/" to="/tabs" />
             <Route path="/tabs" render={() => <Aipp />} />
 
             <Route path="/dev" render={() => <TabBar />} />
