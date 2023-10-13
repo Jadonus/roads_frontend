@@ -53,13 +53,15 @@ const App: React.FC = () => {
       console.log("Authentication");
     }
   }, [user]);
+  console.log(user)
   useEffect(() => {
+    if (user) {
     console.log('useffect')
 
     console.log('useffected')
       // Check if the user is authenticated
       const data = {
-        username: user?.name, // Access user information
+        username: user.name, // Access user information
       };
       console.log('data',data);
       async function get() {
@@ -94,6 +96,7 @@ const App: React.FC = () => {
         received[0].fields.color
       );
       }
+    }
   }, [user]);
   const currentPath = window.location.pathname;
 
