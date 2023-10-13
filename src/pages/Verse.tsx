@@ -311,11 +311,13 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
   useEffect(() => {
+    if (settings){
   if (settings[0].fields.defaultmode == "randomword") {
     console.log("Random word");
   } else {
     toggleFirstLetterMode()
   }
+}
 }, [settings] )
   const style = {
     "--background": "var(--ion-background)",
