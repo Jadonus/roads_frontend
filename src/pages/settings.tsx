@@ -40,7 +40,7 @@ const SettingsPage = () => {
       },
     }
     await 
-      fetch("https://roadsbible.com/api/settings/", dato)
+      fetch("https://www.roadsbible.com/api/settings/", dato)
       .catch((err) => {
         console.error(err);
       });
