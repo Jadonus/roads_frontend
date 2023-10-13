@@ -313,26 +313,35 @@ const [forceUpdate, setForceUpdate] = useState(0);
     }
 
     // Trigger a re-render by updating forceUpdate
-    setForceUpdate((prev) => prev + 1);
+    setShouldRerender(true);
+
 
     return newSentences; // Return newSentences
   });
 };
+const [shouldRerender, setShouldRerender] = useState(false);
 
 useEffect(() => {
   if (settings.length > 0) {
     if (settings[0].fields.defaultmode === "randomWord") {
       console.log("Random word");
-      if (isFirstLetterMode) {
-        toggleFirstLetterMode();
-      }
+     
     } else {
-      if (!isFirstLetterMode) {
         toggleFirstLetterMode();
-      }
     }
   }
 }, [settings]);
+useEffect(() => {
+  if (shouldRerender) {
+    setForceUpdate((prev) => prev + 1);
+    setShouldRerender(false); // Reset the flag
+  }
+}, [shouldRerender]);
+
+
+
+
+
 
  
   
