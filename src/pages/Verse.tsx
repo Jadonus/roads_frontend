@@ -312,7 +312,7 @@ const toggleFirstLetterMode = () => {
       if (settings[0].fields.defaultmode == "randomword") {
     console.log("Random word");
   } else {
-    toggleFirstLetterMode
+    toggleFirstLetterMode()
   }
 }
 }, [settings] )
