@@ -72,23 +72,23 @@ const Verse: React.FC<ContainerProps> = () => {
       "This is the second sentence.",
       // Add more sentences as needed
     ];
-let dat = {
-  username: user.name
-}
-const requestOption: RequestInit = {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(dat),
-};
-    const location = window.location.href
-interface ResponseData {
-  dat: any;
-}
+    let dat = {
+      username: user.name,
+    };
+    const requestOption: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dat),
+    };
+    const location = window.location.href;
+    interface ResponseData {
+      dat: any;
+    }
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("https://www.roadsbible.com/roads/" + groupName + '/', requestOption)
+    fetch("https://www.roadsbible.com/roads/" + groupName + "/", requestOption)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
@@ -316,9 +316,7 @@ interface ResponseData {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start">
-              <IonBackButton />
-            </IonButtons>
+            <IonButtons slot="start"></IonButtons>
             <IonTitle>{groupName}</IonTitle>
             <IonButtons slot="end">
               <IonButton id="open-action-sheet">
@@ -380,75 +378,83 @@ interface ResponseData {
             message="Horray! 🎉 You finished this road."
           ></IonAlert>
 
-<div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
-  }}
->
-  {sentences.length === 0 ? (
-    <IonSpinner
-      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-      name="dots"
-    ></IonSpinner>
-  ) : (
-    <div style={{ padding: "20px" }}>
-      <h1 className="ion-text-center">
-        {sentences.length === 0 ? (
-          <IonSpinner
-            style={{ margin: "auto", width: "5rem", height: "5rem" }}
-            name="dots"
-          ></IonSpinner>
-        ) : (
-          <span>
-            {currentSentenceIndex < sentences.length &&
-              sentences[currentSentenceIndex]
-                .split(" ")
-                .map((word, index) => (
-                  <span
-                    key={index}
-                    className={
-                      hiddenWordIndices.includes(index) ? "hide-word" : ""
-                    }
-                  >
-                    {word}{" "}
-                  </span>
-                ))}
-          </span>
-        )}
-      </h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly", // This will evenly space out the buttons
-          margin: "1rem",
-          marginTop: "2rem",
-        }}
-      >
-        <IonButton onClick={backButtonClicked}>
-          <IonIcon size="medium" icon={arrowBack} />
-        </IonButton>
-        <IonButton onClick={() => hideRandomWords(3)} style={{ margin: "0 0.5rem" }}>
-          <IonIcon size="medium" icon={backspace} />
-        </IonButton>
-        <IonButton onClick={hideAllWords} style={{ margin: "0 0.5rem" }}>
-          <IonIcon size="medium" icon={eyeOff} />
-        </IonButton>
-        <IonButton onClick={revealAllWords}>
-          <IonIcon size="medium" icon={refresh} />
-        </IonButton>
-        <IonButton onClick={moveToNextSentence}>
-          <IonIcon size="medium" icon={arrowForward} />
-        </IonButton>
-      </div>
-    </div>
-  )}
-</div>
-
-
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100vh",
+            }}
+          >
+            {sentences.length === 0 ? (
+              <IonSpinner
+                style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                name="dots"
+              ></IonSpinner>
+            ) : (
+              <div style={{ padding: "20px" }}>
+                <h1 className="ion-text-center">
+                  {sentences.length === 0 ? (
+                    <IonSpinner
+                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
+                      name="dots"
+                    ></IonSpinner>
+                  ) : (
+                    <span>
+                      {currentSentenceIndex < sentences.length &&
+                        sentences[currentSentenceIndex]
+                          .split(" ")
+                          .map((word, index) => (
+                            <span
+                              key={index}
+                              className={
+                                hiddenWordIndices.includes(index)
+                                  ? "hide-word"
+                                  : ""
+                              }
+                            >
+                              {word}{" "}
+                            </span>
+                          ))}
+                    </span>
+                  )}
+                </h1>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-evenly", // This will evenly space out the buttons
+                    margin: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  <IonButtons>
+                    <IonButton onClick={backButtonClicked}>
+                      <IonIcon size="medium" icon={arrowBack} />
+                    </IonButton>
+                    <IonButton
+                      onClick={() => hideRandomWords(3)}
+                      style={{ margin: "0 0.5rem" }}
+                    >
+                      <IonIcon size="medium" icon={backspace} />
+                    </IonButton>
+                    <IonButton
+                      onClick={hideAllWords}
+                      style={{ margin: "0 0.5rem" }}
+                    >
+                      <IonIcon size="medium" icon={eyeOff} />
+                    </IonButton>
+                    <IonButton onClick={revealAllWords}>
+                      <IonIcon size="medium" icon={refresh} />
+                    </IonButton>
+                    <IonButton onClick={moveToNextSentence}>
+                      <IonIcon size="medium" icon={arrowForward} />
+                    </IonButton>
+                  </IonButtons>
+                </div>
+              </div>
+            )}
+          </div>
         </IonContent>
       </IonPage>
     </>
