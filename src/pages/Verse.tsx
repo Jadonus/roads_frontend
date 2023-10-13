@@ -50,7 +50,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 let groupName = "";
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
-  let settings;
+  const [settings, setSettings] = useState([])
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -88,7 +88,7 @@ const Verse: React.FC<ContainerProps> = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        data = settings;
+        setSettings(data);
       });
 
     const location = window.location.href;
@@ -316,7 +316,7 @@ const Verse: React.FC<ContainerProps> = () => {
   } else {
     toggleFirstLetterMode()
   }
-}, [] )
+}, [settings] )
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
