@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
-import Get from "./get"
+import AuthenticationAction from "./get"
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
@@ -123,7 +123,7 @@ const App: React.FC = () => {
             {/* Dashboard Routes */}
             <Redirect from="/" to="/tabs" />
             <Route path="/tabs" render={() => <Aipp />} />
-<Get />
+<AuthenticationAction />
             <Route path="/dev" render={() => <TabBar />} />
             <Route path="/" exact render={() => <Login />} />
             {/* Additional Routes */}
