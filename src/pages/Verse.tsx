@@ -320,19 +320,15 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
 
- useEffect(() => {
+useEffect(() => {
   if (settings.length > 0) {
-    if (settings[0].fields.defaultmode === "randomWord") {
-      if (isFirstLetterMode) {
-        toggleFirstLetterMode();
-      }
-    } else {
-      if (!isFirstLetterMode) {
-        toggleFirstLetterMode();
-      }
+    const newMode = settings[0].fields.defaultmode;
+    if (newMode === "randomWord" && !isFirstLetterMode) {
+    } else if (newMode === "firstLetter" && !isFirstLetterMode) {
+      toggleFirstLetterMode();
     }
   }
-}, [settings, isFirstLetterMode]);
+}, [settings]);
 
   const style = {
     "--background": "var(--ion-background)",
