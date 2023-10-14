@@ -23,8 +23,6 @@ import {
   IonRefresherContent,
   RefresherEventDetail,
   IonBadge,
-
-  
 } from "@ionic/react";
 import "../theme/variables.css";
 import { settings, settingsOutline } from "ionicons/icons";
@@ -131,12 +129,11 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonPage>
-         
-         <IonContent>
-<IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+        <IonContent>
+          <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <IonHeader >
+          <IonHeader>
             <IonToolbar>
               <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
                 Dashboard
@@ -169,8 +166,6 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                           ></IonIcon>
                         )}
                       </IonAvatar>
-
-                     
                     </IonRouterLink>
                   </h1>
                 </div>
@@ -195,9 +190,11 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
           <div>
             {filteredMetadata.map((item: any, index: number) => (
-              <IonCard 
-                    href={"/tabs" + item.parsed_data[0]?.url || ""}
-              className="margin" key={index}>
+              <IonCard
+                routerLink={"/tabs" + item.parsed_data[0]?.url || ""}
+                className="margin"
+                key={index}
+              >
                 <IonCardHeader>
                   <IonCardTitle>
                     {item.parsed_data[0]?.title || "No title available"}
@@ -212,9 +209,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
                   <IonChip>{item.num_groups} Verses</IonChip>
                 </IonCardContent>
-                <IonButton fill="clear">
-                 
-                </IonButton>
+                <IonButton fill="clear"></IonButton>
               </IonCard>
             ))}
           </div>
