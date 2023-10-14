@@ -374,13 +374,13 @@ const Verse: React.FC<ContainerProps> = () => {
           initialBreakpoint={0.25}
           breakpoints={[0, 0.25, 0.5, 0.75]}
         >
+          <IonHeader>
+            <IonTitle>More</IonTitle>
+            <IonAvatar slot="end">
+              <img src={user.picture} />
+            </IonAvatar>
+          </IonHeader>
           <IonContent className="ion-padding">
-            <IonToolbar>
-              <IonTitle>More</IonTitle>
-              <IonAvatar slot="end">
-                <IonImg src={user.picture} />
-              </IonAvatar>
-            </IonToolbar>
             <IonItem button onClick={toggleFirstLetterMode}>
               {isFirstLetterMode ? (
                 <>Random Word Mode</>
