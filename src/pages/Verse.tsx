@@ -337,7 +337,7 @@ const Verse: React.FC<ContainerProps> = () => {
     }
 
     console.log("After", shouldRerender);
-  }, [shouldRerender]);
+  }, [shouldRerender, isFirstLetterMode]);
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
