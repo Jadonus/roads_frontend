@@ -319,7 +319,6 @@ const Verse: React.FC<ContainerProps> = () => {
     });
   };
 
-  console.log("redede", shouldRerender); // Reset the flag
   useEffect(() => {
     if (settings.length > 0) {
       if (settings[0].fields.defaultmode === "randomWord") {
@@ -333,7 +332,7 @@ const Verse: React.FC<ContainerProps> = () => {
   useEffect(() => {
     if (shouldRerender) {
       toggleFirstLetterMode();
-      console.log("redede", shouldRerender); // Reset the flag
+      console.log("Should ya?", shouldRerender); // Reset the flag
       setShouldRerender(false);
     }
   }, [shouldRerender]);
