@@ -330,11 +330,13 @@ const Verse: React.FC<ContainerProps> = () => {
   }, [settings]);
 
   useEffect(() => {
+    console.log("before", shouldRerender);
     if (shouldRerender) {
       toggleFirstLetterMode();
-      console.log("Should ya?", shouldRerender); // Reset the flag
       setShouldRerender(false);
     }
+
+    console.log("After", shouldRerender);
   }, [shouldRerender]);
   const style = {
     "--background": "var(--ion-background)",
