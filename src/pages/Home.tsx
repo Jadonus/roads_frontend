@@ -143,7 +143,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 <div>
                   <h1>
                     <IonRouterLink
-                      routerLink="/settings"
+                      routerLink="/tabs/settings/"
                       target="_blank"
                       routerDirection="forward"
                       style={{ paddingRight: "1rem" }}

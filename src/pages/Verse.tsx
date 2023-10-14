@@ -377,7 +377,18 @@ const Verse: React.FC<ContainerProps> = () => {
           <IonHeader>
             <IonTitle>More</IonTitle>
             <IonAvatar slot="end">
-              <img src={user.picture} />
+              {user ? (
+                <img
+                  alt="Profile"
+                  style={{
+                    width: "2rem",
+                    height: "2rem",
+                  }}
+                  src={user.picture}
+                />
+              ) : (
+                <IonIcon className="color" icon={settingsOutline}></IonIcon>
+              )}
             </IonAvatar>
           </IonHeader>
           <IonContent className="ion-padding">
@@ -388,6 +399,8 @@ const Verse: React.FC<ContainerProps> = () => {
                 <>First Letter Mode</>
               )}{" "}
             </IonItem>
+
+            <IonItem button>Verse Info.</IonItem>
           </IonContent>
         </IonModal>
         <IonContent {...handlers}>
