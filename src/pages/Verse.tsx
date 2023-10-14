@@ -87,13 +87,15 @@ const Verse: React.FC<ContainerProps> = () => {
       },
       body: JSON.stringify(dat),
     };
-    fetch("https://www.roadsbible.com/api/settings/", requestOption)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setSettings(data);
-      });
-
+    async function sett() {
+      await fetch("https://www.roadsbible.com/api/settings/", requestOption)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setSettings(data);
+        });
+    }
+    sett();
     const location = window.location.href;
     interface ResponseData {
       dat: any;
@@ -336,7 +338,7 @@ const Verse: React.FC<ContainerProps> = () => {
       toggleFirstLetterMode();
       setShouldRerender(false);
     }
-  }, []);
+  }, [shouldRerender]);
 
   const style = {
     "--background": "var(--ion-background)",
