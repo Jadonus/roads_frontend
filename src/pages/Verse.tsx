@@ -375,19 +375,19 @@ const Verse: React.FC<ContainerProps> = () => {
           breakpoints={[0, 0.25, 0.5, 0.75]}
         >
           <IonContent className="ion-padding">
-            Settings
-            <IonAvatar slot="end">
-              <IonImg src={user.picture} />
-            </IonAvatar>
-            <IonButton>
-              <IonItem onClick={toggleFirstLetterMode}>
-                {isFirstLetterMode ? (
-                  <>Random Word Mode</>
-                ) : (
-                  <>First Letter Mode</>
-                )}{" "}
-              </IonItem>
-            </IonButton>
+            <IonToolbar>
+              <IonTitle>More</IonTitle>
+              <IonAvatar slot="end">
+                <IonImg src={user.picture} />
+              </IonAvatar>
+            </IonToolbar>
+            <IonItem button onClick={toggleFirstLetterMode}>
+              {isFirstLetterMode ? (
+                <>Random Word Mode</>
+              ) : (
+                <>First Letter Mode</>
+              )}{" "}
+            </IonItem>
           </IonContent>
         </IonModal>
         <IonContent {...handlers}>
