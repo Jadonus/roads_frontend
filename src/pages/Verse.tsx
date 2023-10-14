@@ -51,9 +51,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 interface ContainerProps {}
 const Verse: React.FC<ContainerProps> = () => {
-  const [forceUpdate, setForceUpdate] = useState(0);
-
-  const [shouldRerender, setShouldRerender] = useState(false);
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
@@ -67,6 +64,7 @@ const Verse: React.FC<ContainerProps> = () => {
   const [isFabOpen, setIsFabOpen] = useState(false);
   const isFirstLetterModeRef = useRef(null);
 
+  const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Medium });
@@ -280,12 +278,16 @@ const Verse: React.FC<ContainerProps> = () => {
     }
   };
   const toggleFirstLetterMode = () => {
-    setSentences((prevSentences) => {
-      let newSentences; // Define newSentences variable
+    if (isFirstLetterModeRef.current) {
+      return;
+    }
 
+    isFirstLetterModeRef.current = true;
+
+    setSentences((prevSentences) => {
       if (!isFirstLetterMode) {
         // Enter First Letter Mode
-        newSentences = [...prevSentences];
+        const newSentences = [...prevSentences];
         newSentences.forEach((sentence, index) => {
           // Store the original content
           originalSentences[index] = sentence;
@@ -304,18 +306,18 @@ const Verse: React.FC<ContainerProps> = () => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
+        isFirstLetterModeRef.current = false;
+        return newSentences;
       } else {
         // Exit First Letter Mode and restore original content
-        newSentences = [...prevSentences];
+        const newSentences = [...prevSentences];
         newSentences.forEach((sentence, index) => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
+        isFirstLetterModeRef.current = false;
+        return newSentences;
       }
-
-      // Trigger a re-render by updating forceUpdate
-
-      return newSentences; // Return newSentences
     });
   };
 
@@ -337,7 +339,8 @@ const Verse: React.FC<ContainerProps> = () => {
     }
 
     console.log("After", shouldRerender);
-  }, [shouldRerender, isFirstLetterMode]);
+  }, [shouldRerender]);
+
   const style = {
     "--background": "var(--ion-background)",
   } as React.CSSProperties;
