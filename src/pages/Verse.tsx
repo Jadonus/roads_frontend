@@ -377,10 +377,10 @@ const Verse: React.FC<ContainerProps> = () => {
           <IonContent className="ion-padding">
             Settings
             <IonAvatar slot="end">
-              <img src={user.picture} />
+              <IonImg src={user.picture} />
             </IonAvatar>
             <IonButton>
-              <IonItem button={true} onClick={toggleFirstLetterMode}>
+              <IonItem onClick={toggleFirstLetterMode}>
                 {isFirstLetterMode ? (
                   <>Random Word Mode</>
                 ) : (
