@@ -376,20 +376,22 @@ const Verse: React.FC<ContainerProps> = () => {
         >
           <IonHeader>
             <IonTitle>More</IonTitle>
-            <IonAvatar slot="end">
-              {user ? (
-                <img
-                  alt="Profile"
-                  style={{
-                    width: "2rem",
-                    height: "2rem",
-                  }}
-                  src={user.picture}
-                />
-              ) : (
-                <IonIcon className="color" icon={settingsOutline}></IonIcon>
-              )}
-            </IonAvatar>
+            <IonButtons>
+              <IonAvatar slot="end">
+                {user ? (
+                  <img
+                    alt="Profile"
+                    style={{
+                      width: "2rem",
+                      height: "2rem",
+                    }}
+                    src={user.picture}
+                  />
+                ) : (
+                  <IonIcon className="color" icon={settingsOutline}></IonIcon>
+                )}
+              </IonAvatar>
+            </IonButtons>
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem button onClick={toggleFirstLetterMode}>
