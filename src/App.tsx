@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
-import AuthenticationAction from "./get"
+import AuthenticationAction from "./get";
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
@@ -64,8 +64,8 @@ const App: React.FC = () => {
         username: user.name, // Access user information
       };
       console.log("data", data);
-      async function get() {
-        await fetch("https://www.roadsbible.com/api/settings", {
+      function get() {
+        fetch("https://www.roadsbible.com/api/settings", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
@@ -134,7 +134,7 @@ const App: React.FC = () => {
         </IonReactRouter>
       </IonApp>
 
-<AuthenticationAction />
+      <AuthenticationAction />
     </Auth0Provider>
   );
 };
