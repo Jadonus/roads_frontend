@@ -332,13 +332,8 @@ const Verse: React.FC<ContainerProps> = () => {
   }, [settings]);
 
   useEffect(() => {
-    console.log("before", shouldRerender);
-    if (shouldRerender) {
-      toggleFirstLetterMode();
-      setShouldRerender(false);
-    }
-
-    console.log("After", shouldRerender);
+    toggleFirstLetterMode();
+    setShouldRerender(false);
   }, [isFirstLetterMode]);
 
   const style = {
