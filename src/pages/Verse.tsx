@@ -28,11 +28,14 @@ import {
   IonSegment,
   IonSegmentButton,
   IonIcon,
+  IonModal,
   IonFab,
   IonFabButton,
   IonFabList,
   IonSpinner,
   IonProgressBar,
+  IonAvatar,
+  IonImg,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import {
@@ -63,6 +66,7 @@ const Verse: React.FC<ContainerProps> = () => {
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
   const [isFabOpen, setIsFabOpen] = useState(false);
   const isFirstLetterModeRef = useRef(null);
+  const modal = useRef<HTMLIonModalElement>(null);
 
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
@@ -363,34 +367,29 @@ const Verse: React.FC<ContainerProps> = () => {
               </IonButton>
             </IonButtons>
           </IonToolbar>
-          <IonActionSheet
-            trigger="open-action-sheet"
-            onDidDismiss={closeActionSheet} // Close the ActionSheet when anything is clicked outside
-            header="Actions"
-            buttons={[
-              {
-                text: isFirstLetterMode
-                  ? "Random Word Mode"
-                  : "First Letter Mode",
-                handler: toggleFirstLetterMode, // Toggle the mode when the button is clicked
-              },
-              {
-                text: "Verse Info",
-                data: {
-                  action: "share",
-                },
-              },
-              {
-                text: "Cancel",
-                role: "cancel",
-                data: {
-                  action: "cancel",
-                },
-              },
-            ]}
-          ></IonActionSheet>
         </IonHeader>
-
+        <IonModal
+          ref={modal}
+          trigger="open-action-sheet"
+          initialBreakpoint={0.25}
+          breakpoints={[0, 0.25, 0.5, 0.75]}
+        >
+          <IonContent className="ion-padding">
+            Settings
+            <IonAvatar>
+              <IonImg src={user.picture} slot="end" />
+            </IonAvatar>
+            <IonButton>
+              <IonItem button onClick={toggleFirstLetterMode}>
+                {isFirstLetterMode ? (
+                  <>Random Word Mode</>
+                ) : (
+                  <>First Letter Mode</>
+                )}{" "}
+              </IonItem>
+            </IonButton>
+          </IonContent>
+        </IonModal>
         <IonContent {...handlers}>
           <IonAlert
             buttons={[

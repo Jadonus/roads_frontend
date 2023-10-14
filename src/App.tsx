@@ -53,7 +53,6 @@ const App: React.FC = () => {
       console.log("Authentication");
     }
   }, [user]);
-  console.log(user);
   useEffect(() => {
     if (user) {
       console.log("useffect");
