@@ -332,9 +332,11 @@ const Verse: React.FC<ContainerProps> = () => {
   }, [settings]);
 
   useEffect(() => {
-    toggleFirstLetterMode();
-    setShouldRerender(false);
-  }, [isFirstLetterMode]);
+    if (shouldRerender) {
+      toggleFirstLetterMode();
+      setShouldRerender(false);
+    }
+  }, []);
 
   const style = {
     "--background": "var(--ion-background)",
