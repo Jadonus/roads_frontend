@@ -370,7 +370,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             </IonButtons>
             <IonTitle>{dynamic}</IonTitle>
 
-            <IonButtons slot="end">
+            <IonButtons slot="start">
               <IonButton id="open-action-sheet">
                 <IonIcon icon={settingsOutline}></IonIcon>
               </IonButton>
@@ -518,6 +518,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             )}
           </div>
         </IonContent>
+        <IonFooter>
+          <IonProgressBar type="indeterminate"></IonProgressBar>
+        </IonFooter>
       </IonModal>
     </>
   );
