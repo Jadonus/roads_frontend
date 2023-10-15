@@ -55,6 +55,7 @@ interface VerseModalProps {
   dynamicPath: string;
   onClose?: () => void; // Function to close the modal (optional)
 }
+
 interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [settings, setSettings] = useState([]);
@@ -124,12 +125,14 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         console.error("Error fetching verses:", error);
       });
   }, []);
+
+  var dynamic = dynamicPath.replace("/roads/", "");
   useEffect(() => {
     const loadProgress = async () => {
       try {
         const data = {
           username: user.name,
-          road: groupName,
+          road: dynamic,
           index: currentSentenceIndex,
         };
 
@@ -356,15 +359,15 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
-
   return (
     <>
       <IonModal isOpen={true}>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start"></IonButtons>
-            <IonTitle>{dynamicPath}</IonTitle>
-            <IonButtons slot="end">
+            <IonButtons>
+              <IonButton onClick={onClose}>Done</IonButton>{" "}
+              {/* Clicking this button will close the modal */}
+              <IonTitle>{dynamic}</IonTitle>
               <IonButton id="open-action-sheet">
                 <IonIcon icon={settingsOutline}></IonIcon>
               </IonButton>

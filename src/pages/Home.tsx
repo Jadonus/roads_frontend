@@ -137,6 +137,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       event.detail.complete();
     }, 2000);
   }
+  const closeModal = () => {
+    setShowModal(false); // This function closes the modal
+  };
 
   return (
     <>
@@ -225,7 +228,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               </IonCard>
             ))}
           </div>
-          {showModal && <Verse dynamicPath={dynamicPath} />}
+          {showModal && (
+            <Verse dynamicPath={dynamicPath} onClose={closeModal} />
+          )}
         </IonContent>
       </IonPage>
     </>
