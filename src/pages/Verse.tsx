@@ -364,10 +364,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       <IonModal isOpen={true}>
         <IonHeader>
           <IonToolbar>
-            <IonButtons>
+            <IonButtons slot="end">
               <IonButton onClick={onClose}>Done</IonButton>{" "}
               {/* Clicking this button will close the modal */}
-              <IonTitle>{dynamic}</IonTitle>
+            </IonButtons>
+            <IonTitle>{dynamic}</IonTitle>
+
+            <IonButtons slot="end">
               <IonButton id="open-action-sheet">
                 <IonIcon icon={settingsOutline}></IonIcon>
               </IonButton>
