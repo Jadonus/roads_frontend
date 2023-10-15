@@ -109,10 +109,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     }
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch(
-      "https://www.roadsbible.com/roads/" + dynamicPath + "/",
-      requestOption
-    )
+    fetch("https://www.roadsbible.com" + dynamicPath + "/", requestOption)
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
@@ -366,7 +363,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start"></IonButtons>
-            <IonTitle>{groupName}</IonTitle>
+            <IonTitle>{dynamicPath}</IonTitle>
             <IonButtons slot="end">
               <IonButton id="open-action-sheet">
                 <IonIcon icon={settingsOutline}></IonIcon>
