@@ -34,7 +34,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import { Link } from "react-router-dom";
-
+import Verse from "./Verse";
 interface ContainerProps {}
 
 interface DashboardData {
@@ -43,9 +43,17 @@ interface DashboardData {
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
   const [verse, setVerse] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
     null
   );
+  const [dynamicPath, setDynamicPath] = useState<string>(""); // State variable to hold the dynamic path
+  const openModalWithDynamicPath = (dynamicPath: string) => {
+    setShowModal(true);
+    setDynamicPath(dynamicPath); // Store the dynamic path in a state variable
+  };
+
   const { user } = useAuth0();
 
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
@@ -195,7 +203,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           <div>
             {filteredMetadata.map((item: any, index: number) => (
               <IonCard
-                routerLink={"/tabs" + item.parsed_data[0]?.url || ""}
+                onClick={() =>
+                  openModalWithDynamicPath(item.parsed_data[0]?.url)
+                }
                 className="margin"
                 key={index}
               >
@@ -215,6 +225,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               </IonCard>
             ))}
           </div>
+          {showModal && <Verse dynamicPath={dynamicPath} />}
         </IonContent>
       </IonPage>
     </>

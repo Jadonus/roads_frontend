@@ -53,7 +53,7 @@ import "../theme/variables.css";
 import { useAuth0 } from "@auth0/auth0-react";
 interface VerseModalProps {
   dynamicPath: string;
-  onClose: () => void; // Function to close the modal
+  onClose?: () => void; // Function to close the modal (optional)
 }
 interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
