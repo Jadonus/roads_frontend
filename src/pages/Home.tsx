@@ -34,10 +34,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import { Link } from "react-router-dom";
+
 interface ContainerProps {}
+
 interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
 }
+
 const ExploreContainer: React.FC<ContainerProps> = () => {
   const [verse, setVerse] = useState<string | null>(null);
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
@@ -47,6 +50,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
   const [searchQuery, setSearchQuery] = useState<string>("");
+
   useEffect(() => {
     const verseUrl = "https://beta.ourmanna.com/api/v1/get";
     console.log(verseUrl);
@@ -64,13 +68,14 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         console.error("Error fetching verse:", error);
       });
   }, []);
+
   useEffect(() => {
     const dashboardUrl = "https://www.roadsbible.com/dashboard";
 
     fetch(dashboardUrl)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw Error("Network response was not ok");
         }
         return response.json();
       })
@@ -86,15 +91,12 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     setSearchQuery(e.target.value);
   };
 
-  // Create a new function that adapts the event type
   const handleIonSearchChange = (
     e: IonSearchbarCustomEvent<SearchbarChangeEventDetail>
   ) => {
-    // You can access e.detail.value for the search query
     setSearchQuery(e.detail.value || "");
   };
 
-  console.log(dashboardData);
   const filteredMetadata = Array.isArray(dashboardData?.combined_data)
     ? dashboardData.combined_data.filter((item: any) => {
         const firstItem = item.parsed_data[0];
@@ -120,12 +122,14 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       </>
     );
   }
+
   function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
     setTimeout(() => {
       // Any calls to load data go here
       event.detail.complete();
     }, 2000);
   }
+
   return (
     <>
       <IonPage>
@@ -202,11 +206,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 </IonCardHeader>
                 <IonCardContent>
                   <p>
-                    {" "}
                     {item.parsed_data[0]?.description ||
                       "No description available"}
                   </p>
-
                   <IonChip>{item.num_groups} Verses</IonChip>
                 </IonCardContent>
                 <IonButton fill="clear"></IonButton>

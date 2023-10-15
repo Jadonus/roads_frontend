@@ -51,9 +51,12 @@ import {
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
 import { useAuth0 } from "@auth0/auth0-react";
-
+interface VerseModalProps {
+  dynamicPath: string;
+  onClose: () => void; // Function to close the modal
+}
 interface ContainerProps {}
-const Verse: React.FC<ContainerProps> = () => {
+const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
@@ -106,7 +109,10 @@ const Verse: React.FC<ContainerProps> = () => {
     }
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("https://www.roadsbible.com/roads/" + groupName + "/", requestOption)
+    fetch(
+      "https://www.roadsbible.com/roads/" + dynamicPath + "/",
+      requestOption
+    )
       .then((response) => response.json())
       .then((data) => {
         // Extract verses and references from the API response
@@ -356,7 +362,7 @@ const Verse: React.FC<ContainerProps> = () => {
 
   return (
     <>
-      <IonPage>
+      <IonModal isOpen={true}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start"></IonButtons>
@@ -509,7 +515,7 @@ const Verse: React.FC<ContainerProps> = () => {
             )}
           </div>
         </IonContent>
-      </IonPage>
+      </IonModal>
     </>
   );
 };
