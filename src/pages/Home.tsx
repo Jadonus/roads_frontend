@@ -38,7 +38,6 @@ import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
 interface ContainerProps {}
-
 const itemOptionRef = useRef(null);
 interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
@@ -121,6 +120,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       })
     : [];
 
+  const itemOptionRefs = filteredMetadata.map(() => useRef(null));
   if (verse === null || dashboardData === null) {
     return (
       <>
@@ -239,9 +239,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </IonItem>
 
           <div>
-            {filteredMetadata.map((item: any, index: number) => (
-              <IonItemSliding>
-                <IonItemOptions side="end" ref={itemOptionRef}>
+            {filteredMetadata.map((item, index) => (
+              <IonItemSliding key={index}>
+                <IonItemOptions side="end" ref={itemOptionRefs[index]}>
                   <IonItemOption color="primary" expandable>
                     <IonIcon slot="icon-only" icon="share"></IonIcon>
                   </IonItemOption>
