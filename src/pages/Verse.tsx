@@ -63,7 +63,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Medium });
   };
-
+  let refer;
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -104,7 +104,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           (verse) => `${verse.verse} ${verse.reference}`
         );
         console.log(data);
-        const refer = data;
+        refer = data;
         console.log(refer);
         // Update the state with the fetched verses
         setSentences(verses);
@@ -416,7 +416,6 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     "Revelation",
   ];
   function readContext() {
-    console.log(refer);
     let refeer = refer.verses[currentSentenceIndex].reference;
     console.log(refeer);
     const match = refeer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
