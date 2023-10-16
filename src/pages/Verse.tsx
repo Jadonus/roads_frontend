@@ -433,6 +433,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
               alignItems: "center",
               justifyContent: "center",
               height: "100vh",
+              paddingLeft: "1rem",
+              paddingRight: "1rem",
+              overflowX: "hidden",
             }}
           >
             {sentences.length === 0 ? (
