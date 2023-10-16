@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   IonToolbar,
   IonTitle,
@@ -119,7 +119,10 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       })
     : [];
 
-  const itemOptionRefs = filteredMetadata.map(() => useRef(null));
+  const itemOptionRefs = useMemo(
+    () => filteredMetadata.map(() => useRef(null)),
+    [filteredMetadata]
+  );
   if (verse === null || dashboardData === null) {
     return (
       <>
@@ -161,14 +164,14 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   }
 
   useEffect(() => {
-    filteredMetadata.forEach((item: any, index: number) => {
-      const itemOption = itemOptionRefs[index].current;
+    itemOptionRefs.forEach((itemOptionRef, index) => {
+      const itemOption = itemOptionRef.current;
       if (itemOption) {
         itemOption.addEventListener("ionSwipe", () => {
           share(
-            item.parsed_data[0]?.title,
+            filteredMetadata[index].parsed_data[0]?.title,
             "https://www.dashboard.roadsbible.com/tabs/dashboard",
-            item.parsed_data[0]?.description
+            filteredMetadata[index].parsed_data[0]?.description
           );
         });
       }
