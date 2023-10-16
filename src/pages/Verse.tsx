@@ -347,7 +347,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   });
   return (
     <>
-      <IonModal isOpen={true}>
+      <IonModal className="fullscreen-modal" isOpen={true}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="end">
