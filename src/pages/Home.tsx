@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonToolbar,
   IonTitle,
@@ -24,20 +24,21 @@ import {
   IonItemOption,
   IonItemOptions,
   IonRefresherContent,
-  RefresherEventDetail,
   IonBadge,
 } from "@ionic/react";
 import "../theme/variables.css";
-import { settings, settingsOutline, share } from "ionicons/icons";
+import { settingsOutline, share } from "ionicons/icons";
 import {
   IonSearchbarCustomEvent,
+  RefresherEventDetail,
   SearchbarChangeEventDetail,
 } from "@ionic/core";
 import { useAuth0 } from "@auth0/auth0-react";
-import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
+
 interface ContainerProps {}
+
 interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
 }
@@ -50,50 +51,52 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     null
   );
   const [dynamicPath, setDynamicPath] = useState<string>(""); // State variable to hold the dynamic path
+
+  const { user } = useAuth0();
+
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const openModalWithDynamicPath = (dynamicPath: string) => {
     setShowModal(true);
     setDynamicPath(dynamicPath); // Store the dynamic path in a state variable
   };
-
-  const { user } = useAuth0();
-
-  let PWA = window.matchMedia("(display-mode: standalone)").matches;
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
   useEffect(() => {
-    const verseUrl = "https://beta.ourmanna.com/api/v1/get";
-    console.log(verseUrl);
-    fetch(verseUrl)
-      .then((response) => {
+    const fetchVerse = async () => {
+      try {
+        const verseUrl = "https://beta.ourmanna.com/api/v1/get";
+        const response = await fetch(verseUrl);
+
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.text();
-      })
-      .then((fetchedData) => {
+
+        const fetchedData = await response.text();
         setVerse(fetchedData);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching verse:", error);
-      });
+      }
+    };
+
+    fetchVerse();
   }, []);
 
   useEffect(() => {
-    const dashboardUrl = "https://www.roadsbible.com/dashboard";
+    const fetchDashboardData = async () => {
+      try {
+        const dashboardUrl = "https://www.roadsbible.com/dashboard";
+        const response = await fetch(dashboardUrl);
 
-    fetch(dashboardUrl)
-      .then((response) => {
         if (!response.ok) {
           throw Error("Network response was not ok");
         }
-        return response.json();
-      })
-      .then((fetchedData) => {
+
+        const fetchedData = await response.json();
         setDashboardData(fetchedData);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching dashboard data:", error);
-      });
+      }
+    };
+
+    fetchDashboardData();
   }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,20 +122,14 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       })
     : [];
 
-  const itemOptionRefs = useMemo(
-    () => filteredMetadata.map(() => useRef(null)),
-    [filteredMetadata]
-  );
   if (verse === null || dashboardData === null) {
     return (
-      <>
-        <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
-          <IonSpinner
-            style={{ margin: "auto", width: "7rem", height: "7rem" }}
-            name="dots"
-          ></IonSpinner>
-        </div>
-      </>
+      <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+        <IonSpinner
+          style={{ margin: "auto", width: "7rem", height: "7rem" }}
+          name="dots"
+        ></IonSpinner>
+      </div>
     );
   }
 
@@ -142,144 +139,95 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       event.detail.complete();
     }, 2000);
   }
+
   const closeModal = () => {
     setShowModal(false); // This function closes the modal
   };
-  function share(title, url, description) {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: title,
-          url: url,
-          text: description,
-        })
-        .then(() => {
-          console.log("Thanks for sharing!");
-        })
-        .catch(console.error);
-    } else {
-      console.log("Error");
-      // fallback
-    }
-  }
-
-  useEffect(() => {
-    itemOptionRefs.forEach((itemOptionRef, index) => {
-      const itemOption = itemOptionRef.current;
-      if (itemOption) {
-        itemOption.addEventListener("ionSwipe", () => {
-          share(
-            filteredMetadata[index].parsed_data[0]?.title,
-            "https://www.dashboard.roadsbible.com/tabs/dashboard",
-            filteredMetadata[index].parsed_data[0]?.description
-          );
-        });
-      }
-    });
-  }, [itemOptionRefs]);
 
   return (
-    <>
-      <IonPage>
-        <IonContent>
-          <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
-            <IonRefresherContent></IonRefresherContent>
-          </IonRefresher>
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
-                Dashboard
-              </IonTitle>
-
-              <IonButtons style={{ paddingTop: "0.5rem" }} slot="end">
-                <div>
-                  <h1>
-                    <IonRouterLink
-                      routerLink="/tabs/settings/"
-                      target="_blank"
-                      routerDirection="forward"
-                      style={{ paddingRight: "1rem" }}
-                    >
-                      <IonAvatar>
-                        {user ? (
-                          <img
-                            alt="Profile"
-                            style={{
-                              width: "2rem",
-                              height: "2rem",
-                              marginRight: ".7rem",
-                            }}
-                            src={user.picture}
-                          />
-                        ) : (
-                          <IonIcon
-                            className="color"
-                            icon={settingsOutline}
-                          ></IonIcon>
-                        )}
-                      </IonAvatar>
-                    </IonRouterLink>
-                  </h1>
-                </div>
-              </IonButtons>
-            </IonToolbar>
-            <IonToolbar className="">
-              <IonSearchbar
-                className="mt"
-                placeholder="Search all roads"
-                onIonChange={handleIonSearchChange}
-                value={searchQuery}
-              />
-            </IonToolbar>
-          </IonHeader>
-
-          <IonItem>
-            <IonCardTitle>Verse Of the Day</IonCardTitle>
-          </IonItem>
-          <IonItem lines="none" href="/verseoftheday">
-            <IonLabel className="ion-text-wrap">{verse}</IonLabel>
-          </IonItem>
-
-          <div>
-            {filteredMetadata.map((item, index) => (
-              <IonItemSliding key={index}>
-                <IonItemOptions side="end" ref={itemOptionRefs[index]}>
-                  <IonItemOption color="primary" expandable>
-                    <IonIcon slot="icon-only" icon="share"></IonIcon>
-                  </IonItemOption>
-                </IonItemOptions>
-                <IonItem>
-                  <IonCard
-                    onClick={() =>
-                      openModalWithDynamicPath(item.parsed_data[0]?.url)
-                    }
-                    className="margin"
-                    key={index}
+    <IonPage>
+      <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle style={{ marginTop: "-3.2rem" }} size="large">
+              Dashboard
+            </IonTitle>
+            <IonButtons style={{ paddingTop: "0.5rem" }} slot="end">
+              <div>
+                <h1>
+                  <IonRouterLink
+                    routerLink="/tabs/settings/"
+                    target="_blank"
+                    routerDirection="forward"
+                    style={{ paddingRight: "1rem" }}
                   >
-                    <IonCardHeader>
-                      <IonCardTitle>
-                        {item.parsed_data[0]?.title || "No title available"}
-                      </IonCardTitle>
-                    </IonCardHeader>
-                    <IonCardContent>
-                      <p>
-                        {item.parsed_data[0]?.description ||
-                          "No description available"}
-                      </p>
-                      <IonChip>{item.num_groups} Verses</IonChip>
-                    </IonCardContent>
-                    <IonButton fill="clear"></IonButton>
-                  </IonCard>
-                </IonItem>
-              </IonItemSliding>
-            ))}
-          </div>
-          {showModal && (
-            <Verse dynamicPath={dynamicPath} onClose={closeModal} />
-          )}
-        </IonContent>
-      </IonPage>
-    </>
+                    <IonAvatar>
+                      {user ? (
+                        <img
+                          alt="Profile"
+                          style={{
+                            width: "2rem",
+                            height: "2rem",
+                            marginRight: ".7rem",
+                          }}
+                          src={user.picture}
+                        />
+                      ) : (
+                        <IonIcon
+                          className="color"
+                          icon={settingsOutline}
+                        ></IonIcon>
+                      )}
+                    </IonAvatar>
+                  </IonRouterLink>
+                </h1>
+              </div>
+            </IonButtons>
+          </IonToolbar>
+          <IonToolbar className="">
+            <IonSearchbar
+              className="mt"
+              placeholder="Search all roads"
+              onIonChange={handleIonSearchChange}
+              value={searchQuery}
+            />
+          </IonToolbar>
+        </IonHeader>
+        <IonItem>
+          <IonCardTitle>Verse Of the Day</IonCardTitle>
+        </IonItem>
+        <IonItem lines="none" href="/verseoftheday">
+          <IonLabel className="ion-text-wrap">{verse}</IonLabel>
+        </IonItem>
+        <div>
+          {filteredMetadata.map((item: any, index: number) => (
+            <IonCard
+              onClick={() => openModalWithDynamicPath(item.parsed_data[0]?.url)}
+              className="margin"
+              key={index}
+            >
+              <IonCardHeader>
+                <IonCardTitle>
+                  {item.parsed_data[0]?.title || "No title available"}
+                </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <p>
+                  {item.parsed_data[0]?.description ||
+                    "No description available"}
+                </p>
+                <IonChip>{item.num_groups} Verses</IonChip>
+              </IonCardContent>
+              <IonButton fill="clear"></IonButton>
+            </IonCard>
+          ))}
+        </div>
+        {showModal && <Verse dynamicPath={dynamicPath} onClose={closeModal} />}
+      </IonContent>
+    </IonPage>
   );
 };
 

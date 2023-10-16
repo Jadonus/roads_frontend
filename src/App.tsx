@@ -126,6 +126,11 @@ const App: React.FC = () => {
             <Route path="/" exact render={() => <Login />} />
             {/* Additional Routes */}
 
+            <Route
+              path="/dev/dashboard"
+              exact
+              render={() => <ExploreContainer />}
+            />
             <Route path="/devpro" exact component={Myprogress}></Route>
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
