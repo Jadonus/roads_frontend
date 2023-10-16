@@ -6,36 +6,22 @@ import { useSwipeable } from "react-swipeable";
 
 let groupName;
 import {
-  IonActionSheet,
   IonFooter,
   IonTitle,
   IonToolbar,
   IonItem,
-  IonBackButton,
   IonButtons,
   IonButton,
-  IonMenuButton,
-  IonPage,
-  IonMenu,
   IonContent,
-  IonCardTitle,
   IonHeader,
   IonAlert,
-  IonCardHeader,
-  IonCard,
-  IonLabel,
-  IonSkeletonText,
-  IonSegment,
-  IonSegmentButton,
   IonIcon,
   IonModal,
-  IonFab,
-  IonFabButton,
-  IonFabList,
   IonSpinner,
   IonProgressBar,
   IonAvatar,
   IonImg,
+  IonLoading,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import {
@@ -450,18 +436,20 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             }}
           >
             {sentences.length === 0 ? (
-              <IonSpinner
-                style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                name="dots"
-              ></IonSpinner>
+              <IonLoading
+                translucent={true}
+                isOpen={true}
+                message="Loading..."
+              />
             ) : (
-              <div style={{ padding: "20px" }}>
+              <div style={{}}>
                 <h1 className="ion-text-center">
                   {sentences.length === 0 ? (
-                    <IonSpinner
-                      style={{ margin: "auto", width: "5rem", height: "5rem" }}
-                      name="dots"
-                    ></IonSpinner>
+                    <IonLoading
+                      isOpen={true}
+                      translucent={true}
+                      message="Loading..."
+                    />
                   ) : (
                     <span>
                       {currentSentenceIndex < sentences.length &&
@@ -519,7 +507,12 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           </div>
         </IonContent>
         <IonFooter>
-          <IonProgressBar type="indeterminate"></IonProgressBar>
+          <IonProgressBar
+            value={parseFloat(
+              (currentSentenceIndex / sentences.length).toFixed(2)
+            )}
+            style={{ marginBottom: "1rem" }}
+          ></IonProgressBar>
         </IonFooter>
       </IonModal>
     </>
