@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   IonToolbar,
   IonTitle,
@@ -38,6 +38,7 @@ import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
 interface ContainerProps {}
+const itemOptionRef = useRef(null);
 
 interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
@@ -142,6 +143,38 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const closeModal = () => {
     setShowModal(false); // This function closes the modal
   };
+  function share(title, url, description) {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: title,
+          url: url,
+          text: description,
+        })
+        .then(() => {
+          console.log("Thanks for sharing!");
+        })
+        .catch(console.error);
+    } else {
+      console.log("Error");
+      // fallback
+    }
+  }
+  useEffect(() => {
+    const itemOption = itemOptionRef.current;
+    if (itemOption) {
+      filteredMetadata.map((item: any, index: number) => {
+        itemOption.addEventListener(
+          "ionSwipe",
+          share(
+            item.parsed_data[0]?.title,
+            "https://www.dashboard.roadsbible.com/tabs/dashboard",
+            item.parsed_data[0]?.description
+          )
+        );
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -208,9 +241,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           <div>
             {filteredMetadata.map((item: any, index: number) => (
               <IonItemSliding>
-                <IonItemOptions side="end">
-                  <IonItemOption color="primary">
-                    <IonIcon slot="icon-only" icon={share}></IonIcon>
+                <IonItemOptions side="end" ref={itemOptionRef}>
+                  <IonItemOption color="primary" expandable>
+                    <IonIcon slot="icon-only" icon="share"></IonIcon>
                   </IonItemOption>
                 </IonItemOptions>
                 <IonItem>
