@@ -5,6 +5,8 @@ import {
   IonPage,
   IonTitle,
   IonContent,
+  IonRefresher,
+  IonRefresherContent,
   IonIcon,
   IonButton,
   IonHeader,
@@ -12,7 +14,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import { share } from "ionicons/icons";
 import Confetti from "react-confetti";
-
+import { RefresherEventDetail } from "@ionic/react";
 function Myprogress() {
   const [progress, setProgress] = useState(0);
 
@@ -44,6 +46,12 @@ function Myprogress() {
     }
   }
   let da;
+  function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.detail.complete();
+    }, 2000);
+  }
   async function fetchData() {
     if (user) {
       const data = {
@@ -88,7 +96,7 @@ function Myprogress() {
     console.log(progress);
     const shareData = {
       title: "Roads",
-      text: "I memorized " + progress + "bible verses!",
+      text: "I memorized " + progress + " bible verses!",
       url: "https://www.roadsbible.com",
     };
 
@@ -98,6 +106,9 @@ function Myprogress() {
   return (
     <IonPage>
       <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <IonHeader>
           <IonToolbar>
             <IonTitle size="large">My Progress</IonTitle>
