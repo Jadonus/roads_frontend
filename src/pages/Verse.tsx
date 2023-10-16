@@ -48,7 +48,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
 
-  const [refer, setRefer] = useState({});
+  const [refer, setRefer] = useState<{ verses: any[] }>({ verses: [] });
+
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [hiddenWordIndices, setHiddenWordIndices] = useState([]);
   const [finishButtonClicks, setFinishButtonClicks] = useState(0);
@@ -106,14 +107,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       .then((data) => {
         // Specify the structure
         // Use the 'Data' interface here
+        setRefer(data);
 
+        console.log(refer);
         // Extract verses and references from the API response
         const verses = data.verses.map(
           (verse) => `${verse.verse} ${verse.reference}`
         );
-        console.log(data);
-        setRefer(data);
-        console.log(refer);
         // Update the state with the fetched verses
         setSentences(verses);
       })
@@ -424,7 +424,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     "Revelation",
   ];
   function readContext() {
-    let refeer = refer[currentSentenceIndex].reference;
+    let refeer = refer.verses[currentSentenceIndex].reference;
     console.log(refeer);
     const match = refeer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
     if (!match) {
