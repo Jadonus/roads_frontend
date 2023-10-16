@@ -38,8 +38,8 @@ import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
 interface ContainerProps {}
-const itemOptionRef = useRef(null);
 
+const itemOptionRef = useRef(null);
 interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
 }
@@ -160,20 +160,18 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       // fallback
     }
   }
-  const itemOptionRef = useRef(null);
 
   useEffect(() => {
     const itemOption = itemOptionRef.current;
     if (itemOption) {
       filteredMetadata.map((item: any, index: number) => {
-        itemOption.addEventListener(
-          "ionSwipe",
+        itemOption.addEventListener("ionSwipe", () => {
           share(
             item.parsed_data[0]?.title,
             "https://www.dashboard.roadsbible.com/tabs/dashboard",
             item.parsed_data[0]?.description
-          )
-        );
+          );
+        });
       });
     }
   }, []);
