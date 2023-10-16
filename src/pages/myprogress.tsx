@@ -5,10 +5,13 @@ import {
   IonPage,
   IonTitle,
   IonContent,
+  IonIcon,
+  IonBadge,
   IonHeader,
 } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Confetti from 'react-confetti'
+import { share } from "ionicons/icons";
+import Confetti from "react-confetti";
 
 function Myprogress() {
   const [progress, setProgress] = useState(0);
@@ -17,30 +20,30 @@ function Myprogress() {
   const { user } = useAuth0();
   const textRef = useRef(null);
   function setProgressBarPosition(progress) {
-  // Ensure that textRef.current exists before accessing its parent
-  if (textRef.current) {
-    // Calculate the position of the text box
-    const progressBarHeight = 250; // Assuming the progress bar covers 250% of the screen
+    // Ensure that textRef.current exists before accessing its parent
+    if (textRef.current) {
+      // Calculate the position of the text box
+      const progressBarHeight = 250; // Assuming the progress bar covers 250% of the screen
 
-    const newPosition =
-      (progress / progressBarHeight) * progressBarHeight - 2;
+      const newPosition =
+        (progress / progressBarHeight) * progressBarHeight - 2;
 
-    console.log("Progress:", progress);
-    console.log("New Position:", newPosition);
+      console.log("Progress:", progress);
+      console.log("New Position:", newPosition);
 
-    textRef.current.style.transform = `translateY(${newPosition}%)`;
+      textRef.current.style.transform = `translateY(${newPosition}%)`;
 
-    // Calculate the scroll position
-    const windowHeight = window.innerHeight;
-    const scrollToY = (progress / 100) * windowHeight;
-    document.getElementById('mem').scrollIntoView({
- behavior: 'smooth', // Optional: Add smooth scrolling for a polished effect
-  block: 'center',  
-    })
-    // Scroll the window to the calculated Y-coordinate
+      // Calculate the scroll position
+      const windowHeight = window.innerHeight;
+      const scrollToY = (progress / 100) * windowHeight;
+      document.getElementById("mem").scrollIntoView({
+        behavior: "smooth", // Optional: Add smooth scrolling for a polished effect
+        block: "center",
+      });
+      // Scroll the window to the calculated Y-coordinate
+    }
   }
-}
-
+  let da;
   function fetchData() {
     if (user && user.name) {
       const data = {
@@ -60,18 +63,14 @@ function Myprogress() {
           console.log(response);
           setProgress(response.numverses);
           setProgressBarPosition(response.numverses);
-
+          response = da;
           if (response.numverses % 10) {
-          
-          console.log('sad...')
+            console.log("sad...");
+          } else {
+            setConfet(true);
+
+            console.log("🎉");
           }
-
-        else {
-
-            setConfet(true)
-
-            console.log('🎉')
-        }
         })
         .catch((error) => {
           console.error(error);
@@ -82,10 +81,20 @@ function Myprogress() {
   }
 
   useEffect(() => {
-
     fetchData();
   }, []);
+  function share() {
+    const shareData = {
+      title: "Roads",
+      text: "I memorized " + da.numverses + "verses!",
+      url: "https://www.roadsbible.com",
+    };
 
+    // Share must be triggered by "user activation"
+    try {
+      navigator.share(shareData);
+    } catch (err) {}
+  }
   return (
     <IonPage>
       <IonContent>
@@ -95,8 +104,16 @@ function Myprogress() {
           </IonToolbar>
         </IonHeader>
 
-
- {confet ? <><Confetti height={window.innerHeight * 2.5} recycle={false}></Confetti> </>: ''}
+        {confet ? (
+          <>
+            <Confetti
+              height={window.innerHeight * 2.5}
+              recycle={false}
+            ></Confetti>{" "}
+          </>
+        ) : (
+          ""
+        )}
 
         <div className="vertical-progress-bar-container">
           <div className="progress-bars-container">
@@ -114,10 +131,12 @@ function Myprogress() {
             ></div>
           </div>
           <div className="text-box" ref={textRef}>
-
             <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
-              great work!
+              great work!{" "}
+              <IonBadge color="primary" onClick={share}>
+                <IonIcon icon="share" />
+              </IonBadge>
             </p>
           </div>
         </div>
