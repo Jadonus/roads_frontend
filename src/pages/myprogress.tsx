@@ -44,7 +44,7 @@ function Myprogress() {
     }
   }
   let da;
-  function fetchData() {
+  async function fetchData() {
     if (user) {
       const data = {
         username: user.name,
@@ -57,7 +57,8 @@ function Myprogress() {
         },
         body: JSON.stringify(data),
       };
-      fetch("https://www.roadsbible.com/api/gameify", requestOptions)
+
+      await fetch("https://www.roadsbible.com/api/gameify", requestOptions)
         .then((response) => response.json())
         .then((response) => {
           console.log(response);
