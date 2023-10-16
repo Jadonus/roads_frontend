@@ -417,9 +417,10 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     "Revelation",
   ];
   function readContext() {
-    refer = refer.verses[currentSentenceIndex].reference;
     console.log(refer);
-    const match = refer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
+    let refeer = refer.verses[currentSentenceIndex].reference;
+    console.log(refeer);
+    const match = refeer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
     if (!match) {
       return null; // Invalid reference
     }
