@@ -103,7 +103,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     console.log(groupName);
     fetch("https://www.roadsbible.com" + dynamicPath + "/", requestOption)
       .then((response) => response.json())
-      .then((data: { verses: any[] }) => {
+      .then((data) => {
         // Specify the structure
         // Use the 'Data' interface here
 
@@ -112,7 +112,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           (verse) => `${verse.verse} ${verse.reference}`
         );
         console.log(data);
-        setRefer(data.verses);
+        setRefer(data);
         console.log(refer);
         // Update the state with the fetched verses
         setSentences(verses);
