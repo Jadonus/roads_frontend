@@ -38,7 +38,6 @@ import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
 interface ContainerProps {}
-const itemOptionRef = useRef(null);
 interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
 }
@@ -162,9 +161,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   }
 
   useEffect(() => {
-    const itemOption = itemOptionRef.current;
-    if (itemOption) {
-      filteredMetadata.map((item: any, index: number) => {
+    filteredMetadata.forEach((item: any, index: number) => {
+      const itemOption = itemOptionRefs[index].current;
+      if (itemOption) {
         itemOption.addEventListener("ionSwipe", () => {
           share(
             item.parsed_data[0]?.title,
@@ -172,9 +171,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             item.parsed_data[0]?.description
           );
         });
-      });
-    }
-  }, []);
+      }
+    });
+  }, [itemOptionRefs]);
 
   return (
     <>
