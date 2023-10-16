@@ -214,7 +214,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
 
     const data = {
       username: user.name,
-      road: groupName,
+      road: dynamic,
       index: currentSentenceIndex + 1,
     };
 
