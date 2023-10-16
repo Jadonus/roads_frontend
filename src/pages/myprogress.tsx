@@ -45,7 +45,7 @@ function Myprogress() {
   }
   let da;
   function fetchData() {
-    if (user && user.name) {
+    if (user) {
       const data = {
         username: user.name,
       };
@@ -63,7 +63,7 @@ function Myprogress() {
           console.log(response);
           setProgress(response.numverses);
           setProgressBarPosition(response.numverses);
-          response = da;
+
           if (response.numverses % 10) {
             console.log("sad...");
           } else {
@@ -84,16 +84,15 @@ function Myprogress() {
     fetchData();
   }, []);
   function sharee() {
+    console.log(progress);
     const shareData = {
       title: "Roads",
-      text: "I memorized " + da.numverses + "verses!",
+      text: "I memorized " + progress + "bible verses!",
       url: "https://www.roadsbible.com",
     };
 
     // Share must be triggered by "user activation"
-    try {
-      navigator.share(shareData);
-    } catch (err) {}
+    navigator.share(shareData);
   }
   return (
     <IonPage>
@@ -134,14 +133,18 @@ function Myprogress() {
             <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!{" "}
-              <IonButton fill="clear" onClick={sharee}>
-                <IonIcon
-                  color="primary"
-                  size="large"
-                  style={{ marginBottom: "1rem" }}
-                  icon={share}
-                />
-              </IonButton>
+              {navigator.canShare ? (
+                <IonButton fill="clear" onClick={sharee}>
+                  <IonIcon
+                    color="primary"
+                    size="large"
+                    style={{ marginBottom: "1rem" }}
+                    icon={share}
+                  />
+                </IonButton>
+              ) : (
+                <span></span>
+              )}
             </p>
           </div>
         </div>
