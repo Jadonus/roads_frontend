@@ -104,6 +104,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         const verses = data.verses.map(
           (verse) => `${verse.verse} ${verse.reference}`
         );
+        console.log(data);
+        console.log(data.verses);
         refer = data.verses.reference;
         // Update the state with the fetched verses
         setSentences(verses);
