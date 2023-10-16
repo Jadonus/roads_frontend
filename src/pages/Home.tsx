@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   IonToolbar,
   IonTitle,
+  IonItemSliding,
   IonHeader,
   IonCard,
   IonCardTitle,
@@ -20,12 +21,14 @@ import {
   IonIcon,
   IonChip,
   IonRefresher,
+  IonItemOption,
+  IonItemOptions,
   IonRefresherContent,
   RefresherEventDetail,
   IonBadge,
 } from "@ionic/react";
 import "../theme/variables.css";
-import { settings, settingsOutline } from "ionicons/icons";
+import { settings, settingsOutline, share } from "ionicons/icons";
 import {
   IonSearchbarCustomEvent,
   SearchbarChangeEventDetail,
@@ -33,7 +36,6 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import SettingsIcon from "../components/settingsicon";
 import "./ExploreContainer.css";
-import { Link } from "react-router-dom";
 import Verse from "./Verse";
 interface ContainerProps {}
 
@@ -205,27 +207,36 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
           <div>
             {filteredMetadata.map((item: any, index: number) => (
-              <IonCard
-                onClick={() =>
-                  openModalWithDynamicPath(item.parsed_data[0]?.url)
-                }
-                className="margin"
-                key={index}
-              >
-                <IonCardHeader>
-                  <IonCardTitle>
-                    {item.parsed_data[0]?.title || "No title available"}
-                  </IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  <p>
-                    {item.parsed_data[0]?.description ||
-                      "No description available"}
-                  </p>
-                  <IonChip>{item.num_groups} Verses</IonChip>
-                </IonCardContent>
-                <IonButton fill="clear"></IonButton>
-              </IonCard>
+              <IonItemSliding>
+                <IonItemOptions side="end">
+                  <IonItemOption color="primary">
+                    <IonIcon slot="icon-only" icon={share}></IonIcon>
+                  </IonItemOption>
+                </IonItemOptions>
+                <IonItem>
+                  <IonCard
+                    onClick={() =>
+                      openModalWithDynamicPath(item.parsed_data[0]?.url)
+                    }
+                    className="margin"
+                    key={index}
+                  >
+                    <IonCardHeader>
+                      <IonCardTitle>
+                        {item.parsed_data[0]?.title || "No title available"}
+                      </IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                      <p>
+                        {item.parsed_data[0]?.description ||
+                          "No description available"}
+                      </p>
+                      <IonChip>{item.num_groups} Verses</IonChip>
+                    </IonCardContent>
+                    <IonButton fill="clear"></IonButton>
+                  </IonCard>
+                </IonItem>
+              </IonItemSliding>
             ))}
           </div>
           {showModal && (
