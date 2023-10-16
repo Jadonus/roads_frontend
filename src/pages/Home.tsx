@@ -160,6 +160,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       // fallback
     }
   }
+  const itemOptionRef = useRef(null);
+
   useEffect(() => {
     const itemOption = itemOptionRef.current;
     if (itemOption) {
