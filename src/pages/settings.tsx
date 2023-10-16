@@ -90,57 +90,56 @@ const SettingsPage = () => {
                   First Letter
                 </IonSelectOption>
               </IonSelect>
-              <IonItem id="open-picker" button>
-                <IonLabel>Translation</IonLabel>
-                <IonPicker
-                  trigger="open-picker"
-                  columns={[
-                    {
-                      name: "languages",
-                      options: [
-                        {
-                          text: "NLT",
-                          value: "NLT",
-                        },
-                        {
-                          text: "KJV",
-                          value: "KJV",
-                        },
-                        {
-                          text: "YLT",
-                          value: "YLT",
-                        },
-                        {
-                          text: "NIV (default)",
-                          value: "NIV",
-                        },
-                        {
-                          text: "ESV",
-                          value: "ESV",
-                        },
-                        {
-                          text: "ASV",
-                          value: "ASV",
-                        },
-                      ],
-                    },
-                  ]}
-                  buttons={[
-                    {
-                      text: "Cancel",
-                      role: "cancel",
-                    },
-                    {
-                      text: "Confirm",
-                      handler: (value) => {
-                        settings("translation", value.languages.value);
-                      },
-                    },
-                  ]}
-                ></IonPicker>
-              </IonItem>
             </IonItem>
-
+            <IonItem id="open-picker" button>
+              <IonLabel>Translation</IonLabel>
+              <IonPicker
+                trigger="open-picker"
+                columns={[
+                  {
+                    name: "languages",
+                    options: [
+                      {
+                        text: "NLT",
+                        value: "NLT",
+                      },
+                      {
+                        text: "KJV",
+                        value: "KJV",
+                      },
+                      {
+                        text: "YLT",
+                        value: "YLT",
+                      },
+                      {
+                        text: "NIV (default)",
+                        value: "NIV",
+                      },
+                      {
+                        text: "ESV",
+                        value: "ESV",
+                      },
+                      {
+                        text: "ASV",
+                        value: "ASV",
+                      },
+                    ],
+                  },
+                ]}
+                buttons={[
+                  {
+                    text: "Cancel",
+                    role: "cancel",
+                  },
+                  {
+                    text: "Confirm",
+                    handler: (value) => {
+                      settings("translation", value.languages.value);
+                    },
+                  },
+                ]}
+              ></IonPicker>
+            </IonItem>
             <h3>Colors</h3>
             <IonItem>
               <IonRadioGroup
