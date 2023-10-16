@@ -47,6 +47,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
+
+  const [refer, setRefer] = useState({});
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [hiddenWordIndices, setHiddenWordIndices] = useState([]);
   const [finishButtonClicks, setFinishButtonClicks] = useState(0);
@@ -63,7 +65,10 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Medium });
   };
-  let refer;
+  interface Data {
+    verses: any[]; // You can replace 'any' with a more specific type if you know the structure.
+    // Other properties if 'data' has them
+  }
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -98,13 +103,16 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     console.log(groupName);
     fetch("https://www.roadsbible.com" + dynamicPath + "/", requestOption)
       .then((response) => response.json())
-      .then((data) => {
+      .then((data: { verses: any[] }) => {
+        // Specify the structure
+        // Use the 'Data' interface here
+
         // Extract verses and references from the API response
         const verses = data.verses.map(
           (verse) => `${verse.verse} ${verse.reference}`
         );
         console.log(data);
-        refer = data;
+        setRefer(data.verses);
         console.log(refer);
         // Update the state with the fetched verses
         setSentences(verses);
@@ -416,7 +424,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     "Revelation",
   ];
   function readContext() {
-    let refeer = refer.verses[currentSentenceIndex].reference;
+    let refeer = refer[currentSentenceIndex].reference;
     console.log(refeer);
     const match = refeer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
     if (!match) {
