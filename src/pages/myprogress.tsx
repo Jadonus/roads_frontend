@@ -83,7 +83,7 @@ function Myprogress() {
   useEffect(() => {
     fetchData();
   }, []);
-  function share() {
+  function sharee() {
     const shareData = {
       title: "Roads",
       text: "I memorized " + da.numverses + "verses!",
@@ -134,8 +134,13 @@ function Myprogress() {
             <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!{" "}
-              <IonButton fill="clear" onClick={share}>
-                <IonIcon color="primary" icon="share" />
+              <IonButton fill="clear" onClick={sharee}>
+                <IonIcon
+                  color="primary"
+                  size="large"
+                  style={{ marginBottom: "1rem" }}
+                  icon={share}
+                />
               </IonButton>
             </p>
           </div>
