@@ -91,7 +91,7 @@ const SettingsPage = () => {
                 </IonSelectOption>
               </IonSelect>
               <IonItem id="open-picker" button>
-                Translation
+                <IonLabel>Translation</IonLabel>
                 <IonPicker
                   trigger="open-picker"
                   columns={[
