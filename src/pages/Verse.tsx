@@ -58,6 +58,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
 
+  let refer;
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -103,6 +104,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         const verses = data.verses.map(
           (verse) => `${verse.verse} ${verse.reference}`
         );
+        data.verses.reference = refer;
 
         // Update the state with the fetched verses
         setSentences(verses);
@@ -345,6 +347,100 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
+  const bookofbiblelist = [
+    "Genesis",
+    "Exodus",
+    "Leviticus",
+    "Numbers",
+    "Deuteronomy",
+    "Joshua",
+    "Judges",
+    "Ruth",
+    "1 Samuel",
+    "2 Samuel",
+    "1 Kings",
+    "2 Kings",
+    "1 Chronicles",
+    "2 Chronicles",
+    "Ezra",
+    "Nehemiah",
+    "Esther",
+    "Job",
+    "Psalms",
+    "Proverbs",
+    "Ecclesiastes",
+    "Song of Solomon",
+    "Isaiah",
+    "Jeremiah",
+    "Lamentations",
+    "Ezekiel",
+    "Daniel",
+    "Hosea",
+    "Joel",
+    "Amos",
+    "Obadiah",
+    "Jonah",
+    "Micah",
+    "Nahum",
+    "Habakkuk",
+    "Zephaniah",
+    "Haggai",
+    "Zechariah",
+    "Malachi",
+    "Matthew",
+    "Mark",
+    "Luke",
+    "John",
+    "Acts",
+    "Romans",
+    "1 Corinthians",
+    "2 Corinthians",
+    "Galatians",
+    "Ephesians",
+    "Philippians",
+    "Colossians",
+    "1 Thessalonians",
+    "2 Thessalonians",
+    "1 Timothy",
+    "2 Timothy",
+    "Titus",
+    "Philemon",
+    "Hebrews",
+    "James",
+    "1 Peter",
+    "2 Peter",
+    "1 John",
+    "2 John",
+    "3 John",
+    "Jude",
+    "Revelation",
+  ];
+  function readContext() {
+    const match = refer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
+    if (!match) {
+      return null; // Invalid reference
+    }
+
+    const [, boook, chapter, translation] = match;
+
+    // Now, let's check if the extracted book is in the bookofbiblelist
+    const validBooks = bookofbiblelist.map((bookName) =>
+      bookName.toLowerCase()
+    );
+    const bookIndex = validBooks.indexOf(boook.toLowerCase());
+
+    if (bookIndex === -1) {
+      return null; // Book not found in the list
+    }
+    console.log("book", bookIndex);
+
+    console.log("chapter", chapter);
+
+    console.log("translation", translation);
+    window.location.assign(
+      `https://bible-ui.rkeplin.com/book/${translation.toLowerCase()}/${bookIndex}/${chapter}`
+    );
+  }
   return (
     <>
       <IonModal isOpen={true}>
@@ -398,6 +494,10 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             </IonItem>
 
             <IonItem button>Verse Info.</IonItem>
+
+            <IonItem onClick={readContext} button>
+              Read Verse Context
+            </IonItem>
           </IonContent>
         </IonModal>
         <IonContent {...handlers}>
