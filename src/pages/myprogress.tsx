@@ -6,7 +6,7 @@ import {
   IonTitle,
   IonContent,
   IonIcon,
-  IonBadge,
+  IonButton,
   IonHeader,
 } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -134,9 +134,9 @@ function Myprogress() {
             <p id="mem">
               You have memorized <strong>{progress}</strong> verses! Keep up the
               great work!{" "}
-              <IonBadge color="primary" onClick={share}>
-                <IonIcon icon="share" />
-              </IonBadge>
+              <IonButton fill="clear" onClick={share}>
+                <IonIcon color="primary" icon="share" />
+              </IonButton>
             </p>
           </div>
         </div>
