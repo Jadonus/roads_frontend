@@ -58,7 +58,6 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
 
-  let refer;
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -105,7 +104,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           (verse) => `${verse.verse} ${verse.reference}`
         );
         console.log(data);
-        refer = data;
+        const refer = data;
 
         // Update the state with the fetched verses
         setSentences(verses);
