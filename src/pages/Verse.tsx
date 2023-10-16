@@ -416,6 +416,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     "Revelation",
   ];
   function readContext() {
+    console.log(refer);
     const match = refer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
     if (!match) {
       return null; // Invalid reference
