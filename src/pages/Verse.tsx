@@ -447,8 +447,10 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     console.log("chapter", chapter);
 
     console.log("translation", translation);
-    window.location.assign(
-      `https://bible-ui.rkeplin.com/book/${translation.toLowerCase()}/${bookIndex}/${chapter}`
+    window.open(
+      `https://bible-ui.rkeplin.com/book/${translation.toLowerCase()}/${
+        bookIndex + 1
+      }/${chapter}`
     );
   }
   return (
