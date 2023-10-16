@@ -105,10 +105,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           (verse) => `${verse.verse} ${verse.reference}`
         );
         console.log(data);
-        console.log(data.verses.verse);
+        refer = data;
 
-        console.log(data.verses[currentSentenceIndex].reference);
-        refer = data.verses.reference;
         // Update the state with the fetched verses
         setSentences(verses);
       })
@@ -419,6 +417,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     "Revelation",
   ];
   function readContext() {
+    refer = refer.verses[currentSentenceIndex].reference;
     console.log(refer);
     const match = refer.match(/(\d?\s?[A-Z][a-z]+)\s(\d+):\d+\s\((\w+)\)/);
     if (!match) {
