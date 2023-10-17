@@ -60,7 +60,14 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [isFabOpen, setIsFabOpen] = useState(false);
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
+  const page = useRef(null);
 
+  const [presentingElement, setPresentingElement] =
+    useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPresentingElement(page.current);
+  }, []);
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -473,9 +480,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         </IonHeader>
         <IonModal
           ref={modal}
+          presentingElement={presentingElement!}
           trigger="open-action-sheet"
-          initialBreakpoint={0.25}
-          breakpoints={[0, 0.25, 0.5, 0.75]}
         >
           <IonHeader>
             <IonTitle>More</IonTitle>
