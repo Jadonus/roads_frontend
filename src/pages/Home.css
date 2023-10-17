@@ -9,7 +9,7 @@ IonButton {
    --ion-color: #ffffff;
 
   }
-  ion-modal{
-    height: 100vh;
-    width: 100vw;
-  }
+  ion-modal {
+    --width: 100%;
+    --height: 100%;
+}
