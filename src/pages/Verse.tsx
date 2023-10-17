@@ -49,7 +49,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [sentences, setSentences] = useState([]);
 
   const [refer, setRefer] = useState<{ verses: any[] }>({ verses: [] });
-
+  const [dis, setDis] = useState(false);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [hiddenWordIndices, setHiddenWordIndices] = useState([]);
   const [finishButtonClicks, setFinishButtonClicks] = useState(0);
@@ -314,6 +314,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
+        setDis(true);
         isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
@@ -323,6 +324,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
+        setDis(false);
         isFirstLetterModeRef.current = false;
         return newSentences;
       }
@@ -602,7 +604,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
                     <IonButton onClick={backButtonClicked}>
                       <IonIcon size="medium" icon={arrowBack} />
                     </IonButton>
-                    {!isFirstLetterMode ? (
+                    {!dis ? (
                       <>
                         <IonButton
                           onClick={() => hideRandomWords(3)}
