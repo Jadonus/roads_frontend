@@ -152,7 +152,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         </IonRefresher>
         <IonHeader>
           <IonToolbar>
-            <IonTitle style={{}} size="large">
+            <IonTitle style={{ marginTop: "0.5rem" }} size="large">
               Dashboard
             </IonTitle>
             <IonButtons style={{ paddingTop: "0.5rem" }} slot="end">

@@ -51,6 +51,7 @@ interface VerseModalProps {
 
 interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
+  const [pdf, setPdf] = useState(false);
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
@@ -465,7 +466,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   }
   function togg() {}
   function flashcard() {
-    return <BasicDocument></BasicDocument>;
+    console.log("flashcard");
+    setPdf(true);
   }
   return (
     <>
@@ -654,6 +656,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
               </div>
             )}
           </div>
+          {!pdf ? <BasicDocument></BasicDocument> : <div></div>}
         </IonContent>
       </IonModal>
     </>
