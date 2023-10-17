@@ -314,6 +314,14 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
+        let undo = document.getElementById("undo");
+        let hide = document.getElementById("hide");
+        let all = document.getElementById("all");
+        undo.classList.add("hidee");
+
+        hide.classList.add("hidee");
+
+        all.classList.add("hidee");
         isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
@@ -323,6 +331,14 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
+        let undo = document.getElementById("undo");
+        let hide = document.getElementById("hide");
+        let all = document.getElementById("all");
+        undo.classList.remove("hidee");
+
+        hide.classList.remove("hidee");
+
+        all.classList.remove("hidee");
         isFirstLetterModeRef.current = false;
         return newSentences;
       }
@@ -456,12 +472,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     let undo = document.getElementById("undo");
     let hide = document.getElementById("hide");
     let all = document.getElementById("all");
+
+    toggleFirstLetterMode();
     undo.classList.add("hidee");
 
     hide.classList.add("hidee");
 
     all.classList.add("hidee");
-    toggleFirstLetterMode();
   }
   return (
     <>
