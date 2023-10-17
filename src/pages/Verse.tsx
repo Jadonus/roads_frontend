@@ -32,7 +32,7 @@ import {
   ellipsisHorizontal,
   settingsOutline,
   arrowForward,
-  toggle,
+  documentText,
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
@@ -479,7 +479,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         <IonModal
           ref={modal}
           trigger="open-action-sheet"
-          initialBreakpoint={0.25}
+          initialBreakpoint={0.75}
           breakpoints={[0, 0.25, 0.5, 0.75]}
         >
           <IonHeader>
@@ -602,21 +602,37 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
                     <IonButton onClick={backButtonClicked}>
                       <IonIcon size="medium" icon={arrowBack} />
                     </IonButton>
-                    <IonButton
-                      onClick={() => hideRandomWords(3)}
-                      style={{ margin: "0 0.5rem" }}
-                    >
-                      <IonIcon size="medium" icon={backspace} />
-                    </IonButton>
-                    <IonButton
-                      onClick={hideAllWords}
-                      style={{ margin: "0 0.5rem" }}
-                    >
-                      <IonIcon size="medium" icon={eyeOff} />
-                    </IonButton>
-                    <IonButton onClick={revealAllWords}>
-                      <IonIcon size="medium" icon={refresh} />
-                    </IonButton>
+                    {!isFirstLetterMode ? (
+                      <>
+                        <IonButton
+                          onClick={() => hideRandomWords(3)}
+                          style={{ margin: "0 0.5rem" }}
+                          id="ran"
+                        >
+                          <IonIcon size="medium" icon={backspace} />
+                        </IonButton>
+                        <IonButton
+                          onClick={hideAllWords}
+                          style={{ margin: "0 0.5rem" }}
+                          id="all"
+                        >
+                          <IonIcon size="medium" icon={eyeOff} />
+                        </IonButton>
+                        <IonButton onClick={revealAllWords} id="undo">
+                          <IonIcon size="medium" icon={refresh} />
+                        </IonButton>{" "}
+                      </>
+                    ) : (
+                      <div>
+                        {" "}
+                        <IonButton
+                          onClick={toggleFirstLetterMode}
+                          style={{ margin: "0 0.5rem" }}
+                        >
+                          <IonIcon size="medium" icon={documentText} />
+                        </IonButton>
+                      </div>
+                    )}
                     <IonButton onClick={moveToNextSentence}>
                       <IonIcon size="medium" icon={arrowForward} />
                     </IonButton>
