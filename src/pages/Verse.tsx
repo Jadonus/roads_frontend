@@ -314,7 +314,6 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
-        setDis(true);
         isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
@@ -324,13 +323,11 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
-        setDis(false);
         isFirstLetterModeRef.current = false;
         return newSentences;
       }
     });
   };
-
   useEffect(() => {
     if (settings.length > 0) {
       if (settings[0].fields.defaultmode === "randomWord") {
@@ -454,6 +451,17 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
         bookIndex + 1
       }/${chapter}`
     );
+  }
+  function togg() {
+    let undo = document.getElementById("undo");
+    let hide = document.getElementById("hide");
+    let all = document.getElementById("all");
+    undo.classList.add("hidee");
+
+    hide.classList.add("hidee");
+
+    all.classList.add("hidee");
+    toggleFirstLetterMode();
   }
   return (
     <>
@@ -604,37 +612,31 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
                     <IonButton onClick={backButtonClicked}>
                       <IonIcon size="medium" icon={arrowBack} />
                     </IonButton>
-                    {!dis ? (
-                      <>
-                        <IonButton
-                          onClick={() => hideRandomWords(3)}
-                          style={{ margin: "0 0.5rem" }}
-                          id="ran"
-                        >
-                          <IonIcon size="medium" icon={backspace} />
-                        </IonButton>
-                        <IonButton
-                          onClick={hideAllWords}
-                          style={{ margin: "0 0.5rem" }}
-                          id="all"
-                        >
-                          <IonIcon size="medium" icon={eyeOff} />
-                        </IonButton>
-                        <IonButton onClick={revealAllWords} id="undo">
-                          <IonIcon size="medium" icon={refresh} />
-                        </IonButton>{" "}
-                      </>
-                    ) : (
-                      <div>
-                        {" "}
-                        <IonButton
-                          onClick={toggleFirstLetterMode}
-                          style={{ margin: "0 0.5rem" }}
-                        >
-                          <IonIcon size="medium" icon={documentText} />
-                        </IonButton>
-                      </div>
-                    )}
+                    <>
+                      <IonButton
+                        onClick={() => hideRandomWords(3)}
+                        style={{ margin: "0 0.5rem" }}
+                        id="ran"
+                      >
+                        <IonIcon size="medium" icon={backspace} />
+                      </IonButton>
+                      <IonButton
+                        onClick={hideAllWords}
+                        style={{ margin: "0 0.5rem" }}
+                        id="all"
+                      >
+                        <IonIcon size="medium" icon={eyeOff} />
+                      </IonButton>
+                      <IonButton onClick={revealAllWords} id="undo">
+                        <IonIcon size="medium" icon={refresh} />
+                      </IonButton>{" "}
+                    </>
+                    <div>
+                      {" "}
+                      <IonButton onClick={togg} style={{ margin: "0 0.5rem" }}>
+                        <IonIcon size="medium" icon={documentText} />
+                      </IonButton>
+                    </div>
                     <IonButton onClick={moveToNextSentence}>
                       <IonIcon size="medium" icon={arrowForward} />
                     </IonButton>
