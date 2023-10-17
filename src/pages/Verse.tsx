@@ -460,13 +460,17 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       }/${chapter}`
     );
   }
+  function dismiss() {
+    modal.current?.dismiss();
+  }
+
   return (
     <>
-      <IonModal isOpen={true}>
+      <IonModal isOpen={true} ref={page}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="end">
-              <IonButton onClick={onClose}>Done</IonButton>{" "}
+              <IonButton onClick={() => dismiss()}>Done</IonButton>
               {/* Clicking this button will close the modal */}
             </IonButtons>
             <IonTitle>{dynamic}</IonTitle>
@@ -632,7 +636,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             value={parseFloat(
               (currentSentenceIndex / sentences.length).toFixed(2)
             )}
-            style={{ marginBottom: "1rem" }}
+            style={{ height: "1rem" }}
           ></IonProgressBar>
         </IonFooter>
       </IonModal>
