@@ -60,14 +60,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [isFabOpen, setIsFabOpen] = useState(false);
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
-  const page = useRef(null);
 
-  const [presentingElement, setPresentingElement] =
-    useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    setPresentingElement(page.current);
-  }, []);
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -460,17 +453,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       }/${chapter}`
     );
   }
-  function dismiss() {
-    modal.current?.dismiss();
-  }
-
   return (
     <>
-      <IonModal isOpen={true} ref={page}>
+      <IonModal isOpen={true}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="end">
-              <IonButton onClick={() => dismiss()}>Done</IonButton>
+              <IonButton onClick={onClose}>Done</IonButton>{" "}
               {/* Clicking this button will close the modal */}
             </IonButtons>
             <IonTitle>{dynamic}</IonTitle>
@@ -480,12 +469,18 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
                 <IonIcon icon={settingsOutline}></IonIcon>
               </IonButton>
             </IonButtons>
+            <IonProgressBar
+              value={parseFloat(
+                (currentSentenceIndex / sentences.length).toFixed(2)
+              )}
+            ></IonProgressBar>
           </IonToolbar>
         </IonHeader>
         <IonModal
           ref={modal}
-          presentingElement={presentingElement!}
           trigger="open-action-sheet"
+          initialBreakpoint={0.25}
+          breakpoints={[0, 0.25, 0.5, 0.75]}
         >
           <IonHeader>
             <IonTitle>More</IonTitle>
@@ -631,14 +626,6 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             )}
           </div>
         </IonContent>
-        <IonFooter>
-          <IonProgressBar
-            value={parseFloat(
-              (currentSentenceIndex / sentences.length).toFixed(2)
-            )}
-            style={{ height: "1rem" }}
-          ></IonProgressBar>
-        </IonFooter>
       </IonModal>
     </>
   );
