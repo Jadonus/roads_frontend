@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
-
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  PDFViewer,
+} from "@react-pdf/renderer";
 import { useSwipeable } from "react-swipeable";
-
+import BasicDocument from "../components/pdfutil";
 let groupName;
 import {
   IonFooter,
@@ -47,7 +54,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
   const [sentences, setSentences] = useState([]);
-
+  const undo = useRef(null);
+  const hide = useRef(null);
+  const all = useRef(null);
   const [refer, setRefer] = useState<{ verses: any[] }>({ verses: [] });
   const [dis, setDis] = useState(false);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
@@ -314,14 +323,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = firstLetters;
         });
         setIsFirstLetterMode(true);
-        let undo = document.getElementById("undo");
-        let hide = document.getElementById("hide");
-        let all = document.getElementById("all");
-        undo.classList.add("hidee");
 
-        hide.classList.add("hidee");
-
-        all.classList.add("hidee");
         isFirstLetterModeRef.current = false;
         return newSentences;
       } else {
@@ -331,14 +333,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           newSentences[index] = originalSentences[index];
         });
         setIsFirstLetterMode(false);
-        let undo = document.getElementById("undo");
-        let hide = document.getElementById("hide");
-        let all = document.getElementById("all");
-        undo.classList.remove("hidee");
 
-        hide.classList.remove("hidee");
-
-        all.classList.remove("hidee");
         isFirstLetterModeRef.current = false;
         return newSentences;
       }
@@ -468,17 +463,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       }/${chapter}`
     );
   }
-  function togg() {
-    let undo = document.getElementById("undo");
-    let hide = document.getElementById("hide");
-    let all = document.getElementById("all");
-
-    toggleFirstLetterMode();
-    undo.classList.add("hidee");
-
-    hide.classList.add("hidee");
-
-    all.classList.add("hidee");
+  function togg() {}
+  function flashcard() {
+    return <BasicDocument></BasicDocument>;
   }
   return (
     <>
@@ -510,23 +497,25 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
           breakpoints={[0, 0.25, 0.5, 0.75]}
         >
           <IonHeader>
-            <IonTitle>More</IonTitle>
-            <IonButtons>
-              <IonAvatar slot="end">
-                {user ? (
-                  <img
-                    alt="Profile"
-                    style={{
-                      width: "2rem",
-                      height: "2rem",
-                    }}
-                    src={user.picture}
-                  />
-                ) : (
-                  <IonIcon className="color" icon={settingsOutline}></IonIcon>
-                )}
-              </IonAvatar>
-            </IonButtons>
+            <IonToolbar>
+              <IonTitle>More</IonTitle>
+              <IonButtons>
+                <IonAvatar slot="end">
+                  {user ? (
+                    <img
+                      alt="Profile"
+                      style={{
+                        width: "2rem",
+                        height: "2rem",
+                      }}
+                      src={user.picture}
+                    />
+                  ) : (
+                    <IonIcon className="color" icon={settingsOutline}></IonIcon>
+                  )}
+                </IonAvatar>
+              </IonButtons>
+            </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem button onClick={toggleFirstLetterMode}>
@@ -541,6 +530,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
 
             <IonItem onClick={readContext} button>
               Read Verse Context
+            </IonItem>
+            <IonItem onClick={flashcard} button>
+              Print FlashCards
             </IonItem>
           </IonContent>
         </IonModal>
@@ -633,27 +625,27 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
                       <IonButton
                         onClick={() => hideRandomWords(3)}
                         style={{ margin: "0 0.5rem" }}
-                        id="ran"
+                        ref={hide}
                       >
                         <IonIcon size="medium" icon={backspace} />
                       </IonButton>
                       <IonButton
                         onClick={hideAllWords}
                         style={{ margin: "0 0.5rem" }}
-                        id="all"
+                        ref={all}
                       >
                         <IonIcon size="medium" icon={eyeOff} />
                       </IonButton>
-                      <IonButton onClick={revealAllWords} id="undo">
+                      <IonButton onClick={revealAllWords} ref={undo}>
                         <IonIcon size="medium" icon={refresh} />
                       </IonButton>{" "}
                     </>
-                    <div>
+                    {/* <div>
                       {" "}
                       <IonButton onClick={togg} style={{ margin: "0 0.5rem" }}>
                         <IonIcon size="medium" icon={documentText} />
                       </IonButton>
-                    </div>
+                </div> */}
                     <IonButton onClick={moveToNextSentence}>
                       <IonIcon size="medium" icon={arrowForward} />
                     </IonButton>
