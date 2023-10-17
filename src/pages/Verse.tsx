@@ -1,22 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  PDFViewer,
-} from "@react-pdf/renderer";
+
 import { useSwipeable } from "react-swipeable";
-import BasicDocument from "../components/pdfutil";
 let groupName;
 import {
   IonFooter,
   IonTitle,
   IonToolbar,
   IonItem,
+  IonList,
   IonButtons,
   IonButton,
   IonContent,
@@ -520,22 +513,24 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
-            <IonItem button onClick={toggleFirstLetterMode}>
-              {isFirstLetterMode ? (
-                <>Random Word Mode</>
-              ) : (
-                <>First Letter Mode</>
-              )}{" "}
-            </IonItem>
+            <IonList inset>
+              <IonItem button onClick={toggleFirstLetterMode}>
+                {isFirstLetterMode ? (
+                  <>Random Word Mode</>
+                ) : (
+                  <>First Letter Mode</>
+                )}{" "}
+              </IonItem>
 
-            <IonItem button>Verse Info.</IonItem>
+              <IonItem button>Verse Info.</IonItem>
 
-            <IonItem onClick={readContext} button>
-              Read Verse Context
-            </IonItem>
-            <IonItem onClick={flashcard} button>
-              Print FlashCards
-            </IonItem>
+              <IonItem onClick={readContext} button>
+                Read Verse Context
+              </IonItem>
+              <IonItem onClick={flashcard} disabled button>
+                Print FlashCards (coming soon)
+              </IonItem>
+            </IonList>
           </IonContent>
         </IonModal>
         <IonContent {...handlers}>
@@ -656,7 +651,6 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
               </div>
             )}
           </div>
-          {!pdf ? <BasicDocument></BasicDocument> : <div></div>}
         </IonContent>
       </IonModal>
     </>
