@@ -133,7 +133,7 @@ export default function user() {
         console.log("noloop", item);
 
         console.log("loop", item);
-        console.log(item.combined_data[0]);
+        console.log(item.title[0]);
         return (
           <IonCard
             onClick={() => openModalWithDynamicPath(item.combined_data[0].url)}
