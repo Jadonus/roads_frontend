@@ -42,16 +42,9 @@ interface VerseModalProps {
   userr: boolean;
   onClose?: () => void; // Function to close the modal (optional)
 }
-const verseProps: VerseModalProps = {
-  dynamicPath: "examplePath",
-  userr: false, // Assuming you include the user property
-  onClose: () => {
-    // Your onClose logic here
-  },
-};
 
 interface ContainerProps {}
-const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
+const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   const [pdf, setPdf] = useState(false);
   const [settings, setSettings] = useState([]);
   const { user } = useAuth0();
@@ -89,7 +82,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       // Add more sentences as needed
     ];
     let dat;
-    if (verseProps.userr == true) {
+    if (userr == true) {
       dat = {
         username: user.name,
         title: dynamic,
