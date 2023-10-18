@@ -86,8 +86,8 @@ export default function user() {
             const firstItem = item.combined_data[0];
             return (
               firstItem &&
-              firstItem.description[0] &&
-              firstItem.description[0]
+              firstItem.description &&
+              firstItem.description
                 .toLowerCase()
                 .includes(searchQuery.toLowerCase())
             );
