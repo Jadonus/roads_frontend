@@ -135,8 +135,7 @@ function Makeroad() {
           chapter: chapterInput,
           verse_number: verseNumberInput,
           title: nameInputValue,
-          url: `/roads/${finalInput}`,
-          img: `${finalInput}.png`,
+          url: `/roads/${nameInputValue}`,
           description: desc,
         },
       ]);
@@ -151,13 +150,12 @@ function Makeroad() {
       ]);
     }
 
-    // Clear input fields
+    // Clear input fields related to the verse, but not "name" and "description"
     setBookInput("");
     setFormInputs({
-      name: "",
-      description: "",
-      book: "",
+      ...formInputs,
       reference: "",
+      book: "",
     });
   };
 
