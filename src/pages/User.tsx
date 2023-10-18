@@ -133,24 +133,19 @@ export default function user() {
         console.log("noloop", item);
 
         console.log("loop", item);
-        console.log(item.title[0]);
+        console.log(item.title);
         return (
           <IonCard
-            onClick={() => openModalWithDynamicPath(item.combined_data[0].url)}
+            onClick={() => openModalWithDynamicPath(item.url[0])}
             className="margin"
             key={index}
           >
             <IonCardHeader>
-              <IonCardTitle>
-                {item.combined_data[0].title || "No title available"}
-              </IonCardTitle>
+              <IonCardTitle>{item.title || "No title available"}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <p>
-                {item.combined_data[0].description ||
-                  "No description available"}
-              </p>
-              <IonChip>{item.combined_data[0].num} Verses</IonChip>
+              <p>{item.description[0] || "No description available"}</p>
+              <IonChip>{item.num} Verses</IonChip>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
           </IonCard>
