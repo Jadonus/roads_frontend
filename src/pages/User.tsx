@@ -17,7 +17,6 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
-let filteredMetadata;
 interface ContainerProps {}
 
 interface DashboardData {
@@ -29,6 +28,8 @@ interface DashboardData {
   }[];
 }
 export default function user() {
+  let filteredMetadata = []; // Declare filteredMetadata here
+
   const [verse, setVerse] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -90,20 +91,18 @@ export default function user() {
   useEffect(() => {
     if (dashboardData) {
       console.log(dashboardData);
-      filteredMetadata = Array.isArray(dashboardData?.combined_data)
-        ? dashboardData.combined_data.filter((item: any) => {
-            const firstItem = item.combined_data;
-            return (
-              firstItem &&
-              firstItem.description &&
-              firstItem.description
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
-            );
-          })
-        : [];
+      filteredMetadata = dashboardData.combined_data.filter((item: any) => {
+        const firstItem = item.combined_data;
+        return (
+          firstItem &&
+          firstItem.description &&
+          firstItem.description
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+        );
+      });
     }
-  }, [dashboardData]);
+  }, [dashboardData, searchQuery]);
 
   if (dashboardData === null) {
     return (
