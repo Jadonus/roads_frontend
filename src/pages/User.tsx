@@ -130,6 +130,7 @@ export default function user() {
       <h1>HELLO</h1>
       {dashboardData.combined_data.map((item: any, index: number) => {
         // Apply your filtering logic here
+        console.log(item);
         if (
           item &&
           item.combined_data &&
@@ -139,6 +140,7 @@ export default function user() {
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
         ) {
+          console.log(item);
           return (
             <IonCard
               onClick={() =>
