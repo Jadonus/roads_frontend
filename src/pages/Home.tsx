@@ -190,18 +190,18 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 </h1>
               </div>
             </IonButtons>
-            <IonSegment
-              value={activeSegment}
-              onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
-            >
-              <IonSegmentButton value="default">
-                <IonLabel>Home</IonLabel>
-              </IonSegmentButton>
-              <IonSegmentButton value="next">
-                <IonLabel>My Roads</IonLabel>
-              </IonSegmentButton>
-            </IonSegment>
           </IonToolbar>
+          <IonSegment
+            value={activeSegment}
+            onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
+          >
+            <IonSegmentButton value="default">
+              <IonLabel>Home</IonLabel>
+            </IonSegmentButton>
+            <IonSegmentButton value="next">
+              <IonLabel>My Roads</IonLabel>
+            </IonSegmentButton>
+          </IonSegment>
           <IonToolbar className="">
             <IonSearchbar
               className="mt"
