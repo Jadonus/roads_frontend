@@ -54,6 +54,7 @@ export default function user() {
 
         const fetchedData = await response.json();
         setDashboardData(fetchedData);
+        console.log(dashboardData);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       }
@@ -74,11 +75,11 @@ export default function user() {
 
   const filteredMetadata = Array.isArray(dashboardData?.combined_data)
     ? dashboardData.combined_data.filter((item: any) => {
-        const firstItem = item.parsed_data[0];
+        const firstItem = item.combined_data[0];
         return (
           firstItem &&
-          firstItem.description &&
-          firstItem.description
+          firstItem.description[0] &&
+          firstItem.description[0]
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
         );
