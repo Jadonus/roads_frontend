@@ -83,7 +83,7 @@ export default function user() {
       console.log(dashboardData);
       const filteredMetadata = Array.isArray(dashboardData?.combined_data)
         ? dashboardData.combined_data.filter((item: any) => {
-            const firstItem = item.combined_data[0];
+            const firstItem = item.combined_data;
             return (
               firstItem &&
               firstItem.description &&
