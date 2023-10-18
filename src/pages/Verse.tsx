@@ -82,6 +82,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     ];
     let dat = {
       username: user.name,
+      title: dynamic,
     };
     const requestOption: RequestInit = {
       method: "POST",
