@@ -7,6 +7,8 @@ import {
   IonChip,
   IonIcon,
   IonButton,
+  IonFabButton,
+  IonFab,
   IonSpinner,
 } from "@ionic/react";
 import React, { useState, useEffect } from "react";
@@ -145,12 +147,19 @@ export default function user() {
             <IonCardContent>
               <p>{item.descriptions[0] || "No description available"}</p>
               <IonChip>{item.num} Verses</IonChip>
+
+              <p>Made By {item.creator}</p>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
           </IonCard>
         );
         return null; // If the item doesn't meet the filtering criteria
       })}
+      <IonFab slot="fixed" vertical="bottom" horizontal="end">
+        <IonFabButton>
+          <IonIcon icon={addCircle}></IonIcon>
+        </IonFabButton>
+      </IonFab>
       {showModal && (
         <Verse dynamicPath={dynamicPath} userr={true} onClose={closeModal} />
       )}
