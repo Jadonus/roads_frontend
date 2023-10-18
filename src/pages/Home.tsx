@@ -198,19 +198,19 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               onIonChange={handleIonSearchChange}
               value={searchQuery}
             />
+            <IonSegment
+              value={activeSegment}
+              onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
+            >
+              <IonSegmentButton value="default">
+                <IonLabel>Home</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="next">
+                <IonLabel>My Roads</IonLabel>
+              </IonSegmentButton>
+            </IonSegment>
           </IonToolbar>
         </IonHeader>
-        <IonSegment
-          value={activeSegment}
-          onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
-        >
-          <IonSegmentButton value="default">
-            <IonLabel>Default</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="next">
-            <IonLabel>Next</IonLabel>
-          </IonSegmentButton>
-        </IonSegment>
       </IonContent>
       {activeSegment === "default" ? (
         <IonContent>
