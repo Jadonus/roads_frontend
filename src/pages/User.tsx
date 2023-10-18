@@ -130,7 +130,7 @@ export default function user() {
       <h1>HELLO</h1>
       {dashboardData.combined_data.map((item: any, index: number) => {
         const firstItem = item.combined_data;
-
+        console.log("dassda", dashboardData);
         // Apply your filtering logic here
         if (
           firstItem &&
