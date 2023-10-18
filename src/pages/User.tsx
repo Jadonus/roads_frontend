@@ -1,4 +1,13 @@
-import { IonCard, IonCardTitle, IonItem, IonSpinner } from "@ionic/react";
+import {
+  IonCard,
+  IonCardTitle,
+  IonItem,
+  IonCardHeader,
+  IonCardContent,
+  IonChip,
+  IonButton,
+  IonSpinner,
+} from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import {
   IonSearchbarCustomEvent,
@@ -8,7 +17,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
-
+let filteredMetadata;
 interface ContainerProps {}
 
 interface DashboardData {
@@ -81,7 +90,7 @@ export default function user() {
   useEffect(() => {
     if (dashboardData) {
       console.log(dashboardData);
-      const filteredMetadata = Array.isArray(dashboardData?.combined_data)
+      filteredMetadata = Array.isArray(dashboardData?.combined_data)
         ? dashboardData.combined_data.filter((item: any) => {
             const firstItem = item.combined_data;
             return (
@@ -119,7 +128,27 @@ export default function user() {
   };
   return (
     <>
-      <h1>{dashboardData.combined_data[0].title}</h1>
+      {filteredMetadata.map((item: any, index: number) => (
+        <IonCard
+          onClick={() => openModalWithDynamicPath(item.combined_data[0]?.url)}
+          className="margin"
+          key={index}
+        >
+          <IonCardHeader>
+            <IonCardTitle>
+              {item.combined_data[0]?.title || "No title available"}
+            </IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <p>
+              {item.combined_data[0]?.description || "No description available"}
+            </p>
+            <IonChip>{item.combined_data.num} Verses</IonChip>
+          </IonCardContent>
+          <IonButton fill="clear"></IonButton>
+        </IonCard>
+      ))}
+      {showModal && <Verse dynamicPath={dynamicPath} onClose={closeModal} />}
     </>
   );
 }
