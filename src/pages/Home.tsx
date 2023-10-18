@@ -198,60 +198,60 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               onIonChange={handleIonSearchChange}
               value={searchQuery}
             />
-            <IonSegment
-              value={activeSegment}
-              onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
-            >
-              <IonSegmentButton value="default">
-                <IonLabel>Home</IonLabel>
-              </IonSegmentButton>
-              <IonSegmentButton value="next">
-                <IonLabel>My Roads</IonLabel>
-              </IonSegmentButton>
-            </IonSegment>
           </IonToolbar>
         </IonHeader>
-      </IonContent>
-      {activeSegment === "default" ? (
-        <IonContent>
-          <IonItem>
-            <IonCardTitle>Verse Of the Day</IonCardTitle>
-          </IonItem>
-          <IonItem lines="none" href="/verseoftheday">
-            <IonLabel className="ion-text-wrap">{verse}</IonLabel>
-          </IonItem>
+        <IonSegment
+          value={activeSegment}
+          onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
+        >
+          <IonSegmentButton value="default">
+            <IonLabel>Home</IonLabel>
+          </IonSegmentButton>
+          <IonSegmentButton value="next">
+            <IonLabel>My Roads</IonLabel>
+          </IonSegmentButton>
+        </IonSegment>
+        {activeSegment === "default" ? (
           <div>
-            {filteredMetadata.map((item: any, index: number) => (
-              <IonCard
-                onClick={() =>
-                  openModalWithDynamicPath(item.parsed_data[0]?.url)
-                }
-                className="margin"
-                key={index}
-              >
-                <IonCardHeader>
-                  <IonCardTitle>
-                    {item.parsed_data[0]?.title || "No title available"}
-                  </IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  <p>
-                    {item.parsed_data[0]?.description ||
-                      "No description available"}
-                  </p>
-                  <IonChip>{item.num_groups} Verses</IonChip>
-                </IonCardContent>
-                <IonButton fill="clear"></IonButton>
-              </IonCard>
-            ))}
+            <IonItem>
+              <IonCardTitle>Verse Of the Day</IonCardTitle>
+            </IonItem>
+            <IonItem lines="none" href="/verseoftheday">
+              <IonLabel className="ion-text-wrap">{verse}</IonLabel>
+            </IonItem>
+            <div>
+              {filteredMetadata.map((item: any, index: number) => (
+                <IonCard
+                  onClick={() =>
+                    openModalWithDynamicPath(item.parsed_data[0]?.url)
+                  }
+                  className="margin"
+                  key={index}
+                >
+                  <IonCardHeader>
+                    <IonCardTitle>
+                      {item.parsed_data[0]?.title || "No title available"}
+                    </IonCardTitle>
+                  </IonCardHeader>
+                  <IonCardContent>
+                    <p>
+                      {item.parsed_data[0]?.description ||
+                        "No description available"}
+                    </p>
+                    <IonChip>{item.num_groups} Verses</IonChip>
+                  </IonCardContent>
+                  <IonButton fill="clear"></IonButton>
+                </IonCard>
+              ))}
+            </div>
+            {showModal && (
+              <Verse dynamicPath={dynamicPath} onClose={closeModal} />
+            )}
           </div>
-          {showModal && (
-            <Verse dynamicPath={dynamicPath} onClose={closeModal} />
-          )}
-        </IonContent>
-      ) : (
-        <User />
-      )}
+        ) : (
+          <User />
+        )}
+      </IonContent>
     </IonPage>
   );
 };
