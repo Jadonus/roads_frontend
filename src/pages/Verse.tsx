@@ -89,7 +89,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       // Add more sentences as needed
     ];
     let dat;
-    if (verseProps.userr) {
+    if (verseProps.userr == true) {
       dat = {
         username: user.name,
         title: dynamic,
