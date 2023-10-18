@@ -130,10 +130,6 @@ export default function user() {
       <h1>HELLO</h1>
       {dashboardData.combined_data.map((item: any, index: number) => {
         // Apply your filtering logic here
-        console.log("noloop", item);
-
-        console.log("loop", item);
-        console.log(item.title);
         return (
           <IonCard
             onClick={() => openModalWithDynamicPath(item.url[0])}
@@ -144,7 +140,7 @@ export default function user() {
               <IonCardTitle>{item.title || "No title available"}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <p>{item.description || "No description available"}</p>
+              <p>{item.descriptions[0] || "No description available"}</p>
               <IonChip>{item.num} Verses</IonChip>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
@@ -152,7 +148,9 @@ export default function user() {
         );
         return null; // If the item doesn't meet the filtering criteria
       })}
-      {showModal && <Verse dynamicPath={dynamicPath} onClose={closeModal} />}
+      {showModal && (
+        <Verse dynamicPath={dynamicPath} userr={true} onClose={closeModal} />
+      )}
     </>
   );
 }

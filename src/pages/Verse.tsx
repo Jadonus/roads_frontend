@@ -39,8 +39,16 @@ import "../theme/variables.css";
 import { useAuth0 } from "@auth0/auth0-react";
 interface VerseModalProps {
   dynamicPath: string;
+  userr: boolean;
   onClose?: () => void; // Function to close the modal (optional)
 }
+const verseProps: VerseModalProps = {
+  dynamicPath: "examplePath",
+  userr: false, // Assuming you include the user property
+  onClose: () => {
+    // Your onClose logic here
+  },
+};
 
 interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
@@ -80,11 +88,20 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
       "This is the second sentence.",
       // Add more sentences as needed
     ];
-    let dat = {
-      username: user.name,
-      title: dynamic,
-      custom: "no",
-    };
+    let dat;
+    if (verseProps.userr) {
+      let dat = {
+        username: user.name,
+        title: dynamic,
+        custom: "yes",
+      };
+    } else {
+      let dat = {
+        username: user.name,
+        title: dynamic,
+        custom: "no",
+      };
+    }
     const requestOption: RequestInit = {
       method: "POST",
       headers: {
