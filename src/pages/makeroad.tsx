@@ -81,7 +81,7 @@ function Makeroad() {
     "Jude",
     "Revelation",
   ];
-  const [refer, setRefer] = useState("");
+
   const [bookInput, setBookInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [verseData, setVerseData] = useState([]);
@@ -115,8 +115,8 @@ function Makeroad() {
   // Function to add a verse
   const handleAddVerse = () => {
     const bookInputValue = bookInput.toLowerCase();
-    const chapterInput = parseInt(refer.split(":")[0]);
-    const verseNumberInput = parseInt(refer.split(":")[1]);
+    const chapterInput = parseInt(formInputs.reference.split(":")[0]);
+    const verseNumberInput = parseInt(formInputs.reference.split(":")[1]);
     const nameInputValue = formInputs.name;
     const desc = formInputs.description;
 
@@ -124,7 +124,9 @@ function Makeroad() {
     setFinalInput(nameInputValue.replace(/\s/g, ""));
 
     const bookId = bookofbiblelist.indexOf(bookInputValue) + 1;
-
+    useEffect(() => {
+      console.log(formInputs);
+    }, [formInputs]);
     if (!firstVerseAdded) {
       setFirstVerseAdded(true);
 
@@ -149,7 +151,7 @@ function Makeroad() {
         },
       ]);
     }
-    console.log(formInputs);
+
     // Clear input fields related to the verse, but not "name" and "description"
     setBookInput("");
     setFormInputs({
@@ -191,10 +193,8 @@ function Makeroad() {
           </IonItem>
           <IonItem>
             <IonInput
-              value={bookInput} // Update the value to bookInput
-              onIonChange={
-                (e) => handleBookInput(e.detail.value) // Update the book input directly
-              }
+              value={bookInput}
+              onIonInput={(e) => handleBookInput(e.detail.value)}
               placeholder="Book of your verse"
             ></IonInput>
             <div>
@@ -211,9 +211,9 @@ function Makeroad() {
           </IonItem>
           <IonItem>
             <IonInput
-              value={refer} // Update the value to refer
-              onIonChange={
-                (e) => setRefer(e.detail.value) // Update the refer state directly
+              value={formInputs.reference}
+              onIonChange={(e) =>
+                setFormInputs({ ...formInputs, reference: e.detail.value })
               }
               placeholder="Reference (example: 23:1)"
             ></IonInput>
