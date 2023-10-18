@@ -78,19 +78,22 @@ export default function user() {
   ) => {
     setSearchQuery(e.detail.value || "");
   };
-
-  const filteredMetadata = Array.isArray(dashboardData?.combined_data)
-    ? dashboardData.combined_data.filter((item: any) => {
-        const firstItem = item.combined_data[0];
-        return (
-          firstItem &&
-          firstItem.description[0] &&
-          firstItem.description[0]
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())
-        );
-      })
-    : [];
+  useEffect(() => {
+    if (dashboardData) {
+      const filteredMetadata = Array.isArray(dashboardData?.combined_data)
+        ? dashboardData.combined_data.filter((item: any) => {
+            const firstItem = item.combined_data[0];
+            return (
+              firstItem &&
+              firstItem.description[0] &&
+              firstItem.description[0]
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
+            );
+          })
+        : [];
+    }
+  }, [dashboardData]);
 
   if (verse === null || dashboardData === null) {
     return (
