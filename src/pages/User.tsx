@@ -130,42 +130,31 @@ export default function user() {
       <h1>HELLO</h1>
       {dashboardData.combined_data.map((item: any, index: number) => {
         // Apply your filtering logic here
-        console.log(item);
-        if (
-          item &&
-          item.combined_data &&
-          item.combined_data[0] &&
-          item.combined_data[0].description &&
-          item.combined_data[0].description
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())
-        ) {
-          console.log("loop", item);
-          console.log(item.combined_data[0]);
-          return (
-            <IonCard
-              onClick={() =>
-                openModalWithDynamicPath(item.combined_data[0].url)
-              }
-              className="margin"
-              key={index}
-            >
-              <IonCardHeader>
-                <IonCardTitle>
-                  {item.combined_data[0].title || "No title available"}
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <p>
-                  {item.combined_data[0].description ||
-                    "No description available"}
-                </p>
-                <IonChip>{item.combined_data[0].num} Verses</IonChip>
-              </IonCardContent>
-              <IonButton fill="clear"></IonButton>
-            </IonCard>
-          );
-        }
+        console.log("noloop", item);
+
+        console.log("loop", item);
+        console.log(item.combined_data[0]);
+        return (
+          <IonCard
+            onClick={() => openModalWithDynamicPath(item.combined_data[0].url)}
+            className="margin"
+            key={index}
+          >
+            <IonCardHeader>
+              <IonCardTitle>
+                {item.combined_data[0].title || "No title available"}
+              </IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
+              <p>
+                {item.combined_data[0].description ||
+                  "No description available"}
+              </p>
+              <IonChip>{item.combined_data[0].num} Verses</IonChip>
+            </IonCardContent>
+            <IonButton fill="clear"></IonButton>
+          </IonCard>
+        );
         return null; // If the item doesn't meet the filtering criteria
       })}
       {showModal && <Verse dynamicPath={dynamicPath} onClose={closeModal} />}
