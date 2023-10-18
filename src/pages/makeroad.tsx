@@ -209,7 +209,6 @@ function Makeroad() {
           </IonItem>
           <IonItem>
             <IonInput
-              type="number"
               value={formInputs.reference}
               onIonChange={(e) =>
                 setFormInputs({ ...formInputs, reference: e.detail.value })
