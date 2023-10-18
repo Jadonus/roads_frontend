@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonPage,
   IonContent,
@@ -158,7 +158,9 @@ function Makeroad() {
       book: "",
     });
   };
-
+  useEffect(() => {
+    console.log(verseData);
+  }, [verseData]);
   return (
     <IonPage>
       <IonHeader>
