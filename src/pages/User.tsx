@@ -128,33 +128,38 @@ export default function user() {
   return (
     <>
       <h1>HELLO</h1>
-      {filteredMetadata &&
-        filteredMetadata.map((item: any, index: number) => (
-          <>
-            <h1>HELLO</h1>
+      {dashboardData.combined_data.map((item: any, index: number) => {
+        const firstItem = item.combined_data;
+
+        // Apply your filtering logic here
+        if (
+          firstItem &&
+          firstItem.description &&
+          firstItem.description
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+        ) {
+          return (
             <IonCard
-              onClick={() =>
-                openModalWithDynamicPath(item.combined_data[0]?.url)
-              }
+              onClick={() => openModalWithDynamicPath(firstItem[0]?.url)}
               className="margin"
               key={index}
             >
               <IonCardHeader>
                 <IonCardTitle>
-                  {item.combined_data?.title || "No title available"}
+                  {firstItem.title || "No title available"}
                 </IonCardTitle>
               </IonCardHeader>
               <IonCardContent>
-                <p>
-                  {item.combined_data?.description ||
-                    "No description available"}
-                </p>
-                <IonChip>{item.combined_data.num} Verses</IonChip>
+                <p>{firstItem.description || "No description available"}</p>
+                <IonChip>{firstItem.num} Verses</IonChip>
               </IonCardContent>
               <IonButton fill="clear"></IonButton>
             </IonCard>
-          </>
-        ))}
+          );
+        }
+        return null; // If the item doesn't meet the filtering criteria
+      })}
       {showModal && <Verse dynamicPath={dynamicPath} onClose={closeModal} />}
     </>
   );
