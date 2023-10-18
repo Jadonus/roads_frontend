@@ -149,7 +149,7 @@ function Makeroad() {
         },
       ]);
     }
-
+    console.log(formInputs);
     // Clear input fields related to the verse, but not "name" and "description"
     setBookInput("");
     setFormInputs({
@@ -192,7 +192,7 @@ function Makeroad() {
           <IonItem>
             <IonInput
               value={bookInput}
-              onIonChange={(e) => handleBookInput(e.detail.value)}
+              onIonInput={(e) => handleBookInput(e.detail.value)}
               placeholder="Book of your verse"
             ></IonInput>
             <div>
