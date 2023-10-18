@@ -140,7 +140,8 @@ export default function user() {
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
         ) {
-          console.log(item);
+          console.log("loop", item);
+          console.log(item.combined_data[0]);
           return (
             <IonCard
               onClick={() =>
