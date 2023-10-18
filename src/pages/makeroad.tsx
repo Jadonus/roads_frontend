@@ -191,9 +191,9 @@ function Makeroad() {
           </IonItem>
           <IonItem>
             <IonInput
-              value={formInputs.book} // Update the value to formInputs.book
+              value={bookInput} // Update the value to bookInput
               onIonChange={
-                (e) => setFormInputs({ ...formInputs, book: e.detail.value }) // Update the book property in formInputs
+                (e) => handleBookInput(e.detail.value) // Update the book input directly
               }
               placeholder="Book of your verse"
             ></IonInput>
