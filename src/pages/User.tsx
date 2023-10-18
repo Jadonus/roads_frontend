@@ -45,7 +45,7 @@ export default function user() {
     };
     const fetchDashboardData = async () => {
       try {
-        const dashboardUrl = "https://www.roadsbible.com/userdash";
+        const dashboardUrl = "https://www.roadsbible.com/userdash/";
         const response = await fetch(dashboardUrl, options);
 
         if (!response.ok) {
