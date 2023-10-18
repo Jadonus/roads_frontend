@@ -90,13 +90,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose }) => {
     ];
     let dat;
     if (verseProps.userr) {
-      let dat = {
+      dat = {
         username: user.name,
         title: dynamic,
         custom: "yes",
       };
     } else {
-      let dat = {
+      dat = {
         username: user.name,
         title: dynamic,
         custom: "no",
