@@ -111,7 +111,9 @@ function Makeroad() {
     setBookInput(suggestion);
     setSuggestions([]);
   };
-
+  useEffect(() => {
+    console.log(formInputs);
+  }, [formInputs]);
   // Function to add a verse
   const handleAddVerse = () => {
     const bookInputValue = bookInput.toLowerCase();
@@ -124,9 +126,7 @@ function Makeroad() {
     setFinalInput(nameInputValue.replace(/\s/g, ""));
 
     const bookId = bookofbiblelist.indexOf(bookInputValue) + 1;
-    useEffect(() => {
-      console.log(formInputs);
-    }, [formInputs]);
+
     if (!firstVerseAdded) {
       setFirstVerseAdded(true);
 
