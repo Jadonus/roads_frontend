@@ -130,24 +130,30 @@ export default function user() {
     <>
       {filteredMetadata &&
         filteredMetadata.map((item: any, index: number) => (
-          <IonCard
-            onClick={() => openModalWithDynamicPath(item.combined_data[0]?.url)}
-            className="margin"
-            key={index}
-          >
-            <IonCardHeader>
-              <IonCardTitle>
-                {item.combined_data?.title || "No title available"}
-              </IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              <p>
-                {item.combined_data?.description || "No description available"}
-              </p>
-              <IonChip>{item.combined_data.num} Verses</IonChip>
-            </IonCardContent>
-            <IonButton fill="clear"></IonButton>
-          </IonCard>
+          <>
+            <h1>HELLO</h1>
+            <IonCard
+              onClick={() =>
+                openModalWithDynamicPath(item.combined_data[0]?.url)
+              }
+              className="margin"
+              key={index}
+            >
+              <IonCardHeader>
+                <IonCardTitle>
+                  {item.combined_data?.title || "No title available"}
+                </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <p>
+                  {item.combined_data?.description ||
+                    "No description available"}
+                </p>
+                <IonChip>{item.combined_data.num} Verses</IonChip>
+              </IonCardContent>
+              <IonButton fill="clear"></IonButton>
+            </IonCard>
+          </>
         ))}
       {showModal && <Verse dynamicPath={dynamicPath} onClose={closeModal} />}
     </>
