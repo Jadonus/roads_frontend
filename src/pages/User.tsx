@@ -144,7 +144,7 @@ export default function user() {
               <IonCardTitle>{item.title || "No title available"}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <p>{item.description[0] || "No description available"}</p>
+              <p>{item.description || "No description available"}</p>
               <IonChip>{item.num} Verses</IonChip>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
