@@ -128,7 +128,7 @@ export default function user() {
   };
   return (
     <>
-      <IonButton expand="block">
+      <IonButton expand="block" style={{ margin: "1rem" }}>
         <IonIcon slot="icon-only" icon={addCircle}></IonIcon>
       </IonButton>
       {dashboardData.combined_data.map((item: any, index: number) => {

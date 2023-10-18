@@ -203,7 +203,6 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         </IonHeader>
         <IonSegment
           swipeGesture={true}
-          style={{ marginLeft: "1rem", marginRight: "1rem" }}
           value={activeSegment}
           onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
         >
