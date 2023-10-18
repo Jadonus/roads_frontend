@@ -51,8 +51,9 @@ export default function user() {
         if (!response.ok) {
           throw Error("Network response was not ok");
         }
-
+        console.log("response: " + response);
         const fetchedData = await response.json();
+        console.log(fetchedData);
         setDashboardData(fetchedData);
         console.log(dashboardData);
       } catch (error) {
