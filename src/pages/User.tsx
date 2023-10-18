@@ -129,30 +129,35 @@ export default function user() {
     <>
       <h1>HELLO</h1>
       {dashboardData.combined_data.map((item: any, index: number) => {
-        const firstItem = item.combined_data;
-        console.log(firstItem);
         // Apply your filtering logic here
         if (
-          firstItem &&
-          firstItem.description &&
-          firstItem.description
+          item &&
+          item.combined_data &&
+          item.combined_data[0] &&
+          item.combined_data[0].description &&
+          item.combined_data[0].description
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
         ) {
           return (
             <IonCard
-              onClick={() => openModalWithDynamicPath(firstItem[0]?.url)}
+              onClick={() =>
+                openModalWithDynamicPath(item.combined_data[0].url)
+              }
               className="margin"
               key={index}
             >
               <IonCardHeader>
                 <IonCardTitle>
-                  {firstItem.title || "No title available"}
+                  {item.combined_data[0].title || "No title available"}
                 </IonCardTitle>
               </IonCardHeader>
               <IonCardContent>
-                <p>{firstItem.description || "No description available"}</p>
-                <IonChip>{firstItem.num} Verses</IonChip>
+                <p>
+                  {item.combined_data[0].description ||
+                    "No description available"}
+                </p>
+                <IonChip>{item.combined_data[0].num} Verses</IonChip>
               </IonCardContent>
               <IonButton fill="clear"></IonButton>
             </IonCard>
