@@ -153,7 +153,7 @@ export default function user() {
         return null; // If the item doesn't meet the filtering criteria
       })}
       <IonFab slot="fixed" vertical="bottom" horizontal="end">
-        <IonFabButton>
+        <IonFabButton href="/makeroad">
           <IonIcon icon={addCircle}></IonIcon>
         </IonFabButton>
       </IonFab>
