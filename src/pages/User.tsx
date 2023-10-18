@@ -96,7 +96,7 @@ export default function user() {
     }
   }, [dashboardData]);
 
-  if (verse === null || dashboardData === null) {
+  if (dashboardData === null) {
     return (
       <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
         <IonSpinner
@@ -119,7 +119,7 @@ export default function user() {
   };
   return (
     <>
-      <h1>User</h1>
+      <h1>{dashboardData.combined_data[0].title}</h1>
     </>
   );
 }
