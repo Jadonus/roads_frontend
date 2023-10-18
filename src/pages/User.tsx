@@ -128,8 +128,7 @@ export default function user() {
   };
   return (
     <>
-      {dashboardData &&
-        filteredMetadata &&
+      {filteredMetadata &&
         filteredMetadata.map((item: any, index: number) => (
           <IonCard
             onClick={() => openModalWithDynamicPath(item.combined_data[0]?.url)}
