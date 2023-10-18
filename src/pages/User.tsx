@@ -12,7 +12,12 @@ import Verse from "./Verse";
 interface ContainerProps {}
 
 interface DashboardData {
-  combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
+  combined_data: {
+    title: string;
+    num: number;
+    url: string[];
+    descriptions: string[];
+  }[];
 }
 export default function user() {
   const [verse, setVerse] = useState<string | null>(null);
