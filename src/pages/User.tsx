@@ -5,6 +5,7 @@ import {
   IonCardHeader,
   IonCardContent,
   IonChip,
+  IonIcon,
   IonButton,
   IonSpinner,
 } from "@ionic/react";
@@ -18,7 +19,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
 interface ContainerProps {}
-
+import { addCircle } from "ionicons/icons";
 interface DashboardData {
   combined_data: {
     title: string;
@@ -127,7 +128,9 @@ export default function user() {
   };
   return (
     <>
-      <h1>HELLO</h1>
+      <IonButton expand="block">
+        <IonIcon slot="icon-only" icon={addCircle}></IonIcon>
+      </IonButton>
       {dashboardData.combined_data.map((item: any, index: number) => {
         // Apply your filtering logic here
         return (
