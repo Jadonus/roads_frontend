@@ -80,6 +80,7 @@ export default function user() {
   };
   useEffect(() => {
     if (dashboardData) {
+      console.log(dashboardData);
       const filteredMetadata = Array.isArray(dashboardData?.combined_data)
         ? dashboardData.combined_data.filter((item: any) => {
             const firstItem = item.combined_data[0];
