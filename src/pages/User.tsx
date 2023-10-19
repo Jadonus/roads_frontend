@@ -211,7 +211,7 @@ export default function user() {
                 if (navigator.share) {
                   const shareData = {
                     title: "Roads",
-                    text: "Check out this Road",
+                    text: "Check out this Road!",
                     url: `https://dashboard.roadsbible.com/tabs/dashboard/${selectedCard.creator}/${selectedCard.title}`,
                   };
 
@@ -223,6 +223,19 @@ export default function user() {
               text: "Delete",
               role: "destructive",
               handler: () => {
+                const data = {
+                  username: user.name,
+                  road: selectedCard.title,
+                };
+
+                const options = {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                };
+                fetch("https://dashboard.roadsbible.com/api/delete/", options);
                 // Handle the delete action using 'selectedCard'
               },
             },
