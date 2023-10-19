@@ -7,10 +7,15 @@ import {
   IonButton,
   IonList,
   IonLabel,
+  IonTitle,
+  IonSearchbar,
   IonSelect,
   IonSelectOption,
+  IonHeader,
+  IonToolbar,
+  IonBackButton,
 } from "@ionic/react";
-
+import { useAuth0 } from "@auth0/auth0-react";
 function Makeroad() {
   const bookofbiblelist = [
     "Genesis",
@@ -80,14 +85,16 @@ function Makeroad() {
     "Jude",
     "Revelation",
   ];
-
+  const { user } = useAuth0();
   const [formInputs, setFormInputs] = useState({
     name: "",
     description: "",
     book: "",
-    reference: "",
+    chapter: "",
+    verse: "",
   });
 
+  const [suggestions, setSuggestions] = useState([]);
   const [verseData, setVerseData] = useState([]);
 
   const handleInputChange = (e) => {
@@ -98,46 +105,101 @@ function Makeroad() {
     });
   };
 
+  // Function to handle book input and suggestions
+  const handleBookInput = (input) => {
+    setFormInputs({
+      ...formInputs,
+      book: input,
+    });
+
+    const lowerInput = input.toLowerCase();
+
+    const filteredSuggestions = bookofbiblelist.filter((book) =>
+      book.toLowerCase().includes(lowerInput)
+    );
+
+    setSuggestions(filteredSuggestions);
+  };
+
+  // Function to handle selecting a suggestion
+  const handleSuggestionClick = (suggestion) => {
+    setFormInputs({
+      ...formInputs,
+      book: suggestion,
+    });
+    setSuggestions([]);
+  };
+
+  // Function to get the ID of the selected book
+  const getBookId = (bookName) => {
+    const bookId = bookofbiblelist.indexOf(bookName);
+    return bookId + 1;
+  };
+
   const handleAddVerse = () => {
-    const { name, description, book, reference } = formInputs;
-    if (name && book && reference) {
-      const [bookName, chapter, verseNumber] = reference.split(":");
-      if (bookofbiblelist.includes(bookName)) {
-        setVerseData([
-          ...verseData,
-          {
-            book: bookName,
-            chapter: chapter,
-            verse: verseNumber,
-            title: name,
-            description: description,
-          },
-        ]);
-        setFormInputs({
-          name: "",
-          description: "",
-          book: "",
-          reference: "",
-        });
-      } else {
-        alert("Invalid book name. Please choose a book from the Bible.");
+    const { name, description, book, chapter, verse } = formInputs;
+    if (name && book && chapter && verse) {
+      const bookId = getBookId(book);
+
+      const newVerse: any = {
+        book_id: bookId,
+        chapter: parseInt(chapter),
+        verse_number: parseInt(verse),
+      };
+
+      if (verseData.length === 0) {
+        newVerse.description = description;
+
+        newVerse.url = `/roads/${name}`;
       }
+
+      setVerseData([...verseData, newVerse]);
     } else {
       alert("Please fill in all fields.");
     }
   };
 
+  useEffect(() => {
+    console.log(verseData);
+  }, [verseData]);
+  function push() {
+    let data = {
+      verses: verseData,
+      title: formInputs.name,
+      creator: user.name,
+    };
+    const requestOption: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    fetch("https://www.roadsbible.com/api/newroad/", requestOption)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonBackButton />
+          <IonTitle size="large">Make A Road.</IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
-        <IonList>
+        <IonList inset color="light">
           <IonItem>
             <IonInput
               type="text"
               name="name"
               value={formInputs.name}
-              placeholder="Your Name Here..."
-              onIonChange={handleInputChange}
+              placeholder="The Name Of your Road"
+              onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
           <IonItem>
@@ -145,34 +207,49 @@ function Makeroad() {
               type="text"
               name="description"
               value={formInputs.description}
-              placeholder="Description"
-              onIonChange={handleInputChange}
+              placeholder="Description of your road"
+              onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
           <IonItem>
-            <IonSelect
+            {/* Replace IonSelect with IonSearchbar for book input */}
+            <IonInput
               name="book"
               value={formInputs.book}
               placeholder="Book of your verse"
-              onIonChange={handleInputChange}
-            >
-              {bookofbiblelist.map((book, index) => (
-                <IonSelectOption key={index} value={book}>
-                  {book}
-                </IonSelectOption>
+              onIonInput={(e) => handleBookInput(e.detail.value)}
+            ></IonInput>
+            <div>
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className="suggestion"
+                  onClick={() => handleSuggestionClick(suggestion)}
+                >
+                  {suggestion}
+                </div>
               ))}
-            </IonSelect>
+            </div>
           </IonItem>
           <IonItem>
             <IonInput
-              type="text"
-              name="reference"
-              value={formInputs.reference}
-              placeholder="Reference (example: Genesis 23:1)"
-              onIonChange={handleInputChange}
+              type="number"
+              name="chapter"
+              value={formInputs.chapter}
+              placeholder="Chapter"
+              onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
-          <IonButton expand="full" onClick={handleAddVerse}>
+          <IonItem>
+            <IonInput
+              type="number"
+              name="verse"
+              value={formInputs.verse}
+              placeholder="Verse"
+              onIonInput={handleInputChange}
+            ></IonInput>
+          </IonItem>
+          <IonButton fill="clear" onClick={handleAddVerse}>
             Add Verse
           </IonButton>
         </IonList>
@@ -180,8 +257,8 @@ function Makeroad() {
           {verseData.map((verse, index) => (
             <IonItem key={index}>
               <IonLabel>
-                {verse.book} {verse.chapter}:{verse.verse} - {verse.title} -{" "}
-                {verse.description}
+                {bookofbiblelist[verse.book_id - 1]} {verse.chapter}:
+                {verse.verse_number}
               </IonLabel>
             </IonItem>
           ))}
