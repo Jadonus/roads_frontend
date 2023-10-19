@@ -124,6 +124,11 @@ export default function user() {
         <IonItem>
           <IonLabel>You do not have any custom roads yet. </IonLabel>
         </IonItem>
+        <IonFab slot="fixed" vertical="bottom" horizontal="end">
+          <IonFabButton routerLink="/tabs/dashboard/makeroad/">
+            <IonIcon icon={addCircle}></IonIcon>
+          </IonFabButton>
+        </IonFab>
       </div>
     );
   }
