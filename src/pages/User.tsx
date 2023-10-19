@@ -237,8 +237,11 @@ export default function user() {
                   body: JSON.stringify(data),
                 };
 
-                fetch("https://www.roadsbible.com/api/delete/", options);
-                location.reload();
+                fetch("https://www.roadsbible.com/api/delete/", options).then(
+                  () => {
+                    location.reload();
+                  }
+                );
                 // Handle the delete action using 'selectedCard'
               },
             },
