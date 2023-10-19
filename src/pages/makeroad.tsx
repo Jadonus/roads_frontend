@@ -14,6 +14,7 @@ import {
   IonHeader,
   IonToolbar,
   IonBackButton,
+  IonAlert,
   IonButtons,
 } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -94,7 +95,7 @@ function Makeroad() {
     chapter: "",
     verse: "",
   });
-
+  const [success, setSuccess] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [verseData, setVerseData] = useState([]);
 
@@ -177,7 +178,15 @@ function Makeroad() {
       body: JSON.stringify(data),
     };
     fetch("https://www.roadsbible.com/api/newroad/", requestOption)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Assuming you want to parse the response as JSON
+      })
       .then((data) => {
+        // Your code to handle the data if the response is successful
+        setSuccess(true);
         console.log(data);
       })
       .catch((err) => {
@@ -275,6 +284,36 @@ function Makeroad() {
             </IonItem>
           ))}
         </IonList>
+        {success ? (
+          <>
+            {" "}
+            <IonAlert
+              trigger="present-alert"
+              header="Success!"
+              message="Your Road has been created succesfully."
+              buttons={[
+                {
+                  text: "Cancel",
+                  role: "cancel",
+                  handler: () => {
+                    console.log("Alert canceled");
+                  },
+                },
+                {
+                  text: "OK",
+                  role: "confirm",
+                  handler: () => {
+                    location.href = `https://dashboard.roadsbible.com/tabs/dashboard/`;
+                  },
+                },
+              ]}
+              isOpen={true}
+              onDidDismiss={({ detail }) =>
+                console.log(`Dismissed with role: ${detail.role}`)
+              }
+            ></IonAlert>
+          </>
+        ) : null}
       </IonContent>
     </IonPage>
   );
