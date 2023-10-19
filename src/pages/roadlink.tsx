@@ -15,9 +15,10 @@ import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { userr, road } = useParams<{ userr: string; road: string }>();
-
   const { user } = useAuth0();
   const [description, setDescription] = useState();
+
+  const [success, setSuccess] = useState(false);
   let verses;
   const [title, setTitle] = useState();
   async function get() {
@@ -67,7 +68,11 @@ function Roadlink() {
       },
       body: JSON.stringify(dat),
     };
-    fetch("https://www.roadsbible.com/api/newroad/", requestOption);
+    fetch("https://www.roadsbible.com/api/newroad/", requestOption)
+      .then((data) => {
+        setSuccess(true);
+      })
+      .catch();
   }
   return (
     <>
@@ -81,24 +86,29 @@ function Roadlink() {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonItem>
-            {title !== null && title !== undefined ? (
-              <>
+          {title !== null && title !== undefined ? (
+            <>
+              <IonItem>
                 {" "}
-                <h1>
-                  {title}
-                  <br />
-                </h1>{" "}
-                <p>{description}</p>
-                <p>Made by {userr}</p>
-              </>
-            ) : (
-              <h1>This Road Does not Exist.</h1>
-            )}
-          </IonItem>
+                <h1>{title}</h1>
+              </IonItem>{" "}
+              <IonItem>
+                <p>
+                  {description} | Made by {userr}
+                </p>
+              </IonItem>
+            </>
+          ) : (
+            <h1>This Road Does not Exist.</h1>
+          )}
           <IonButton onClick={neww} size="small" shape="round">
             GET
           </IonButton>
+          {success ? (
+            <IonItem routerLink="/tabs/dashboard/">
+              🎉 Your Road Has been added
+            </IonItem>
+          ) : null}
         </IonContent>
       </IonPage>
     </>
