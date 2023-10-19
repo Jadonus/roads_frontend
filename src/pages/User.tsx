@@ -5,6 +5,7 @@ import {
   IonCardHeader,
   IonCardContent,
   IonChip,
+  IonActionSheet,
   IonIcon,
   IonButton,
   IonFabButton,
@@ -21,33 +22,46 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
+
 interface ContainerProps {}
+
 import { addCircle } from "ionicons/icons";
+
 interface DashboardData {
   combined_data: {
     title: string;
     num: number;
     url: string[];
     descriptions: string[];
+    creator: string; // Added creator property here
   }[];
 }
+
 export default function user() {
-  let filteredMetadata = []; // Declare filteredMetadata here
+  let filteredMetadata = [];
 
   const [verse, setVerse] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [showActionSheet, setShowActionSheet] = useState(false);
+
+  const openActionSheet = (item) => {
+    setSelectedCard(item);
+    setShowActionSheet(true);
+  };
 
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
     null
   );
-  const [dynamicPath, setDynamicPath] = useState<string>(""); // State variable to hold the dynamic path
+  const [dynamicPath, setDynamicPath] = useState<string>("");
 
   const { user } = useAuth0();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
+
   const openModalWithDynamicPath = (dynamicPath: string) => {
     setShowModal(true);
-    setDynamicPath(dynamicPath); // Store the dynamic path in a state variable
+    setDynamicPath(dynamicPath);
   };
 
   useEffect(() => {
@@ -70,11 +84,8 @@ export default function user() {
         if (!response.ok) {
           throw Error("Network response was not ok");
         }
-        console.log("response: " + response);
         const fetchedData = await response.json();
-        console.log(fetchedData);
         setDashboardData(fetchedData);
-        console.log(dashboardData);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       }
@@ -92,9 +103,9 @@ export default function user() {
   ) => {
     setSearchQuery(e.detail.value || "");
   };
+
   useEffect(() => {
     if (dashboardData) {
-      console.log(dashboardData);
       filteredMetadata = dashboardData.combined_data.filter((item: any) => {
         const firstItem = item.combined_data;
         return (
@@ -141,14 +152,18 @@ export default function user() {
   }
 
   const closeModal = () => {
-    setShowModal(false); // This function closes the modal
+    setShowModal(false);
   };
+
   return (
     <>
       {dashboardData.combined_data.map((item: any, index: number) => {
-        // Apply your filtering logic here
         return (
           <IonCard
+            onContextMenu={(e) => {
+              e.preventDefault();
+              openActionSheet(item);
+            }}
             onClick={() => openModalWithDynamicPath(item.url[0])}
             className="margin"
             key={index}
@@ -164,7 +179,6 @@ export default function user() {
             <IonButton fill="clear"></IonButton>
           </IonCard>
         );
-        return null; // If the item doesn't meet the filtering criteria
       })}
       <IonFab slot="fixed" vertical="bottom" horizontal="end">
         <IonFabButton routerLink="/tabs/dashboard/makeroad/">
@@ -173,6 +187,39 @@ export default function user() {
       </IonFab>
       {showModal && (
         <Verse dynamicPath={dynamicPath} userr={true} onClose={closeModal} />
+      )}
+      {showActionSheet && selectedCard && (
+        <IonActionSheet
+          isOpen={showActionSheet}
+          onDidDismiss={() => setShowActionSheet(false)}
+          buttons={[
+            {
+              text: "Share",
+              handler: () => {
+                if (navigator.share) {
+                  const shareData = {
+                    title: "Roads",
+                    text: "Check out this Road",
+                    url: `https://dashboard.roadsbible.com/tabs/dashboard/${selectedCard.creator}/${selectedCard.title}`,
+                  };
+
+                  navigator.share(shareData);
+                }
+              },
+            },
+            {
+              text: "Delete",
+              role: "destructive",
+              handler: () => {
+                // Handle the delete action using 'selectedCard'
+              },
+            },
+            {
+              text: "Cancel",
+              role: "cancel",
+            },
+          ]}
+        />
       )}
     </>
   );

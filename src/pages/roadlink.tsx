@@ -97,13 +97,16 @@ function Roadlink() {
                   {description} | Made by {userr}
                 </p>
               </IonItem>
+              <IonItem>
+                <IonButton onClick={neww} size="small" shape="round">
+                  GET
+                </IonButton>
+              </IonItem>
             </>
           ) : (
             <h1>This Road Does not Exist.</h1>
           )}
-          <IonButton onClick={neww} size="small" shape="round">
-            GET
-          </IonButton>
+
           {success ? (
             <IonItem routerLink="/tabs/dashboard/">
               🎉 Your Road Has been added
