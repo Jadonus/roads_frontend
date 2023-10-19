@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { userr, road } = useParams<{ userr: string; road: string }>();
-
+  let res;
   const { user } = useAuth0();
   async function get() {
     const dat = {
@@ -32,7 +32,10 @@ function Roadlink() {
     };
     await fetch("https://www.roadsbible.com/api/getroad/", requestOption)
       .then((response) => {
+        console.log(response);
         response.json();
+        response = res;
+        console.log(response);
       })
       .then((data) => {
         console.log(data);
@@ -51,6 +54,7 @@ function Roadlink() {
         </IonHeader>
         <IonContent>
           <IonButton onClick={get}>Get</IonButton>
+          <IonItem>{res.data.title}</IonItem>
         </IonContent>
       </IonPage>
     </>
