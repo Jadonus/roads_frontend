@@ -10,6 +10,7 @@ import {
   IonFabButton,
   IonFab,
   IonSpinner,
+  IonLabel,
 } from "@ionic/react";
 import React, { useState, useRef, useEffect } from "react";
 import {
@@ -117,6 +118,15 @@ export default function user() {
       </div>
     );
   }
+  if (dashboardData.combined_data.length === 0) {
+    return (
+      <div>
+        <IonItem>
+          <IonLabel>You do not have any custom roads yet. </IonLabel>
+        </IonItem>
+      </div>
+    );
+  }
 
   function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
     setTimeout(() => {
@@ -144,7 +154,6 @@ export default function user() {
             <IonCardContent>
               <p>{item.descriptions[0] || "No description available"}</p>
               <IonChip>{item.num} Verses</IonChip>
-
               <p>Made By {item.creator}</p>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
