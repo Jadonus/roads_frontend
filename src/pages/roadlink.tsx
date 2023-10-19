@@ -30,14 +30,13 @@ function Roadlink() {
       },
       body: JSON.stringify(dat),
     };
-    fetch("www.roadsbible.com/api/getroad/", requestOption)
+    await fetch("www.roadsbible.com/api/getroad/", requestOption)
       .then((response) => {
         response.json();
       })
       .then((data) => {
         console.log(data);
       });
-    get();
   }
   return (
     <>
@@ -50,6 +49,9 @@ function Roadlink() {
             <IonTitle>{userr + " - " + road}</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonContent>
+          <IonButton onClick={get}>Get</IonButton>
+        </IonContent>
       </IonPage>
     </>
   );
