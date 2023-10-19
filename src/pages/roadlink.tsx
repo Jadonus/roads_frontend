@@ -30,7 +30,7 @@ function Roadlink() {
       },
       body: JSON.stringify(dat),
     };
-    await fetch("www.roadsbible.com/api/getroad/", requestOption)
+    await fetch("https://www.roadsbible.com/api/getroad/", requestOption)
       .then((response) => {
         response.json();
       })
