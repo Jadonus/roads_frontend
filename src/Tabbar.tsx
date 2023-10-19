@@ -13,7 +13,7 @@ import { library, personCircle, settingsOutline, book } from "ionicons/icons";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
 import Settings from "./pages/settings";
-import Welcome from "./pages/welcome";
+import Roadlink from "./pages/roadlink";
 import About from "./pages/aboutroads";
 import Install from "./pages/install";
 import Myprogress from "./pages/myprogress";
@@ -65,6 +65,11 @@ const TabBar: React.FC = () => {
         <Route
           path="/tabs/dashboard"
           component={ExploreContainer}
+          exact={true}
+        />
+        <Route
+          path="/tabs/dashboard/:userr/:road"
+          component={Roadlink}
           exact={true}
         />
 
