@@ -15,9 +15,10 @@ import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { userr, road } = useParams<{ userr: string; road: string }>();
-  let title;
-  let description;
   const { user } = useAuth0();
+  const [description, setDescription] = useState();
+
+  const [title, setTitle] = useState();
   async function get() {
     const dat = {
       username: user.name,
@@ -43,8 +44,8 @@ function Roadlink() {
       const data = await response.json(); // Make sure to await this!
 
       console.log(data);
-      title = data.data[0].fields.title;
-      description = data.data[0].fields.verses[0].description;
+      setTitle(data.data[0].fields.title);
+      setDescription(data.data[0].fields.verses[0].description);
 
       // Now your data should be defined.
     } catch (error) {
@@ -64,7 +65,11 @@ function Roadlink() {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonItem>{title !== null ? title + "-" + description : null}</IonItem>
+          <IonItem>
+            {title !== null && title !== undefined
+              ? title + "-" + description
+              : null}
+          </IonItem>
         </IonContent>
       </IonPage>
     </>
