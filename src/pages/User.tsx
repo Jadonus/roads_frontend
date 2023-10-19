@@ -235,7 +235,33 @@ export default function user() {
                   },
                   body: JSON.stringify(data),
                 };
-                fetch("https://dashboard.roadsbible.com/api/delete/", options);
+                <IonAlert
+                  header="Are you sure?"
+                  message="You May not get this back."
+                  isOpen={true}
+                  buttons={[
+                    {
+                      text: "Cancel",
+                      role: "cancel",
+                      handler: () => {
+                        console.log("Alert canceled");
+                      },
+                    },
+                    {
+                      text: "OK",
+                      role: "confirm",
+                      handler: () => {
+                        fetch(
+                          "https://www.roadsbible.com/api/delete/",
+                          options
+                        );
+                      },
+                    },
+                  ]}
+                  onDidDismiss={({ detail }) =>
+                    console.log(`Dismissed with role: ${detail.role}`)
+                  }
+                ></IonAlert>;
                 // Handle the delete action using 'selectedCard'
               },
             },
