@@ -37,6 +37,7 @@ function Roadlink() {
       .then((data) => {
         console.log(data);
       });
+    get();
   }
   return (
     <>
