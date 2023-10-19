@@ -36,7 +36,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 /* Theme variables */
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
-import makeroad from "./pages/makeroad";
+import Makeroad from "./pages/makeroad";
 setupIonicReact();
 type MyAuth0ProviderOptions = {
   domain: string;
@@ -109,7 +109,7 @@ const App: React.FC = () => {
   };
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
-  const Make = withAuthenticationRequired(makeroad);
+  const Make = withAuthenticationRequired(Makeroad);
   const Aipp = withAuthenticationRequired(TabBar);
   return (
     <Auth0Provider
@@ -127,6 +127,7 @@ const App: React.FC = () => {
             <Route path="/dev" render={() => <TabBar />} />
             <Route path="/" exact render={() => <Login />} />
             {/* Additional Routes */}
+            <Route path="/makedevv" exact component={Makeroad} />
             <Route path="/makeroad" exact component={Make}></Route>
             <Route
               path="/dev/dashboard"
