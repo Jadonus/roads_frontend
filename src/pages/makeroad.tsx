@@ -167,7 +167,7 @@ function Makeroad() {
     let data = {
       verses: verseData,
       title: formInputs.name,
-      creator: user.name,
+      username: user.name,
     };
     const requestOption: RequestInit = {
       method: "POST",
