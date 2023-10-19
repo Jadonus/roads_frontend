@@ -15,9 +15,10 @@ import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { userr, road } = useParams<{ userr: string; road: string }>();
+
   const { user } = useAuth0();
   const [description, setDescription] = useState();
-
+  let verses;
   const [title, setTitle] = useState();
   async function get() {
     const dat = {
@@ -46,13 +47,28 @@ function Roadlink() {
       console.log(data);
       setTitle(data.data[0].fields.title);
       setDescription(data.data[0].fields.verses[0].description);
-
+      verses = data.data[0].fields.verses;
       // Now your data should be defined.
     } catch (error) {
       console.error("Oops, something went wrong:", error);
     }
   }
   get();
+  function neww() {
+    const dat = {
+      username: user.name,
+      title: title,
+      verses: verses,
+    };
+    const requestOption: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dat),
+    };
+    fetch("https://www.roadsbible.com/api/newroad/", requestOption);
+  }
   return (
     <>
       <IonPage>
@@ -66,10 +82,23 @@ function Roadlink() {
         </IonHeader>
         <IonContent>
           <IonItem>
-            {title !== null && title !== undefined
-              ? title + "-" + description
-              : null}
+            {title !== null && title !== undefined ? (
+              <>
+                {" "}
+                <h1>
+                  {title}
+                  <br />
+                </h1>{" "}
+                <p>{description}</p>
+                <p>Made by {userr}</p>
+              </>
+            ) : (
+              <h1>This Road Does not Exist.</h1>
+            )}
           </IonItem>
+          <IonButton onClick={neww} size="small" shape="round">
+            GET
+          </IonButton>
         </IonContent>
       </IonPage>
     </>
