@@ -54,7 +54,7 @@ function Roadlink() {
         </IonHeader>
         <IonContent>
           <IonButton onClick={get}>Get</IonButton>
-          <IonItem>{res.data.title}</IonItem>
+          <IonItem></IonItem>
         </IonContent>
       </IonPage>
     </>
