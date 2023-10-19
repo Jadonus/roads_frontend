@@ -82,6 +82,7 @@ function Makeroad() {
     "Revelation",
   ];
 
+  const [refer, setRefer] = useState("");
   const [bookInput, setBookInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [verseData, setVerseData] = useState([]);
@@ -117,8 +118,8 @@ function Makeroad() {
   // Function to add a verse
   const handleAddVerse = () => {
     const bookInputValue = bookInput.toLowerCase();
-    const chapterInput = parseInt(formInputs.reference.split(":")[0]);
-    const verseNumberInput = parseInt(formInputs.reference.split(":")[1]);
+    const chapterInput = parseInt(refer.split(":")[0]);
+    const verseNumberInput = parseInt(refer.split(":")[1]);
     const nameInputValue = formInputs.name;
     const desc = formInputs.description;
 
@@ -211,10 +212,8 @@ function Makeroad() {
           </IonItem>
           <IonItem>
             <IonInput
-              value={formInputs.reference}
-              onIonChange={(e) =>
-                setFormInputs({ ...formInputs, reference: e.detail.value })
-              }
+              value={refer}
+              onIonChange={(e) => setRefer(e.detail.value)}
               placeholder="Reference (example: 23:1)"
             ></IonInput>
           </IonItem>
