@@ -238,7 +238,7 @@ export default function user() {
                 };
 
                 fetch("https://www.roadsbible.com/api/delete/", options);
-
+                location.reload();
                 // Handle the delete action using 'selectedCard'
               },
             },
