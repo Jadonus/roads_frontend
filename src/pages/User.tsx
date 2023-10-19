@@ -44,6 +44,19 @@ export default function user() {
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [showActionSheet, setShowActionSheet] = useState(false);
+  const [longPressTimer, setLongPressTimer] = useState(null);
+
+  const startLongPress = (item) => {
+    setLongPressTimer(
+      setTimeout(() => {
+        openActionSheet(item);
+      }, 500) // Adjust the delay (in milliseconds) as needed
+    );
+  };
+
+  const endLongPress = () => {
+    clearTimeout(longPressTimer);
+  };
 
   const openActionSheet = (item) => {
     setSelectedCard(item);
@@ -160,10 +173,9 @@ export default function user() {
       {dashboardData.combined_data.map((item: any, index: number) => {
         return (
           <IonCard
-            onContextMenu={(e) => {
-              e.preventDefault();
-              openActionSheet(item);
-            }}
+            onTouchStart={() => startLongPress(item)}
+            onTouchEnd={endLongPress}
+            onTouchCancel={endLongPress}
             onClick={() => openModalWithDynamicPath(item.url[0])}
             className="margin"
             key={index}
