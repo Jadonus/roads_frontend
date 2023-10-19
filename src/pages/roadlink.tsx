@@ -15,7 +15,8 @@ import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { userr, road } = useParams<{ userr: string; road: string }>();
-  let res;
+  let title;
+  let description;
   const { user } = useAuth0();
   async function get() {
     const dat = {
@@ -30,17 +31,27 @@ function Roadlink() {
       },
       body: JSON.stringify(dat),
     };
-    await fetch("https://www.roadsbible.com/api/getroad/", requestOption)
-      .then((response) => {
-        console.log(response);
-        response.json();
-        response = res;
-        console.log(response);
-      })
-      .then((data) => {
-        console.log(data);
-      });
+
+    try {
+      const response = await fetch(
+        "https://www.roadsbible.com/api/getroad/",
+        requestOption
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json(); // Make sure to await this!
+
+      console.log(data);
+      title = data.data[0].fields.title;
+      description = data.data[0].fields.verses[0].description;
+
+      // Now your data should be defined.
+    } catch (error) {
+      console.error("Oops, something went wrong:", error);
+    }
   }
+  get();
   return (
     <>
       <IonPage>
@@ -53,8 +64,7 @@ function Roadlink() {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <IonButton onClick={get}>Get</IonButton>
-          <IonItem></IonItem>
+          <IonItem>{title !== null ? title + "-" + description : null}</IonItem>
         </IonContent>
       </IonPage>
     </>
