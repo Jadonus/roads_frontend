@@ -14,6 +14,7 @@ import {
   IonHeader,
   IonToolbar,
   IonBackButton,
+  IonButtons,
 } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
 function Makeroad() {
@@ -249,9 +250,18 @@ function Makeroad() {
               onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
-          <IonButton fill="clear" onClick={handleAddVerse}>
-            Add Verse
-          </IonButton>
+          <IonButtons>
+            <IonButton fill="clear" onClick={handleAddVerse}>
+              Add Verse
+            </IonButton>
+            <IonButton
+              fill="clear"
+              disabled={!verseData ? true : false}
+              onClick={push}
+            >
+              Submit
+            </IonButton>
+          </IonButtons>
         </IonList>
         <IonList>
           {verseData.map((verse, index) => (

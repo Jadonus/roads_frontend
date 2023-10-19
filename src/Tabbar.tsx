@@ -18,6 +18,7 @@ import About from "./pages/aboutroads";
 import Install from "./pages/install";
 import Myprogress from "./pages/myprogress";
 import { useAuth0 } from "@auth0/auth0-react";
+import Makeroad from "./pages/makeroad";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
@@ -66,6 +67,8 @@ const TabBar: React.FC = () => {
           component={ExploreContainer}
           exact={true}
         />
+
+        <Route path="/dashboard/makeroad" exact component={Makeroad}></Route>
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
 

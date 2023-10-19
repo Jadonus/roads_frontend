@@ -128,7 +128,6 @@ const App: React.FC = () => {
             <Route path="/" exact render={() => <Login />} />
             {/* Additional Routes */}
             <Route path="/makedevv" exact component={Makeroad} />
-            <Route path="/makeroad" exact component={Make}></Route>
             <Route
               path="/dev/dashboard"
               exact
