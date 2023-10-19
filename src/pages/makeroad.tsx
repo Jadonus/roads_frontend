@@ -152,15 +152,17 @@ function Makeroad() {
         },
       ]);
     }
+useEffect(() => { 
 
+    console.log(refer)
+},[refer])
     // Clear input fields related to the verse, but not "name" and "description"
-    setBookInput("");
-    setFormInputs({
-      ...formInputs,
-      reference: "",
-      book: "",
-    });
-  };
+setBookInput("");
+setFormInputs((prevInputs) => ({
+  ...prevInputs,
+  reference: "",
+  book: "",
+}));
   useEffect(() => {
     console.log(verseData);
   }, [verseData]);
