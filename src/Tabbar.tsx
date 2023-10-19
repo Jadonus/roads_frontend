@@ -68,7 +68,11 @@ const TabBar: React.FC = () => {
           exact={true}
         />
 
-        <Route path="/dashboard/makeroad" exact component={Makeroad}></Route>
+        <Route
+          path="/tabs/dashboard/makeroad"
+          exact
+          component={Makeroad}
+        ></Route>
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
 
