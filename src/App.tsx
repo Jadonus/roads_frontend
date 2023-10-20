@@ -115,7 +115,7 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      redirectUri={window.location.href}
+      redirectUri="https://dashboard.roadsbible.com/tabs/"
       {...({} as MyAuth0ProviderOptions)}
     >
       <IonApp>
