@@ -23,8 +23,10 @@ function Roadlink() {
   useEffect(() => {
     const decodedInput = decodeURI(id);
     [userr, road] = decodedInput.split("_");
+    console.log(userr, road);
   }, [id]);
 
+  console.log(userr, road);
   const [success, setSuccess] = useState(false);
   let verses;
   const [title, setTitle] = useState();
@@ -98,6 +100,7 @@ function Roadlink() {
             <IonList inset>
               <IonItem>
                 <IonInput
+                  placeholder="Put The Id here."
                   value={id || ""} // Ensure the input value is a string or an empty string
                   onIonInput={(e) => {
                     setId(e.target.value.toString()); // Convert the input value to a string
@@ -124,7 +127,7 @@ function Roadlink() {
               </IonItem>
             </>
           ) : (
-            <h1>This Road Does not Exist.</h1>
+            <h1>This Road Does not Exist or the ID is wrong.</h1>
           )}
 
           {success ? (
