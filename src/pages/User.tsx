@@ -202,7 +202,8 @@ export default function user() {
           <IonFabButton routerLink="/tabs/dashboard/makeroad/">
             <IonIcon icon={createOutline}></IonIcon>
           </IonFabButton>
-          <IonFabButton>
+
+          <IonFabButton routerLink="/tabs/dashboard/roadlink/">
             <IonIcon icon={linkOutline}></IonIcon>
           </IonFabButton>
         </IonFabList>
@@ -221,8 +222,7 @@ export default function user() {
                 if (navigator.share) {
                   const shareData = {
                     title: "Roads",
-                    text: "Check out this Road!",
-                    url: `https://dashboard.roadsbible.com/tabs/dashboard/${selectedCard.creator}/${selectedCard.title}`,
+                    url: `${selectedCard.creator}_${selectedCard.title}`,
                   };
 
                   navigator.share(shareData);

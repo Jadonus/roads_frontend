@@ -68,7 +68,7 @@ const TabBar: React.FC = () => {
           exact={true}
         />
         <Route
-          path="/tabs/dashboard/:userr/:road"
+          path="/tabs/dashboard/roadlink/"
           component={Roadlink}
           exact={true}
         />

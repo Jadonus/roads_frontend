@@ -8,15 +8,22 @@ import {
   IonButtons,
   IonBackButton,
   IonPage,
+  IonInput,
   IonContent,
+  IonList,
 } from "@ionic/react";
 import { useParams } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
-  const { userr, road } = useParams<{ userr: string; road: string }>();
   const { user } = useAuth0();
   const [description, setDescription] = useState();
+  let userr, road;
+  const [id, setId] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    const decodedInput = decodeURI(id);
+    [userr, road] = decodedInput.split("_");
+  }, [id]);
 
   const [success, setSuccess] = useState(false);
   let verses;
@@ -82,10 +89,23 @@ function Roadlink() {
             <IonButtons>
               <IonBackButton />
             </IonButtons>
-            <IonTitle>{userr + " - " + road}</IonTitle>
+            <IonTitle>Get A Road.</IonTitle>
           </IonToolbar>
         </IonHeader>
+
         <IonContent>
+          <>
+            <IonList inset>
+              <IonItem>
+                <IonInput
+                  value={id || ""} // Ensure the input value is a string or an empty string
+                  onIonInput={(e) => {
+                    setId(e.target.value.toString()); // Convert the input value to a string
+                  }}
+                />
+              </IonItem>
+            </IonList>
+          </>
           {title !== null && title !== undefined ? (
             <>
               <IonItem>
