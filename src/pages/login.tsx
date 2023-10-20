@@ -24,16 +24,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Login = () => {
   // Initialize settings using localStorage or default values
 
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout } = useAuth0();
   // Function to update settings
-  useEffect(() => {
-    // Check if the user is not authenticated
-    if (!isAuthenticated) {
-      // Perform automatic login
-      loginWithRedirect({ appState: { returnTo: window.location.pathname } });
-    }
-  }, [loginWithRedirect, isAuthenticated]);
-
+  loginWithRedirect();
   return (
     <IonPage>
       <IonHeader>

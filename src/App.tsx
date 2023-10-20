@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, Route, useHistory } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
 import AuthenticationAction from "./get";
@@ -13,7 +13,7 @@ import Welcome from "./pages/welcome";
 import Login from "./pages/login";
 import TabBar from "./Tabbar";
 import "@ionic/react/css/core.css";
-import { Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
@@ -34,6 +34,8 @@ import {
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { useAuth0 } from "@auth0/auth0-react";
 /* Theme variables */
+import { History } from "history"; // Import the History type
+
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
 import Makeroad from "./pages/makeroad";
@@ -46,7 +48,8 @@ type MyAuth0ProviderOptions = {
 let received;
 const App: React.FC = () => {
   const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-
+  const history = useHistory() as History; // Typecast history to the History type
+  const [requestedUrl, setRequestedUrl] = useState<string | null>(null);
   useEffect(() => {
     console.log("isAuthenticated:", isAuthenticated);
     if (user) {
@@ -101,16 +104,15 @@ const App: React.FC = () => {
       }
     }
   }, [user]);
-
-  const currentPath = window.location.pathname;
-  const history = useHistory(); // Use useHistory here
-
-  const onRedirectCallback = (appState) => {
-    history.push(appState?.returnTo || currentPath);
-  };
-  const isTabActive = (tabPath: string) => {
-    return currentPath === tabPath;
-  };
+  useEffect(() => {
+    // Check if the user is authenticated
+    if (!isAuthenticated) {
+      // If not authenticated, store the requested URL
+      setRequestedUrl(history.location.pathname);
+      // Redirect to the login page
+      history.push("/login");
+    }
+  }, [isAuthenticated, history]);
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
   const Make = withAuthenticationRequired(Makeroad);
@@ -119,7 +121,6 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      onRedirectCallback={onRedirectCallback}
       redirectUri="https://dashboard.roadsbible.com/tabs/"
       {...({} as MyAuth0ProviderOptions)}
     >
@@ -141,6 +142,9 @@ const App: React.FC = () => {
             <Route path="/devpro" exact component={Myprogress}></Route>
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
+            {isAuthenticated ? (
+              <Redirect from="/login" to={requestedUrl || "/tabs"} />
+            ) : null}
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
