@@ -18,12 +18,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { user } = useAuth0();
   const [description, setDescription] = useState();
-  let userr, road;
+
+  const [userr, setUserr] = useState<string | undefined>(undefined); // Initialize state variables with the correct type
+  const [road, setRoad] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string | undefined>(undefined);
   useEffect(() => {
     const decodedInput = decodeURI(id);
-    [userr, road] = decodedInput.split("_");
+    const [userr, road] = decodedInput.split("_"); // Declare them inside the useEffect
     console.log(userr, road);
+    setUserr(userr); // Set the state variables with the values
+    setRoad(road);
   }, [id]);
 
   console.log(userr, road);
