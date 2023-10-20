@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { personCircle, book, library, settingsOutline } from "ionicons/icons";
 import AuthenticationAction from "./get";
@@ -101,9 +101,13 @@ const App: React.FC = () => {
       }
     }
   }, [user]);
-  const currentPath = window.location.pathname;
 
-  // Define a function to determine if a tab should be active
+  const currentPath = window.location.pathname;
+  const history = useHistory(); // Use useHistory here
+
+  const onRedirectCallback = (appState) => {
+    history.push(appState?.returnTo || currentPath);
+  };
   const isTabActive = (tabPath: string) => {
     return currentPath === tabPath;
   };
@@ -115,6 +119,7 @@ const App: React.FC = () => {
     <Auth0Provider
       domain="dev-72prekgw4c7whtas.us.auth0.com"
       clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
+      onRedirectCallback={onRedirectCallback}
       redirectUri="https://dashboard.roadsbible.com/tabs/"
       {...({} as MyAuth0ProviderOptions)}
     >
