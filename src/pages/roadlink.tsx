@@ -95,7 +95,7 @@ function Roadlink() {
             <IonButtons>
               <IonBackButton />
             </IonButtons>
-            <IonTitle>Get A Road.</IonTitle>
+            <IonTitle size="large">Get A Road.</IonTitle>
           </IonToolbar>
         </IonHeader>
 
@@ -104,6 +104,7 @@ function Roadlink() {
             <IonList inset>
               <IonItem>
                 <IonInput
+                  label="Road ID"
                   placeholder="Put The Id here."
                   value={id || ""} // Ensure the input value is a string or an empty string
                   onIonInput={(e) => {
@@ -128,6 +129,12 @@ function Roadlink() {
                 <IonButton onClick={neww} size="small" shape="round">
                   GET
                 </IonButton>
+              </IonItem>
+            </>
+          ) : id === null && id === undefined ? (
+            <>
+              <IonItem>
+                <p>Waiting For Input...</p>
               </IonItem>
             </>
           ) : (

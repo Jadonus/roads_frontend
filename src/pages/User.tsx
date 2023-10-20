@@ -222,7 +222,8 @@ export default function user() {
                 if (navigator.share) {
                   const shareData = {
                     title: "Roads",
-                    url: `${selectedCard.creator}_${selectedCard.title}`,
+                    text: `Here is my custom Road ID: ${selectedCard.creator}_${selectedCard.title}`,
+                    url: "https://dashboard.roadsbible.com/tabs/dashboard/roadlink/",
                   };
 
                   navigator.share(shareData);
