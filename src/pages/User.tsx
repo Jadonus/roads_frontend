@@ -8,6 +8,7 @@ import {
   IonActionSheet,
   IonAlert,
   IonIcon,
+  IonFabList,
   IonButton,
   IonFabButton,
   IonFab,
@@ -26,7 +27,7 @@ import Verse from "./Verse";
 
 interface ContainerProps {}
 
-import { addCircle } from "ionicons/icons";
+import { addCircle, createOutline, linkOutline } from "ionicons/icons";
 
 interface DashboardData {
   combined_data: {
@@ -40,18 +41,18 @@ interface DashboardData {
 
 export default function user() {
   let filteredMetadata = [];
-
+  const [link, setlink] = useState("");
   const [verse, setVerse] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [longPressTimer, setLongPressTimer] = useState(null);
-
+  const [showAlert, setShowAlert] = useState(false);
   const startLongPress = (item) => {
     setLongPressTimer(
       setTimeout(() => {
         openActionSheet(item);
-      }, 500) // Adjust the delay (in milliseconds) as needed
+      }, 300) // Adjust the delay (in milliseconds) as needed
     );
   };
 
@@ -194,9 +195,17 @@ export default function user() {
         );
       })}
       <IonFab slot="fixed" vertical="bottom" horizontal="end">
-        <IonFabButton routerLink="/tabs/dashboard/makeroad/">
+        <IonFabButton>
           <IonIcon icon={addCircle}></IonIcon>
         </IonFabButton>
+        <IonFabList side="top">
+          <IonFabButton routerLink="/tabs/dashboard/makeroad/">
+            <IonIcon icon={createOutline}></IonIcon>
+          </IonFabButton>
+          <IonFabButton>
+            <IonIcon icon={linkOutline}></IonIcon>
+          </IonFabButton>
+        </IonFabList>
       </IonFab>
       {showModal && (
         <Verse dynamicPath={dynamicPath} userr={true} onClose={closeModal} />
