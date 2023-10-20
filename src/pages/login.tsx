@@ -19,14 +19,14 @@ import {
   IonRadioGroup,
   IonRadio,
 } from "@ionic/react";
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
   // Initialize settings using localStorage or default values
 
-const { loginWithRedirect, logout } = useAuth0();
+  const { loginWithRedirect, logout } = useAuth0();
   // Function to update settings
-  loginWithRedirect()
+  loginWithRedirect({ appState: { returnTo: window.location.pathname } });
   return (
     <IonPage>
       <IonHeader>
@@ -36,8 +36,7 @@ const { loginWithRedirect, logout } = useAuth0();
         </IonToolbar>
       </IonHeader>
       <IonContent color="">
-      <div>
-        </div>
+        <div></div>
       </IonContent>
     </IonPage>
   );
