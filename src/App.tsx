@@ -13,7 +13,7 @@ import Welcome from "./pages/welcome";
 import Login from "./pages/login";
 import TabBar from "./Tabbar";
 import "@ionic/react/css/core.css";
-import { useHistory } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
@@ -34,8 +34,6 @@ import {
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { useAuth0 } from "@auth0/auth0-react";
 /* Theme variables */
-import { History } from "history"; // Import the History type
-
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
 import Makeroad from "./pages/makeroad";
@@ -48,8 +46,7 @@ type MyAuth0ProviderOptions = {
 let received;
 const App: React.FC = () => {
   const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-  const history = useHistory<History>(); // Pass the History type as a generic argument
-  const [requestedUrl, setRequestedUrl] = useState<string | null>(null);
+
   useEffect(() => {
     console.log("isAuthenticated:", isAuthenticated);
     if (user) {
@@ -104,15 +101,7 @@ const App: React.FC = () => {
       }
     }
   }, [user]);
-  useEffect(() => {
-    // Check if the user is authenticated
-    if (!isAuthenticated) {
-      // If not authenticated, store the requested URL
-      setRequestedUrl(history.location.pathname);
-      // Redirect to the login page
-      history.push("/login");
-    }
-  }, [isAuthenticated, history]);
+
   const Dashboard = withAuthenticationRequired(ExploreContainer);
   const Roads = withAuthenticationRequired(Verse);
   const Make = withAuthenticationRequired(Makeroad);
@@ -142,9 +131,6 @@ const App: React.FC = () => {
             <Route path="/devpro" exact component={Myprogress}></Route>
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
-            {isAuthenticated ? (
-              <Redirect from="/login" to={requestedUrl || "/tabs"} />
-            ) : null}
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
