@@ -48,7 +48,7 @@ type MyAuth0ProviderOptions = {
 let received;
 const App: React.FC = () => {
   const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-  const history = useHistory() as History; // Typecast history to the History type
+  const history = useHistory<History>(); // Pass the History type as a generic argument
   const [requestedUrl, setRequestedUrl] = useState<string | null>(null);
   useEffect(() => {
     console.log("isAuthenticated:", isAuthenticated);
