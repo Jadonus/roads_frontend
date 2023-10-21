@@ -188,7 +188,6 @@ export default function user() {
             <IonCardContent>
               <p>{item.descriptions[0] || "No description available"}</p>
               <IonChip>{item.num} Verses</IonChip>
-              <p>Made By {item.creator}</p>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
           </IonCard>
