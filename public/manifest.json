@@ -3,31 +3,31 @@
   "name": "Roads: Bible Memory",
   "icons": [
     {
-      "src": "roads.svg",
+      "src": "roads.png",
       "sizes": "192x192",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/roadspwa.svg",
+      "src": "/roadspwa.png",
       "sizes": "192x192",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "roads.svg",
+      "src": "roads.png",
       "sizes": "512x512",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/roadspwa.svg",
+      "src": "/roadspwa.png",
       "sizes": "512x512",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/roadspwa.svg",
+      "src": "/roadspwa.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
