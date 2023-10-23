@@ -9,7 +9,7 @@
       "purpose": "any"
     },
     {
-      "src": "roads.png",
+      "src": "/roadspwa.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
@@ -21,7 +21,7 @@
       "purpose": "any"
     },
     {
-      "src": "roads.png",
+      "src": "/roadspwa.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
