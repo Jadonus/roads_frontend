@@ -79,7 +79,7 @@ function Myprogress() {
           setProgress(response.numverses);
           setProgressBarPosition(response.numverses);
 
-          if (response.numverses % 10) {
+          if (response.numverses % 10 && response.numverses !== "Not Started") {
             console.log("sad...");
           } else {
             setConfet(true);
@@ -102,7 +102,7 @@ function Myprogress() {
     console.log(progress);
     const shareData = {
       title: "Roads",
-      text: "I memorized " + progress + " bible verses!",
+      text: "I memorized " + progress + " bible verses with this free app!",
       url: "https://www.roadsbible.com",
     };
 

@@ -8,6 +8,7 @@ import {
   IonIcon,
   IonLabel,
 } from "@ionic/react";
+import AuthenticatedAction from "./get";
 import { Route, Redirect } from "react-router";
 import { library, personCircle, settingsOutline, book } from "ionicons/icons";
 import ExploreContainer from "./pages/Home";
@@ -22,9 +23,9 @@ import Makeroad from "./pages/makeroad";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
+  const [isauth, setIsAuth] = useState(localStorage.getItem("token"));
+  //const [isauth, setIsAuth] = useState(false)
   const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
     return localStorage.getItem("username");
   };
   let username = getUsername();
@@ -92,6 +93,7 @@ const TabBar: React.FC = () => {
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="dashboard" href="/tabs/dashboard">
+          {isauth !== "" ? <AuthenticatedAction /> : <Redirect to="/login" />}
           <IonIcon icon={library} />
           <IonLabel>Dashboard</IonLabel>
         </IonTabButton>

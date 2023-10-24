@@ -23,7 +23,6 @@ import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
-import { Auth0Provider } from "@auth0/auth0-react";
 import {
   IonTabs,
   IonTabBar,
@@ -105,7 +104,10 @@ const App: React.FC = () => {
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
             {isauth ? (
-              <Route path="/authenticated" component={AuthenticationAction} />
+              <>
+                <AuthenticationAction />
+                <Redirect to="/tabs/dashboard/" />
+              </>
             ) : (
               <Redirect to="/login" />
             )}
