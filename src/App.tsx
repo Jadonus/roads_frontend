@@ -39,18 +39,9 @@ setupIonicReact();
 
 let received;
 const App: React.FC = () => {
-  const isauth = localStorage.getItem("token");
-  useEffect(() => {
-    if (!isauth) {
-      // Token is missing, redirect the user to the login page
-      // Replace '/login' with the actual route for your login page
-      window.location.href = "/login";
-    }
-  }, [isauth]);
-
+  const [isauth, setIsAuth] = useState(localStorage.getItem("token"));
+  //const [isauth, setIsAuth] = useState(false)
   const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
     return localStorage.getItem("username");
   };
   useEffect(() => {
@@ -99,26 +90,26 @@ const App: React.FC = () => {
         );
       }
     }
-  }, [getUsername()]);
+  }, [isauth]);
 
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           {/* Dashboard Routes */}
-          <Redirect from="/" to="/tabs" />
-          <Route path="/tabs" render={() => <TabBar />} />
-          <Route path="/" exact render={() => <TabBar />} />
-          {/* Additional Routes */}
-          <Route path="/makedevv" exact component={Makeroad} />
-          <Route
-            path="/dev/dashboard"
-            exact
-            render={() => <ExploreContainer />}
-          />
-          <Route path="/devpro" exact component={Myprogress}></Route>
-          <Route path="/verseoftheday" component={Verseday} exact />
-          <Route path="/login" component={Login} exact />
+          <Switch>
+            <Route path="/tabs" component={TabBar} />
+            <Route path="/makedevv" exact component={Makeroad} />
+            <Route path="/dev/dashboard" exact component={ExploreContainer} />
+            <Route path="/devpro" exact component={Myprogress} />
+            <Route path="/verseoftheday" component={Verseday} exact />
+            <Route path="/login" component={Login} exact />
+            {isauth ? (
+              <Route path="/authenticated" component={AuthenticationAction} />
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Switch>
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

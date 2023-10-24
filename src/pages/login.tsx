@@ -18,20 +18,18 @@ import {
 } from "@ionic/react";
 
 import Axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
   // Initialize settings using localStorage or default values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const handleLogin = async () => {
     try {
       const response = await Axios.post(
-        "https://roadsbible.com/dj-rest-auth/login/",
+        "https://www.roadsbible.com/dj-rest-auth/login/",
         {
-          username,
-          password,
+          username: username,
+          password: password,
         }
       );
 
@@ -40,6 +38,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.key);
 
         localStorage.setItem("username", username);
+        window.location.href = "/tabs/dashboard/";
         // Redirect to a protected page or update the app's state to consider the user as authenticated
       } else {
         // Handle login error
@@ -50,34 +49,32 @@ const Login = () => {
       console.error(error);
     }
   };
-  const { loginWithRedirect, logout } = useAuth0();
-  // Function to update settings
-  loginWithRedirect();
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonBackButton></IonBackButton>
-          <IonTitle size="large">Login/Signup</IonTitle>
+          <IonTitle size="large">Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent color="">
-        <div></div>
-        <IonInput
-          type="text"
-          placeholder="Username"
-          value={username}
-          onIonChange={(e) => setUsername(e.detail.value!)}
-        />
-        <IonInput
-          type="password"
-          placeholder="Password"
-          value={password}
-          onIonChange={(e) => setPassword(e.detail.value!)}
-        />
-        <IonButton expand="full" onClick={handleLogin}>
-          Log In
-        </IonButton>
+        <IonList inset>
+          <IonInput
+            type="text"
+            placeholder="Username"
+            value={username}
+            onIonInput={(e) => setUsername(e.detail.value!)}
+          />
+          <IonInput
+            type="password"
+            placeholder="Password"
+            value={password}
+            onIonInput={(e) => setPassword(e.detail.value!)}
+          />
+          <IonButton expand="block" onClick={handleLogin}>
+            Log In
+          </IonButton>
+        </IonList>
       </IonContent>
     </IonPage>
   );

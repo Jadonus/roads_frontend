@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function AuthenticatedAction() {
   const getUsername = () => {
@@ -7,16 +6,17 @@ function AuthenticatedAction() {
     // For example, if you're using local storage:
     return localStorage.getItem("username");
   };
-  console.log("YEH WE IN DIS");
+  let username = getUsername();
+  console.log(username);
   let received;
   useEffect(() => {
-    if (getUsername) {
+    if (username) {
       console.log("useffect");
 
       console.log("useffected");
       // Check if the user is authenticated
       const data = {
-        username: getUsername(), // Access user information
+        username: username, // Access user information
       };
       console.log("data", data);
       async function get() {
@@ -57,7 +57,7 @@ function AuthenticatedAction() {
 
       get();
     }
-  }, [getUsername]);
+  }, []);
 
   // You can return null or any UI elements you want here
   return null;
