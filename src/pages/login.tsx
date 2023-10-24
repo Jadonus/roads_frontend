@@ -27,10 +27,13 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await Axios.post("http://your-api-url/login/", {
-        username,
-        password,
-      });
+      const response = await Axios.post(
+        "https://roadsbible.com/dj-rest-auth/login/",
+        {
+          username,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         // Successful login, you can save the token or user info in local storage
