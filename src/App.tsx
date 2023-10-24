@@ -31,37 +31,36 @@ import {
   IonIcon,
   IonLabel,
 } from "@ionic/react";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { useAuth0 } from "@auth0/auth0-react";
 /* Theme variables */
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
 import Makeroad from "./pages/makeroad";
 setupIonicReact();
-type MyAuth0ProviderOptions = {
-  domain: string;
-  clientId: string;
-  redirectUri: string;
-};
+
 let received;
 const App: React.FC = () => {
-  const { user, isAuthenticated } = useAuth0(); // Get user and isAuthenticated status
-
+  const isauth = localStorage.getItem("token");
   useEffect(() => {
-    console.log("isAuthenticated:", isAuthenticated);
-    if (user) {
-      // Run your code here when the user is authenticated
-      console.log("Authentication");
+    if (!isauth) {
+      // Token is missing, redirect the user to the login page
+      // Replace '/login' with the actual route for your login page
+      window.location.href = "/login";
     }
-  }, [user]);
+  }, [isauth]);
+
+  const getUsername = () => {
+    // You'll want to fetch this from your authentication state or local storage
+    // For example, if you're using local storage:
+    return localStorage.getItem("username");
+  };
   useEffect(() => {
-    if (user) {
+    if (isauth) {
       console.log("useffect");
 
       console.log("useffected");
       // Check if the user is authenticated
       const data = {
-        username: user.name, // Access user information
+        username: getUsername(), // Access user information
       };
       console.log("data", data);
       function get() {
@@ -100,43 +99,29 @@ const App: React.FC = () => {
         );
       }
     }
-  }, [user]);
+  }, [getUsername()]);
 
-  const Dashboard = withAuthenticationRequired(ExploreContainer);
-  const Roads = withAuthenticationRequired(Verse);
-  const Make = withAuthenticationRequired(Makeroad);
-  const Aipp = withAuthenticationRequired(TabBar);
   return (
-    <Auth0Provider
-      domain="dev-72prekgw4c7whtas.us.auth0.com"
-      clientId="Ul7yQWjotlDqR1fscE5m5pHEZ6VBvGsv"
-      redirectUri="https://dashboard.roadsbible.com/tabs/"
-      {...({} as MyAuth0ProviderOptions)}
-    >
-      <IonApp>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            {/* Dashboard Routes */}
-            <Redirect from="/" to="/tabs" />
-            <Route path="/tabs" render={() => <Aipp />} />
-            <Route path="/dev" render={() => <TabBar />} />
-            <Route path="/" exact render={() => <Login />} />
-            {/* Additional Routes */}
-            <Route path="/makedevv" exact component={Makeroad} />
-            <Route
-              path="/dev/dashboard"
-              exact
-              render={() => <ExploreContainer />}
-            />
-            <Route path="/devpro" exact component={Myprogress}></Route>
-            <Route path="/verseoftheday" component={Verseday} exact />
-            <Route path="/login" component={Login} exact />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
-
-      <AuthenticationAction />
-    </Auth0Provider>
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          {/* Dashboard Routes */}
+          <Redirect from="/" to="/tabs" />
+          <Route path="/tabs" render={() => <TabBar />} />
+          <Route path="/" exact render={() => <TabBar />} />
+          {/* Additional Routes */}
+          <Route path="/makedevv" exact component={Makeroad} />
+          <Route
+            path="/dev/dashboard"
+            exact
+            render={() => <ExploreContainer />}
+          />
+          <Route path="/devpro" exact component={Myprogress}></Route>
+          <Route path="/verseoftheday" component={Verseday} exact />
+          <Route path="/login" component={Login} exact />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
   );
 };
 

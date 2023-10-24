@@ -25,11 +25,14 @@ import {
 } from "@ionic/react";
 let colorPreference;
 const SettingsPage = () => {
-  const { user } = useAuth0();
+  const getUsername = () => {
+    return localStorage.getItem("username");
+  };
+  let username = getUsername();
   // Initialize settings using localStorage or default values
   async function settings(key, value) {
     let data = {
-      username: user.name,
+      username: username,
     };
     data[key] = value;
 

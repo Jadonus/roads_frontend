@@ -18,7 +18,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
   const { user } = useAuth0();
   const [description, setDescription] = useState();
-
+  // A simple utility function to get the username from wherever you store it
+  const getUsername = () => {
+    // You'll want to fetch this from your authentication state or local storage
+    // For example, if you're using local storage:
+    return localStorage.getItem("username");
+  };
+  let username = getUsername();
   const [userr, setUserr] = useState<string | undefined>(undefined); // Initialize state variables with the correct type
   const [road, setRoad] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string | undefined>(undefined);
@@ -36,7 +42,7 @@ function Roadlink() {
   const [title, setTitle] = useState();
   async function get() {
     const dat = {
-      username: user.name,
+      username: username,
       usertoget: userr,
       road: road,
     };
@@ -70,7 +76,7 @@ function Roadlink() {
   get();
   function neww() {
     const dat = {
-      username: user.name,
+      username: username,
       title: title,
       verses: verses,
     };

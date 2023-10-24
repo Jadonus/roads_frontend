@@ -12,18 +12,41 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonSelect,
   IonButton,
-  IonSelectOption,
   IonBackButton,
-  IonRadioGroup,
-  IonRadio,
+  IonInput,
 } from "@ionic/react";
+
+import Axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
   // Initialize settings using localStorage or default values
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleLogin = async () => {
+    try {
+      const response = await Axios.post("http://your-api-url/login/", {
+        username,
+        password,
+      });
+
+      if (response.status === 200) {
+        // Successful login, you can save the token or user info in local storage
+        localStorage.setItem("token", response.data.key);
+
+        localStorage.setItem("username", username);
+        // Redirect to a protected page or update the app's state to consider the user as authenticated
+      } else {
+        // Handle login error
+        console.log("Login failed");
+      }
+    } catch (error) {
+      // Handle any network or request errors
+      console.error(error);
+    }
+  };
   const { loginWithRedirect, logout } = useAuth0();
   // Function to update settings
   loginWithRedirect();
@@ -37,6 +60,21 @@ const Login = () => {
       </IonHeader>
       <IonContent color="">
         <div></div>
+        <IonInput
+          type="text"
+          placeholder="Username"
+          value={username}
+          onIonChange={(e) => setUsername(e.detail.value!)}
+        />
+        <IonInput
+          type="password"
+          placeholder="Password"
+          value={password}
+          onIonChange={(e) => setPassword(e.detail.value!)}
+        />
+        <IonButton expand="full" onClick={handleLogin}>
+          Log In
+        </IonButton>
       </IonContent>
     </IonPage>
   );

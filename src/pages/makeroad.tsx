@@ -87,7 +87,13 @@ function Makeroad() {
     "Jude",
     "Revelation",
   ];
-  const { user } = useAuth0();
+  // A simple utility function to get the username from wherever you store it
+  const getUsername = () => {
+    // You'll want to fetch this from your authentication state or local storage
+    // For example, if you're using local storage:
+    return localStorage.getItem("username");
+  };
+  let username = getUsername();
   const [formInputs, setFormInputs] = useState({
     name: "",
     description: "",
@@ -98,7 +104,6 @@ function Makeroad() {
   const [success, setSuccess] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [verseData, setVerseData] = useState([]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormInputs({
@@ -168,7 +173,7 @@ function Makeroad() {
     let data = {
       verses: verseData,
       title: formInputs.name,
-      username: user.name,
+      username: username,
     };
     const requestOption: RequestInit = {
       method: "POST",

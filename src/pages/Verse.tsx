@@ -47,7 +47,12 @@ interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   const [pdf, setPdf] = useState(false);
   const [settings, setSettings] = useState([]);
-  const { user } = useAuth0();
+  const getUsername = () => {
+    // You'll want to fetch this from your authentication state or local storage
+    // For example, if you're using local storage:
+    return localStorage.getItem("username");
+  };
+  let username = getUsername();
   const [sentences, setSentences] = useState([]);
   const undo = useRef(null);
   const hide = useRef(null);
@@ -84,13 +89,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
     let dat;
     if (userr == true) {
       dat = {
-        username: user.name,
+        username: username,
         title: dynamic,
         custom: "yes",
       };
     } else {
       dat = {
-        username: user.name,
+        username: username,
         title: dynamic,
         custom: "no",
       };
@@ -142,7 +147,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
     const loadProgress = async () => {
       try {
         const data = {
-          username: user.name,
+          username: username,
           road: dynamic,
           index: currentSentenceIndex,
         };
@@ -238,7 +243,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
     setHiddenWordIndices([]);
 
     const data = {
-      username: user.name,
+      username: username,
       road: dynamic,
       index: currentSentenceIndex + 1,
     };
@@ -275,7 +280,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
       setCurrentSentenceIndex((prevIndex) => prevIndex - 1);
       setHiddenWordIndices([]);
       const data = {
-        username: user.name,
+        username: username,
         road: dynamic,
         index: currentSentenceIndex - 1,
       };
@@ -506,22 +511,6 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
           <IonHeader>
             <IonToolbar>
               <IonTitle>More</IonTitle>
-              <IonButtons>
-                <IonAvatar slot="end">
-                  {user ? (
-                    <img
-                      alt="Profile"
-                      style={{
-                        width: "2rem",
-                        height: "2rem",
-                      }}
-                      src={user.picture}
-                    />
-                  ) : (
-                    <IonIcon className="color" icon={settingsOutline}></IonIcon>
-                  )}
-                </IonAvatar>
-              </IonButtons>
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">

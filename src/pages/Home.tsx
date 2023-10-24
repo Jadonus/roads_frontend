@@ -56,8 +56,6 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [dynamicPath, setDynamicPath] = useState<string>(""); // State variable to hold the dynamic path
   const [activeSegment, setActiveSegment] = useState<string>("default");
 
-  const { user } = useAuth0();
-
   const [searchQuery, setSearchQuery] = useState<string>("");
   const openModalWithDynamicPath = (dynamicPath: string) => {
     setShowModal(true);
@@ -168,26 +166,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     target="_blank"
                     routerDirection="forward"
                     style={{ paddingRight: "1rem" }}
-                  >
-                    <IonAvatar>
-                      {user ? (
-                        <img
-                          alt="Profile"
-                          style={{
-                            width: "2rem",
-                            height: "2rem",
-                            marginRight: ".7rem",
-                          }}
-                          src={user.picture}
-                        />
-                      ) : (
-                        <IonIcon
-                          className="color"
-                          icon={settingsOutline}
-                        ></IonIcon>
-                      )}
-                    </IonAvatar>
-                  </IonRouterLink>
+                  ></IonRouterLink>
                 </h1>
               </div>
             </IonButtons>

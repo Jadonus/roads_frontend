@@ -70,8 +70,12 @@ export default function user() {
   );
   const [dynamicPath, setDynamicPath] = useState<string>("");
 
-  const { user } = useAuth0();
-
+  const getUsername = () => {
+    // You'll want to fetch this from your authentication state or local storage
+    // For example, if you're using local storage:
+    return localStorage.getItem("username");
+  };
+  const username = getUsername();
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const openModalWithDynamicPath = (dynamicPath: string) => {
@@ -81,7 +85,7 @@ export default function user() {
 
   useEffect(() => {
     const data = {
-      username: user.name,
+      username: username,
     };
 
     const options = {
@@ -234,7 +238,7 @@ export default function user() {
               role: "destructive",
               handler: () => {
                 const data = {
-                  username: user.name,
+                  username: username,
                   road: selectedCard.title,
                 };
 

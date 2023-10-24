@@ -21,12 +21,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Makeroad from "./pages/makeroad";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
+  // A simple utility function to get the username from wherever you store it
+  const getUsername = () => {
+    // You'll want to fetch this from your authentication state or local storage
+    // For example, if you're using local storage:
+    return localStorage.getItem("username");
+  };
+  let username = getUsername();
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
-  let { user } = useAuth0();
   function fetchData() {
-    if (user && user.name) {
+    if (username) {
       const data = {
-        username: user.name,
+        username: username,
       };
 
       const requestOptions = {
