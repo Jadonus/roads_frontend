@@ -11,6 +11,7 @@ import {
   IonList,
   IonHeader,
   IonToolbar,
+  IonSpinner,
   IonTitle,
   IonButton,
   IonBackButton,
@@ -20,10 +21,13 @@ import {
 import Axios from "axios";
 
 const Login = () => {
+  const [error, setError] = useState(undefined);
   // Initialize settings using localStorage or default values
   const [username, setUsername] = useState("");
+  const [load, setLoad] = useState(false);
   const [password, setPassword] = useState("");
   const handleLogin = async () => {
+    setLoad(true);
     try {
       const response = await Axios.post(
         "https://www.roadsbible.com/dj-rest-auth/login/",
@@ -34,19 +38,26 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        // Successful login, you can save the token or user info in local storage
         localStorage.setItem("token", response.data.key);
-
         localStorage.setItem("username", username);
         window.location.href = "/tabs/dashboard/";
-        // Redirect to a protected page or update the app's state to consider the user as authenticated
       } else {
-        // Handle login error
-        console.log("Login failed");
+        if (response.data && response.data.non_field_errors) {
+          setError(response.data.non_field_errors[0]);
+        } else {
+          setError("Login failed");
+        }
       }
     } catch (error) {
-      // Handle any network or request errors
-      console.error(error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.non_field_errors
+      ) {
+        setError(error.response.data.non_field_errors[0]);
+      } else {
+        setError("Login failed");
+      }
     }
   };
   return (
@@ -57,22 +68,33 @@ const Login = () => {
           <IonTitle size="large">Login</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent color="">
+      <IonContent color="light">
         <IonList inset>
-          <IonInput
-            type="text"
-            placeholder="Username"
-            value={username}
-            onIonInput={(e) => setUsername(e.detail.value!)}
-          />
-          <IonInput
-            type="password"
-            placeholder="Password"
-            value={password}
-            onIonInput={(e) => setPassword(e.detail.value!)}
-          />
+          <IonItem>
+            <IonInput
+              type="text"
+              placeholder="Username"
+              value={username}
+              onIonInput={(e) => setUsername(e.detail.value!)}
+            />
+          </IonItem>
+          <IonItem>
+            <IonInput
+              type="password"
+              placeholder="Password"
+              value={password}
+              onIonInput={(e) => setPassword(e.detail.value!)}
+            />
+          </IonItem>
+          {error !== undefined ? (
+            <IonItem color="danger">{error}</IonItem>
+          ) : (
+            <></>
+          )}
+        </IonList>
+        <IonList inset>
           <IonButton expand="block" onClick={handleLogin}>
-            Log In
+            Log In {load ? <IonSpinner></IonSpinner> : <></>}
           </IonButton>
         </IonList>
       </IonContent>
