@@ -14,9 +14,9 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-const response = await axios.get(
-  "https://www.roadsbible.com/dj-rest-auth/user/",
-  {
+let response;
+async function get() {
+  response = await axios.get("https://www.roadsbible.com/dj-rest-auth/user/", {
     params: {
       format: "json",
     },
@@ -26,12 +26,13 @@ const response = await axios.get(
       "accept-language": "en-US,en;q=0.9",
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
-  }
-);
-console.log(response);
-
+  });
+  console.log(response);
+}
 export default function Account() {
   const [success, setSuccess] = useState(null);
+
+  get();
   async function reset() {
     const resett = await axios.post(
       "https://www.roadsbible.com/dj-rest-auth/password/reset/",
@@ -44,6 +45,7 @@ export default function Account() {
       setSuccess(false);
     }
   }
+
   return (
     <IonPage>
       <IonHeader>
