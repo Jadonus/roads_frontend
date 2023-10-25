@@ -8,6 +8,7 @@ import {
   IonIcon,
   IonLabel,
 } from "@ionic/react";
+import Account from "./pages/account";
 import AuthenticatedAction from "./get";
 import { Route, Redirect } from "react-router";
 import { library, personCircle, settingsOutline, book } from "ionicons/icons";
@@ -88,6 +89,7 @@ const TabBar: React.FC = () => {
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
 
+        <Route path="/tabs/settings/account" component={Account} exact={true} />
         <Route path="/tabs/settings/install" component={Install} exact={true} />
         <Route path="/tabs/roads/:groupName" component={Verse} />
       </IonRouterOutlet>

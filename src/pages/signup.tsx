@@ -9,11 +9,11 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonNote,
   IonHeader,
   IonToolbar,
   IonSpinner,
   IonTitle,
-  IonNote,
   IonButton,
   IonBackButton,
   IonInput,
@@ -21,20 +21,25 @@ import {
 
 import Axios from "axios";
 
-const Login = () => {
+const Signup = () => {
   const [error, setError] = useState(undefined);
   // Initialize settings using localStorage or default values
   const [username, setUsername] = useState("");
   const [load, setLoad] = useState(false);
   const [password, setPassword] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [password2, setPassword2] = useState("");
   const handleLogin = async () => {
     setLoad(true);
     try {
       const response = await Axios.post(
-        "https://www.roadsbible.com/dj-rest-auth/login/",
+        "https://www.roadsbible.com/dj-rest-auth/registration/",
         {
           username: username,
-          password: password,
+          email: email,
+          password1: password,
+          password2: password2,
         }
       );
 
@@ -43,13 +48,10 @@ const Login = () => {
         localStorage.setItem("username", username);
         window.location.href = "/tabs/dashboard/";
       } else {
-        if (response) {
-          setError(response);
-          setLoad(false);
+        if (response.data && response.data.non_field_errors) {
+          setError(response.data.non_field_errors[0]);
         } else {
           setError("Login failed");
-
-          setLoad(false);
         }
       }
     } catch (error) {
@@ -69,7 +71,7 @@ const Login = () => {
       <IonHeader>
         <IonToolbar>
           <IonBackButton></IonBackButton>
-          <IonTitle size="large">Login</IonTitle>
+          <IonTitle size="large">Sign Up For Roads.</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent color="light">
@@ -77,9 +79,17 @@ const Login = () => {
           <IonItem>
             <IonInput
               type="text"
-              placeholder="Username"
+              placeholder="Username (No Spaces)"
               value={username}
               onIonInput={(e) => setUsername(e.detail.value!)}
+            />
+          </IonItem>
+          <IonItem>
+            <IonInput
+              type="text"
+              placeholder="Email"
+              value={email}
+              onIonInput={(e) => setEmail(e.detail.value!)}
             />
           </IonItem>
           <IonItem>
@@ -90,6 +100,15 @@ const Login = () => {
               onIonInput={(e) => setPassword(e.detail.value!)}
             />
           </IonItem>
+
+          <IonItem>
+            <IonInput
+              type="password"
+              placeholder="Password Again"
+              value={password2}
+              onIonInput={(e) => setPassword2(e.detail.value!)}
+            />
+          </IonItem>
           {error !== undefined ? (
             <IonItem color="danger">{error}</IonItem>
           ) : (
@@ -98,16 +117,15 @@ const Login = () => {
         </IonList>
         <IonList inset>
           <IonButton expand="block" onClick={handleLogin}>
-            Log In {load ? <IonSpinner></IonSpinner> : <></>}
+            Sign Up{load ? <IonSpinner></IonSpinner> : <></>}
           </IonButton>
         </IonList>
         <IonNote className="ion-padding">
-          {" "}
-          Dont have an account? <a href="/signup">Sign up</a>{" "}
+          Already registered? <a href="/login">Login</a>{" "}
         </IonNote>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Login;
+export default Signup;

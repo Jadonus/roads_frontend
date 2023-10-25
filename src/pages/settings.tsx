@@ -183,7 +183,10 @@ const SettingsPage = () => {
                 <div></div>
               )}
             </IonItem>
-
+            <h3>Account Settings</h3>
+            <IonItem routerLink="/tabs/settings/account">
+              View Account Settings
+            </IonItem>
             <h3>Links</h3>
             <IonItem href="https://github.com/jadonus/roads_bible_vercel">
               <IonIcon icon={logoGithub} /> Backend Source Code

@@ -34,6 +34,7 @@ import {
 import "./theme/variables.css";
 import Myprogress from "./pages/myprogress";
 import Makeroad from "./pages/makeroad";
+import Signup from "./pages/signup";
 setupIonicReact();
 
 let received;
@@ -97,6 +98,7 @@ const App: React.FC = () => {
         <IonRouterOutlet>
           {/* Dashboard Routes */}
           <Switch>
+            <Route path="/signup" component={Signup} exact />
             <Route path="/tabs" component={TabBar} />
             <Route path="/makedevv" exact component={Makeroad} />
             <Route path="/dev/dashboard" exact component={ExploreContainer} />
