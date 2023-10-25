@@ -1,6 +1,6 @@
 import { IonIcon } from "@ionic/react";
+import "history";
 import { square } from "ionicons/icons";
-
 import React, { useState, useEffect } from "react";
 import {
   IonContent,
@@ -18,10 +18,13 @@ import {
   IonBackButton,
   IonInput,
 } from "@ionic/react";
+import { useHistory } from "react-router-dom";
 
 import Axios from "axios";
 
 const Login = () => {
+  let history = useHistory();
+
   const [error, setError] = useState(undefined);
   // Initialize settings using localStorage or default values
   const [username, setUsername] = useState("");
@@ -41,7 +44,7 @@ const Login = () => {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.key);
         localStorage.setItem("username", username);
-        window.location.href = "/tabs/dashboard/";
+        history.push("/tabs/dashboard/");
       } else {
         if (response) {
           setError(response);
@@ -72,9 +75,9 @@ const Login = () => {
           <IonTitle size="large">Login</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent color="light">
+      <IonContent>
         <IonList inset>
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="text"
               placeholder="Username"
@@ -82,7 +85,7 @@ const Login = () => {
               onIonInput={(e) => setUsername(e.detail.value!)}
             />
           </IonItem>
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="password"
               placeholder="Password"

@@ -73,9 +73,10 @@ const SettingsPage = () => {
               <IonTitle size="large">Settings</IonTitle>
             </IonToolbar>
           </IonHeader>
+          <h3 className="ion-padding">General</h3>
+
           <IonList inset={true}>
-            <h3>General</h3>
-            <IonItem>
+            <IonItem color="light">
               <IonSelect
                 label="Default Memory Mode"
                 aria-label="Default Memory Mode"
@@ -94,7 +95,7 @@ const SettingsPage = () => {
                 </IonSelectOption>
               </IonSelect>
             </IonItem>
-            <IonItem id="open-picker" button>
+            <IonItem color="light" id="open-picker" button>
               <IonLabel>Translation</IonLabel>
               <IonPicker
                 trigger="open-picker"
@@ -143,8 +144,10 @@ const SettingsPage = () => {
                 ]}
               ></IonPicker>
             </IonItem>
-            <h3>Colors</h3>
-            <IonItem>
+          </IonList>
+          <h3 className="ion-padding">Colors</h3>
+          <IonList inset>
+            <IonItem color="light">
               <IonRadioGroup
                 value={colorPreference}
                 onIonChange={(a) => {
@@ -172,8 +175,10 @@ const SettingsPage = () => {
                 </IonRadio>
               </IonRadioGroup>
             </IonItem>
-            <h3>App</h3>
-            <IonItem routerLink="/tabs/settings/install">
+          </IonList>
+          <h3 className="ion-padding">App</h3>
+          <IonList inset>
+            <IonItem color="light" routerLink="/tabs/settings/install">
               Install Roads{" "}
               {!PWA ? (
                 <IonBadge slot="end" color="danger">
@@ -183,15 +188,26 @@ const SettingsPage = () => {
                 <div></div>
               )}
             </IonItem>
-            <h3>Account Settings</h3>
-            <IonItem routerLink="/tabs/settings/account">
+          </IonList>
+          <h3 className="ion-padding">Account Settings</h3>
+          <IonList inset>
+            <IonItem color="light" routerLink="/tabs/settings/account">
               View Account Settings
             </IonItem>
-            <h3>Links</h3>
-            <IonItem href="https://github.com/jadonus/roads_bible_vercel">
+          </IonList>
+          <h3 className="ion-padding">Links</h3>
+
+          <IonList inset>
+            <IonItem
+              color="light"
+              href="https://github.com/jadonus/roads_bible_vercel"
+            >
               <IonIcon icon={logoGithub} /> Backend Source Code
             </IonItem>
-            <IonItem href="https://github.com/jadonus/roads_frontend">
+            <IonItem
+              color="light"
+              href="https://github.com/jadonus/roads_frontend"
+            >
               <IonIcon icon={logoGithub} /> Frontend Source Code
             </IonItem>
           </IonList>
