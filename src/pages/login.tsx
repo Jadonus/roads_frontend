@@ -16,6 +16,7 @@ import {
   IonInput,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
+import { Preferences } from "@capacitor/preferences";
 
 import Axios from "axios";
 
@@ -39,9 +40,15 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.key);
-        localStorage.setItem("username", username);
-        history.push("/tabs/dashboard/");
+        await Preferences.set({
+          key: "token",
+          value: response.data.key,
+        });
+        await Preferences.set({
+          key: "username",
+          value: username,
+        });
+        // history.push("/tabs/dashboard/");
       } else {
         if (response) {
           setError(response);

@@ -36,22 +36,25 @@ import Myprogress from "./pages/myprogress";
 import Makeroad from "./pages/makeroad";
 import Signup from "./pages/signup";
 setupIonicReact();
-
+import { Preferences } from "@capacitor/preferences";
+console.log("asdfaswdfhp");
 let received;
 const App: React.FC = () => {
-  const [isauth, setIsAuth] = useState(localStorage.getItem("token"));
-  //const [isauth, setIsAuth] = useState(false)
-  const getUsername = () => {
-    return localStorage.getItem("username");
+  const [username, setUsername] = useState(String);
+  const checkName = async () => {
+    let { value } = await Preferences.get({ key: "username" });
+    setUsername(value);
   };
+
+  checkName();
   useEffect(() => {
-    if (isauth) {
+    if (username !== undefined) {
       console.log("useffect");
 
       console.log("useffected");
       // Check if the user is authenticated
       const data = {
-        username: getUsername(), // Access user information
+        username: username, // Access user information
       };
       console.log("data", data);
       function get() {
@@ -90,8 +93,7 @@ const App: React.FC = () => {
         );
       }
     }
-  }, [isauth]);
-
+  }, [username]);
   return (
     <IonApp>
       <IonReactRouter>
@@ -105,9 +107,8 @@ const App: React.FC = () => {
             <Route path="/devpro" exact component={Myprogress} />
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
-            {isauth ? (
+            {username ? (
               <>
-                <AuthenticationAction />
                 <Redirect to="/tabs/dashboard/" />
               </>
             ) : (

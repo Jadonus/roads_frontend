@@ -47,6 +47,7 @@ interface DashboardData {
 import User from "./User"; // Import the User component
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
+  console.log("ENRTGVASWEIP:J");
   const [verse, setVerse] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
 
