@@ -5,9 +5,7 @@ import React, { useState, useEffect } from "react";
 import {
   IonContent,
   IonPage,
-  IonToggle,
   IonItem,
-  IonLabel,
   IonList,
   IonHeader,
   IonToolbar,
@@ -15,7 +13,6 @@ import {
   IonTitle,
   IonNote,
   IonButton,
-  IonBackButton,
   IonInput,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
@@ -71,7 +68,6 @@ const Login = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonBackButton></IonBackButton>
           <IonTitle size="large">Login</IonTitle>
         </IonToolbar>
       </IonHeader>

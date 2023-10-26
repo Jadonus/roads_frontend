@@ -14,25 +14,35 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-let response;
-async function get() {
-  response = await axios.get("https://www.roadsbible.com/dj-rest-auth/user/", {
-    params: {
-      format: "json",
-    },
-    headers: {
-      accept:
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-      "accept-language": "en-US,en;q=0.9",
-      Authorization: `Token ${localStorage.getItem("token")}`,
-    },
-  });
-  console.log(response);
-}
+import { useHistory } from "react-router";
 export default function Account() {
+  let history = useHistory();
+  const [response, setResponse] = useState({
+    data: { username: "", email: "" },
+  });
   const [success, setSuccess] = useState(null);
-
+  async function get() {
+    setResponse(
+      await axios.get("https://www.roadsbible.com/dj-rest-auth/user/", {
+        params: {
+          format: "json",
+        },
+        headers: {
+          accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-language": "en-US,en;q=0.9",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+      })
+    );
+    console.log(response);
+  }
   get();
+  function logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    history.push("/login");
+  }
   async function reset() {
     const resett = await axios.post(
       "https://www.roadsbible.com/dj-rest-auth/password/reset/",
@@ -58,10 +68,13 @@ export default function Account() {
       </IonHeader>
       <IonContent>
         <IonList inset>
-          <IonItem>Email: {response.data.email}</IonItem>
+          <IonItem color="light">Email: {response.data.email}</IonItem>
 
-          <IonItem>Username: {response.data.username}</IonItem>
-          <IonItem onClick={reset}>
+          <IonItem color="light">Username: {response.data.username}</IonItem>
+          <IonItem button onClick={logOut} color="light">
+            Logout
+          </IonItem>
+          <IonItem button color="light" onClick={reset}>
             Reset Password{" "}
             {success === true ? (
               <IonBadge slot="end" color="success">
@@ -73,8 +86,8 @@ export default function Account() {
               </IonBadge>
             )}
           </IonItem>
-          <IonNote>This will send an email with instructions.</IonNote>
         </IonList>
+        <IonNote>This will send an email with instructions.</IonNote>
       </IonContent>
     </IonPage>
   );
