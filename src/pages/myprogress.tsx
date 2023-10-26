@@ -15,20 +15,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { share } from "ionicons/icons";
 import Confetti from "react-confetti";
 import { RefresherEventDetail } from "@ionic/react";
-
-import { Preferences } from "@capacitor/preferences";
-
+const getUsername = () => {
+  // You'll want to fetch this from your authentication state or local storage
+  // For example, if you're using local storage:
+  return localStorage.getItem("username");
+};
+let username = getUsername();
 function Myprogress() {
   const [progress, setProgress] = useState(0);
   const [confet, setConfet] = useState(false);
   const textRef = useRef(null);
-  const [username, setUsername] = useState("");
-  const checkName = async () => {
-    const { value } = await Preferences.get({ key: "username" });
-    setUsername(value);
-    console.log(username);
-  };
-  checkName();
   function setProgressBarPosition(progress) {
     // Ensure that textRef.current exists before accessing its parent
     if (textRef.current) {
@@ -101,7 +97,7 @@ function Myprogress() {
 
   useEffect(() => {
     fetchData();
-  }, [username]);
+  }, []);
   function sharee() {
     console.log(progress);
     const shareData = {

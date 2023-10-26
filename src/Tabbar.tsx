@@ -21,22 +21,17 @@ import Install from "./pages/install";
 import Myprogress from "./pages/myprogress";
 import { useAuth0 } from "@auth0/auth0-react";
 import Makeroad from "./pages/makeroad";
-import { Preferences } from "@capacitor/preferences";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
   const [isauth, setIsAuth] = useState(localStorage.getItem("token"));
   //const [isauth, setIsAuth] = useState(false)
-  const [username, setUsername] = useState("");
-  const checkName = async () => {
-    const { value } = await Preferences.get({ key: "username" });
-    setUsername(value);
-    console.log(username);
+  const getUsername = () => {
+    return localStorage.getItem("username");
   };
-  checkName();
+  let username = getUsername();
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
   function fetchData() {
-    console.log(username);
     if (username) {
       const data = {
         username: username,
@@ -70,7 +65,7 @@ const TabBar: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, [username]);
+  }, []);
   return (
     <IonTabs>
       <IonRouterOutlet>

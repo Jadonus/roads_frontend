@@ -8,7 +8,4 @@ export default defineConfig({
     react(),
     legacy()
   ],
-build: {
-    target: 'esnext'
-  }
 })
