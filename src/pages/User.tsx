@@ -214,15 +214,14 @@ export default function user() {
             {
               text: "Share",
               handler: () => {
+                const shareData = {
+                  title: "Roads",
+                  text: `Here is my custom Road ID: ${
+                    selectedCard.creator
+                  }_${encodeURIComponent(selectedCard.title)}`,
+                  url: "https://dashboard.roadsbible.com/tabs/dashboard/roadlink/",
+                };
                 if (navigator.share) {
-                  const shareData = {
-                    title: "Roads",
-                    text: `Here is my custom Road ID: ${
-                      selectedCard.creator
-                    }_${selectedCard.title.encodeURIComponent()}`,
-                    url: "https://dashboard.roadsbible.com/tabs/dashboard/roadlink/",
-                  };
-
                   navigator.share(shareData);
                 }
               },
