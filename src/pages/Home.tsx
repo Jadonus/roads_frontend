@@ -7,6 +7,8 @@ import {
   IonItemSliding,
   IonHeader,
   IonCard,
+  IonFab,
+  IonFabButton,
   IonCardTitle,
   IonRouterLink,
   IonSpinner,
@@ -24,6 +26,7 @@ import {
   IonChip,
   IonRefresher,
   IonItemOption,
+  IonFabList,
   IonItemOptions,
   IonRefresherContent,
   IonBadge,
@@ -38,7 +41,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
-
+import { addCircle, createOutline, linkOutline } from "ionicons/icons";
 interface ContainerProps {}
 
 interface DashboardData {
@@ -128,8 +131,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     return (
       <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
         <IonSpinner
-          style={{ margin: "auto", width: "7rem", height: "7rem" }}
-          name="dots"
+          style={{ margin: "auto", width: "3rem", height: "3rem" }}
         ></IonSpinner>
       </div>
     );
@@ -181,7 +183,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             />
           </IonToolbar>
         </IonHeader>
-        <IonSegment
+        {/*} <IonSegment
           swipeGesture={true}
           value={activeSegment}
           onIonChange={(e) => setActiveSegment(e.detail.value as string)} // Cast e.detail.value to string
@@ -193,50 +195,62 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             <IonLabel>My Roads</IonLabel>
           </IonSegmentButton>
         </IonSegment>
-        {activeSegment === "default" ? (
-          <div>
-            <IonItem>
-              <IonCardTitle>Verse Of the Day</IonCardTitle>
-            </IonItem>
-            <IonItem lines="none" href="/verseoftheday">
-              <IonLabel className="ion-text-wrap">{verse}</IonLabel>
-            </IonItem>
-            <div>
-              {filteredMetadata.map((item: any, index: number) => (
-                <IonCard
-                  onClick={() =>
-                    openModalWithDynamicPath(item.parsed_data[0]?.url)
-                  }
-                  className="margin"
-                  key={index}
-                >
-                  <IonCardHeader>
-                    <IonCardTitle>
-                      {item.parsed_data[0]?.title || "No title available"}
-                    </IonCardTitle>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    <p>
-                      {item.parsed_data[0]?.description ||
-                        "No description available"}
-                    </p>
-                    <IonChip>{item.num_groups} Verses</IonChip>
-                  </IonCardContent>
-                  <IonButton fill="clear"></IonButton>
-                </IonCard>
-              ))}
-            </div>
-            {showModal && (
-              <Verse
-                dynamicPath={dynamicPath}
-                userr={false}
-                onClose={closeModal}
-              />
-            )}
-          </div>
-        ) : (
+  {activeSegment === "default" ? ( */}
+        <div>
+          <IonItem>
+            <IonCardTitle>Verse Of the Day</IonCardTitle>
+          </IonItem>
+          <IonItem lines="none" href="/verseoftheday">
+            <IonLabel className="ion-text-wrap">{verse}</IonLabel>
+          </IonItem>
           <User />
-        )}
+          <div>
+            {filteredMetadata.map((item: any, index: number) => (
+              <IonCard
+                onClick={() =>
+                  openModalWithDynamicPath(item.parsed_data[0]?.url)
+                }
+                className="margin"
+                key={index}
+              >
+                <IonCardHeader>
+                  <IonCardTitle>
+                    {item.parsed_data[0]?.title || "No title available"}
+                  </IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  <p>
+                    {item.parsed_data[0]?.description ||
+                      "No description available"}
+                  </p>
+                  <IonChip>{item.num_groups} Verses</IonChip>
+                </IonCardContent>
+                <IonButton fill="clear"></IonButton>
+              </IonCard>
+            ))}
+          </div>
+          {showModal && (
+            <Verse
+              dynamicPath={dynamicPath}
+              userr={false}
+              onClose={closeModal}
+            />
+          )}
+        </div>
+        <IonFab slot="fixed" vertical="bottom" horizontal="end">
+          <IonFabButton>
+            <IonIcon icon={addCircle}></IonIcon>
+          </IonFabButton>
+          <IonFabList side="top">
+            <IonFabButton routerLink="/tabs/dashboard/makeroad/">
+              <IonIcon icon={createOutline}></IonIcon>
+            </IonFabButton>
+
+            <IonFabButton routerLink="/tabs/dashboard/roadlink/">
+              <IonIcon icon={linkOutline}></IonIcon>
+            </IonFabButton>
+          </IonFabList>
+        </IonFab>
       </IonContent>
     </IonPage>
   );

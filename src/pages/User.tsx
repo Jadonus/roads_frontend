@@ -14,6 +14,7 @@ import {
   IonFab,
   IonSpinner,
   IonLabel,
+  IonNote,
 } from "@ionic/react";
 import React, { useState, useRef, useEffect } from "react";
 import {
@@ -24,10 +25,15 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
 import Verse from "./Verse";
-
+import {
+  addCircle,
+  createOutline,
+  linkOutline,
+  micCircle,
+  person,
+  personCircle,
+} from "ionicons/icons";
 interface ContainerProps {}
-
-import { addCircle, createOutline, linkOutline } from "ionicons/icons";
 
 interface DashboardData {
   combined_data: {
@@ -142,8 +148,7 @@ export default function user() {
     return (
       <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
         <IonSpinner
-          style={{ margin: "auto", width: "7rem", height: "7rem" }}
-          name="dots"
+          style={{ margin: "auto", width: "3rem", height: "3rem" }}
         ></IonSpinner>
       </div>
     );
@@ -154,11 +159,6 @@ export default function user() {
         <IonItem>
           <IonLabel>You do not have any custom roads yet. </IonLabel>
         </IonItem>
-        <IonFab slot="fixed" vertical="bottom" horizontal="end">
-          <IonFabButton routerLink="/tabs/dashboard/makeroad/">
-            <IonIcon icon={addCircle}></IonIcon>
-          </IonFabButton>
-        </IonFab>
       </div>
     );
   }
@@ -191,26 +191,18 @@ export default function user() {
             </IonCardHeader>
             <IonCardContent>
               <p>{item.descriptions[0] || "No description available"}</p>
-              <IonChip>{item.num} Verses</IonChip>
+              {item.num} Verses {"      "}
+              <IonIcon
+                icon={personCircle}
+                color="primary"
+                size="medium"
+              ></IonIcon>
             </IonCardContent>
             <IonButton fill="clear"></IonButton>
           </IonCard>
         );
       })}
-      <IonFab slot="fixed" vertical="bottom" horizontal="end">
-        <IonFabButton>
-          <IonIcon icon={addCircle}></IonIcon>
-        </IonFabButton>
-        <IonFabList side="top">
-          <IonFabButton routerLink="/tabs/dashboard/makeroad/">
-            <IonIcon icon={createOutline}></IonIcon>
-          </IonFabButton>
 
-          <IonFabButton routerLink="/tabs/dashboard/roadlink/">
-            <IonIcon icon={linkOutline}></IonIcon>
-          </IonFabButton>
-        </IonFabList>
-      </IonFab>
       {showModal && (
         <Verse dynamicPath={dynamicPath} userr={true} onClose={closeModal} />
       )}
@@ -225,7 +217,9 @@ export default function user() {
                 if (navigator.share) {
                   const shareData = {
                     title: "Roads",
-                    text: `Here is my custom Road ID: ${selectedCard.creator}_${selectedCard.title}`,
+                    text: `Here is my custom Road ID: ${
+                      selectedCard.creator
+                    }_${selectedCard.title.encodeURIComponent()}`,
                     url: "https://dashboard.roadsbible.com/tabs/dashboard/roadlink/",
                   };
 

@@ -12,7 +12,7 @@ import {
   IonHeader,
 } from "@ionic/react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { share } from "ionicons/icons";
+import { share, shareOutline } from "ionicons/icons";
 import Confetti from "react-confetti";
 import { RefresherEventDetail } from "@ionic/react";
 const getUsername = () => {
@@ -117,6 +117,11 @@ function Myprogress() {
         </IonRefresher>
         <IonHeader>
           <IonToolbar>
+            <IonTitle>Settings</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonHeader collapse="condense">
+          <IonToolbar>
             <IonTitle size="large">My Progress</IonTitle>
           </IonToolbar>
         </IonHeader>
@@ -157,7 +162,7 @@ function Myprogress() {
                     color="primary"
                     size="large"
                     style={{ marginBottom: "1rem" }}
-                    icon={share}
+                    icon={shareOutline}
                   />
                 </IonButton>
               ) : (
