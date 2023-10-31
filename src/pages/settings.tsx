@@ -78,6 +78,7 @@ const SettingsPage = () => {
           <IonList inset={true}>
             <IonItem color="light">
               <IonSelect
+                disabled={true}
                 label="Default Memory Mode"
                 aria-label="Default Memory Mode"
                 interface="action-sheet"
