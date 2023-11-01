@@ -15,6 +15,7 @@ import {
   IonSpinner,
   IonLabel,
   IonNote,
+  IonToast,
 } from "@ionic/react";
 import React, { useState, useRef, useEffect } from "react";
 import {
@@ -54,11 +55,13 @@ export default function user() {
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [longPressTimer, setLongPressTimer] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const startLongPress = (item) => {
     setLongPressTimer(
       setTimeout(() => {
         openActionSheet(item);
-      }, 300) // Adjust the delay (in milliseconds) as needed
+      }, 500) // Adjust the delay (in milliseconds) as needed
     );
   };
 
@@ -227,6 +230,25 @@ export default function user() {
               },
             },
             {
+              text: "Add Road For All",
+              handler: () => {
+                const data = {
+                  username: username,
+                  title: selectedCard.title,
+                };
+
+                const options = {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                };
+                fetch("https://www.roadsbible.com/api/approve/", options);
+                setIsOpen(true);
+              },
+            },
+            {
               text: "Delete",
               role: "destructive",
               handler: () => {
@@ -258,6 +280,13 @@ export default function user() {
           ]}
         />
       )}
+      <IonToast
+        isOpen={isOpen}
+        message="Your Road is currently awaiting approval to be added."
+        onDidDismiss={() => setIsOpen(false)}
+        duration={4000}
+        color="primary"
+      ></IonToast>
     </>
   );
 }
