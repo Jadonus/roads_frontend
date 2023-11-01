@@ -96,7 +96,7 @@ const App: React.FC = () => {
             <Route path="/devpro" exact component={Myprogress} />
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
-            {isauth ? (
+            {isauth.value ? (
               <>
                 <AuthenticationAction />
                 <Redirect to="/tabs/dashboard/" />

@@ -13,7 +13,7 @@ import {
 import { AppIcon } from "@capacitor-community/app-icon";
 function Appicon() {
   const changeIcon = async (iconName) => {
-    await AppIcon.change({ name: iconName, suppressNotification: true });
+    await AppIcon.change({ name: iconName, suppressNotification: false });
   };
   return (
     <IonPage>
