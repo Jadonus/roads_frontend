@@ -15,13 +15,17 @@ import {
 import { AppIcon } from "@capacitor-community/app-icon";
 function Appicon() {
   const changeIcon = async (iconName) => {
-    await AppIcon.change({ name: iconName, suppressNotification: false });
+    if (iconName !== "default") {
+      await AppIcon.change({ name: iconName, suppressNotification: false });
+    } else {
+      await AppIcon.reset({ suppressNotification: false });
+    }
   };
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButtons slot="start">
+          <IonButtons>
             <IonBackButton></IonBackButton>
           </IonButtons>
           <IonTitle size="large">App Icon</IonTitle>
