@@ -174,6 +174,9 @@ const SettingsPage = () => {
                 </IonRadio>
               </IonRadioGroup>
             </IonItem>
+            <IonItem color="light" routerLink="/tabs/settings/appicon/">
+              App Icon
+            </IonItem>
           </IonList>
           <h3 className="ion-padding">App</h3>
           <IonList inset>

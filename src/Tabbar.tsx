@@ -23,6 +23,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { isauth } from "./pages/isauth";
 import Makeroad from "./pages/makeroad";
 import { effect } from "@preact/signals";
+import Appicon from "./pages/appicon";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
@@ -83,7 +84,7 @@ const TabBar: React.FC = () => {
         ></Route>
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
-
+        <Route path="/tabs/settings/appicon" component={Appicon} exact />
         <Route path="/tabs/settings/account" component={Account} exact={true} />
         <Route path="/tabs/settings/install" component={Install} exact={true} />
         <Route path="/tabs/roads/:groupName" component={Verse} />

@@ -1,4 +1,4 @@
-import { IonIcon } from "@ionic/react";
+import { IonIcon, IonRouterLink } from "@ionic/react";
 import { square } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -119,7 +119,8 @@ const Signup = () => {
           </IonButton>
         </IonList>
         <IonNote className="ion-padding">
-          Already registered? <a href="/login">Login</a>{" "}
+          Already registered?{" "}
+          <IonRouterLink routerLink="/login">Login</IonRouterLink>{" "}
         </IonNote>
       </IonContent>
     </IonPage>
