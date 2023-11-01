@@ -2,23 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<key>CFBundleIcons</key>
-<dict>
-  <key>CFBundleAlternateIcons</key>
-  <dict>
-    <!-- The names to reference in your code -->
-    <key>neumorph</key>
+ <key>CFBundleIcons</key>
     <dict>
-      <key>UIPrerenderedIcon</key>
-      <true/>
-      <key>CFBundleIconFiles</key>
-      <array>
-        <!-- Filenames-->
-        <string>neumorph</string>
-      </array>
+        <key>CFBundleAlternateIcons</key>
+        <dict>
+            <!-- The name you use in code -->
+            <key>neumorph</key>
+            <dict>
+                <key>UIPrerenderedIcon</key>
+                <true/>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <!-- The actual filenames. Don't list the @2x/@3x files here, and you can use just the biggest one if you like -->
+                    <string>neumorph</string>
+                </array>
+            </dict>
+            <key>classic</key>
+            <dict>
+                <key>UIPrerenderedIcon</key>
+                <true/>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <!-- The actual filenames. Don't list the @2x/@3x files here, and you can use just the biggest one if you like -->
+                    <string>classic</string>
+                </array>
+            </dict>
+        </dict>
     </dict>
-  </dict>
-</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
