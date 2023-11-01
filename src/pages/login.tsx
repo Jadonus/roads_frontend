@@ -45,8 +45,9 @@ const Login = () => {
         await Preferences.set({
           key: "username",
           value: username,
+        }).then(() => {
+          history.push("/tabs/dashboard/");
         });
-        history.push("/tabs/dashboard/");
       } else {
         if (response) {
           setError(response);
