@@ -12,8 +12,10 @@ import {
   IonNote,
   IonList,
 } from "@ionic/react";
+import { Preferences } from "@capacitor/preferences";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { token } from "./isauth";
 import { useHistory } from "react-router";
 export default function Account() {
   let history = useHistory();
@@ -31,16 +33,15 @@ export default function Account() {
           accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
           "accept-language": "en-US,en;q=0.9",
-          Authorization: `Token ${localStorage.getItem("token")}`,
+          Authorization: `Token ${token.value}`,
         },
       })
     );
     console.log(response);
   }
   get();
-  function logOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+  async function logOut() {
+    await Preferences.clear();
     history.push("/login");
   }
   async function reset() {

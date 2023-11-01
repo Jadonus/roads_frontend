@@ -18,12 +18,11 @@ import {
 import { useHistory } from "react-router-dom";
 
 import Axios from "axios";
-
+import { Preferences } from "@capacitor/preferences";
 const Login = () => {
   let history = useHistory();
 
   const [error, setError] = useState(undefined);
-  // Initialize settings using localStorage or default values
   const [username, setUsername] = useState("");
   const [load, setLoad] = useState(false);
   const [password, setPassword] = useState("");
@@ -39,8 +38,14 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.key);
-        localStorage.setItem("username", username);
+        await Preferences.set({
+          key: "token",
+          value: response.data.key,
+        });
+        await Preferences.set({
+          key: "username",
+          value: username,
+        });
         history.push("/tabs/dashboard/");
       } else {
         if (response) {

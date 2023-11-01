@@ -17,7 +17,8 @@ import {
   IonAlert,
   IonButtons,
 } from "@ionic/react";
-import { useAuth0 } from "@auth0/auth0-react";
+
+import { isauth } from "./isauth";
 function Makeroad() {
   const bookofbiblelist = [
     "Genesis",
@@ -88,12 +89,7 @@ function Makeroad() {
     "Revelation",
   ];
   // A simple utility function to get the username from wherever you store it
-  const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
-    return localStorage.getItem("username");
-  };
-  let username = getUsername();
+  let username = isauth.value;
   const [formInputs, setFormInputs] = useState({
     name: "",
     description: "",

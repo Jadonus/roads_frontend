@@ -23,12 +23,10 @@ import {
   IonButtons,
   IonBadge,
 } from "@ionic/react";
+import { isauth } from "./isauth";
 let colorPreference;
 const SettingsPage = () => {
-  const getUsername = () => {
-    return localStorage.getItem("username");
-  };
-  let username = getUsername();
+  let username = isauth.value;
   // Initialize settings using localStorage or default values
   async function settings(key, value) {
     let data = {

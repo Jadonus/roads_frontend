@@ -15,12 +15,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { share, shareOutline } from "ionicons/icons";
 import Confetti from "react-confetti";
 import { RefresherEventDetail } from "@ionic/react";
-const getUsername = () => {
-  // You'll want to fetch this from your authentication state or local storage
-  // For example, if you're using local storage:
-  return localStorage.getItem("username");
-};
-let username = getUsername();
+import { isauth } from "./isauth";
+import { effect } from "@preact/signals";
+let username = isauth.value;
 function Myprogress() {
   const [progress, setProgress] = useState(0);
   const [confet, setConfet] = useState(false);
@@ -58,46 +55,41 @@ function Myprogress() {
       event.detail.complete();
     }, 2000);
   }
-  async function fetchData() {
-    if (username) {
-      const data = {
-        username: username,
-      };
+  async function fetchData(usernamee) {
+    const data = {
+      username: usernamee,
+    };
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
 
-      await fetch("https://www.roadsbible.com/api/gameify", requestOptions)
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
-          setProgress(response.numverses);
-          setProgressBarPosition(response.numverses);
+    await fetch("https://www.roadsbible.com/api/gameify", requestOptions)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setProgress(response.numverses);
+        setProgressBarPosition(response.numverses);
+        console.log("%10", response.numverses % 10);
+        if (response.numverses % 10 || response.numverses === "Not started") {
+          console.log("sad...");
+        } else {
+          setConfet(true);
 
-          if (response.numverses % 10 && response.numverses !== "Not Started") {
-            console.log("sad...");
-          } else {
-            setConfet(true);
-
-            console.log("🎉");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      console.error("User or username is undefined.");
-    }
+          console.log("🎉");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  effect(() => {
+    fetchData(isauth.value);
+  });
   function sharee() {
     console.log(progress);
     const shareData = {

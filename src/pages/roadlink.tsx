@@ -13,18 +13,12 @@ import {
   IonList,
 } from "@ionic/react";
 import { useParams } from "react-router-dom";
+import { isauth } from "./isauth";
 
-import { useAuth0 } from "@auth0/auth0-react";
 function Roadlink() {
-  const { user } = useAuth0();
   const [description, setDescription] = useState();
   // A simple utility function to get the username from wherever you store it
-  const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
-    return localStorage.getItem("username");
-  };
-  let username = getUsername();
+  let username = isauth.value;
   const [userr, setUserr] = useState<string | undefined>(undefined); // Initialize state variables with the correct type
   const [road, setRoad] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string | undefined>(undefined);

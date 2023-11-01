@@ -45,7 +45,7 @@ interface DashboardData {
     creator: string; // Added creator property here
   }[];
 }
-
+import { isauth } from "./isauth";
 export default function user() {
   let filteredMetadata = [];
   const [link, setlink] = useState("");
@@ -79,12 +79,7 @@ export default function user() {
   );
   const [dynamicPath, setDynamicPath] = useState<string>("");
 
-  const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
-    return localStorage.getItem("username");
-  };
-  const username = getUsername();
+  let username = isauth.value;
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const openModalWithDynamicPath = (dynamicPath: string) => {

@@ -1,6 +1,6 @@
 import { IonIcon } from "@ionic/react";
 import { square } from "ionicons/icons";
-
+import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import {
   IonContent,
@@ -27,7 +27,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [load, setLoad] = useState(false);
   const [password, setPassword] = useState("");
-
+  let history = useHistory();
   const [email, setEmail] = useState("");
   const [password2, setPassword2] = useState("");
   const handleLogin = async () => {
@@ -44,9 +44,7 @@ const Signup = () => {
       );
 
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.key);
-        localStorage.setItem("username", username);
-        window.location.href = "/tabs/dashboard/";
+        history.push("/tabs/dashboard");
       } else {
         if (response.data && response.data.non_field_errors) {
           setError(response.data.non_field_errors[0]);

@@ -20,52 +20,47 @@ import About from "./pages/aboutroads";
 import Install from "./pages/install";
 import Myprogress from "./pages/myprogress";
 import { useAuth0 } from "@auth0/auth0-react";
+import { isauth } from "./pages/isauth";
 import Makeroad from "./pages/makeroad";
+import { effect } from "@preact/signals";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
-  const [isauth, setIsAuth] = useState(localStorage.getItem("token"));
+
   //const [isauth, setIsAuth] = useState(false)
-  const getUsername = () => {
-    return localStorage.getItem("username");
-  };
-  let username = getUsername();
+  let username = isauth.value;
+  console.log("sdfv", isauth.value);
   let PWA = window.matchMedia("(display-mode: standalone)").matches;
-  function fetchData() {
-    if (username) {
-      const data = {
-        username: username,
-      };
+  function fetchData(userneam) {
+    const data = {
+      username: userneam,
+    };
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      };
-      fetch("https://www.roadsbible.com/api/gameify", requestOptions)
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    fetch("https://www.roadsbible.com/api/gameify", requestOptions)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
 
-          if (response.numverses % 10) {
-            console.log("sad...");
-          } else {
-            setProgress(true);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      console.error("User or user.name is undefined.");
-    }
+        if (response.numverses % 10 || response.numverses === "Not started") {
+          console.log("sad...");
+        } else {
+          setProgress(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  effect(() => {
+    fetchData(isauth.value);
+  });
   return (
     <IonTabs>
       <IonRouterOutlet>
@@ -95,7 +90,11 @@ const TabBar: React.FC = () => {
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="dashboard" href="/tabs/dashboard">
-          {isauth !== "" ? <AuthenticatedAction /> : <Redirect to="/login" />}
+          {isauth.value !== "" ? (
+            <AuthenticatedAction />
+          ) : (
+            <Redirect to="/login" />
+          )}
           <IonIcon icon={library} />
           <IonLabel>Dashboard</IonLabel>
         </IonTabButton>

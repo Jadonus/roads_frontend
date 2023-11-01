@@ -36,7 +36,7 @@ import {
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
-import { useAuth0 } from "@auth0/auth0-react";
+import { isauth } from "./isauth";
 interface VerseModalProps {
   dynamicPath: string;
   userr: boolean;
@@ -47,12 +47,7 @@ interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   const [pdf, setPdf] = useState(false);
   const [settings, setSettings] = useState([]);
-  const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
-    return localStorage.getItem("username");
-  };
-  let username = getUsername();
+  let username = isauth.value;
   const [sentences, setSentences] = useState([]);
   const undo = useRef(null);
   const hide = useRef(null);

@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-
+import { isauth } from "./pages/isauth";
+import { effect } from "@preact/signals";
 function AuthenticatedAction() {
-  const getUsername = () => {
-    // You'll want to fetch this from your authentication state or local storage
-    // For example, if you're using local storage:
-    return localStorage.getItem("username");
-  };
-  let username = getUsername();
-  console.log(username);
-  let received;
-  useEffect(() => {
+  effect(() => {
+    let username = isauth.value;
+    username = username;
+
+    console.log(username);
+    let received;
     if (username) {
       console.log("useffect");
 
@@ -57,8 +55,7 @@ function AuthenticatedAction() {
 
       get();
     }
-  }, []);
-
+  });
   // You can return null or any UI elements you want here
   return null;
 }
