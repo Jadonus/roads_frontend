@@ -47,7 +47,7 @@ const Login = () => {
           key: "username",
           value: username,
         }).then(() => {
-          history.push("/tabs/dashboard/");
+          window.location.href = "/tabs/dashboard/";
         });
       } else {
         if (response) {
