@@ -45,6 +45,7 @@ interface DashboardData {
     creator: string; // Added creator property here
   }[];
 }
+import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { isauth } from "./isauth";
 export default function user() {
   let filteredMetadata = [];
@@ -56,10 +57,13 @@ export default function user() {
   const [longPressTimer, setLongPressTimer] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const hapticsImpactMedium = async () => {
+    await Haptics.impact({ style: ImpactStyle.Heavy });
+  };
   const startLongPress = (item) => {
     setLongPressTimer(
       setTimeout(() => {
+        hapticsImpactMedium();
         openActionSheet(item);
       }, 500) // Adjust the delay (in milliseconds) as needed
     );

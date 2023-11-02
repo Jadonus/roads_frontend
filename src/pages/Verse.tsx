@@ -68,7 +68,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
-    await Haptics.impact({ style: ImpactStyle.Medium });
+    await Haptics.impact({ style: ImpactStyle.Heavy });
   };
   interface Data {
     verses: any[]; // You can replace 'any' with a more specific type if you know the structure.
@@ -204,13 +204,14 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
       randomIndices.push(randomVisibleIndex);
       visibleWordIndices.splice(randomIndex, 1);
     }
-
+    hapticsImpactMedium();
     setHiddenWordIndices((prevHiddenWordIndices) =>
       prevHiddenWordIndices.concat(randomIndices)
     );
   };
 
   const hideAllWords = () => {
+    hapticsImpactMedium();
     const currentSentence = sentences[currentSentenceIndex];
     console.log(currentSentence);
     const words = currentSentence.split(" ");
