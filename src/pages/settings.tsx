@@ -46,6 +46,7 @@ const SettingsPage = () => {
     await fetch("https://www.roadsbible.com/api/settings/", dato)
       .then((response) => {
         console.log("Api REsponse:", response);
+        location.reload();
       })
       .catch((err) => {
         console.error(err);
@@ -53,7 +54,7 @@ const SettingsPage = () => {
   }
 
   // useEffect to save settings to localStorage whenever they change
-
+  console.log(col);
   // Function to update settings
   function isNative() {
     return Capacitor.isNativePlatform();
@@ -181,12 +182,11 @@ const SettingsPage = () => {
               Custom Color {"  "}
               <input
                 value={col} // Use the 'col' variable here
-                onBlur={(e) => {
+                onChange={(e) => {
                   setCol(e.target.value);
-                  settings("color", e.target.value);
-                  setTimeout(() => {
-                    location.reload(); // Update with 'e.target.value'
-                  }, 1);
+                }}
+                onBlur={(e) => {
+                  settings("color", col);
                 }}
                 type="color"
               />
