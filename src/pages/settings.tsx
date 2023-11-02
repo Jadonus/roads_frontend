@@ -58,8 +58,8 @@ const SettingsPage = () => {
 
       // Create the notification data.
       const notification = {
-        title: "Your Daily Reminder",
-        body: "It's 12 pm, time for your daily notification!",
+        title: "Roads!",
+        body: "Its time for you to memorize bible verses! ",
         id: 1, // You can use a different ID if needed.
         schedule: {
           at: twelveNoon,
