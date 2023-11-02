@@ -16,7 +16,6 @@ import {
   IonInput,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-
 import Axios from "axios";
 import { Preferences } from "@capacitor/preferences";
 const Login = () => {
@@ -28,6 +27,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const handleLogin = async () => {
     setLoad(true);
+    let usernam = await Preferences.get({ key: "username" }).then(() => {});
+
     try {
       const response = await Axios.post(
         "https://www.roadsbible.com/dj-rest-auth/login/",
@@ -70,6 +71,19 @@ const Login = () => {
       }
     }
   };
+  useEffect(() => {
+    // Inside an async function to use 'await'
+    const checkUsernameAndRedirect = async () => {
+      let usernam = await Preferences.get({ key: "username" });
+
+      if (usernam) {
+        // Username exists, navigate to the dashboard
+        history.push("/tabs/dashboard/");
+      }
+    };
+
+    checkUsernameAndRedirect();
+  }, []);
   return (
     <IonPage>
       <IonHeader>
