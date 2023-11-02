@@ -75,8 +75,8 @@ const Login = () => {
     // Inside an async function to use 'await'
     const checkUsernameAndRedirect = async () => {
       let usernam = await Preferences.get({ key: "username" });
-
-      if (usernam) {
+      console.log("user", usernam.value);
+      if (usernam.value) {
         // Username exists, navigate to the dashboard
         history.push("/tabs/dashboard/");
       }
