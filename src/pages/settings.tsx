@@ -1,6 +1,7 @@
 import { IonIcon } from "@ionic/react";
 import { colorPalette, logoGithub } from "ionicons/icons";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Capacitor } from "@capacitor/core";
+
 import React, { useState, useEffect } from "react";
 import {
   IonContent,
@@ -53,7 +54,9 @@ const SettingsPage = () => {
   // useEffect to save settings to localStorage whenever they change
 
   // Function to update settings
-
+  function isNative() {
+    return Capacitor.isNativePlatform();
+  }
   const PWA = window.matchMedia("(display-mode: standalone)").matches;
   return (
     <div>
@@ -144,7 +147,7 @@ const SettingsPage = () => {
               ></IonPicker>
             </IonItem>
           </IonList>
-          <h3 className="ion-padding">Colors</h3>
+          <h3 className="ion-padding">Appearance</h3>
           <IonList inset>
             <IonItem color="light">
               <IonRadioGroup
@@ -174,15 +177,17 @@ const SettingsPage = () => {
                 </IonRadio>
               </IonRadioGroup>
             </IonItem>
-            <IonItem color="light" routerLink="/tabs/settings/appicon/">
-              App Icon
-            </IonItem>
+            {isNative() ? (
+              <IonItem color="light" routerLink="/tabs/settings/appicon/">
+                App Icon
+              </IonItem>
+            ) : null}
           </IonList>
           <h3 className="ion-padding">App</h3>
           <IonList inset>
             <IonItem color="light" routerLink="/tabs/settings/install">
               Install Roads{" "}
-              {!PWA ? (
+              {!PWA && !isNative() ? (
                 <IonBadge slot="end" color="danger">
                   1
                 </IonBadge>

@@ -58,6 +58,15 @@ function Appicon() {
             <IonItem>
               <img
                 className="ion-padding"
+                src="/green.png"
+                width="100"
+                alt="green icon"
+              />
+              <IonRadio value="classic">Green</IonRadio>
+            </IonItem>
+            <IonItem>
+              <img
+                className="ion-padding"
                 src="/dsf.png"
                 width="100"
                 alt="neumorph icon"
