@@ -1,6 +1,13 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
+  plugins: {
+    LocalNotifications: {
+      smallIcon: "/rounded.png",
+      iconColor: "#488AFF",
+      sound: "beep.wav",
+    },
+  },
   appId: 'io.ionic.starter',
   appName: 'roads_frontend',
   webDir: 'dist',

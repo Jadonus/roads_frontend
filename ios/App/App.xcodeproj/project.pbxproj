@@ -33,7 +33,6 @@
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		DEED47012AF2EE1C00261EE7 /* neumorph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = neumorph.png; path = ../../../src/neumorph.png; sourceTree = "<group>"; };
 		DEED47062AF3E23A00261EE7 /* AlternateIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AlternateIcons; sourceTree = "<group>"; };
-		DEED47082AF3F24200261EE7 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +82,6 @@
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
-				DEED47082AF3F24200261EE7 /* green.png */,
 				504EC3131FED79650016851F /* Info.plist */,
 				DEED47012AF2EE1C00261EE7 /* neumorph.png */,
 				DEED47062AF3E23A00261EE7 /* AlternateIcons */,

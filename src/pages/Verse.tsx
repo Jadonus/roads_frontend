@@ -222,6 +222,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   };
 
   const revealAllWords = () => {
+    hapticsImpactMedium();
     setHiddenWordIndices([]);
   };
 

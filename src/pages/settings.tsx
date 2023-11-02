@@ -1,7 +1,7 @@
 import { IonIcon } from "@ionic/react";
 import { colorPalette, logoGithub } from "ionicons/icons";
 import { Capacitor } from "@capacitor/core";
-
+import { LocalNotifications } from "@capacitor/local-notifications";
 import React, { useState, useEffect } from "react";
 import {
   IonContent,
@@ -28,8 +28,53 @@ import { isauth } from "./isauth";
 let colorPreference;
 const SettingsPage = () => {
   let username = isauth.value;
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
 
-  let [col, setCol] = useState("#3875D2"); // Initialize settings using localStorage or default values
+  let [col, setCol] = useState("#3875D2");
+  const handleNotificationsToggle = async () => {
+    // Toggle the state
+    setNotificationsEnabled(!notificationsEnabled);
+
+    if (notificationsEnabled == false) {
+      await LocalNotifications.cancel({ notifications: [] }); // Provide an empty array
+    } else {
+      scheduleDailyNotification();
+    }
+  };
+  async function scheduleDailyNotification() {
+    console.log("getting permissionl");
+    const permission = await LocalNotifications.requestPermissions();
+    if (permission.display) {
+      // Calculate the time for 12 pm.
+      const now = new Date();
+      const twelveNoon = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        1, // 12 pm
+        15, // 0 minutes
+        0 // 0 seconds
+      );
+
+      // Create the notification data.
+      const notification = {
+        title: "Your Daily Reminder",
+        body: "It's 12 pm, time for your daily notification!",
+        id: 1, // You can use a different ID if needed.
+        schedule: {
+          at: twelveNoon,
+          repeats: true, // This will repeat daily.
+        },
+      };
+
+      // Schedule the notification.
+      await LocalNotifications.schedule({ notifications: [notification] });
+
+      console.log("Daily notification scheduled at 12 pm!");
+    } else {
+      console.log("Notifications are disabled. No notification scheduled.");
+    }
+  }
   async function settings(key, value) {
     let data = {
       username: username,
@@ -147,6 +192,14 @@ const SettingsPage = () => {
                   },
                 ]}
               ></IonPicker>
+            </IonItem>
+            <IonItem color="light">
+              Notifications
+              <IonToggle
+                slot="end"
+                checked={!notificationsEnabled} // Controlled by state
+                onIonChange={handleNotificationsToggle}
+              ></IonToggle>
             </IonItem>
           </IonList>
           <h3 className="ion-padding">Appearance</h3>
