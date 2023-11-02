@@ -62,7 +62,7 @@ function Appicon() {
                 width="100"
                 alt="green icon"
               />
-              <IonRadio value="classic">Green</IonRadio>
+              <IonRadio value="green">Green</IonRadio>
             </IonItem>
             <IonItem>
               <img
