@@ -28,7 +28,8 @@ import { isauth } from "./isauth";
 let colorPreference;
 const SettingsPage = () => {
   let username = isauth.value;
-  // Initialize settings using localStorage or default values
+
+  let [col, setCol] = useState("#3875D2"); // Initialize settings using localStorage or default values
   async function settings(key, value) {
     let data = {
       username: username,
@@ -158,7 +159,6 @@ const SettingsPage = () => {
                 }}
               >
                 {/* Radio options */}
-
                 <IonRadio value="#eb3434">
                   Red{" "}
                   <IonIcon icon={colorPalette} style={{ color: "#eb3434" }} />
@@ -176,6 +176,20 @@ const SettingsPage = () => {
                   <IonIcon icon={colorPalette} style={{ color: "#9133FF" }} />{" "}
                 </IonRadio>
               </IonRadioGroup>
+            </IonItem>
+            <IonItem color="light">
+              Custom Color {"  "}
+              <input
+                value={col} // Use the 'col' variable here
+                onBlur={(e) => {
+                  setCol(e.target.value);
+                  settings("color", e.target.value);
+                  setTimeout(() => {
+                    location.reload(); // Update with 'e.target.value'
+                  }, 1);
+                }}
+                type="color"
+              />
             </IonItem>
             {isNative() ? (
               <IonItem color="light" routerLink="/tabs/settings/appicon/">
