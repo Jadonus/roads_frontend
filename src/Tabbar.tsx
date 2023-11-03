@@ -24,6 +24,7 @@ import { isauth } from "./pages/isauth";
 import Makeroad from "./pages/makeroad";
 import { effect } from "@preact/signals";
 import Appicon from "./pages/appicon";
+import { Capacitor } from "@capacitor/core";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
@@ -108,7 +109,11 @@ const TabBar: React.FC = () => {
         <IonTabButton tab="settings" href="/tabs/settings">
           <IonIcon icon={settingsOutline} />
           <IonLabel>Settings</IonLabel>
-          {!PWA ? <IonBadge color="danger">1</IonBadge> : <div></div>}
+          {!PWA && !Capacitor.isNativePlatform() ? (
+            <IonBadge color="danger">1</IonBadge>
+          ) : (
+            <div></div>
+          )}
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

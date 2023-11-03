@@ -45,7 +45,6 @@ interface VerseModalProps {
 
 interface ContainerProps {}
 const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
-  const [pdf, setPdf] = useState(false);
   const [settings, setSettings] = useState([]);
   let username = isauth.value;
   const [sentences, setSentences] = useState([]);
@@ -122,24 +121,49 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
     }
     groupName = location.split("/").slice(-1)[0];
     console.log(groupName);
-    fetch("https://www.roadsbible.com" + dynamicPath + "/", requestOption)
-      .then((response) => response.json())
-      .then((data) => {
-        // Specify the structure
-        // Use the 'Data' interface here
-        setRefer(data);
+    if (dynamicPath === "verseoftheday") {
+      const verseUrl =
+        "https://beta.ourmanna.com/api/v1/get?format=json&translation=kjv";
 
-        console.log(refer);
-        // Extract verses and references from the API response
-        const verses = data.verses.map(
-          (verse) => `${verse.verse} ${verse.reference}`
-        );
-        // Update the state with the fetched verses
-        setSentences(verses);
-      })
-      .catch((error) => {
-        console.error("Error fetching verses:", error);
-      });
+      fetch(verseUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json(); // Parse the response as text
+        })
+        .then((fetchedData) => {
+          // Assuming the API response contains the text directly
+          let d = [fetchedData];
+          const verses = d.map(
+            (verse) =>
+              `${verse.verse.details.text} ${verse.verse.details.reference}`
+          );
+          setSentences(verses); // Set the verse to the fetched data as a string
+        })
+        .catch((error) => {
+          console.error("Error fetching verse:", error);
+        });
+    } else {
+      fetch("https://www.roadsbible.com" + dynamicPath + "/", requestOption)
+        .then((response) => response.json())
+        .then((data) => {
+          // Specify the structure
+          // Use the 'Data' interface here
+          setRefer(data);
+
+          console.log(refer);
+          // Extract verses and references from the API response
+          const verses = data.verses.map(
+            (verse) => `${verse.verse} ${verse.reference}`
+          );
+          // Update the state with the fetched verses
+          setSentences(verses);
+        })
+        .catch((error) => {
+          console.error("Error fetching verses:", error);
+        });
+    }
   }, []);
 
   var dynamic = dynamicPath.replace("/roads/", "");
@@ -620,9 +644,11 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
                   }}
                 >
                   <IonButtons>
-                    <IonButton onClick={backButtonClicked}>
-                      <IonIcon size="medium" icon={arrowBack} />
-                    </IonButton>
+                    {dynamicPath !== "verseoftheday" ? (
+                      <IonButton onClick={backButtonClicked}>
+                        <IonIcon size="medium" icon={arrowBack} />
+                      </IonButton>
+                    ) : null}
                     <>
                       <IonButton
                         onClick={() => hideRandomWords(3)}
@@ -648,9 +674,11 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
                         <IonIcon size="medium" icon={documentText} />
                       </IonButton>
                 </div> */}
-                    <IonButton onClick={moveToNextSentence}>
-                      <IonIcon size="medium" icon={arrowForward} />
-                    </IonButton>
+                    {dynamicPath !== "verseoftheday" ? (
+                      <IonButton onClick={moveToNextSentence}>
+                        <IonIcon size="medium" icon={arrowForward} />
+                      </IonButton>
+                    ) : null}
                   </IonButtons>
                 </div>
               </div>

@@ -197,11 +197,16 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         </IonSegment>
   {activeSegment === "default" ? ( */}
         <div>
-          <IonItem>
+          <IonItem lines="none">
             <IonCardTitle>Verse Of the Day</IonCardTitle>
           </IonItem>
-          <IonItem lines="none" href="/verseoftheday">
-            <IonLabel className="ion-text-wrap">{verse}</IonLabel>
+          <IonItem lines="none">
+            <IonLabel
+              onClick={() => openModalWithDynamicPath("verseoftheday")}
+              className="ion-text-wrap"
+            >
+              {verse}
+            </IonLabel>
           </IonItem>
           <User />
           <div>
@@ -223,7 +228,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     {item.parsed_data[0]?.description ||
                       "No description available"}
                   </p>
-                  <IonChip>{item.num_groups} Verses</IonChip>
+                  {item.num_groups} Verses
                 </IonCardContent>
                 <IonButton fill="clear"></IonButton>
               </IonCard>
