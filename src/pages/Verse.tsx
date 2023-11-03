@@ -473,8 +473,32 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   }
   function togg() {}
   function flashcard() {
-    console.log("flashcard");
-    setPdf(true);
+    let da = {
+      username: username,
+      title: dynamic,
+      custom: "no",
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(da),
+    };
+    fetch("https://www.roadsbible.com/api/pdf/", requestOptions)
+      .then((response) => {
+        // First, you need to convert the response to a blob using the .blob() method
+        response.blob().then((blob) => {
+          var url = URL.createObjectURL(blob);
+          window.location.href = url;
+          // Now you can do something with 'url', like opening it in a new tab or assigning it to an iframe.
+        });
+      })
+      .catch((error) => {
+        console.error("Oops, something went wrong: " + error);
+      });
+
+    // Now you can create a link or embed the PDF
   }
   return (
     <>
@@ -525,8 +549,8 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
               <IonItem onClick={readContext} button>
                 Read Verse Context
               </IonItem>
-              <IonItem onClick={flashcard} disabled button>
-                Print FlashCards (coming soon)
+              <IonItem onClick={flashcard} button>
+                Print FlashCards
               </IonItem>
             </IonList>
           </IonContent>
