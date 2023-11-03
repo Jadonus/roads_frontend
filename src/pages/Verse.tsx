@@ -74,6 +74,10 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
     verses: any[]; // You can replace 'any' with a more specific type if you know the structure.
     // Other properties if 'data' has them
   }
+  let custom = "no";
+  if (userr) {
+    custom = "yes";
+  }
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -82,6 +86,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
       // Add more sentences as needed
     ];
     let dat;
+
     if (userr == true) {
       dat = {
         username: username,
@@ -473,31 +478,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   }
   function togg() {}
   function flashcard() {
-    let da = {
-      username: username,
-      title: dynamic,
-      custom: "no",
-    };
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(da),
-    };
-    fetch("https://www.roadsbible.com/api/pdf/", requestOptions)
-      .then((response) => {
-        // First, you need to convert the response to a blob using the .blob() method
-        response.blob().then((blob) => {
-          var url = URL.createObjectURL(blob);
-          window.location.href = url;
-          // Now you can do something with 'url', like opening it in a new tab or assigning it to an iframe.
-        });
-      })
-      .catch((error) => {
-        console.error("Oops, something went wrong: " + error);
-      });
-
+    window.open(
+      `https://www.roadsbible.com/api/pdf/?title=${dynamic}&username=${username}&custom=${custom}`
+    );
     // Now you can create a link or embed the PDF
   }
   return (
