@@ -3,6 +3,7 @@ import { colorPalette, logoGithub } from "ionicons/icons";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import React, { useState, useEffect } from "react";
+import "../theme/variables.css";
 import {
   IonContent,
   IonPage,
@@ -55,7 +56,7 @@ const SettingsPage = () => {
         0, // 0 minutes
         0 // 0 seconds
       );
-
+      console.log(twelveNoon);
       // Create the notification data.
       const notification = {
         title: "Roads",

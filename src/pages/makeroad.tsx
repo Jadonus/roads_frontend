@@ -13,6 +13,7 @@ import {
   IonSelectOption,
   IonHeader,
   IonToolbar,
+  IonNote,
   IonBackButton,
   IonAlert,
   IonButtons,
@@ -194,6 +195,10 @@ function Makeroad() {
         console.error(err);
       });
   }
+  const handleRemoveVerse = (index) => {
+    const updatedVerseData = verseData.filter((_, i) => i !== index);
+    setVerseData(updatedVerseData);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -205,8 +210,14 @@ function Makeroad() {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList inset color="light">
-          <IonItem>
+        <IonList inset>
+          <IonNote>
+            Please Make Sure the verses you pick exist before entering them.
+            Only one verse at a time.
+          </IonNote>
+        </IonList>
+        <IonList inset>
+          <IonItem color="light">
             <IonInput
               type="text"
               name="name"
@@ -215,7 +226,7 @@ function Makeroad() {
               onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="text"
               name="description"
@@ -224,7 +235,7 @@ function Makeroad() {
               onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
-          <IonItem>
+          <IonItem color="light">
             {/* Replace IonSelect with IonSearchbar for book input */}
             <IonInput
               name="book"
@@ -244,7 +255,7 @@ function Makeroad() {
               ))}
             </div>
           </IonItem>
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="number"
               name="chapter"
@@ -253,7 +264,7 @@ function Makeroad() {
               onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="number"
               name="verse"
@@ -262,28 +273,34 @@ function Makeroad() {
               onIonInput={handleInputChange}
             ></IonInput>
           </IonItem>
-          <IonButtons>
-            <IonButton fill="clear" onClick={handleAddVerse}>
-              Add Verse
-            </IonButton>
-            <IonButton
-              fill="clear"
-              disabled={!verseData ? true : false}
-              onClick={push}
-            >
-              Submit
-            </IonButton>
-          </IonButtons>
+          <IonItem color="light">
+            <IonButtons>
+              <IonButton fill="clear" color="primary" onClick={handleAddVerse}>
+                Add Verse
+              </IonButton>
+              <IonButton
+                color="primary"
+                fill="clear"
+                disabled={verseData.length === 0}
+                onClick={push}
+              >
+                Submit
+              </IonButton>
+            </IonButtons>
+          </IonItem>
         </IonList>
         <IonList>
           {verseData.map((verse, index) => (
-            <IonItem key={index}>
+            <IonItem key={index} onClick={() => handleRemoveVerse(index)}>
               <IonLabel>
                 {bookofbiblelist[verse.book_id - 1]} {verse.chapter}:
                 {verse.verse_number}
               </IonLabel>
             </IonItem>
           ))}
+          <IonNote className="ion-padding">
+            Tap on the verses you want to remove.
+          </IonNote>
         </IonList>
         {success ? (
           <>
