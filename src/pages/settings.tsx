@@ -51,14 +51,14 @@ const SettingsPage = () => {
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
-        1, // 12 pm
-        15, // 0 minutes
+        14, // 12 pm
+        0, // 0 minutes
         0 // 0 seconds
       );
 
       // Create the notification data.
       const notification = {
-        title: "Roads!",
+        title: "Roads",
         body: "Its time for you to memorize bible verses! ",
         id: 1, // You can use a different ID if needed.
         schedule: {

@@ -534,7 +534,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
           ref={modal}
           trigger="open-action-sheet"
           initialBreakpoint={0.75}
-          breakpoints={[0, 0.25, 0.5, 0.75]}
+          breakpoints={[0, 0.75, 1]}
         >
           <IonHeader>
             <IonToolbar>
@@ -552,13 +552,16 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
               </IonItem>
 
               <IonItem button>Verse Info.</IonItem>
-
-              <IonItem onClick={readContext} button>
-                Read Verse Context
-              </IonItem>
-              <IonItem onClick={flashcard} button>
-                Print FlashCards
-              </IonItem>
+              {dynamicPath !== "verseoftheday" ? (
+                <>
+                  <IonItem onClick={readContext} button>
+                    Read Verse Context
+                  </IonItem>
+                  <IonItem onClick={flashcard} button>
+                    Print FlashCards
+                  </IonItem>
+                </>
+              ) : null}
             </IonList>
           </IonContent>
         </IonModal>
