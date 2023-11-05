@@ -24,17 +24,13 @@ function Roadlink() {
   const [id, setId] = useState<string | undefined>(undefined);
   const urlParams = new URLSearchParams(window.location.search);
   const par = urlParams.get("id");
-  if (par) {
-    setId(par);
-  }
-  effect(() => {});
-  useEffect(() => {
-    const decodedInput = decodeURI(id);
-    const [userr, road] = decodedInput.split("_"); // Declare them inside the useEffect
-    console.log(userr, road);
-    setUserr(userr); // Set the state variables with the values
-    setRoad(road);
-  }, [id]);
+  setId(par);
+  console.log(id);
+  const decodedInput = decodeURI(id);
+  const [userrr, rroad] = decodedInput.split("_"); // Declare them inside the useEffect
+  console.log(userr, road);
+  setUserr(userrr); // Set the state variables with the values
+  setRoad(rroad);
 
   console.log(userr, road);
   const [success, setSuccess] = useState(false);
@@ -73,7 +69,9 @@ function Roadlink() {
       console.error("Oops, something went wrong:", error);
     }
   }
-  get();
+  if (username) {
+    get();
+  }
   function neww() {
     if (!isauth.value) {
       location.href = "/login?redirect=/tabs/dashboard/roadlink";
