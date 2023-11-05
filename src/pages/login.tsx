@@ -80,7 +80,9 @@ const Login = () => {
       console.log("user", usernam.value);
       if (usernam.value) {
         // Username exists, navigate to the dashboard
-        history.push("/tabs/dashboard/");
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get("redirect");
+        window.location.href = myParam || "/tabs/dashboard/";
       }
     };
 
