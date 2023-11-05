@@ -27,13 +27,7 @@ function Roadlink() {
   if (par) {
     setId(par);
   }
-  effect(() => {
-    if (isauth.value) {
-      console.log("logged in");
-    } else {
-      location.href = "/login?redirect=/tabs/dashboard/roadlink";
-    }
-  });
+  effect(() => {});
   useEffect(() => {
     const decodedInput = decodeURI(id);
     const [userr, road] = decodedInput.split("_"); // Declare them inside the useEffect
@@ -81,23 +75,27 @@ function Roadlink() {
   }
   get();
   function neww() {
-    const dat = {
-      username: username,
-      title: title,
-      verses: verses,
-    };
-    const requestOption: RequestInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dat),
-    };
-    fetch("https://www.roadsbible.com/api/newroad/", requestOption)
-      .then((data) => {
-        setSuccess(true);
-      })
-      .catch();
+    if (!isauth.value) {
+      location.href = "/login?redirect=/tabs/dashboard/roadlink";
+    } else {
+      const dat = {
+        username: username,
+        title: title,
+        verses: verses,
+      };
+      const requestOption: RequestInit = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dat),
+      };
+      fetch("https://www.roadsbible.com/api/newroad/", requestOption)
+        .then((data) => {
+          setSuccess(true);
+        })
+        .catch();
+    }
   }
   return (
     <>
