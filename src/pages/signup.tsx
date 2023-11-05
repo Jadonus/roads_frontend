@@ -43,7 +43,7 @@ const Signup = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 200 || 204) {
         history.push("/tabs/dashboard");
       } else {
         if (response.data && response.data.non_field_errors) {
