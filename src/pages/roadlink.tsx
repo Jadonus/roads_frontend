@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 import { useParams } from "react-router-dom";
 import { isauth } from "./isauth";
-
+import { signal, effect } from "@preact/signals";
 function Roadlink() {
   const [description, setDescription] = useState();
   // A simple utility function to get the username from wherever you store it
@@ -22,6 +22,18 @@ function Roadlink() {
   const [userr, setUserr] = useState<string | undefined>(undefined); // Initialize state variables with the correct type
   const [road, setRoad] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string | undefined>(undefined);
+  const urlParams = new URLSearchParams(window.location.search);
+  const par = urlParams.get("id");
+  if (par) {
+    setId(par);
+  }
+  effect(() => {
+    if (isauth.value) {
+      console.log("logged in");
+    } else {
+      location.href = "/login?redirect=/tabs/dashboard/roadlink";
+    }
+  });
   useEffect(() => {
     const decodedInput = decodeURI(id);
     const [userr, road] = decodedInput.split("_"); // Declare them inside the useEffect
@@ -138,7 +150,9 @@ function Roadlink() {
               </IonItem>
             </>
           ) : (
-            <h1>This Road Does not Exist or the ID is wrong.</h1>
+            <IonItem>
+              <h1>This Road Does not Exist or the ID is wrong.</h1>
+            </IonItem>
           )}
 
           {success ? (

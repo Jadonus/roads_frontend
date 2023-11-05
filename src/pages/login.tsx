@@ -47,7 +47,9 @@ const Login = () => {
           key: "username",
           value: username,
         }).then(() => {
-          window.location.href = "/tabs/dashboard/";
+          const urlParams = new URLSearchParams(window.location.search);
+          const myParam = urlParams.get("redirect");
+          window.location.href = myParam || "/tabs/dashboard/";
         });
       } else {
         if (response) {
