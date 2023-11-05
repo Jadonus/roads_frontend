@@ -35,7 +35,7 @@ function Roadlink() {
     setRoad(rroad);
 
     console.log(userr, road);
-  });
+  }, []);
 
   const [success, setSuccess] = useState(false);
   let verses;
