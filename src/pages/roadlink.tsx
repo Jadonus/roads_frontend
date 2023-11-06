@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 import { useParams } from "react-router-dom";
 import { isauth } from "./isauth";
-import { signal, effect } from "@preact/signals";
+
 function Roadlink() {
   const [description, setDescription] = useState();
   // A simple utility function to get the username from wherever you store it
@@ -22,20 +22,15 @@ function Roadlink() {
   const [userr, setUserr] = useState<string | undefined>(undefined); // Initialize state variables with the correct type
   const [road, setRoad] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string | undefined>(undefined);
-  const urlParams = new URLSearchParams(window.location.search);
-  const par = urlParams.get("id");
-  if (par) {
-    setId(par);
-  }
   useEffect(() => {
-    const [userrr, rroad] = id.split("_"); // Declare them inside the useEffect
+    const decodedInput = decodeURI(id);
+    const [userr, road] = decodedInput.split("_"); // Declare them inside the useEffect
     console.log(userr, road);
-    setUserr(userrr); // Set the state variables with the values
-    setRoad(rroad);
-
-    console.log(userr, road);
+    setUserr(userr); // Set the state variables with the values
+    setRoad(road);
   }, [id]);
 
+  console.log(userr, road);
   const [success, setSuccess] = useState(false);
   let verses;
   const [title, setTitle] = useState();
@@ -72,31 +67,25 @@ function Roadlink() {
       console.error("Oops, something went wrong:", error);
     }
   }
-  if (username) {
-    get();
-  }
+  get();
   function neww() {
-    if (!isauth.value) {
-      location.href = "/login?redirect=/tabs/dashboard/roadlink";
-    } else {
-      const dat = {
-        username: username,
-        title: title,
-        verses: verses,
-      };
-      const requestOption: RequestInit = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dat),
-      };
-      fetch("https://www.roadsbible.com/api/newroad/", requestOption)
-        .then((data) => {
-          setSuccess(true);
-        })
-        .catch();
-    }
+    const dat = {
+      username: username,
+      title: title,
+      verses: verses,
+    };
+    const requestOption: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dat),
+    };
+    fetch("https://www.roadsbible.com/api/newroad/", requestOption)
+      .then((data) => {
+        setSuccess(true);
+      })
+      .catch();
   }
   return (
     <>
