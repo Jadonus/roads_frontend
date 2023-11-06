@@ -29,6 +29,7 @@ import {
   arrowBack,
   eyeOff,
   refresh,
+  heartOutline,
   ellipsisHorizontal,
   settingsOutline,
   arrowForward,
@@ -521,6 +522,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
             <IonButtons slot="start">
               <IonButton id="open-action-sheet">
                 <IonIcon icon={settingsOutline}></IonIcon>
+              </IonButton>
+              <IonButton>
+                <IonIcon icon={heartOutline}></IonIcon>
               </IonButton>
             </IonButtons>
             <IonProgressBar

@@ -107,7 +107,7 @@ function Roadlink() {
                   label="Road ID"
                   placeholder="Put The Id here."
                   value={id || ""} // Ensure the input value is a string or an empty string
-                  onIonChange={(e) => {
+                  onIonInput={(e) => {
                     setId(e.target.value.toString()); // Convert the input value to a string
                   }}
                 />
