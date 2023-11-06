@@ -23,16 +23,18 @@ function Roadlink() {
   const [road, setRoad] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string | undefined>(undefined);
   const urlParams = new URLSearchParams(window.location.search);
+  const par = urlParams.get("id");
+  if (par) {
+    setId(par);
+  }
   useEffect(() => {
-    const par = urlParams.get("id");
-
-    const [userrr, rroad] = par.split("_"); // Declare them inside the useEffect
+    const [userrr, rroad] = id.split("_"); // Declare them inside the useEffect
     console.log(userr, road);
     setUserr(userrr); // Set the state variables with the values
     setRoad(rroad);
 
     console.log(userr, road);
-  }, []);
+  }, [id]);
 
   const [success, setSuccess] = useState(false);
   let verses;
