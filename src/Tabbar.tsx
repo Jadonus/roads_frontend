@@ -11,7 +11,13 @@ import {
 import Account from "./pages/account";
 import AuthenticatedAction from "./get";
 import { Route, Redirect } from "react-router";
-import { library, personCircle, settingsOutline, book } from "ionicons/icons";
+import {
+  library,
+  personCircle,
+  settingsOutline,
+  book,
+  heart,
+} from "ionicons/icons";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
 import Settings from "./pages/settings";
@@ -25,6 +31,7 @@ import Makeroad from "./pages/makeroad";
 import { effect } from "@preact/signals";
 import Appicon from "./pages/appicon";
 import { Capacitor } from "@capacitor/core";
+import Favorites from "./pages/favorites";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
@@ -83,6 +90,7 @@ const TabBar: React.FC = () => {
           exact
           component={Makeroad}
         ></Route>
+        <Route path="/tabs/favorites" component={Favorites} exact={true} />
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />
         <Route path="/tabs/settings" component={Settings} exact={true} />
         <Route path="/tabs/settings/appicon" component={Appicon} exact />
@@ -105,6 +113,10 @@ const TabBar: React.FC = () => {
           <IonLabel>My Progress</IonLabel>
 
           {progress ? <IonBadge color="danger">1</IonBadge> : <div></div>}
+        </IonTabButton>
+        <IonTabButton tab="favorites" href="/tabs/favorites/">
+          <IonIcon icon={heart} />
+          <IonLabel>Favorites</IonLabel>
         </IonTabButton>
         <IonTabButton tab="settings" href="/tabs/settings">
           <IonIcon icon={settingsOutline} />

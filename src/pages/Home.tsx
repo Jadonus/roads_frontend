@@ -236,6 +236,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </div>
           {showModal && (
             <Verse
+              index={undefined}
               dynamicPath={dynamicPath}
               userr={false}
               onClose={closeModal}

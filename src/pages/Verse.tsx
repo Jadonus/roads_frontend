@@ -38,14 +38,22 @@ import {
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
 import { isauth } from "./isauth";
+import Hearticon from "../components/heart";
 interface VerseModalProps {
   dynamicPath: string;
   userr: boolean;
+  index: number;
   onClose?: () => void; // Function to close the modal (optional)
 }
 
 interface ContainerProps {}
-const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
+const Verse: React.FC<VerseModalProps> = ({
+  dynamicPath,
+  onClose,
+  userr,
+  index,
+}) => {
+  console.log("id", index);
   const [settings, setSettings] = useState([]);
   let username = isauth.value;
   const [sentences, setSentences] = useState([]);
@@ -207,6 +215,9 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
 
     // Load progress when the component mounts or when the currentSentenceIndex changes
     loadProgress();
+    if (index !== undefined) {
+      setCurrentSentenceIndex(index);
+    }
   }, []);
 
   const closeActionSheet = () => {
@@ -510,7 +521,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
   }
   return (
     <>
-      <IonModal isOpen={true}>
+      <IonModal color="light" isOpen={true}>
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="end">
@@ -524,7 +535,13 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
                 <IonIcon icon={settingsOutline}></IonIcon>
               </IonButton>
               <IonButton>
-                <IonIcon icon={heartOutline}></IonIcon>
+                {refer && refer.verses && refer.verses.length > 0 && (
+                  <Hearticon
+                    title={dynamicPath}
+                    verse={refer.verses[currentSentenceIndex].reference}
+                    index={currentSentenceIndex}
+                  />
+                )}
               </IonButton>
             </IonButtons>
             <IonProgressBar
@@ -545,7 +562,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
               <IonTitle>More</IonTitle>
             </IonToolbar>
           </IonHeader>
-          <IonContent className="ion-padding">
+          <IonContent color="light" className="ion-padding">
             <IonList inset>
               <IonItem button onClick={toggleFirstLetterMode}>
                 {isFirstLetterMode ? (
@@ -611,6 +628,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
               <IonLoading
                 translucent={true}
                 isOpen={true}
+                backdrop-dismiss
                 message="Loading..."
               />
             ) : (
@@ -620,6 +638,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
                     <IonLoading
                       isOpen={true}
                       translucent={true}
+                      backdrop-dismiss
                       message="Loading..."
                     />
                   ) : (
@@ -687,6 +706,7 @@ const Verse: React.FC<VerseModalProps> = ({ dynamicPath, onClose, userr }) => {
                       </IonButton>
                     ) : null}
                   </IonButtons>
+                  <h1 style={{ display: "none" }}>{currentSentenceIndex}</h1>
                 </div>
               </div>
             )}

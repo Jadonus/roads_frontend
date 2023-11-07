@@ -207,7 +207,12 @@ export default function user() {
       })}
 
       {showModal && (
-        <Verse dynamicPath={dynamicPath} userr={true} onClose={closeModal} />
+        <Verse
+          index={undefined}
+          dynamicPath={dynamicPath}
+          userr={true}
+          onClose={closeModal}
+        />
       )}
       {showActionSheet && selectedCard && (
         <IonActionSheet
