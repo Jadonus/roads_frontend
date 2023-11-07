@@ -75,7 +75,7 @@ export default function Favorites() {
               <IonItem
                 color="light"
                 key={index}
-                onClick={() => openModalWithDynamicPath(e.title)}
+                // onClick={() => openModalWithDynamicPath(e.title)}
               >
                 <h3>{e.verse}</h3>
                 {showModal ? (
