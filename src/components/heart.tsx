@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IonButton, IonIcon } from "@ionic/react";
-import { heartOutline } from "ionicons/icons";
+import { heartOutline, heart } from "ionicons/icons";
 import { isauth } from "../pages/isauth";
 
 const Hearticon = (props) => {
@@ -38,7 +38,11 @@ const Hearticon = (props) => {
         <IonButton onClick={addToFavorites}>
           <IonIcon icon={heartOutline} />
         </IonButton>
-      ) : null}
+      ) : (
+        <IonButton>
+          <IonIcon icon={heart} />
+        </IonButton>
+      )}
     </>
   );
 };
