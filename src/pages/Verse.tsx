@@ -538,6 +538,7 @@ const Verse: React.FC<VerseModalProps> = ({
                 {refer &&
                   refer.verses &&
                   refer.verses.length > 0 &&
+                  refer.verses[currentSentenceIndex] &&
                   refer.verses[currentSentenceIndex].reference && (
                     <Hearticon
                       title={dynamicPath}
