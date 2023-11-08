@@ -535,13 +535,16 @@ const Verse: React.FC<VerseModalProps> = ({
                 <IonIcon icon={settingsOutline}></IonIcon>
               </IonButton>
               <IonButton>
-                {refer && refer.verses && refer.verses.length > 0 && (
-                  <Hearticon
-                    title={dynamicPath}
-                    verse={refer.verses[currentSentenceIndex].reference}
-                    index={currentSentenceIndex}
-                  />
-                )}
+                {refer &&
+                  refer.verses &&
+                  refer.verses.length > 0 &&
+                  refer.verses[currentSentenceIndex].reference && (
+                    <Hearticon
+                      title={dynamicPath}
+                      verse={refer.verses[currentSentenceIndex].reference}
+                      index={currentSentenceIndex}
+                    />
+                  )}
               </IonButton>
             </IonButtons>
             <IonProgressBar
