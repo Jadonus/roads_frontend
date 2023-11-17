@@ -125,7 +125,7 @@ const SettingsPage = () => {
           <h3 className="ion-padding">General</h3>
 
           <IonList inset={true}>
-            <IonItem color="light">
+            {/* <IonItem color="light">
               <IonSelect
                 disabled={true}
                 label="Default Memory Mode"
@@ -144,9 +144,9 @@ const SettingsPage = () => {
                   First Letter
                 </IonSelectOption>
               </IonSelect>
-            </IonItem>
+              </IonItem> */}
             <IonItem color="light" id="open-picker" button>
-              <IonLabel>Translation</IonLabel>
+              <IonLabel>Bible Translation</IonLabel>
               <IonPicker
                 trigger="open-picker"
                 columns={[
@@ -154,8 +154,20 @@ const SettingsPage = () => {
                     name: "languages",
                     options: [
                       {
-                        text: "NLT",
+                        text: "NLT (default)",
                         value: "NLT",
+                      },
+                      {
+                        text: "NASB",
+                        value: "NASB",
+                      },
+                      {
+                        text: "AMP",
+                        value: "AMP",
+                      },
+                      {
+                        text: "NKJV",
+                        value: "NKJV",
                       },
                       {
                         text: "KJV",
@@ -166,7 +178,7 @@ const SettingsPage = () => {
                         value: "YLT",
                       },
                       {
-                        text: "NIV (default)",
+                        text: "NIV",
                         value: "NIV",
                       },
                       {

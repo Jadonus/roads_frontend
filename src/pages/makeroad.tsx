@@ -143,10 +143,8 @@ function Makeroad() {
   const handleAddVerse = () => {
     const { name, description, book, chapter, verse } = formInputs;
     if (name && book && chapter && verse) {
-      const bookId = getBookId(book);
-
       const newVerse: any = {
-        book_id: bookId,
+        book_name: book,
         chapter: parseInt(chapter),
         verse_number: parseInt(verse),
       };
