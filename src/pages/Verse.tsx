@@ -72,6 +72,7 @@ const Verse: React.FC<VerseModalProps> = ({
   const [isFabOpen, setIsFabOpen] = useState(false);
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
+  const [favoritedIndexes, setFavoritedIndexes] = useState([]);
 
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
@@ -160,6 +161,7 @@ const Verse: React.FC<VerseModalProps> = ({
           // Specify the structure
           // Use the 'Data' interface here
           setRefer(data);
+          setFavoritedIndexes(data.favorites);
 
           console.log(refer);
           // Extract verses and references from the API response
@@ -544,6 +546,7 @@ const Verse: React.FC<VerseModalProps> = ({
                       title={dynamicPath}
                       verse={refer.verses[currentSentenceIndex].reference}
                       index={currentSentenceIndex}
+                      favoritedIndexes={favoritedIndexes} // Pass the favoritedIndexes state
                     />
                   )}
               </IonButton>
