@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct WIdgetsBundle: WidgetBundle {
     var body: some Widget {
-        WIdgets()
+IconWidget()
         WIdgetsLiveActivity()
     }
 }

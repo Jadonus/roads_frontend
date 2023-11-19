@@ -30,6 +30,7 @@ import {
   IonItemOptions,
   IonRefresherContent,
   IonBadge,
+  IonModal,
 } from "@ionic/react";
 import "../theme/variables.css";
 import { settingsOutline, share } from "ionicons/icons";
@@ -234,14 +235,14 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               </IonCard>
             ))}
           </div>
-          {showModal && (
+          <IonModal isOpen={showModal}>
             <Verse
               index={undefined}
               dynamicPath={dynamicPath}
               userr={false}
               onClose={closeModal}
             />
-          )}
+          </IonModal>{" "}
         </div>
         <IonFab slot="fixed" vertical="bottom" horizontal="end">
           <IonFabButton>

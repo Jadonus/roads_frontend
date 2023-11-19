@@ -523,203 +523,201 @@ const Verse: React.FC<VerseModalProps> = ({
   }
   return (
     <>
-      <IonModal color="light" isOpen={true}>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="end">
+            <IonButton onClick={onClose}>Done</IonButton>{" "}
+            {/* Clicking this button will close the modal */}
+          </IonButtons>
+          <IonTitle>{dynamic}</IonTitle>
+
+          <IonButtons slot="start">
+            <IonButton id="open-action-sheet">
+              <IonIcon icon={settingsOutline}></IonIcon>
+            </IonButton>
+            <IonButton>
+              {refer &&
+                refer.verses &&
+                refer.verses.length > 0 &&
+                refer.verses[currentSentenceIndex] &&
+                refer.verses[currentSentenceIndex].reference && (
+                  <Hearticon
+                    title={dynamicPath}
+                    verse={refer.verses[currentSentenceIndex].reference}
+                    index={currentSentenceIndex}
+                    favoritedIndexes={favoritedIndexes} // Pass the favoritedIndexes state
+                  />
+                )}
+            </IonButton>
+          </IonButtons>
+          <IonProgressBar
+            value={parseFloat(
+              (currentSentenceIndex / sentences.length).toFixed(2)
+            )}
+          ></IonProgressBar>
+        </IonToolbar>
+      </IonHeader>
+      <IonModal
+        ref={modal}
+        trigger="open-action-sheet"
+        initialBreakpoint={0.75}
+        breakpoints={[0, 0.75, 1]}
+      >
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="end">
-              <IonButton onClick={onClose}>Done</IonButton>{" "}
-              {/* Clicking this button will close the modal */}
-            </IonButtons>
-            <IonTitle>{dynamic}</IonTitle>
-
-            <IonButtons slot="start">
-              <IonButton id="open-action-sheet">
-                <IonIcon icon={settingsOutline}></IonIcon>
-              </IonButton>
-              <IonButton>
-                {refer &&
-                  refer.verses &&
-                  refer.verses.length > 0 &&
-                  refer.verses[currentSentenceIndex] &&
-                  refer.verses[currentSentenceIndex].reference && (
-                    <Hearticon
-                      title={dynamicPath}
-                      verse={refer.verses[currentSentenceIndex].reference}
-                      index={currentSentenceIndex}
-                      favoritedIndexes={favoritedIndexes} // Pass the favoritedIndexes state
-                    />
-                  )}
-              </IonButton>
-            </IonButtons>
-            <IonProgressBar
-              value={parseFloat(
-                (currentSentenceIndex / sentences.length).toFixed(2)
-              )}
-            ></IonProgressBar>
+            <IonTitle>More</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonModal
-          ref={modal}
-          trigger="open-action-sheet"
-          initialBreakpoint={0.75}
-          breakpoints={[0, 0.75, 1]}
+        <IonContent color="light" className="ion-padding">
+          <IonList inset>
+            <IonItem button onClick={toggleFirstLetterMode}>
+              {isFirstLetterMode ? (
+                <>Random Word Mode</>
+              ) : (
+                <>First Letter Mode</>
+              )}{" "}
+            </IonItem>
+
+            <IonItem button>Verse Info.</IonItem>
+            {dynamicPath !== "verseoftheday" ? (
+              <>
+                <IonItem onClick={readContext} button>
+                  Read Verse Context
+                </IonItem>
+                <IonItem onClick={flashcard} button>
+                  Print FlashCards
+                </IonItem>
+              </>
+            ) : null}
+          </IonList>
+        </IonContent>
+      </IonModal>
+      <IonContent {...handlers}>
+        <IonAlert
+          buttons={[
+            {
+              text: "Retry",
+              role: "cancel",
+              handler: () => {
+                setCurrentSentenceIndex(0);
+              },
+            },
+            {
+              text: "Great!",
+              role: "confirm",
+              handler: () => {
+                location.href = "/tabs/";
+              },
+            },
+          ]}
+          onDidDismiss={({ detail }) =>
+            console.log(`Dismissed with role: ${detail.role}`)
+          }
+          isOpen={showAlert}
+          header="Your Done!"
+          message="Horray! 🎉 You finished this road."
+        ></IonAlert>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+            overflowX: "hidden",
+          }}
         >
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle>More</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent color="light" className="ion-padding">
-            <IonList inset>
-              <IonItem button onClick={toggleFirstLetterMode}>
-                {isFirstLetterMode ? (
-                  <>Random Word Mode</>
+          {sentences.length === 0 ? (
+            <IonLoading
+              translucent={true}
+              isOpen={true}
+              backdrop-dismiss
+              message="Loading..."
+            />
+          ) : (
+            <div style={{}}>
+              <h1 className="ion-text-center">
+                {sentences.length === 0 ? (
+                  <IonLoading
+                    isOpen={true}
+                    translucent={true}
+                    backdrop-dismiss
+                    message="Loading..."
+                  />
                 ) : (
-                  <>First Letter Mode</>
-                )}{" "}
-              </IonItem>
-
-              <IonItem button>Verse Info.</IonItem>
-              {dynamicPath !== "verseoftheday" ? (
-                <>
-                  <IonItem onClick={readContext} button>
-                    Read Verse Context
-                  </IonItem>
-                  <IonItem onClick={flashcard} button>
-                    Print FlashCards
-                  </IonItem>
-                </>
-              ) : null}
-            </IonList>
-          </IonContent>
-        </IonModal>
-        <IonContent {...handlers}>
-          <IonAlert
-            buttons={[
-              {
-                text: "Retry",
-                role: "cancel",
-                handler: () => {
-                  setCurrentSentenceIndex(0);
-                },
-              },
-              {
-                text: "Great!",
-                role: "confirm",
-                handler: () => {
-                  location.href = "/tabs/";
-                },
-              },
-            ]}
-            onDidDismiss={({ detail }) =>
-              console.log(`Dismissed with role: ${detail.role}`)
-            }
-            isOpen={showAlert}
-            header="Your Done!"
-            message="Horray! 🎉 You finished this road."
-          ></IonAlert>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100vh",
-              paddingLeft: "1rem",
-              paddingRight: "1rem",
-              overflowX: "hidden",
-            }}
-          >
-            {sentences.length === 0 ? (
-              <IonLoading
-                translucent={true}
-                isOpen={true}
-                backdrop-dismiss
-                message="Loading..."
-              />
-            ) : (
-              <div style={{}}>
-                <h1 className="ion-text-center">
-                  {sentences.length === 0 ? (
-                    <IonLoading
-                      isOpen={true}
-                      translucent={true}
-                      backdrop-dismiss
-                      message="Loading..."
-                    />
-                  ) : (
-                    <span>
-                      {currentSentenceIndex < sentences.length &&
-                        sentences[currentSentenceIndex]
-                          .split(" ")
-                          .map((word, index) => (
-                            <span
-                              key={index}
-                              className={
-                                hiddenWordIndices.includes(index)
-                                  ? "hide-word"
-                                  : ""
-                              }
-                            >
-                              {word}{" "}
-                            </span>
-                          ))}
-                    </span>
-                  )}
-                </h1>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-evenly", // This will evenly space out the buttons
-                    margin: "1rem",
-                    marginTop: "2rem",
-                  }}
-                >
-                  <IonButtons>
-                    {dynamicPath !== "verseoftheday" ? (
-                      <IonButton onClick={backButtonClicked}>
-                        <IonIcon size="medium" icon={arrowBack} />
-                      </IonButton>
-                    ) : null}
-                    <>
-                      <IonButton
-                        onClick={() => hideRandomWords(3)}
-                        style={{ margin: "0 0.5rem" }}
-                        ref={hide}
-                      >
-                        <IonIcon size="medium" icon={backspace} />
-                      </IonButton>
-                      <IonButton
-                        onClick={hideAllWords}
-                        style={{ margin: "0 0.5rem" }}
-                        ref={all}
-                      >
-                        <IonIcon size="medium" icon={eyeOff} />
-                      </IonButton>
-                      <IonButton onClick={revealAllWords} ref={undo}>
-                        <IonIcon size="medium" icon={refresh} />
-                      </IonButton>{" "}
-                    </>
-                    {/* <div>
+                  <span>
+                    {currentSentenceIndex < sentences.length &&
+                      sentences[currentSentenceIndex]
+                        .split(" ")
+                        .map((word, index) => (
+                          <span
+                            key={index}
+                            className={
+                              hiddenWordIndices.includes(index)
+                                ? "hide-word"
+                                : ""
+                            }
+                          >
+                            {word}{" "}
+                          </span>
+                        ))}
+                  </span>
+                )}
+              </h1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly", // This will evenly space out the buttons
+                  margin: "1rem",
+                  marginTop: "2rem",
+                }}
+              >
+                <IonButtons>
+                  {dynamicPath !== "verseoftheday" ? (
+                    <IonButton onClick={backButtonClicked}>
+                      <IonIcon size="medium" icon={arrowBack} />
+                    </IonButton>
+                  ) : null}
+                  <>
+                    <IonButton
+                      onClick={() => hideRandomWords(3)}
+                      style={{ margin: "0 0.5rem" }}
+                      ref={hide}
+                    >
+                      <IonIcon size="medium" icon={backspace} />
+                    </IonButton>
+                    <IonButton
+                      onClick={hideAllWords}
+                      style={{ margin: "0 0.5rem" }}
+                      ref={all}
+                    >
+                      <IonIcon size="medium" icon={eyeOff} />
+                    </IonButton>
+                    <IonButton onClick={revealAllWords} ref={undo}>
+                      <IonIcon size="medium" icon={refresh} />
+                    </IonButton>{" "}
+                  </>
+                  {/* <div>
                       {" "}
                       <IonButton onClick={togg} style={{ margin: "0 0.5rem" }}>
                         <IonIcon size="medium" icon={documentText} />
                       </IonButton>
                 </div> */}
-                    {dynamicPath !== "verseoftheday" ? (
-                      <IonButton onClick={moveToNextSentence}>
-                        <IonIcon size="medium" icon={arrowForward} />
-                      </IonButton>
-                    ) : null}
-                  </IonButtons>
-                  <h1 style={{ display: "none" }}>{currentSentenceIndex}</h1>
-                </div>
+                  {dynamicPath !== "verseoftheday" ? (
+                    <IonButton onClick={moveToNextSentence}>
+                      <IonIcon size="medium" icon={arrowForward} />
+                    </IonButton>
+                  ) : null}
+                </IonButtons>
+                <h1 style={{ display: "none" }}>{currentSentenceIndex}</h1>
               </div>
-            )}
-          </div>
-        </IonContent>
-      </IonModal>
+            </div>
+          )}
+        </div>
+      </IonContent>
     </>
   );
 };

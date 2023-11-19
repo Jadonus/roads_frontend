@@ -6,6 +6,7 @@ import {
   IonCardContent,
   IonChip,
   IonActionSheet,
+  IonModal,
   IonAlert,
   IonIcon,
   IonFabList,
@@ -205,15 +206,14 @@ export default function user() {
           </IonCard>
         );
       })}
-
-      {showModal && (
+      <IonModal isOpen={showModal}>
         <Verse
           index={undefined}
           dynamicPath={dynamicPath}
           userr={true}
           onClose={closeModal}
         />
-      )}
+      </IonModal>{" "}
       {showActionSheet && selectedCard && (
         <IonActionSheet
           isOpen={showActionSheet}
@@ -224,9 +224,9 @@ export default function user() {
               handler: () => {
                 const shareData = {
                   title: "Roads",
-                  text: `Here is my custom Road ID: ${
-                    selectedCard.creator
-                  }_${encodeURIComponent(selectedCard.title)}`,
+                  text: `${selectedCard.creator}_${encodeURIComponent(
+                    selectedCard.title
+                  )}`,
                   url: "https://dashboard.roadsbible.com/tabs/dashboard/roadlink/",
                 };
                 if (navigator.share) {

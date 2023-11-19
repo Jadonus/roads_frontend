@@ -1,92 +1,116 @@
-//
-//  Complications.swift
-//  Complications
-//
-//  Created by Jadon Gearhart on 11/19/23.
-//
-
 import WidgetKit
 import SwiftUI
 
-struct Provider: AppIntentTimelineProvider {
+// Define a struct to represent the API response
+struct ApiResponse: Codable {
+    let verse: VerseDetails
+}
+
+struct VerseDetails: Codable {
+    let details: VerseInfo
+}
+
+struct VerseInfo: Codable {
+    let reference: String
+}
+
+struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+        SimpleEntry(date: Date(), reference: "")
     }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+        let entry = SimpleEntry(date: Date(), reference: "")
+        completion(entry)
     }
-    
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var entries: [SimpleEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+        // Fetch the reference from the API
+        fetchReference { reference in
+            // Create a timeline entry with the current date and the fetched reference
+            let entry = SimpleEntry(date: Date(), reference: reference)
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
         }
-
-        return Timeline(entries: entries, policy: .atEnd)
     }
 
-    func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
-        // Create an array with all the preconfigured widgets to show.
-        [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Example Widget")]
+    // Function to fetch the reference from the API
+    func fetchReference(completion: @escaping (String) -> Void) {
+        if let url = URL(string: "https://beta.ourmanna.com/api/v1/get?format=json&order=daily") {
+            let session = URLSession.shared
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    completion("") // Return an empty string in case of an error
+                    return
+                }
+
+                if let data = data {
+                    do {
+                        let apiResponse = try JSONDecoder().decode(ApiResponse.self, from: data)
+                        let reference = apiResponse.verse.details.reference
+                        completion(reference)
+                    } catch {
+                        print("Error parsing JSON: \(error.localizedDescription)")
+                        completion("") // Return an empty string in case of a parsing error
+                    }
+                }
+            }
+            task.resume()
+        } else {
+            print("Invalid URL")
+            completion("") // Return an empty string in case of an invalid URL
+        }
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationAppIntent
+    let reference: String // Store the reference here
 }
 
-struct ComplicationsEntryView : View {
+struct IconWidgetView : View {
     var entry: Provider.Entry
 
     var body: some View {
         VStack {
-            HStack {
-                Text("Time:")
-                Text(entry.date, style: .time)
-            }
-        
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            // Display your icon here
+
+
+
+            // Display the fetched reference
+             Image(systemName: "book.pages.fill")
+                .resizable()
+                    .aspectRatio(contentMode: .fit)
+                .imageScale(.large)
+                .frame(width: 30, height: 30, alignment: .topLeading)
+
         }
+         .widgetLabel(entry.reference)
+
+
+        .containerBackground(.red.gradient, for: .widget)
+
     }
+
 }
 
 @main
-struct Complications: Widget {
-    let kind: String = "Complications"
+struct IconWidget: Widget {
+    let kind: String = "small"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            ComplicationsEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            IconWidgetView(entry: entry)
         }
+        .configurationDisplayName("Verse Of The Day")
+        .description("This complication displays the current verse of the day's reference.")
+
     }
 }
-
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        IconWidgetView(entry: SimpleEntry(date: Date(), reference: "THE THING LOL"))
+            .previewContext(WidgetPreviewContext(family: .accessoryCorner))
     }
 }
-
-#Preview(as: .accessoryRectangular) {
-    Complications()
-} timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
-}    

@@ -2,49 +2,43 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
- <key>CFBundleIcons</key>
-    <dict>
-        <key>CFBundleAlternateIcons</key>
-        <dict>
-            <!-- The name you use in code -->
-            <key>neumorph</key>
-            <dict>
-                <key>UIPrerenderedIcon</key>
-                <true/>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <!-- The actual filenames. Don't list the @2x/@3x files here, and you can use just the biggest one if you like -->
-                    <string>neumorph</string>
-                </array>
-            </dict>
-      <key>green</key>
-            <dict>
-                <key>UIPrerenderedIcon</key>
-                <true/>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <!-- The actual filenames. Don't list the @2x/@3x files here, and you can use just the biggest one if you like -->
-                    <string>green</string>
-                </array>
-            </dict>
-            <key>classic</key>
-            <dict>
-                <key>UIPrerenderedIcon</key>
-                <true/>
-                <key>CFBundleIconFiles</key>
-                <array>
-                    <!-- The actual filenames. Don't list the @2x/@3x files here, and you can use just the biggest one if you like -->
-                    <string>classic</string>
-                </array>
-            </dict>
-        </dict>
-    </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>Roads</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>classic</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>classic</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<true/>
+			</dict>
+			<key>green</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>green</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<true/>
+			</dict>
+			<key>neumorph</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>neumorph</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

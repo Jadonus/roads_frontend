@@ -15,9 +15,107 @@
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		DE47F9AF2B0AB556002F5257 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAEFEBA2B0A9F2C00CD6C56 /* WidgetKit.framework */; };
+		DE47F9B02B0AB556002F5257 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAEFEBC2B0A9F2C00CD6C56 /* SwiftUI.framework */; };
+		DE47F9B32B0AB556002F5257 /* Complications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47F9B22B0AB556002F5257 /* Complications.swift */; };
+		DE47F9B52B0AB556002F5257 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47F9B42B0AB556002F5257 /* AppIntent.swift */; };
+		DE47F9B72B0AB558002F5257 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE47F9B62B0AB558002F5257 /* Assets.xcassets */; };
+		DE47F9BB2B0AB558002F5257 /* ComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DE47F9AE2B0AB556002F5257 /* ComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DE9DD09A2B090EF900916A9C /* Roads_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0992B090EF900916A9C /* Roads_WatchApp.swift */; };
+		DE9DD09C2B090EF900916A9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD09B2B090EF900916A9C /* ContentView.swift */; };
+		DE9DD09E2B090EFA00916A9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE9DD09D2B090EFA00916A9C /* Assets.xcassets */; };
+		DE9DD0A12B090EFA00916A9C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE9DD0A02B090EFA00916A9C /* Preview Assets.xcassets */; };
+		DE9DD0AB2B090EFA00916A9C /* Roads_Watch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0AA2B090EFA00916A9C /* Roads_Watch_Watch_AppTests.swift */; };
+		DE9DD0B52B090EFA00916A9C /* Roads_Watch_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0B42B090EFA00916A9C /* Roads_Watch_Watch_AppUITests.swift */; };
+		DE9DD0B72B090EFA00916A9C /* Roads_Watch_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0B62B090EFA00916A9C /* Roads_Watch_Watch_AppUITestsLaunchTests.swift */; };
+		DE9DD0BA2B090EFA00916A9C /* Roads Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = DE9DD0972B090EF900916A9C /* Roads Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DE9DD0C62B09107700916A9C /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0C52B09107700916A9C /* api.swift */; };
+		DE9DD0C82B09232600916A9C /* verseview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0C72B09232600916A9C /* verseview.swift */; };
+		DEA36F2A2B0AA20E00264F3C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAEFEBA2B0A9F2C00CD6C56 /* WidgetKit.framework */; };
+		DEA36F2B2B0AA20E00264F3C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAEFEBC2B0A9F2C00CD6C56 /* SwiftUI.framework */; };
+		DEA36F2E2B0AA20E00264F3C /* WIdgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA36F2D2B0AA20E00264F3C /* WIdgetsBundle.swift */; };
+		DEA36F302B0AA20E00264F3C /* WIdgetsLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA36F2F2B0AA20E00264F3C /* WIdgetsLiveActivity.swift */; };
+		DEA36F322B0AA20E00264F3C /* WIdgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA36F312B0AA20E00264F3C /* WIdgets.swift */; };
+		DEA36F342B0AA20E00264F3C /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA36F332B0AA20E00264F3C /* AppIntent.swift */; };
+		DEA36F362B0AA20F00264F3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEA36F352B0AA20F00264F3C /* Assets.xcassets */; };
+		DEA36F3A2B0AA20F00264F3C /* WIdgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DEA36F292B0AA20E00264F3C /* WIdgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DEED47022AF2EE1C00261EE7 /* neumorph.png in Resources */ = {isa = PBXBuildFile; fileRef = DEED47012AF2EE1C00261EE7 /* neumorph.png */; };
 		DEED47072AF3E23A00261EE7 /* AlternateIcons in Resources */ = {isa = PBXBuildFile; fileRef = DEED47062AF3E23A00261EE7 /* AlternateIcons */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE47F9B92B0AB558002F5257 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE47F9AD2B0AB556002F5257;
+			remoteInfo = ComplicationsExtension;
+		};
+		DE9DD0A72B090EFA00916A9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE9DD0962B090EF900916A9C;
+			remoteInfo = "Roads Watch Watch App";
+		};
+		DE9DD0B12B090EFA00916A9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE9DD0962B090EF900916A9C;
+			remoteInfo = "Roads Watch Watch App";
+		};
+		DE9DD0B82B090EFA00916A9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE9DD0962B090EF900916A9C;
+			remoteInfo = "Roads Watch Watch App";
+		};
+		DEA36F382B0AA20F00264F3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEA36F282B0AA20E00264F3C;
+			remoteInfo = WIdgetsExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DE9DD0BB2B090EFA00916A9C /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				DE9DD0BA2B090EFA00916A9C /* Roads Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEAEFEC92B0A9F2D00CD6C56 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DE47F9BB2B0AB558002F5257 /* ComplicationsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEAEFEE62B0A9FCE00CD6C56 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DEA36F3A2B0AA20F00264F3C /* WIdgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
@@ -31,6 +129,34 @@
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
+		DE47F9AE2B0AB556002F5257 /* ComplicationsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ComplicationsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE47F9B22B0AB556002F5257 /* Complications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complications.swift; sourceTree = "<group>"; };
+		DE47F9B42B0AB556002F5257 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		DE47F9B62B0AB558002F5257 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DE47F9B82B0AB558002F5257 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE9DD0972B090EF900916A9C /* Roads Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roads Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE9DD0992B090EF900916A9C /* Roads_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_WatchApp.swift; sourceTree = "<group>"; };
+		DE9DD09B2B090EF900916A9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DE9DD09D2B090EFA00916A9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DE9DD0A02B090EFA00916A9C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DE9DD0A62B090EFA00916A9C /* Roads Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Roads Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE9DD0AA2B090EFA00916A9C /* Roads_Watch_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_Watch_Watch_AppTests.swift; sourceTree = "<group>"; };
+		DE9DD0B02B090EFA00916A9C /* Roads Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Roads Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE9DD0B42B090EFA00916A9C /* Roads_Watch_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_Watch_Watch_AppUITests.swift; sourceTree = "<group>"; };
+		DE9DD0B62B090EFA00916A9C /* Roads_Watch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_Watch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DE9DD0C52B09107700916A9C /* api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
+		DE9DD0C72B09232600916A9C /* verseview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verseview.swift; sourceTree = "<group>"; };
+		DEA36F232B0AA1ED00264F3C /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		DEA36F242B0AA1F300264F3C /* classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = classic.png; sourceTree = "<group>"; };
+		DEA36F292B0AA20E00264F3C /* WIdgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WIdgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEA36F2D2B0AA20E00264F3C /* WIdgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIdgetsBundle.swift; sourceTree = "<group>"; };
+		DEA36F2F2B0AA20E00264F3C /* WIdgetsLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIdgetsLiveActivity.swift; sourceTree = "<group>"; };
+		DEA36F312B0AA20E00264F3C /* WIdgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIdgets.swift; sourceTree = "<group>"; };
+		DEA36F332B0AA20E00264F3C /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		DEA36F352B0AA20F00264F3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DEA36F372B0AA20F00264F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEAEFEBA2B0A9F2C00CD6C56 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		DEAEFEBC2B0A9F2C00CD6C56 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		DEED47012AF2EE1C00261EE7 /* neumorph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = neumorph.png; path = ../../../src/neumorph.png; sourceTree = "<group>"; };
 		DEED47062AF3E23A00261EE7 /* AlternateIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AlternateIcons; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -45,6 +171,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE47F9AB2B0AB556002F5257 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE47F9B02B0AB556002F5257 /* SwiftUI.framework in Frameworks */,
+				DE47F9AF2B0AB556002F5257 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0942B090EF900916A9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0A32B090EFA00916A9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0AD2B090EFA00916A9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEA36F262B0AA20E00264F3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA36F2B2B0AA20E00264F3C /* SwiftUI.framework in Frameworks */,
+				DEA36F2A2B0AA20E00264F3C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */,
+				DEAEFEBA2B0A9F2C00CD6C56 /* WidgetKit.framework */,
+				DEAEFEBC2B0A9F2C00CD6C56 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -60,6 +227,11 @@
 			isa = PBXGroup;
 			children = (
 				504EC3061FED79650016851F /* App */,
+				DE9DD0982B090EF900916A9C /* Roads Watch Watch App */,
+				DE9DD0A92B090EFA00916A9C /* Roads Watch Watch AppTests */,
+				DE9DD0B32B090EFA00916A9C /* Roads Watch Watch AppUITests */,
+				DEA36F2C2B0AA20E00264F3C /* WIdgets */,
+				DE47F9B12B0AB556002F5257 /* Complications */,
 				504EC3051FED79650016851F /* Products */,
 				7F8756D8B27F46E3366F6CEA /* Pods */,
 				27E2DDA53C4D2A4D1A88CE4A /* Frameworks */,
@@ -70,6 +242,11 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
+				DE9DD0972B090EF900916A9C /* Roads Watch Watch App.app */,
+				DE9DD0A62B090EFA00916A9C /* Roads Watch Watch AppTests.xctest */,
+				DE9DD0B02B090EFA00916A9C /* Roads Watch Watch AppUITests.xctest */,
+				DEA36F292B0AA20E00264F3C /* WIdgetsExtension.appex */,
+				DE47F9AE2B0AB556002F5257 /* ComplicationsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,6 +261,8 @@
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				DEED47012AF2EE1C00261EE7 /* neumorph.png */,
+				DEA36F242B0AA1F300264F3C /* classic.png */,
+				DEA36F232B0AA1ED00264F3C /* green.png */,
 				DEED47062AF3E23A00261EE7 /* AlternateIcons */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
@@ -100,6 +279,68 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DE47F9B12B0AB556002F5257 /* Complications */ = {
+			isa = PBXGroup;
+			children = (
+				DE47F9B22B0AB556002F5257 /* Complications.swift */,
+				DE47F9B42B0AB556002F5257 /* AppIntent.swift */,
+				DE47F9B62B0AB558002F5257 /* Assets.xcassets */,
+				DE47F9B82B0AB558002F5257 /* Info.plist */,
+			);
+			path = Complications;
+			sourceTree = "<group>";
+		};
+		DE9DD0982B090EF900916A9C /* Roads Watch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				DE9DD0992B090EF900916A9C /* Roads_WatchApp.swift */,
+				DE9DD09B2B090EF900916A9C /* ContentView.swift */,
+				DE9DD0C72B09232600916A9C /* verseview.swift */,
+				DE9DD0C52B09107700916A9C /* api.swift */,
+				DE9DD09D2B090EFA00916A9C /* Assets.xcassets */,
+				DE9DD09F2B090EFA00916A9C /* Preview Content */,
+			);
+			path = "Roads Watch Watch App";
+			sourceTree = "<group>";
+		};
+		DE9DD09F2B090EFA00916A9C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DE9DD0A02B090EFA00916A9C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DE9DD0A92B090EFA00916A9C /* Roads Watch Watch AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				DE9DD0AA2B090EFA00916A9C /* Roads_Watch_Watch_AppTests.swift */,
+			);
+			path = "Roads Watch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		DE9DD0B32B090EFA00916A9C /* Roads Watch Watch AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DE9DD0B42B090EFA00916A9C /* Roads_Watch_Watch_AppUITests.swift */,
+				DE9DD0B62B090EFA00916A9C /* Roads_Watch_Watch_AppUITestsLaunchTests.swift */,
+			);
+			path = "Roads Watch Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		DEA36F2C2B0AA20E00264F3C /* WIdgets */ = {
+			isa = PBXGroup;
+			children = (
+				DEA36F2D2B0AA20E00264F3C /* WIdgetsBundle.swift */,
+				DEA36F2F2B0AA20E00264F3C /* WIdgetsLiveActivity.swift */,
+				DEA36F312B0AA20E00264F3C /* WIdgets.swift */,
+				DEA36F332B0AA20E00264F3C /* AppIntent.swift */,
+				DEA36F352B0AA20F00264F3C /* Assets.xcassets */,
+				DEA36F372B0AA20F00264F3C /* Info.plist */,
+			);
+			path = WIdgets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,15 +353,108 @@
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
 				9592DBEFFC6D2A0C8D5DEB22 /* [CP] Embed Pods Frameworks */,
+				DE9DD0BB2B090EFA00916A9C /* Embed Watch Content */,
+				DEAEFEE62B0A9FCE00CD6C56 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DE9DD0B92B090EFA00916A9C /* PBXTargetDependency */,
+				DEA36F392B0AA20F00264F3C /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DE47F9AD2B0AB556002F5257 /* ComplicationsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE47F9BC2B0AB558002F5257 /* Build configuration list for PBXNativeTarget "ComplicationsExtension" */;
+			buildPhases = (
+				DE47F9AA2B0AB556002F5257 /* Sources */,
+				DE47F9AB2B0AB556002F5257 /* Frameworks */,
+				DE47F9AC2B0AB556002F5257 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ComplicationsExtension;
+			productName = ComplicationsExtension;
+			productReference = DE47F9AE2B0AB556002F5257 /* ComplicationsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		DE9DD0962B090EF900916A9C /* Roads Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE9DD0C22B090EFA00916A9C /* Build configuration list for PBXNativeTarget "Roads Watch Watch App" */;
+			buildPhases = (
+				DE9DD0932B090EF900916A9C /* Sources */,
+				DE9DD0942B090EF900916A9C /* Frameworks */,
+				DE9DD0952B090EF900916A9C /* Resources */,
+				DEAEFEC92B0A9F2D00CD6C56 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE47F9BA2B0AB558002F5257 /* PBXTargetDependency */,
+			);
+			name = "Roads Watch Watch App";
+			productName = "Roads Watch Watch App";
+			productReference = DE9DD0972B090EF900916A9C /* Roads Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DE9DD0A52B090EFA00916A9C /* Roads Watch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE9DD0C32B090EFA00916A9C /* Build configuration list for PBXNativeTarget "Roads Watch Watch AppTests" */;
+			buildPhases = (
+				DE9DD0A22B090EFA00916A9C /* Sources */,
+				DE9DD0A32B090EFA00916A9C /* Frameworks */,
+				DE9DD0A42B090EFA00916A9C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE9DD0A82B090EFA00916A9C /* PBXTargetDependency */,
+			);
+			name = "Roads Watch Watch AppTests";
+			productName = "Roads Watch Watch AppTests";
+			productReference = DE9DD0A62B090EFA00916A9C /* Roads Watch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DE9DD0AF2B090EFA00916A9C /* Roads Watch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE9DD0C42B090EFA00916A9C /* Build configuration list for PBXNativeTarget "Roads Watch Watch AppUITests" */;
+			buildPhases = (
+				DE9DD0AC2B090EFA00916A9C /* Sources */,
+				DE9DD0AD2B090EFA00916A9C /* Frameworks */,
+				DE9DD0AE2B090EFA00916A9C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE9DD0B22B090EFA00916A9C /* PBXTargetDependency */,
+			);
+			name = "Roads Watch Watch AppUITests";
+			productName = "Roads Watch Watch AppUITests";
+			productReference = DE9DD0B02B090EFA00916A9C /* Roads Watch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		DEA36F282B0AA20E00264F3C /* WIdgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEA36F3B2B0AA20F00264F3C /* Build configuration list for PBXNativeTarget "WIdgetsExtension" */;
+			buildPhases = (
+				DEA36F252B0AA20E00264F3C /* Sources */,
+				DEA36F262B0AA20E00264F3C /* Frameworks */,
+				DEA36F272B0AA20E00264F3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WIdgetsExtension;
+			productName = WIdgetsExtension;
+			productReference = DEA36F292B0AA20E00264F3C /* WIdgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -128,12 +462,34 @@
 		504EC2FC1FED79650016851F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 0920;
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1100;
+						ProvisioningStyle = Automatic;
+					};
+					DE47F9AD2B0AB556002F5257 = {
+						CreatedOnToolsVersion = 15.0;
+						ProvisioningStyle = Automatic;
+					};
+					DE9DD0962B090EF900916A9C = {
+						CreatedOnToolsVersion = 15.0;
+						ProvisioningStyle = Automatic;
+					};
+					DE9DD0A52B090EFA00916A9C = {
+						CreatedOnToolsVersion = 15.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DE9DD0962B090EF900916A9C;
+					};
+					DE9DD0AF2B090EFA00916A9C = {
+						CreatedOnToolsVersion = 15.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DE9DD0962B090EF900916A9C;
+					};
+					DEA36F282B0AA20E00264F3C = {
+						CreatedOnToolsVersion = 15.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -152,6 +508,11 @@
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
+				DE9DD0962B090EF900916A9C /* Roads Watch Watch App */,
+				DE9DD0A52B090EFA00916A9C /* Roads Watch Watch AppTests */,
+				DE9DD0AF2B090EFA00916A9C /* Roads Watch Watch AppUITests */,
+				DEA36F282B0AA20E00264F3C /* WIdgetsExtension */,
+				DE47F9AD2B0AB556002F5257 /* ComplicationsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -169,6 +530,45 @@
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				DEED47022AF2EE1C00261EE7 /* neumorph.png in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE47F9AC2B0AB556002F5257 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE47F9B72B0AB558002F5257 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0952B090EF900916A9C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE9DD0A12B090EFA00916A9C /* Preview Assets.xcassets in Resources */,
+				DE9DD09E2B090EFA00916A9C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0A42B090EFA00916A9C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0AE2B090EFA00916A9C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEA36F272B0AA20E00264F3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA36F362B0AA20F00264F3C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +619,83 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE47F9AA2B0AB556002F5257 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE47F9B32B0AB556002F5257 /* Complications.swift in Sources */,
+				DE47F9B52B0AB556002F5257 /* AppIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0932B090EF900916A9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE9DD09C2B090EF900916A9C /* ContentView.swift in Sources */,
+				DE9DD0C62B09107700916A9C /* api.swift in Sources */,
+				DE9DD0C82B09232600916A9C /* verseview.swift in Sources */,
+				DE9DD09A2B090EF900916A9C /* Roads_WatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0A22B090EFA00916A9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE9DD0AB2B090EFA00916A9C /* Roads_Watch_Watch_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9DD0AC2B090EFA00916A9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE9DD0B72B090EFA00916A9C /* Roads_Watch_Watch_AppUITestsLaunchTests.swift in Sources */,
+				DE9DD0B52B090EFA00916A9C /* Roads_Watch_Watch_AppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEA36F252B0AA20E00264F3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA36F302B0AA20E00264F3C /* WIdgetsLiveActivity.swift in Sources */,
+				DEA36F342B0AA20E00264F3C /* AppIntent.swift in Sources */,
+				DEA36F322B0AA20E00264F3C /* WIdgets.swift in Sources */,
+				DEA36F2E2B0AA20E00264F3C /* WIdgetsBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE47F9BA2B0AB558002F5257 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE47F9AD2B0AB556002F5257 /* ComplicationsExtension */;
+			targetProxy = DE47F9B92B0AB558002F5257 /* PBXContainerItemProxy */;
+		};
+		DE9DD0A82B090EFA00916A9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE9DD0962B090EF900916A9C /* Roads Watch Watch App */;
+			targetProxy = DE9DD0A72B090EFA00916A9C /* PBXContainerItemProxy */;
+		};
+		DE9DD0B22B090EFA00916A9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE9DD0962B090EF900916A9C /* Roads Watch Watch App */;
+			targetProxy = DE9DD0B12B090EFA00916A9C /* PBXContainerItemProxy */;
+		};
+		DE9DD0B92B090EFA00916A9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE9DD0962B090EF900916A9C /* Roads Watch Watch App */;
+			targetProxy = DE9DD0B82B090EFA00916A9C /* PBXContainerItemProxy */;
+		};
+		DEA36F392B0AA20F00264F3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEA36F282B0AA20E00264F3C /* WIdgetsExtension */;
+			targetProxy = DEA36F382B0AA20F00264F3C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		504EC30B1FED79650016851F /* Main.storyboard */ = {
@@ -352,7 +828,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VSKSF5JJ94;
@@ -363,6 +841,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = roads.bible;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -373,7 +852,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VSKSF5JJ94;
@@ -383,7 +864,364 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = roads.bible;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DE47F9BD2B0AB558002F5257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Complications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Complications;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks @executable_path/../../../../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = roads.bible.watchkitapp.Complications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		DE47F9BE2B0AB558002F5257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Complications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Complications;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks @executable_path/../../../../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = roads.bible.watchkitapp.Complications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		DE9DD0BC2B090EFA00916A9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Roads Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Roads Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = roads.bible;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = roads.bible.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		DE9DD0BD2B090EFA00916A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Roads Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Roads Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = roads.bible;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = roads.bible.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		DE9DD0BE2B090EFA00916A9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "idk.Roads-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Roads Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Roads Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		DE9DD0BF2B090EFA00916A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "idk.Roads-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Roads Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Roads Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		DE9DD0C02B090EFA00916A9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "idk.Roads-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Roads Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		DE9DD0C12B090EFA00916A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "idk.Roads-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Roads Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		DEA36F3C2B0AA20F00264F3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WIdgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WIdgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = roads.bible.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DEA36F3D2B0AA20F00264F3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VSKSF5JJ94;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WIdgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WIdgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = roads.bible.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -406,6 +1244,51 @@
 			buildConfigurations = (
 				504EC3171FED79650016851F /* Debug */,
 				504EC3181FED79650016851F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE47F9BC2B0AB558002F5257 /* Build configuration list for PBXNativeTarget "ComplicationsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE47F9BD2B0AB558002F5257 /* Debug */,
+				DE47F9BE2B0AB558002F5257 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE9DD0C22B090EFA00916A9C /* Build configuration list for PBXNativeTarget "Roads Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE9DD0BC2B090EFA00916A9C /* Debug */,
+				DE9DD0BD2B090EFA00916A9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE9DD0C32B090EFA00916A9C /* Build configuration list for PBXNativeTarget "Roads Watch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE9DD0BE2B090EFA00916A9C /* Debug */,
+				DE9DD0BF2B090EFA00916A9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE9DD0C42B090EFA00916A9C /* Build configuration list for PBXNativeTarget "Roads Watch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE9DD0C02B090EFA00916A9C /* Debug */,
+				DE9DD0C12B090EFA00916A9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEA36F3B2B0AA20F00264F3C /* Build configuration list for PBXNativeTarget "WIdgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEA36F3C2B0AA20F00264F3C /* Debug */,
+				DEA36F3D2B0AA20F00264F3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -40,7 +40,16 @@ export default function copyright() {
             reserved.
           </IonItem>
           <IonItem>
-            <h3></h3>
+            <h3>NASB</h3>
+            Scripture quotations taken from the (NASB®) New American Standard
+            Bible®, Copyright © 1960, 1971, 1977, 1995, 2020 by The Lockman
+            Foundation. Used by permission. All rights reserved. lockman.org
+          </IonItem>
+          <IonItem>
+            <h3>AMP</h3>
+            Scripture quotations taken from the Amplified® Bible (AMP),
+            Copyright © 2015 by The Lockman Foundation. Used by permission.
+            lockman.org
           </IonItem>
         </IonContent>
       </IonPage>
