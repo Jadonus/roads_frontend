@@ -1,6 +1,6 @@
 //
-//  Widgets.swift
-//  Widgets
+//  Complications.swift
+//  Complications
 //
 //  Created by Jadon Gearhart on 11/19/23.
 //
@@ -42,7 +42,7 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationAppIntent
 }
 
-struct WidgetsEntryView : View {
+struct ComplicationsEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -59,12 +59,12 @@ struct WidgetsEntryView : View {
 }
 
 @main
-struct Widgets: Widget {
-    let kind: String = "Widgets"
+struct Complications: Widget {
+    let kind: String = "Complications"
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            WidgetsEntryView(entry: entry)
+            ComplicationsEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
     }
@@ -85,7 +85,7 @@ extension ConfigurationAppIntent {
 }
 
 #Preview(as: .accessoryRectangular) {
-    Widgets()
+    Complications()
 } timeline: {
     SimpleEntry(date: .now, configuration: .smiley)
     SimpleEntry(date: .now, configuration: .starEyes)
