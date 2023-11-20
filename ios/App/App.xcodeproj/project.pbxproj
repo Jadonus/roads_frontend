@@ -21,6 +21,7 @@
 		DE47F9B52B0AB556002F5257 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47F9B42B0AB556002F5257 /* AppIntent.swift */; };
 		DE47F9B72B0AB558002F5257 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE47F9B62B0AB558002F5257 /* Assets.xcassets */; };
 		DE47F9BB2B0AB558002F5257 /* ComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DE47F9AE2B0AB556002F5257 /* ComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DE47F9C22B0BC3F0002F5257 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = DE47F9C12B0BC3F0002F5257 /* green.png */; };
 		DE9DD09A2B090EF900916A9C /* Roads_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD0992B090EF900916A9C /* Roads_WatchApp.swift */; };
 		DE9DD09C2B090EF900916A9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9DD09B2B090EF900916A9C /* ContentView.swift */; };
 		DE9DD09E2B090EFA00916A9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE9DD09D2B090EFA00916A9C /* Assets.xcassets */; };
@@ -134,6 +135,7 @@
 		DE47F9B42B0AB556002F5257 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		DE47F9B62B0AB558002F5257 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE47F9B82B0AB558002F5257 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE47F9C12B0BC3F0002F5257 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = green.png; path = ../../../public/green.png; sourceTree = "<group>"; };
 		DE9DD0972B090EF900916A9C /* Roads Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roads Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE9DD0992B090EF900916A9C /* Roads_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_WatchApp.swift; sourceTree = "<group>"; };
 		DE9DD09B2B090EF900916A9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -146,7 +148,6 @@
 		DE9DD0B62B090EFA00916A9C /* Roads_Watch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_Watch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DE9DD0C52B09107700916A9C /* api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
 		DE9DD0C72B09232600916A9C /* verseview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verseview.swift; sourceTree = "<group>"; };
-		DEA36F232B0AA1ED00264F3C /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		DEA36F242B0AA1F300264F3C /* classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = classic.png; sourceTree = "<group>"; };
 		DEA36F292B0AA20E00264F3C /* WIdgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WIdgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA36F2D2B0AA20E00264F3C /* WIdgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIdgetsBundle.swift; sourceTree = "<group>"; };
@@ -262,7 +263,7 @@
 				504EC3131FED79650016851F /* Info.plist */,
 				DEED47012AF2EE1C00261EE7 /* neumorph.png */,
 				DEA36F242B0AA1F300264F3C /* classic.png */,
-				DEA36F232B0AA1ED00264F3C /* green.png */,
+				DE47F9C12B0BC3F0002F5257 /* green.png */,
 				DEED47062AF3E23A00261EE7 /* AlternateIcons */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
@@ -528,6 +529,7 @@
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
+				DE47F9C22B0BC3F0002F5257 /* green.png in Resources */,
 				DEED47022AF2EE1C00261EE7 /* neumorph.png in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
 			);
