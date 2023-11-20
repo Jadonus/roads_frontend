@@ -16,6 +16,7 @@ import { AppIcon } from "@capacitor-community/app-icon";
 function Appicon() {
   const changeIcon = async (iconName) => {
     if (iconName !== "default") {
+      console.log(iconName);
       await AppIcon.change({ name: iconName, suppressNotification: false });
     } else {
       await AppIcon.reset({ suppressNotification: false });
@@ -39,6 +40,7 @@ function Appicon() {
           >
             <IonItem>
               <img
+                style={{ borderRadius: "20px" }}
                 className="ion-padding"
                 src="/roads.png"
                 width="100"
@@ -48,6 +50,7 @@ function Appicon() {
             </IonItem>
             <IonItem>
               <img
+                style={{ borderRadius: "20px" }}
                 className="ion-padding"
                 src="/rounded.png"
                 width="100"
@@ -57,6 +60,7 @@ function Appicon() {
             </IonItem>
             <IonItem>
               <img
+                style={{ borderRadius: "20px" }}
                 className="ion-padding"
                 src="/green.png"
                 width="100"
@@ -66,6 +70,7 @@ function Appicon() {
             </IonItem>
             <IonItem>
               <img
+                style={{ borderRadius: "20px" }}
                 className="ion-padding"
                 src="/dsf.png"
                 width="100"
