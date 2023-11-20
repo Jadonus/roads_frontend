@@ -15,6 +15,8 @@ struct VerseInfo: Codable {
 }
 
 struct Provider: TimelineProvider {
+    var backgroundColor: Color = .white // Default color is white
+
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), reference: "")
     }
@@ -71,17 +73,24 @@ struct SimpleEntry: TimelineEntry {
 
 struct IconWidgetView : View {
     var entry: Provider.Entry
+    var backgroundColor: Color // Add this property
+
+    init(entry: Provider.Entry, backgroundColor: Color) {
+        self.entry = entry
+        self.backgroundColor = backgroundColor
+    }
 
     var body: some View {
         VStack(alignment: .center) {
-            Text(entry.reference).font(.title2).bold().foregroundStyle(.black)
+            Text(entry.reference)
+                .font(.title2)
+                .bold()
+                .foregroundStyle(.black)
+                .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill the space
+                .background(backgroundColor) // Apply the background color
         }
         .containerBackground(.white, for: .widget)
-
-
-//asd
     }
-
 }
 
 struct IconWidget: Widget {
@@ -89,16 +98,16 @@ struct IconWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            IconWidgetView(entry: entry)
+            IconWidgetView(entry: entry, backgroundColor: .white) // Pass the background color here
         }
         .configurationDisplayName("Verse Of The Day")
         .description("This complication displays the current verse of the day's reference.")
-
+        .supportedFamilies([.systemSmall])
     }
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        IconWidgetView(entry: SimpleEntry(date: Date(), reference: "Psalm 23:1"))
+        IconWidgetView(entry: SimpleEntry(date: Date(), reference: "Psalm 23:1"), backgroundColor: .white)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

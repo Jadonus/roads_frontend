@@ -39,6 +39,7 @@ import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
 import { isauth } from "./isauth";
 import Hearticon from "../components/heart";
+import Copyright from "./copyright";
 interface VerseModalProps {
   dynamicPath: string;
   userr: boolean;
@@ -73,7 +74,7 @@ const Verse: React.FC<VerseModalProps> = ({
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
   const [favoritedIndexes, setFavoritedIndexes] = useState([]);
-
+  const [info, setInfo] = useState(false);
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // State to track if the ActionSheet is open
   const hapticsImpactMedium = async () => {
@@ -578,7 +579,12 @@ const Verse: React.FC<VerseModalProps> = ({
               )}{" "}
             </IonItem>
 
-            <IonItem button>Verse Info.</IonItem>
+            <IonItem button onClick={() => setInfo(true)}>
+              Copyright info
+            </IonItem>
+            <IonModal isOpen={info}>
+              <Copyright onClose={() => setInfo(false)} />
+            </IonModal>
             {dynamicPath !== "verseoftheday" ? (
               <>
                 <IonItem onClick={readContext} button>

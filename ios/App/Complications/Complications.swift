@@ -16,11 +16,11 @@ struct VerseInfo: Codable {
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), reference: "")
+        SimpleEntry(date: Date(), reference: "Psalm 23:1")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), reference: "")
+        let entry = SimpleEntry(date: Date(), reference: "Psalm 23:1")
         completion(entry)
     }
 
@@ -94,8 +94,40 @@ struct IconWidgetView : View {
     }
 
 }
+struct IconWidgetVieww : View {
+    var entry: Provider.Entry
 
+    var body: some View {
+        VStack {
+            // Display your icon here
+
+
+
+            // Display the fetched reference
+             Image(systemName: "book.pages.fill")
+                .resizable()
+                    .aspectRatio(contentMode: .fit)
+                .imageScale(.large)
+                .frame(width: 30, height: 30, alignment: .topLeading)
+            Text(entry.reference)
+
+        }
+
+
+        .containerBackground(.blue.gradient, for: .widget)
+
+    }
+
+}
 @main
+struct MyWidgetBundle: WidgetBundle {
+    
+    @WidgetBundleBuilder
+    var body: some Widget {
+IconWidget()
+SquareWidget()
+    }
+}
 struct IconWidget: Widget {
     let kind: String = "small"
 
@@ -104,6 +136,21 @@ struct IconWidget: Widget {
             IconWidgetView(entry: entry)
         }
         .configurationDisplayName("Verse Of The Day")
+        .supportedFamilies([.accessoryCorner, .accessoryInline])
+        .description("This complication displays the current verse of the day's reference.")
+
+    }
+}
+
+struct SquareWidget: Widget {
+    let kind: String = "large"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            IconWidgetVieww(entry: entry)
+        }
+        .configurationDisplayName("Verse Of The Day (square)")
+        
         .description("This complication displays the current verse of the day's reference.")
 
     }

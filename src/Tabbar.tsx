@@ -32,6 +32,7 @@ import { effect } from "@preact/signals";
 import Appicon from "./pages/appicon";
 import { Capacitor } from "@capacitor/core";
 import Favorites from "./pages/favorites";
+import copyright from "./pages/copyright";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
@@ -89,6 +90,11 @@ const TabBar: React.FC = () => {
           path="/tabs/dashboard/makeroad"
           exact
           component={Makeroad}
+        ></Route>
+        <Route
+          path="/tabs/dashboard/copyright"
+          exact
+          component={copyright}
         ></Route>
         <Route path="/tabs/favorites" component={Favorites} exact={true} />
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />

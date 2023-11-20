@@ -1,5 +1,12 @@
 import { IonIcon } from "@ionic/react";
-import { colorPalette, logoGithub } from "ionicons/icons";
+import {
+  book,
+  colorPalette,
+  logoAppleAppstore,
+  logoGithub,
+  notifications,
+  square,
+} from "ionicons/icons";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import React, { useState, useEffect } from "react";
@@ -106,6 +113,7 @@ const SettingsPage = () => {
     return Capacitor.isNativePlatform();
   }
   const PWA = window.matchMedia("(display-mode: standalone)").matches;
+
   return (
     <div>
       <IonPage>
@@ -146,7 +154,18 @@ const SettingsPage = () => {
               </IonSelect>
               </IonItem> */}
             <IonItem color="light" id="open-picker" button>
-              <IonLabel>Bible Translation</IonLabel>
+              <IonLabel>
+                <IonIcon
+                  style={{
+                    backgroundColor: "red",
+
+                    padding: "5px",
+                    borderRadius: "5px",
+                  }}
+                  icon={book}
+                ></IonIcon>{" "}
+                Bible Translation
+              </IonLabel>
               <IonPicker
                 trigger="open-picker"
                 columns={[
@@ -207,7 +226,18 @@ const SettingsPage = () => {
               ></IonPicker>
             </IonItem>
             <IonItem color="light">
-              Notifications
+              <IonLabel>
+                <IonIcon
+                  style={{
+                    backgroundColor: "blue",
+
+                    padding: "5px",
+                    borderRadius: "5px",
+                  }}
+                  icon={notifications}
+                ></IonIcon>{" "}
+                Notifications
+              </IonLabel>
               <IonToggle
                 slot="end"
                 checked={!notificationsEnabled} // Controlled by state
@@ -227,46 +257,113 @@ const SettingsPage = () => {
               >
                 {/* Radio options */}
                 <IonRadio value="#eb3434">
-                  Red{" "}
-                  <IonIcon icon={colorPalette} style={{ color: "#eb3434" }} />
+                  <IonLabel>
+                    <IonIcon
+                      icon={colorPalette}
+                      style={{
+                        backgroundColor: "#eb3434",
+
+                        padding: "5px",
+                        borderRadius: "5px",
+                      }}
+                    />{" "}
+                    Red
+                  </IonLabel>
                 </IonRadio>
                 <IonRadio value="#3875D2">
-                  Blue (default){" "}
-                  <IonIcon icon={colorPalette} style={{ color: "#3875D2" }} />
+                  <IonIcon
+                    icon={colorPalette}
+                    style={{
+                      backgroundColor: "#3875D2",
+
+                      padding: "5px",
+                      borderRadius: "5px",
+                    }}
+                  />{" "}
+                  Blue (default)
                 </IonRadio>
                 <IonRadio value="#3A936B">
-                  Green{" "}
-                  <IonIcon icon={colorPalette} style={{ color: "#3A936B" }} />
+                  <IonIcon
+                    icon={colorPalette}
+                    style={{
+                      backgroundColor: "#3A936B",
+
+                      padding: "5px",
+                      borderRadius: "5px",
+                    }}
+                  />{" "}
+                  Green
                 </IonRadio>
                 <IonRadio value="#9133FF">
+                  <IonIcon
+                    icon={colorPalette}
+                    style={{
+                      backgroundColor: "#9133FF",
+
+                      padding: "5px",
+                      borderRadius: "5px",
+                    }}
+                  />{" "}
                   Purple{" "}
-                  <IonIcon icon={colorPalette} style={{ color: "#9133FF" }} />{" "}
                 </IonRadio>
               </IonRadioGroup>
             </IonItem>
             <IonItem color="light">
-              Custom Color {"  "}
-              <input
-                value={col} // Use the 'col' variable here
-                onChange={(e) => {
-                  setCol(e.target.value);
-                }}
-                onBlur={(e) => {
-                  settings("color", col);
-                }}
-                type="color"
-              />
+              <IonLabel>
+                <IonIcon
+                  icon={colorPalette}
+                  style={{
+                    backgroundColor: col,
+
+                    padding: "5px",
+                    borderRadius: "5px",
+                  }}
+                />{" "}
+                Custom Color {"  "}
+                <input
+                  value={col} // Use the 'col' variable here
+                  onChange={(e) => {
+                    setCol(e.target.value);
+                  }}
+                  onBlur={(e) => {
+                    settings("color", col);
+                  }}
+                  type="color"
+                />
+              </IonLabel>
             </IonItem>
             {isNative() ? (
               <IonItem color="light" routerLink="/tabs/settings/appicon/">
-                App Icon
+                <IonLabel>
+                  <IonIcon
+                    icon={square}
+                    style={{
+                      backgroundColor: col,
+
+                      padding: "5px",
+                      borderRadius: "5px",
+                    }}
+                  />{" "}
+                  App Icon
+                </IonLabel>
               </IonItem>
             ) : null}
           </IonList>
           <h3 className="ion-padding">App</h3>
           <IonList inset>
             <IonItem color="light" routerLink="/tabs/settings/install">
-              Install Roads{" "}
+              <IonLabel>
+                <IonIcon
+                  icon={logoAppleAppstore}
+                  style={{
+                    backgroundColor: "orange",
+
+                    padding: "5px",
+                    borderRadius: "5px",
+                  }}
+                />{" "}
+                Install Roads{" "}
+              </IonLabel>
               {!PWA && !isNative() ? (
                 <IonBadge slot="end" color="danger">
                   1
@@ -279,7 +376,18 @@ const SettingsPage = () => {
           <h3 className="ion-padding">Account Settings</h3>
           <IonList inset>
             <IonItem color="light" routerLink="/tabs/settings/account">
-              View Account Settings
+              <IonLabel>
+                <IonIcon
+                  icon={logoAppleAppstore}
+                  style={{
+                    backgroundColor: "purple",
+
+                    padding: "5px",
+                    borderRadius: "5px",
+                  }}
+                />{" "}
+                View Account Settings
+              </IonLabel>
             </IonItem>
           </IonList>
           <h3 className="ion-padding">Links</h3>
