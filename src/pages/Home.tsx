@@ -88,7 +88,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const dashboardUrl = "https://www.roadsbible.com/dashboard";
+        const dashboardUrl = "https://www.roadsbible.com/dashboard/";
         const response = await fetch(dashboardUrl);
 
         if (!response.ok) {
@@ -258,6 +258,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             </IonFabButton>
           </IonFabList>
         </IonFab>
+        <IonItem>
+          Cant find any roads that interest you? No problem,
+          <IonRouterLink routerLink="/tabs/dashboard/makeroad/">
+            {" "}
+            Make your own!
+          </IonRouterLink>
+        </IonItem>
       </IonContent>
     </IonPage>
   );

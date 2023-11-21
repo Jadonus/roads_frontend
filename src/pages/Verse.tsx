@@ -16,6 +16,7 @@ import {
   IonHeader,
   IonAlert,
   IonIcon,
+  IonActionSheet,
   IonModal,
   IonSpinner,
   IonProgressBar,
@@ -80,6 +81,7 @@ const Verse: React.FC<VerseModalProps> = ({
   const hapticsImpactMedium = async () => {
     await Haptics.impact({ style: ImpactStyle.Heavy });
   };
+
   interface Data {
     verses: any[]; // You can replace 'any' with a more specific type if you know the structure.
     // Other properties if 'data' has them
@@ -558,47 +560,55 @@ const Verse: React.FC<VerseModalProps> = ({
           ></IonProgressBar>
         </IonToolbar>
       </IonHeader>
-      <IonModal
-        ref={modal}
-        trigger="open-action-sheet"
-        initialBreakpoint={0.75}
-        breakpoints={[0, 0.75, 1]}
-      >
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>More</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent color="light" className="ion-padding">
-          <IonList inset>
-            <IonItem button onClick={toggleFirstLetterMode}>
-              {isFirstLetterMode ? (
-                <>Random Word Mode</>
-              ) : (
-                <>First Letter Mode</>
-              )}{" "}
-            </IonItem>
 
-            <IonItem button onClick={() => setInfo(true)}>
-              Copyright info
-            </IonItem>
-            <IonModal isOpen={info}>
-              <Copyright onClose={() => setInfo(false)} />
-            </IonModal>
-            {dynamicPath !== "verseoftheday" ? (
-              <>
-                <IonItem onClick={readContext} button>
-                  Read Verse Context
-                </IonItem>
-                <IonItem onClick={flashcard} button>
-                  Print FlashCards
-                </IonItem>
-              </>
-            ) : null}
-          </IonList>
-        </IonContent>
-      </IonModal>
       <IonContent {...handlers}>
+        <IonModal isOpen={info}>
+          <Copyright onClose={() => setInfo(false)} />
+        </IonModal>
+        <IonActionSheet
+          trigger="open-action-sheet"
+          header="Quick Actions"
+          buttons={[
+            {
+              text: isFirstLetterMode
+                ? "Random Word Mode"
+                : "First Letter Mode",
+              handler: () => {
+                toggleFirstLetterMode();
+              },
+            },
+
+            {
+              text: "Copyright info.",
+              handler: () => {
+                setInfo(true);
+              },
+            },
+            dynamicPath !== "verseoftheday"
+              ? {
+                  text: "Read verse context",
+                  handler: () => {
+                    readContext();
+                  },
+                }
+              : null,
+            dynamicPath !== "verseoftheday"
+              ? {
+                  text: "Print flashcards",
+                  handler: () => {
+                    flashcard();
+                  },
+                }
+              : null,
+            {
+              text: "Cancel",
+              role: "cancel",
+              data: {
+                action: "cancel",
+              },
+            },
+          ]}
+        ></IonActionSheet>
         <IonAlert
           buttons={[
             {
@@ -612,7 +622,7 @@ const Verse: React.FC<VerseModalProps> = ({
               text: "Great!",
               role: "confirm",
               handler: () => {
-                location.href = "/tabs/";
+                onClose();
               },
             },
           ]}
@@ -634,6 +644,7 @@ const Verse: React.FC<VerseModalProps> = ({
             paddingLeft: "1rem",
             paddingRight: "1rem",
             overflowX: "hidden",
+            overflowY: "hidden",
           }}
         >
           {sentences.length === 0 ? (

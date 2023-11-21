@@ -3,16 +3,19 @@ import { IonButton, IonIcon } from "@ionic/react";
 import { heartOutline, heart } from "ionicons/icons";
 import { isauth } from "../pages/isauth";
 import { CreateAnimation, Animation } from "@ionic/react";
-
+import { Haptics } from "@capacitor/haptics";
 const Hearticon = (props) => {
   const [isHearted, setHearted] = useState(false);
   console.log(props);
-
+  async function alert() {
+    await Haptics.notification();
+  }
   const { favoritedIndexes } = props;
   useEffect(() => {
     // Assuming props.index represents the current index for this Hearticon
     const isIndexFavorited = favoritedIndexes.includes(props.index);
     setHearted(isIndexFavorited);
+    alert();
   }, [favoritedIndexes, props.index]);
 
   function addToFavorites() {

@@ -96,6 +96,7 @@ export default function user() {
   useEffect(() => {
     const data = {
       username: username,
+      date: Date.now(),
     };
 
     const options = {
