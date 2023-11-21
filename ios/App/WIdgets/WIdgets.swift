@@ -136,14 +136,14 @@ struct IconWidgetView : View {
     var body: some View {
         VStack(alignment: .center) {
             Text(entry.reference)
+
                 .bold()
                 .font(.largeTitle)
-                .foregroundColor(.black)
+                .foregroundColor(.indigo)
                 .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill the space
-                .background(backgroundColor) // Apply the background color
         }
         .widgetURL(URL(string: entry.reference)) // Use entry.reference to enable URL tap action
-        .containerBackground(.white, for: .widget)
+        .containerBackground(.white.gradient, for: .widget)
     }
 }
 
@@ -157,12 +157,13 @@ struct Textt : View {
     }
 
     var body: some View {
-        VStack(alignment: .center) {
-            Text("\(entry.text) \(entry.reference)").onAppear() {
+        VStack(alignment: .leading) {
+            Text(entry.reference).font(.callout)                .bold().foregroundStyle(.indigo)
+
+            Text("\(entry.text)").onAppear() {
                     print(entry)
                 }
-                .bold()
-                .font(.footnote)
+            .font(.caption).minimumScaleFactor(0.7)
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill the space
               // .background(backgroundColor) // Apply the background color

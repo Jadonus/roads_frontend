@@ -136,6 +136,7 @@
 		DE47F9B62B0AB558002F5257 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE47F9B82B0AB558002F5257 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE47F9C12B0BC3F0002F5257 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = green.png; path = ../../../public/green.png; sourceTree = "<group>"; };
+		DE985A042B0D09BD007D88D0 /* apple-splash-640-1136-2abc96e4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "apple-splash-640-1136-2abc96e4.jpg"; sourceTree = "<group>"; };
 		DE9DD0972B090EF900916A9C /* Roads Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roads Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE9DD0992B090EF900916A9C /* Roads_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roads_WatchApp.swift; sourceTree = "<group>"; };
 		DE9DD09B2B090EF900916A9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -262,6 +263,7 @@
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				DEED47012AF2EE1C00261EE7 /* neumorph.png */,
+				DE985A042B0D09BD007D88D0 /* apple-splash-640-1136-2abc96e4.jpg */,
 				DEA36F242B0AA1F300264F3C /* classic.png */,
 				DE47F9C12B0BC3F0002F5257 /* green.png */,
 				DEED47062AF3E23A00261EE7 /* AlternateIcons */,

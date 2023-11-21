@@ -15,7 +15,6 @@ const Hearticon = (props) => {
     // Assuming props.index represents the current index for this Hearticon
     const isIndexFavorited = favoritedIndexes.includes(props.index);
     setHearted(isIndexFavorited);
-    alert();
   }, [favoritedIndexes, props.index]);
 
   function addToFavorites() {
@@ -39,6 +38,7 @@ const Hearticon = (props) => {
       (response) => {
         if (response.ok) {
           setHearted(true);
+          alert();
         }
       }
     );
