@@ -38,10 +38,10 @@ const Hearticon = (props) => {
       (response) => {
         if (response.ok) {
           setHearted(true);
-          alert();
         }
       }
     );
+    alert();
   }
 
   return (
