@@ -35,6 +35,7 @@ import {
   settingsOutline,
   arrowForward,
   documentText,
+  sparkles,
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
@@ -536,7 +537,7 @@ const Verse: React.FC<VerseModalProps> = ({
 
           <IonButtons slot="start">
             <IonButton id="open-action-sheet">
-              <IonIcon icon={settingsOutline}></IonIcon>
+              <IonIcon icon={sparkles}></IonIcon>
             </IonButton>
             <IonButton>
               {refer &&
