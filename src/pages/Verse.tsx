@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
 
@@ -72,7 +72,7 @@ const Verse: React.FC<VerseModalProps> = ({
   const [isFirstLetterMode, setIsFirstLetterMode] = useState(false); // State to track the mode
   const [originalSentences, setOriginalSentences] = useState([]); // Initialize as an empty array
   const [showAlert, setShowAlert] = useState(false); // State to track if the alert is visible
-  const [isFabOpen, setIsFabOpen] = useState(false);
+  const [isFabOpen, setIsFabOpen] = useState(true);
   const isFirstLetterModeRef = useRef(null);
   const modal = useRef<HTMLIonModalElement>(null);
   const [favoritedIndexes, setFavoritedIndexes] = useState([]);
@@ -91,6 +91,42 @@ const Verse: React.FC<VerseModalProps> = ({
   if (userr) {
     custom = "yes";
   }
+  const toggleFirstLetterModeCallback = useCallback(() => {}, [
+    settings,
+    isFirstLetterMode,
+  ]);
+  let dat;
+  if (userr == true) {
+    dat = {
+      username: username,
+      title: dynamic,
+      custom: "yes",
+    };
+  } else {
+    dat = {
+      username: username,
+      title: dynamic,
+      custom: "no",
+    };
+  }
+  const requestOption: RequestInit = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dat),
+  };
+  async function sett() {
+    await fetch("https://www.roadsbible.com/api/settings/", requestOption)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setSettings(data);
+      });
+  }
+  useEffect(() => {
+    sett();
+  }, []);
   useEffect(() => {
     // For simplicity, I'm using placeholder sentences.
     const initialSentences = [
@@ -99,7 +135,6 @@ const Verse: React.FC<VerseModalProps> = ({
       // Add more sentences as needed
     ];
     let dat;
-
     if (userr == true) {
       dat = {
         username: username,
@@ -120,15 +155,6 @@ const Verse: React.FC<VerseModalProps> = ({
       },
       body: JSON.stringify(dat),
     };
-    async function sett() {
-      await fetch("https://www.roadsbible.com/api/settings/", requestOption)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setSettings(data);
-        });
-    }
-    sett();
     const location = window.location.href;
     interface ResponseData {
       dat: any;
@@ -174,12 +200,19 @@ const Verse: React.FC<VerseModalProps> = ({
           );
           // Update the state with the fetched verses
           setSentences(verses);
+          if (settings.length > 0) {
+            if (settings[0].fields.defaultmode === "randomWord") {
+              console.log("Random word");
+            } else {
+              toggleFirstLetterMode();
+            }
+          }
         })
         .catch((error) => {
           console.error("Error fetching verses:", error);
         });
     }
-  }, []);
+  }, [settings]);
 
   var dynamic = dynamicPath.replace("/roads/", "");
   useEffect(() => {
@@ -394,22 +427,6 @@ const Verse: React.FC<VerseModalProps> = ({
       }
     });
   };
-  useEffect(() => {
-    if (settings.length > 0) {
-      if (settings[0].fields.defaultmode === "randomWord") {
-        console.log("Random word");
-      } else {
-        setShouldRerender(true);
-      }
-    }
-  }, [settings]);
-
-  useEffect(() => {
-    if (shouldRerender) {
-      toggleFirstLetterMode();
-      setShouldRerender(false);
-    }
-  }, [shouldRerender]);
 
   const style = {
     "--background": "var(--ion-background)",

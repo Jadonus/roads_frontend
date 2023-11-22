@@ -133,9 +133,8 @@ const SettingsPage = () => {
           <h3 className="ion-padding">General</h3>
 
           <IonList inset={true}>
-            {/* <IonItem color="light">
+            <IonItem color="light">
               <IonSelect
-                disabled={true}
                 label="Default Memory Mode"
                 aria-label="Default Memory Mode"
                 interface="action-sheet"
@@ -152,7 +151,7 @@ const SettingsPage = () => {
                   First Letter
                 </IonSelectOption>
               </IonSelect>
-              </IonItem> */}
+            </IonItem>
             <IonItem color="light" id="open-picker" button>
               <IonLabel>
                 <IonIcon
