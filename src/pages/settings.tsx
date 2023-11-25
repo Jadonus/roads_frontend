@@ -135,7 +135,6 @@ const SettingsPage = () => {
           <IonList inset={true}>
             <IonItem color="light">
               <IonSelect
-                label="Default Memory Mode"
                 aria-label="Default Memory Mode"
                 interface="action-sheet"
                 placeholder="Choose Mode"
@@ -144,6 +143,18 @@ const SettingsPage = () => {
                   settings("defaultmode", selectedMode);
                 }}
               >
+                <IonLabel slot="label">
+                  <IonIcon
+                    style={{
+                      backgroundColor: "darkCyan",
+
+                      padding: "5px",
+                      borderRadius: "5px",
+                    }}
+                    icon={book}
+                  ></IonIcon>{" "}
+                  Bible Translation
+                </IonLabel>
                 <IonSelectOption value="randomWord">
                   Blurred Words
                 </IonSelectOption>

@@ -44,7 +44,7 @@ const Signup = () => {
       );
 
       if (response.status === 200 || 204) {
-        history.push("/tabs/dashboard");
+        history.push("/login/");
       } else {
         if (response.data && response.data.non_field_errors) {
           setError(response.data.non_field_errors[0]);
@@ -60,7 +60,9 @@ const Signup = () => {
       ) {
         setError(error.response.data.non_field_errors[0]);
       } else {
-        setError("Login failed");
+        for (let p in error.response.data) {
+          setError(p);
+        }
       }
     }
   };

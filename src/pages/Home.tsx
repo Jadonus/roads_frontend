@@ -259,7 +259,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </IonFabList>
         </IonFab>
         <IonItem>
-          Cant find any roads that interest you? No problem,
+          Cant find any roads that interest you? No problem,{" "}
           <IonRouterLink routerLink="/tabs/dashboard/makeroad/">
             {" "}
             Make your own!
