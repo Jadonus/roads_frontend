@@ -115,7 +115,11 @@ export default function user() {
           throw Error("Network response was not ok");
         }
         const fetchedData = await response.json();
-        setDashboardData(fetchedData);
+        if (fetchedData.error) {
+          console.log("fatal error");
+        } else {
+          setDashboardData(fetchedData);
+        }
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       }
@@ -158,6 +162,7 @@ export default function user() {
       </div>
     );
   }
+
   if (dashboardData.combined_data.length === 0) {
     return (
       <div>

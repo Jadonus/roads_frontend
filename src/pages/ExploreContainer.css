@@ -28,7 +28,9 @@
   padding-right: 1rem;
 }
 .center {
-  margin: auto;
+display: flex;
+justify-content: center;
+justify-items: center;
 }
 .margin {
   margin-bottom: 4em;
@@ -39,3 +41,4 @@
 .color {
   color: #fff;
   }
+  .ce

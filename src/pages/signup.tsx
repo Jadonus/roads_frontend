@@ -1,6 +1,7 @@
 import { IonIcon, IonRouterLink } from "@ionic/react";
 import { square } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
+import "./ExploreContainer.css";
 import React, { useState, useEffect } from "react";
 import {
   IonContent,
@@ -59,10 +60,15 @@ const Signup = () => {
         error.response.data.non_field_errors
       ) {
         setError(error.response.data.non_field_errors[0]);
+      } else if (error.response && error.response.data) {
+        const errorFields = Object.keys(error.response.data);
+        let errorMessage = "";
+        errorFields.forEach((field) => {
+          errorMessage += `${field}: ${error.response.data[field][0]}\n`;
+        });
+        setError(errorMessage);
       } else {
-        for (let p in error.response.data) {
-          setError(p);
-        }
+        setError("Something went wrong. Please try again later.");
       }
     }
   };
@@ -75,6 +81,9 @@ const Signup = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent color="light">
+        <div className="center">
+          <img src="roads.png" width={150} style={{ margin: "1em" }} />
+        </div>
         <IonList inset>
           <IonItem>
             <IonInput
