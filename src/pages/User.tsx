@@ -50,7 +50,7 @@ import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { isauth } from "./isauth";
 export default function user() {
   let filteredMetadata = [];
-  const [link, setlink] = useState("");
+  const [link, setlink] = useState(false);
   const [verse, setVerse] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -117,6 +117,7 @@ export default function user() {
         const fetchedData = await response.json();
         if (fetchedData.error) {
           console.log("fatal error");
+          setlink(true);
         } else {
           setDashboardData(fetchedData);
         }
@@ -170,6 +171,15 @@ export default function user() {
           <IonLabel>You do not have any custom roads yet. </IonLabel>
         </IonItem>
       </div>
+    );
+  }
+  if (link) {
+    return (
+      <>
+        <IonCard color="danger">
+          <IonCardContent>Error loading custom roads.</IonCardContent>
+        </IonCard>
+      </>
     );
   }
 
