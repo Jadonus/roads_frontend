@@ -19,7 +19,7 @@ import { isauth } from "./isauth";
 import { effect } from "@preact/signals";
 let username = isauth.value;
 function Myprogress() {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(null);
   const [confet, setConfet] = useState(false);
   const textRef = useRef(null);
   function setProgressBarPosition(progress) {
@@ -146,8 +146,17 @@ function Myprogress() {
           </div>
           <div className="text-box" ref={textRef}>
             <p id="mem">
-              You have memorized <strong>{progress}</strong> verses! Keep up the
-              great work!{" "}
+              {progress !== "Not Started" ? (
+                <span>
+                  You have memorized <strong>{progress}</strong> verses! Keep up
+                  the great work!{" "}
+                </span>
+              ) : (
+                <span>
+                  You have not memorized any verses! Head over to the dashboard
+                  and start with a road.
+                </span>
+              )}
               {navigator.canShare ? (
                 <IonButton fill="clear" onClick={sharee}>
                   <IonIcon
