@@ -17,6 +17,7 @@ import {
   settingsOutline,
   book,
   heart,
+  cog,
 } from "ionicons/icons";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
@@ -125,7 +126,7 @@ const TabBar: React.FC = () => {
           <IonLabel>Favorites</IonLabel>
         </IonTabButton>
         <IonTabButton tab="settings" href="/tabs/settings">
-          <IonIcon icon={settingsOutline} />
+          <IonIcon icon={cog} />
           <IonLabel>Settings</IonLabel>
           {!PWA && !Capacitor.isNativePlatform() ? (
             <IonBadge color="danger">1</IonBadge>

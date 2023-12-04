@@ -76,7 +76,6 @@ const Signup = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonBackButton></IonBackButton>
           <IonTitle>Sign Up</IonTitle>
         </IonToolbar>
       </IonHeader>

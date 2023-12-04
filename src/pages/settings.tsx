@@ -5,6 +5,7 @@ import {
   logoAppleAppstore,
   logoGithub,
   notifications,
+  sparkles,
   square,
 } from "ionicons/icons";
 import { Capacitor } from "@capacitor/core";
@@ -151,9 +152,9 @@ const SettingsPage = () => {
                       padding: "5px",
                       borderRadius: "5px",
                     }}
-                    icon={book}
+                    icon={sparkles}
                   ></IonIcon>{" "}
-                  Bible Translation
+                  Default mode
                 </IonLabel>
                 <IonSelectOption value="randomWord">
                   Blurred Words
