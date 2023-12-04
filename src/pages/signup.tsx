@@ -37,7 +37,7 @@ const Signup = () => {
       const response = await Axios.post(
         "https://www.roadsbible.com/dj-rest-auth/registration/",
         {
-          username: username,
+          username: (Math.random() + 1).toString(36).substring(7),
           email: email,
           password1: password,
           password2: password2,
@@ -77,23 +77,12 @@ const Signup = () => {
       <IonHeader>
         <IonToolbar>
           <IonBackButton></IonBackButton>
-          <IonTitle size="large">Sign Up For Roads.</IonTitle>
+          <IonTitle>Sign Up</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent color="light">
-        <div className="center">
-          <img src="roads.png" width={150} style={{ margin: "1em" }} />
-        </div>
+      <IonContent>
         <IonList inset>
-          <IonItem>
-            <IonInput
-              type="text"
-              placeholder="Username (No Spaces)"
-              value={username}
-              onIonInput={(e) => setUsername(e.detail.value!)}
-            />
-          </IonItem>
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="text"
               placeholder="Email"
@@ -101,7 +90,9 @@ const Signup = () => {
               onIonInput={(e) => setEmail(e.detail.value!)}
             />
           </IonItem>
-          <IonItem>
+        </IonList>
+        <IonList inset>
+          <IonItem color="light">
             <IonInput
               type="password"
               placeholder="Password"
@@ -110,14 +101,15 @@ const Signup = () => {
             />
           </IonItem>
 
-          <IonItem>
+          <IonItem color="light">
             <IonInput
               type="password"
-              placeholder="Password Again"
+              placeholder="Password Confirmation"
               value={password2}
               onIonInput={(e) => setPassword2(e.detail.value!)}
             />
           </IonItem>
+
           {error !== undefined ? (
             <IonItem color="danger">{error}</IonItem>
           ) : (

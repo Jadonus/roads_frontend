@@ -36,6 +36,11 @@ import {
   arrowForward,
   documentText,
   sparkles,
+  text,
+  documents,
+  book,
+  bookmark,
+  close,
 } from "ionicons/icons";
 import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import "../theme/variables.css";
@@ -588,6 +593,7 @@ const Verse: React.FC<VerseModalProps> = ({
           header="Quick Actions"
           buttons={[
             {
+              icon: text,
               text: isFirstLetterMode
                 ? "Random Word Mode"
                 : "First Letter Mode",
@@ -597,6 +603,8 @@ const Verse: React.FC<VerseModalProps> = ({
             },
 
             {
+              icon: documents,
+
               text: "Copyright info.",
               handler: () => {
                 setInfo(true);
@@ -604,6 +612,7 @@ const Verse: React.FC<VerseModalProps> = ({
             },
             dynamicPath !== "verseoftheday"
               ? {
+                  icon: book,
                   text: "Read verse context",
                   handler: () => {
                     readContext();
@@ -612,6 +621,7 @@ const Verse: React.FC<VerseModalProps> = ({
               : null,
             dynamicPath !== "verseoftheday"
               ? {
+                  icon: bookmark,
                   text: "Print flashcards",
                   handler: () => {
                     flashcard();
@@ -619,6 +629,7 @@ const Verse: React.FC<VerseModalProps> = ({
                 }
               : null,
             {
+              icon: close,
               text: "Cancel",
               role: "cancel",
               data: {

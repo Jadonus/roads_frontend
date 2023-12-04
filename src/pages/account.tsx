@@ -71,7 +71,9 @@ export default function Account() {
         <IonList inset>
           <IonItem color="light">Email: {response.data.email}</IonItem>
 
-          <IonItem color="light">Username: {response.data.username}</IonItem>
+          <IonItem color="light">
+            Username/ User id: {response.data.username}
+          </IonItem>
           <IonItem button onClick={logOut} color="light">
             Logout
           </IonItem>

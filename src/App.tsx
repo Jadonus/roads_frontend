@@ -36,6 +36,7 @@ import Myprogress from "./pages/myprogress";
 import Makeroad from "./pages/makeroad";
 import Signup from "./pages/signup";
 import { isauth } from "./pages/isauth";
+import welcome from "./pages/welcome";
 setupIonicReact();
 
 let received;
@@ -96,6 +97,7 @@ const App: React.FC = () => {
             <Route path="/devpro" exact component={Myprogress} />
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
+            <Route path="/welcome/" component={welcome} exact />
             {isauth.value ? (
               <>
                 <AuthenticationAction />

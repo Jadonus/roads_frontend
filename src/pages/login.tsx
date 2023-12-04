@@ -33,7 +33,7 @@ const Login = () => {
       const response = await Axios.post(
         "https://www.roadsbible.com/dj-rest-auth/login/",
         {
-          username: username,
+          email: username,
           password: password,
         }
       );
@@ -98,7 +98,7 @@ const Login = () => {
           <IonItem color="light">
             <IonInput
               type="text"
-              placeholder="Username"
+              placeholder="Email"
               value={username}
               onIonInput={(e) => setUsername(e.detail.value!)}
             />

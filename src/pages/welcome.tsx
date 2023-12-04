@@ -1,6 +1,7 @@
-import { IonIcon } from "@ionic/react";
+import { IonIcon, IonNote } from "@ionic/react";
 import { square } from "ionicons/icons";
-import {Mousewheel} from "swiper/modules" 
+import { Mousewheel } from "swiper/modules";
+import { CreateAnimation, Animation } from "@ionic/react";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -31,127 +32,41 @@ const welcome = () => {
   return (
     <IonPage>
       <IonContent color="">
-        <Swiper
-        modules={[Mousewheel]}
-        mousewheel={true}
+        <CreateAnimation
+          duration={1500}
+          play={true}
+          fromTo={{
+            property: "opacity",
+            fromValue: "0",
+
+            toValue: "1",
+          }}
         >
-          <SwiperSlide>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <IonCard>
-                <img alt="Welcome Image" src="/welcome.png" width="1000" />
-                <IonCardHeader>
-                  <IonCardTitle>Roads</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent>
-                  This will be a quick guide on how to use the Roads app. Swipe
-                  to continue.
-                </IonCardContent>
-              </IonCard>
+          <div
+            style={{
+              display: "flex",
+              height: "100vh",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <h1 style={{ fontSize: "5em", fontWeight: "bold" }}>Welcome</h1>
+            <p style={{ textAlign: "center", fontSize: "1.5em" }}>
+              This is Roads, the modern bible memory app for everyone.
+            </p>
+            <div style={{ flexDirection: "row" }}>
+              <IonButton style={{ margin: "1rem" }} routerLink="/signup">
+                Sign Up{" "}
+              </IonButton>
+              <IonButton routerLink="/login">Login </IonButton>
             </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <IonCard>
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>Roads Is Easy to Use</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent>
-                  Once You Get to the dashboard, you can get started. Start by
-                  scrolling to find a road to memorize, and then click the
-                  button.
-                </IonCardContent>
-              </IonCard>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <img
-                src="/2.png"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover", // Maintain // Maintain aspect ratio
-                }}
-              />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <img
-                src="/3.png"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover", // Maintain // Maintain aspect ratio
-
-                }}
-              />
-            </div>
-          </SwiperSlide>
-    <SwiperSlide>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-    <IonCard>
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                />
-                <IonCardHeader>
-                  <IonCardTitle>This Is Roads</IonCardTitle>
-                </IonCardHeader>
-
-                <IonCardContent>
-               This has been a short tutorial on how to use Roads. Swipe once more to go to the dashboard.
-                </IonCardContent>
-              </IonCard>
-              </div>
-              </SwiperSlide>
-        </Swiper>
+            <IonNote style={{ margin: "1rem", textAlign: "center" }}>
+              We Have signups so your settings and custom roads can stay account
+              synced.
+            </IonNote>
+          </div>
+        </CreateAnimation>
       </IonContent>
     </IonPage>
   );
