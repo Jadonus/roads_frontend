@@ -32,41 +32,30 @@ const welcome = () => {
   return (
     <IonPage>
       <IonContent color="">
-        <CreateAnimation
-          duration={1500}
-          play={true}
-          fromTo={{
-            property: "opacity",
-            fromValue: "0",
-
-            toValue: "1",
+        <div
+          style={{
+            display: "flex",
+            height: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              height: "100vh",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <h1 style={{ fontSize: "5em", fontWeight: "bold" }}>Welcome</h1>
-            <p style={{ textAlign: "center", fontSize: "1.5em" }}>
-              This is Roads, the modern bible memory app for everyone.
-            </p>
-            <div style={{ flexDirection: "row" }}>
-              <IonButton style={{ margin: "1rem" }} routerLink="/signup">
-                Sign Up{" "}
-              </IonButton>
-              <IonButton routerLink="/login">Login </IonButton>
-            </div>
-            <IonNote style={{ margin: "1rem", textAlign: "center" }}>
-              We Have signups so your settings and custom roads can stay account
-              synced.
-            </IonNote>
+          <h1 style={{ fontSize: "5em", fontWeight: "bold" }}>Welcome</h1>
+          <p style={{ textAlign: "center", fontSize: "1.5em" }}>
+            This is Roads, the modern bible memory app for everyone.
+          </p>
+          <div style={{ flexDirection: "row" }}>
+            <IonButton style={{ margin: "1rem" }} routerLink="/signup">
+              Sign Up{" "}
+            </IonButton>
+            <IonButton routerLink="/login">Login </IonButton>
           </div>
-        </CreateAnimation>
+          <IonNote style={{ margin: "1rem", textAlign: "center" }}>
+            We Have signups so your settings and custom roads can stay account
+            synced.
+          </IonNote>
+        </div>
       </IonContent>
     </IonPage>
   );
