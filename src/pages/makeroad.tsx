@@ -198,15 +198,7 @@ function Makeroad() {
     setVerseData(updatedVerseData);
   };
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons>
-            <IonBackButton />
-          </IonButtons>
-          <IonTitle size="large">Make A Road.</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <>
       <IonContent>
         <IonList inset>
           <IonNote>
@@ -331,7 +323,7 @@ function Makeroad() {
           </>
         ) : null}
       </IonContent>
-    </IonPage>
+    </>
   );
 }
 

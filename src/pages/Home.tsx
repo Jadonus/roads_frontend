@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   IonToolbar,
   IonSegment,
@@ -49,6 +49,7 @@ interface DashboardData {
   combined_data: any[]; // Adjust the type accordingly if 'combined_data' has a specific structure.
 }
 import User from "./User"; // Import the User component
+import Makeroad from "./makeroad";
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
   const [verse, setVerse] = useState<string | null>(null);
@@ -58,13 +59,16 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     null
   );
   const [dynamicPath, setDynamicPath] = useState<string>(""); // State variable to hold the dynamic path
-  const [activeSegment, setActiveSegment] = useState<string>("default");
-
+  const [activeSegment, setActiveSegment] = useState(false);
+  const [presentingElement, setPresentingElement] =
+    useState<HTMLElement | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const openModalWithDynamicPath = (dynamicPath: string) => {
     setShowModal(true);
     setDynamicPath(dynamicPath); // Store the dynamic path in a state variable
   };
+  const modal = useRef<HTMLIonModalElement>(null);
+  const page = useRef(null);
   useEffect(() => {
     const fetchVerse = async () => {
       try {
@@ -85,6 +89,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     fetchVerse();
   }, []);
 
+  useEffect(() => {
+    setPresentingElement(page.current);
+  }, []);
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -149,7 +156,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const closeModal = () => {
     setShowModal(false); // This function closes the modal
   };
-
+  function dismiss() {
+    modal.current?.dismiss();
+  }
   return (
     <IonPage>
       <IonContent>
@@ -249,7 +258,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             <IonIcon icon={addCircle}></IonIcon>
           </IonFabButton>
           <IonFabList side="top">
-            <IonFabButton routerLink="/tabs/dashboard/makeroad/">
+            <IonFabButton id="open-modal">
               <IonIcon icon={createOutline}></IonIcon>
             </IonFabButton>
 
@@ -258,13 +267,22 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             </IonFabButton>
           </IonFabList>
         </IonFab>
-        <IonItem>
-          Cant find any roads that interest you? No problem,{" "}
-          <IonRouterLink routerLink="/tabs/dashboard/makeroad/">
-            {" "}
-            Make your own!
-          </IonRouterLink>
-        </IonItem>
+
+        <IonModal
+          ref={modal}
+          trigger="open-modal"
+          presentingElement={presentingElement!}
+        >
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="end">
+                <IonButton onClick={dismiss}>Done</IonButton>
+              </IonButtons>
+              <IonTitle>Make A Road.</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <Makeroad />
+        </IonModal>
       </IonContent>
     </IonPage>
   );

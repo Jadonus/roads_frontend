@@ -15,22 +15,40 @@ import {
   IonButton,
   IonInput,
 } from "@ionic/react";
+import axios from "axios";
+
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
 import { Preferences } from "@capacitor/preferences";
 const Login = () => {
   let history = useHistory();
-
+  const [usernamee, setUsernamee] = useState("");
+  const [token, setToken] = useState("");
   const [error, setError] = useState(undefined);
   const [username, setUsername] = useState("");
   const [load, setLoad] = useState(false);
+  const [response, setResponse] = useState(null);
   const [password, setPassword] = useState("");
+  async function get() {
+    let da = await axios.get("https://www.roadsbible.com/dj-rest-auth/user/", {
+      params: {
+        format: "json",
+      },
+      headers: {
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "accept-language": "en-US,en;q=0.9",
+        Authorization: `Token ${token}`,
+      },
+    });
+    setUsernamee(da.data.username);
+    console.log(da.data.username);
+  }
   const handleLogin = async () => {
     setLoad(true);
     let usernam = await Preferences.get({ key: "username" }).then(() => {});
 
     try {
-      const response = await Axios.post(
+      const response = await axios.post(
         "https://www.roadsbible.com/dj-rest-auth/login/",
         {
           email: username,
@@ -39,17 +57,21 @@ const Login = () => {
       );
 
       if (response.status === 200) {
+        setToken(response.data.key);
+        console.log(token);
         await Preferences.set({
           key: "token",
           value: response.data.key,
         });
-        await Preferences.set({
-          key: "username",
-          value: username,
-        }).then(() => {
-          const urlParams = new URLSearchParams(window.location.search);
-          const myParam = urlParams.get("redirect");
-          window.location.href = myParam || "/tabs/dashboard/";
+        await get().then(() => {
+          Preferences.set({
+            key: "username",
+            value: usernamee,
+          }).then(() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get("redirect");
+            window.location.href = myParam || "/tabs/dashboard/";
+          });
         });
       } else {
         if (response) {
@@ -86,6 +108,7 @@ const Login = () => {
 
     checkUsernameAndRedirect();
   }, []);
+
   return (
     <IonPage>
       <IonHeader>
