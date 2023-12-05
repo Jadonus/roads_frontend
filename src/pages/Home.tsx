@@ -270,6 +270,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
         <IonModal
           ref={modal}
+          id="card"
           trigger="open-modal"
           presentingElement={presentingElement!}
         >
