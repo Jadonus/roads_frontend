@@ -18,6 +18,7 @@ import {
   book,
   heart,
   cog,
+  barChart,
 } from "ionicons/icons";
 import ExploreContainer from "./pages/Home";
 import Verse from "./pages/Verse";
@@ -116,8 +117,8 @@ const TabBar: React.FC = () => {
           <IonLabel>Dashboard</IonLabel>
         </IonTabButton>
         <IonTabButton tab="welcome" href="/tabs/welcome">
-          <IonIcon icon={personCircle} />
-          <IonLabel>My Progress</IonLabel>
+          <IonIcon icon={barChart} />
+          <IonLabel>Stats</IonLabel>
 
           {progress ? <IonBadge color="danger">1</IonBadge> : <div></div>}
         </IonTabButton>

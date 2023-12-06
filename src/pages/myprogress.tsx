@@ -7,20 +7,30 @@ import {
   IonContent,
   IonRefresher,
   IonRefresherContent,
+  IonItem,
   IonIcon,
+  IonRow,
+  IonModal,
+  IonCol,
   IonButton,
   IonHeader,
+  IonGrid,
+  IonText,
+  IonList,
 } from "@ionic/react";
-import { useAuth0 } from "@auth0/auth0-react";
 import { share, shareOutline } from "ionicons/icons";
 import Confetti from "react-confetti";
 import { RefresherEventDetail } from "@ionic/react";
 import { isauth } from "./isauth";
+import Verse from "./Verse";
 import { effect } from "@preact/signals";
 let username = isauth.value;
 function Myprogress() {
+  const [date, setDate] = useState(null);
   const [progress, setProgress] = useState(null);
   const [confet, setConfet] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [verse, setVerse] = useState<string | null>(null);
   const textRef = useRef(null);
   function setProgressBarPosition(progress) {
     // Ensure that textRef.current exists before accessing its parent
@@ -38,11 +48,7 @@ function Myprogress() {
 
       // Calculate the scroll position
       const windowHeight = window.innerHeight;
-      const scrollToY = (progress / 100) * windowHeight;
-      document.getElementById("mem").scrollIntoView({
-        behavior: "smooth", // Optional: Add smooth scrolling for a polished effect
-        block: "center",
-      });
+
       // Scroll the window to the calculated Y-coordinate
     }
   }
@@ -73,7 +79,10 @@ function Myprogress() {
       .then((response) => {
         console.log(response);
         setProgress(response.numverses);
-        setProgressBarPosition(response.numverses);
+        setVerse(response.lastroad);
+        let d = new Date(response.lastdate);
+        let da = `${d.getMonth() + 1}/${d.getDate()}`;
+        setDate(da);
         console.log("%10", response.numverses % 10);
         if (response.numverses % 10 || response.numverses === "Not started") {
           console.log("sad...");
@@ -101,22 +110,20 @@ function Myprogress() {
     // Share must be triggered by "user activation"
     navigator.share(shareData);
   }
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Stats</IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
         <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Settings</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">My Progress</IonTitle>
-          </IonToolbar>
-        </IonHeader>
 
         {confet ? (
           <>
@@ -128,50 +135,72 @@ function Myprogress() {
         ) : (
           ""
         )}
-
-        <div className="vertical-progress-bar-container">
-          <div className="progress-bars-container">
-            <div
-              className="vertical-progress-bar"
-              style={{
-                height: `${progress}%`,
-              }}
-            ></div>
-            <div
-              className="vertical-progress-bar-unfilled"
-              style={{
-                height: `${100 - progress}%`,
-              }}
-            ></div>
-          </div>
-          <div className="text-box" ref={textRef}>
-            <p id="mem">
-              {progress !== "Not Started" ? (
-                <span>
-                  You have memorized <strong>{progress}</strong> verses! Keep up
-                  the great work!{" "}
-                </span>
-              ) : (
-                <span>
-                  You have not memorized any verses! Head over to the dashboard
-                  and start with a road.
-                </span>
-              )}
-              {navigator.canShare ? (
-                <IonButton fill="clear" onClick={sharee}>
-                  <IonIcon
-                    color="primary"
-                    size="large"
-                    style={{ marginBottom: "1rem" }}
-                    icon={shareOutline}
-                  />
-                </IonButton>
-              ) : (
-                <span></span>
-              )}
-            </p>
-          </div>
-        </div>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonItem style={{ borderRadius: "1rem" }} color="light">
+                {progress !== "Not Started" ? (
+                  <div className="jus">
+                    <h1 className="text-box">
+                      <strong>{progress}</strong>
+                    </h1>
+                    <IonText className="be">Amount of Verses memorized</IonText>
+                  </div>
+                ) : (
+                  <span className="be">
+                    You have not memorized any verses! Head over to the
+                    dashboard and start with a road.
+                  </span>
+                )}
+                {navigator.canShare ? (
+                  <IonButton fill="clear" onClick={sharee}>
+                    <IonIcon
+                      color="primary"
+                      size="medium"
+                      style={{ marginBottom: "1rem" }}
+                      icon={shareOutline}
+                    />
+                  </IonButton>
+                ) : (
+                  <span></span>
+                )}
+              </IonItem>
+            </IonCol>
+            <IonCol>
+              <IonItem style={{ borderRadius: "1rem" }} color="light">
+                <div className="jus">
+                  <h1 className="text-box">
+                    <strong>{date}</strong>
+                  </h1>
+                  <IonText className="be">Last time you practiced</IonText>
+                </div>
+              </IonItem>
+            </IonCol>
+            {/*} <IonCol>
+              <IonItem style={{ borderRadius: "1rem" }} color="light">
+                <div className="jus">
+                  <h1 className="text-box">
+                    <strong></strong>
+                  </h1>
+                  <IonText className="be">Last time you practiced</IonText>
+                </div>
+              </IonItem>
+                </IonCol>*/}
+          </IonRow>
+        </IonGrid>
+        <IonList inset>
+          <IonItem onClick={() => setIsOpen(true)} button color="light">
+            Jump Back In to most recent road
+          </IonItem>
+        </IonList>
+        <IonModal isOpen={isOpen}>
+          <Verse
+            index={undefined}
+            dynamicPath={"/roads/" + verse}
+            userr={false}
+            onClose={closeModal}
+          />
+        </IonModal>
       </IonContent>
     </IonPage>
   );

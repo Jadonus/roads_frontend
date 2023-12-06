@@ -29,10 +29,18 @@
 }
 
 /* ... Your existing styles for the text box ... */
-
+.jus {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 /* Additional styles for items positioned to the side */
 .text-box {
-  transition: ease-in-out;
-  margin: 1rem;
+text-align: center;
+font-size: xxx-large;
   /* Style items you want to position alongside the progress bars */
+}
+.be {
+  text-align: left;
+  margin: 0.5rem
 }

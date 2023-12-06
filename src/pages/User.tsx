@@ -237,6 +237,8 @@ export default function user() {
           buttons={[
             {
               text: "Share",
+              icon: "share",
+
               handler: () => {
                 const shareData = {
                   title: "Roads",
@@ -252,6 +254,7 @@ export default function user() {
             },
             {
               text: "Add Road For All",
+              icon: "people",
               handler: () => {
                 const data = {
                   username: username,
@@ -271,6 +274,7 @@ export default function user() {
             },
             {
               text: "Delete",
+              icon: "trash",
               role: "destructive",
               handler: () => {
                 const data = {
@@ -295,6 +299,7 @@ export default function user() {
               },
             },
             {
+              icon: "close",
               text: "Cancel",
               role: "cancel",
             },
