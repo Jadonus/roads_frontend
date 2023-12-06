@@ -26,9 +26,9 @@ const Login = () => {
   const [error, setError] = useState(undefined);
   const [username, setUsername] = useState("");
   const [load, setLoad] = useState(false);
-  const [response, setResponse] = useState(null);
+  //const [response, setResponse] = useState(null);
   const [password, setPassword] = useState("");
-  async function get() {
+  async function get(tokeen) {
     let da = await axios.get("https://www.roadsbible.com/dj-rest-auth/user/", {
       params: {
         format: "json",
@@ -37,7 +37,7 @@ const Login = () => {
         accept:
           "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
         "accept-language": "en-US,en;q=0.9",
-        Authorization: `Token ${token}`,
+        Authorization: `Token ${tokeen}`,
       },
     });
     setUsernamee(da.data.username);
@@ -57,13 +57,11 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        setToken(response.data.key);
-        console.log(token);
         await Preferences.set({
           key: "token",
           value: response.data.key,
         });
-        await get().then(() => {
+        await get(response.data.key).then(() => {
           Preferences.set({
             key: "username",
             value: usernamee,
