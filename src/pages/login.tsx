@@ -42,6 +42,7 @@ const Login = () => {
     });
     setUsernamee(da.data.username);
     console.log(da.data.username);
+    return da.data.username;
   }
   const handleLogin = async () => {
     setLoad(true);
@@ -61,15 +62,13 @@ const Login = () => {
           key: "token",
           value: response.data.key,
         });
-        await get(response.data.key).then(() => {
-          Preferences.set({
-            key: "username",
-            value: usernamee,
-          }).then(() => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const myParam = urlParams.get("redirect");
-            window.location.href = myParam || "/tabs/dashboard/";
-          });
+        Preferences.set({
+          key: "username",
+          value: await get(response.data.key),
+        }).then(() => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const myParam = urlParams.get("redirect");
+          window.location.href = myParam || "/tabs/dashboard/";
         });
       } else {
         if (response) {
