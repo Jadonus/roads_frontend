@@ -110,7 +110,7 @@ const Login = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle size="large">Login</IonTitle>
+          <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -123,6 +123,8 @@ const Login = () => {
               onIonInput={(e) => setUsername(e.detail.value!)}
             />
           </IonItem>
+        </IonList>
+        <IonList inset>
           <IonItem color="light">
             <IonInput
               type="password"
