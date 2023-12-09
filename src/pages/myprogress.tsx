@@ -12,11 +12,15 @@ import {
   IonRow,
   IonModal,
   IonCol,
+  IonLabel,
   IonButton,
   IonHeader,
   IonGrid,
   IonText,
   IonList,
+  IonButtons,
+  IonAvatar,
+  IonImg,
 } from "@ionic/react";
 import { share, shareOutline } from "ionicons/icons";
 import Confetti from "react-confetti";
@@ -24,14 +28,29 @@ import { RefresherEventDetail } from "@ionic/react";
 import { isauth } from "./isauth";
 import Verse from "./Verse";
 import { effect } from "@preact/signals";
-let username = isauth.value;
+import Friends from "./friends";
 function Myprogress() {
   const [date, setDate] = useState(null);
   const [progress, setProgress] = useState(null);
   const [confet, setConfet] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [use, setUse] = useState(false);
   const [verse, setVerse] = useState<string | null>(null);
   const textRef = useRef(null);
+  const modal = useRef<HTMLIonModalElement>(null);
+  const page = useRef(null);
+  let username: String = isauth.value;
+
+  const [presentingElement, setPresentingElement] =
+    useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPresentingElement(page.current);
+  }, []);
+
+  function dismiss() {
+    modal.current?.dismiss();
+  }
   function setProgressBarPosition(progress) {
     // Ensure that textRef.current exists before accessing its parent
     if (textRef.current) {
@@ -80,6 +99,7 @@ function Myprogress() {
         console.log(response);
         setProgress(response.numverses);
         setVerse(response.lastroad);
+        setUse(response.islastroadcustom);
         let d = new Date(response.lastdate);
         let da = `${d.getMonth() + 1}/${d.getDate()}`;
         setDate(da);
@@ -118,6 +138,9 @@ function Myprogress() {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Stats</IonTitle>
+          <IonButtons slot="end">
+            <IonButton id="open-modal">Friends</IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -190,16 +213,30 @@ function Myprogress() {
         </IonGrid>
         <IonList inset>
           <IonItem onClick={() => setIsOpen(true)} button color="light">
-            Jump Back In to most recent road
+            Jump Back In to most recent road ({verse})
           </IonItem>
         </IonList>
         <IonModal isOpen={isOpen}>
           <Verse
             index={undefined}
             dynamicPath={"/roads/" + verse}
-            userr={false}
+            userr={use}
             onClose={closeModal}
           />
+        </IonModal>
+
+        <IonModal ref={modal} trigger="open-modal">
+          <IonHeader>
+            <IonToolbar>
+              <IonTitle>Friends</IonTitle>
+              <IonButtons slot="end">
+                <IonButton onClick={() => dismiss()}>Close</IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent className="ion-padding">
+            <Friends username={username as string} />
+          </IonContent>
         </IonModal>
       </IonContent>
     </IonPage>

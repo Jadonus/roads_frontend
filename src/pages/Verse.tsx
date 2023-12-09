@@ -328,6 +328,7 @@ const Verse: React.FC<VerseModalProps> = ({
       username: username,
       road: dynamic,
       index: currentSentenceIndex + 1,
+      isCustom: userr,
     };
 
     const requestOptions = {
