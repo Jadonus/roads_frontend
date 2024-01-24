@@ -41,7 +41,7 @@ import {
 } from "@ionic/core";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./ExploreContainer.css";
-import Verse from "./Verse";
+import PreVerse from "./PreVerse";
 import { addCircle, createOutline, linkOutline } from "ionicons/icons";
 interface ContainerProps {}
 
@@ -222,9 +222,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           <div>
             {filteredMetadata.map((item: any, index: number) => (
               <IonCard
-                onClick={() =>
-                  openModalWithDynamicPath(item.parsed_data[0]?.url)
-                }
+                routerLink={"/preverse/" + item.parsed_data[0]?.url}
                 className="margin"
                 key={index}
               >
@@ -245,7 +243,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             ))}
           </div>
           <IonModal isOpen={showModal}>
-            <Verse
+            <PreVerse
               index={undefined}
               dynamicPath={dynamicPath}
               userr={false}
@@ -277,7 +275,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="end">
-                <IonButton onClick={dismiss}>Done</IonButton>
+                <IonButton color="danger" onClick={dismiss}>
+                  Exit
+                </IonButton>
               </IonButtons>
               <IonTitle>Make A Road.</IonTitle>
             </IonToolbar>

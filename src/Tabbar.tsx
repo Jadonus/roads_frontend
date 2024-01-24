@@ -35,6 +35,7 @@ import Appicon from "./pages/appicon";
 import { Capacitor } from "@capacitor/core";
 import Favorites from "./pages/favorites";
 import copyright from "./pages/copyright";
+import PreVerse from "./pages/PreVerse";
 const TabBar: React.FC = () => {
   const [progress, setProgress] = useState(false);
   // A simple utility function to get the username from wherever you store it
@@ -97,6 +98,11 @@ const TabBar: React.FC = () => {
           path="/tabs/dashboard/copyright"
           exact
           component={copyright}
+        ></Route>
+        <Route
+          exact
+          component={PreVerse}
+          path="/tabs/dashboard/preverse/:dynamicPath"
         ></Route>
         <Route path="/tabs/favorites" component={Favorites} exact={true} />
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />

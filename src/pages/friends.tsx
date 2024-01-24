@@ -113,7 +113,7 @@ export default function Friends(username: any) {
                       </p>
                     </IonCol>
                     <IonCol>
-                      <p>Their Roads: {dataa.friendspracticetitles[index]}</p>
+                      <p>Their Roads: {dataa.friendsroads[index]}</p>
                     </IonCol>
                   </IonGrid>
                 </IonItem>
@@ -131,7 +131,7 @@ export default function Friends(username: any) {
       <IonAlert
         trigger="present-alert"
         header="Enter In Info to add friend"
-        message="Make sure that the nickame you enter is the same if you have already chosen it. "
+        message="Make sure that the nickame you enter is the same if you have already chosen it. Friend nickname may be left blank if unknown.  "
         buttons={[
           {
             text: "Cancel",
@@ -140,6 +140,7 @@ export default function Friends(username: any) {
               // Handle cancel action if needed
             },
           },
+
           {
             text: "Add Friend",
             handler: (e) => {

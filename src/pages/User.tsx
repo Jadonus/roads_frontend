@@ -90,6 +90,7 @@ export default function user() {
 
   const openModalWithDynamicPath = (dynamicPath: string) => {
     setShowModal(true);
+    console.log(`${dynamicPath}`);
     setDynamicPath(dynamicPath);
   };
 

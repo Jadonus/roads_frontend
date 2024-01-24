@@ -138,7 +138,7 @@ struct IconWidgetView : View {
             Text(entry.reference)
 
                 .bold()
-                .font(.largeTitle)
+                .font(.largeTitle).minimumScaleFactor(0.7)
                 .foregroundColor(.indigo)
                 .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill the space
         }
