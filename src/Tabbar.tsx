@@ -102,7 +102,7 @@ const TabBar: React.FC = () => {
         <Route
           exact
           component={PreVerse}
-          path="/tabs/dashboard/preverse/:dynamicPath"
+          path="/tabs/dashboard/roads/:dynamicPath"
         ></Route>
         <Route path="/tabs/favorites" component={Favorites} exact={true} />
         <Route path="/tabs/welcome" component={Myprogress} exact={true} />
@@ -110,15 +110,14 @@ const TabBar: React.FC = () => {
         <Route path="/tabs/settings/appicon" component={Appicon} exact />
         <Route path="/tabs/settings/account" component={Account} exact={true} />
         <Route path="/tabs/settings/install" component={Install} exact={true} />
-        <Route path="/tabs/roads/:groupName" component={Verse} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="dashboard" href="/tabs/dashboard">
-          {isauth.value !== "" ? (
+          {/*} {isauth.value !== "" ? (
             <AuthenticatedAction />
           ) : (
             <Redirect to="/login" />
-          )}
+          )} */}
           <IonIcon icon={library} />
           <IonLabel>Dashboard</IonLabel>
         </IonTabButton>

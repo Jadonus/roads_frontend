@@ -222,7 +222,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           <div>
             {filteredMetadata.map((item: any, index: number) => (
               <IonCard
-                routerLink={"/preverse/" + item.parsed_data[0]?.url}
+                routerLink={"/tabs/dashboard" + item.parsed_data[0]?.url}
                 className="margin"
                 key={index}
               >

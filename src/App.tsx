@@ -98,14 +98,14 @@ const App: React.FC = () => {
             <Route path="/verseoftheday" component={Verseday} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/welcome/" component={welcome} exact />
-            {isauth.value ? (
+            {/*} {isauth.value ? (
               <>
                 <AuthenticationAction />
                 <Redirect to="/tabs/dashboard/" />
               </>
             ) : (
               <Redirect to="/login" />
-            )}
+            )} */}
           </Switch>
         </IonRouterOutlet>
       </IonReactRouter>
