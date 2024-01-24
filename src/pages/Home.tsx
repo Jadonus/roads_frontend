@@ -242,14 +242,6 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               </IonCard>
             ))}
           </div>
-          <IonModal isOpen={showModal}>
-            <PreVerse
-              index={undefined}
-              dynamicPath={dynamicPath}
-              userr={false}
-              onClose={closeModal}
-            />
-          </IonModal>{" "}
         </div>
         <IonFab slot="fixed" vertical="bottom" horizontal="end">
           <IonFabButton>
